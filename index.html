@@ -45,10 +45,13 @@
   .nav-cta { background:var(--gold)!important; color:var(--black)!important; padding:7px 18px; border-radius:3px; color:var(--black)!important; }
   .nav-cta:hover { background:var(--gold-h)!important; color:var(--black)!important; }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
-  .hamburger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; }
-  .mobile-menu { display:none; position:fixed; top:64px; left:0; right:0; background:var(--black); z-index:99; padding:1.5rem 5vw 2rem; flex-direction:column; border-top:1px solid rgba(255,255,255,0.08); }
-  .mobile-menu.open { display:flex; }
-  .mobile-menu a { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.15rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.8); text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+  .hamburger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:all 0.3s ease; transform-origin:center; }
+  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display:flex; flex-direction:column; position:fixed; top:64px; left:0; right:0; background:var(--black); z-index:99; padding:0 5vw; border-top:1px solid rgba(255,255,255,0.08); max-height:0; overflow:hidden; transition:max-height 0.35s ease, padding 0.35s ease; }
+  .mobile-menu.open { max-height:500px; padding:1.5rem 5vw 2rem; }
+  .mobile-menu a { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.15rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.8); text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.07); display:block; }
 
   /* ── HERO ── */
   #inici {
@@ -274,8 +277,8 @@
     .projectes-grid { grid-template-columns:1fr; }
     .news-grid { grid-template-columns:1fr 1fr; }
     .informes-grid { grid-template-columns:1fr; }
-    .nav-links { display:none; }
-    .hamburger { display:flex; }
+    .nav-links { display:none !important; }
+    .hamburger { display:flex !important; }
   }
   @media (max-width:600px) {
     section { padding:70px 5vw; }
@@ -299,6 +302,7 @@
     <li><a href="#projectes">Projectes</a></li>
     <li><a href="#problema">El Problema</a></li>
     <li><a href="#mapa">Mapa</a></li>
+    <li><a href="#actualitat">Actualitat</a></li>
     <li><a href="#diagnostic">Diagnòstic</a></li>
     <li><a href="#contacte" class="nav-cta">Contacte</a></li>
   </ul>
@@ -313,6 +317,7 @@
   <a href="#projectes" onclick="closeMenu()">Projectes</a>
   <a href="#problema" onclick="closeMenu()">El Problema</a>
   <a href="#mapa" onclick="closeMenu()">Mapa</a>
+  <a href="#actualitat" onclick="closeMenu()">Actualitat</a>
   <a href="#diagnostic" onclick="closeMenu()">Diagnòstic</a>
   <a href="#contacte" onclick="closeMenu()">Contacte</a>
 </div>
@@ -483,24 +488,27 @@
     <p class="section-lead">Notícies, casos i reportatges sobre la crisi del comerç local a Catalunya.</p>
   </div>
   <div class="news-grid reveal">
+    <a href="articles/dumping-comerc-local.html" class="news-card">
+      <div class="news-date">Febrer 2026</div>
+      <div class="news-title">Què és el dumping i com afecta el comerç local?</div>
+      <div class="news-excerpt">Darrere de molts tancaments hi ha una estratègia concreta i poc visible. Dumping de preus, d'horaris, immobiliari... Entendre-la és el primer pas per no normalitzar-la.</div>
+      <span style="display:inline-block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Llegir article →</span>
+    </a>
+    <a href="articles/forns-cadenes.html" class="news-card">
+      <div class="news-date">Febrer 2026</div>
+      <div class="news-title">Abans que tanqui el forn del barri: com les grans cadenes estan esborrant el comerç local</div>
+      <div class="news-excerpt">Cinc grans grups acumulen més de 300 establiments a Barcelona. Un model de negoci que expulsa progressivament els forns artesans amb un buit legal que els afavoreix.</div>
+      <span style="display:inline-block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Llegir article →</span>
+    </a>
     <a href="articles/ferreteria-camps.html" class="news-card">
       <div class="news-date">Febrer 2026</div>
       <div class="news-title">La Ferreteria Camps de Gràcia abaixa la persiana després de 90 anys</div>
       <div class="news-excerpt">Un lloguer de 15.000€ mensuals i la caiguda de la clientela tradicional acaben amb un dels comerços més emblemàtics de la Vila de Gràcia.</div>
       <span style="display:inline-block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Llegir article →</span>
     </a>
-    <a href="articles/forn-santa-clara.html" class="news-card">
-      <div class="news-date">Gener 2026</div>
-      <div class="news-title">El Forn Santa Clara tanca: 80 anys esborrats per una pujada de lloguer</div>
-      <div class="news-excerpt">La propietat va exigir doblar la renda, de 1.500 a 3.000€ mensuals. El barri va reaccionar amb indignació i denúncia veïnal.</div>
-      <span style="display:inline-block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Llegir article →</span>
-    </a>
-    <a href="articles/barcelona-capital-europea.html" class="news-card">
-      <div class="news-date">Gener 2026</div>
-      <div class="news-title">Barcelona, primera Capital Europea del Comerç Local 2026</div>
-      <div class="news-excerpt">La Comissió Europea distingeix Barcelona pel seu model de comerç de proximitat, mentre al carrer Gran de Gràcia tanquen comerços centenaris.</div>
-      <span style="display:inline-block;margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Llegir article →</span>
-    </a>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="articles.html" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.88rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text);text-decoration:none;border:2px solid var(--cream-dark);padding:14px 32px;border-radius:2px;display:inline-block;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.color='var(--text)'">Veure tots els articles →</a>
   </div>
 </section>
 
@@ -671,8 +679,16 @@ function downloadPDF(id) {
   document.body.appendChild(a); a.click();
   document.body.removeChild(a); URL.revokeObjectURL(url);
 }
-function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.querySelector('.hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.querySelector('.hamburger').classList.remove('open');
+}
 function submitForm(e, successId, form) {
   e.preventDefault();
   form.style.display = 'none';
@@ -687,4 +703,10 @@ function preselectMotiu(valor) {
     }
   }, 100);
 }
-const observer
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
