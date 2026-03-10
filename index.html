@@ -88,7 +88,8 @@
     border:2px solid var(--cream-dark); transition:all 0.2s; display:inline-block; border-radius:2px;
   }
   .btn-secondary:hover { border-color:var(--text); background:var(--text); color:#fff; }
-  .hero-visual { display:flex; align-items:center; justify-content:center; height:100vh; overflow:hidden; position:absolute; top:0; right:0; width:50%; }
+  .hero-visual { display:flex; align-items:center; justify-content:center; height:100vh; overflow:hidden; }
+  @media (max-width:768px) { .hero-visual { height:300px; } }
 
   /* ── SECTIONS BASE ── */
   section { padding:100px 5vw; }
