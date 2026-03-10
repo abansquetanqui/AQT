@@ -641,16 +641,10 @@ const pdfData = {
 };
 function downloadPDF(id) {
   const item = pdfData[id];
-  if (!item.data || item.data.startsWith('PLACEHOLDER')) { alert('PDF pendent de carregar'); return; }
-  const binary = atob(item.data);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  const blob = new Blob([bytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = item.filename;
+  a.href = './' + item.filename; a.download = item.filename;
   document.body.appendChild(a); a.click();
-  document.body.removeChild(a); URL.revokeObjectURL(url);
+  document.body.removeChild(a);
 }
 function toggleMenu() {
   const menu = document.getElementById('mobileMenu');
