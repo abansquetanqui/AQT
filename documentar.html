@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentar — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#ffffff;--cream-mid:#f4f4f6;--cream-dark:#e0e0e5;
+    --text:#2c3e50;--text-mid:#5d6d7e;
+    --gold:#d4a76a;--gold-h:#e8c39e;
+    --black:#1a1a2e;--white:#ffffff;
+    --shadow:0 4px 24px rgba(44,62,80,0.10);
+    --shadow-lg:0 8px 40px rgba(44,62,80,0.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--text);overflow-x:hidden;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;box-shadow:0 2px 20px rgba(0,0,0,0.18);}
+  .nav-logo{font-family:'Anton',sans-serif;font-size:1rem;color:#fff;text-decoration:none;letter-spacing:0.06em;display:flex;align-items:center;gap:12px;}
+  .nav-logo .logo-wrap{width:44px;height:44px;display:flex;align-items:center;justify-content:center;}
+  .nav-links{display:flex;gap:1.6rem;list-style:none;align-items:center;}
+  .nav-links a{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold-h);}
+  .nav-cta{background:var(--gold)!important;color:var(--black)!important;padding:7px 18px;border-radius:3px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s;transform-origin:center;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-menu{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--black);z-index:99;padding:0 5vw;border-top:1px solid rgba(255,255,255,0.08);max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s ease;}
+  .mobile-menu.open{max-height:500px;padding:1.5rem 5vw 2rem;}
+  .mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;}
+
+  /* ── SELECTOR ── */
+  #selector{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 5vw 4rem;}
+  .selector-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem;text-align:center;}
+  .selector-title{font-family:'Anton',sans-serif;font-size:clamp(2.5rem,6vw,5rem);text-transform:uppercase;color:#fff;line-height:0.92;margin-bottom:0.6rem;text-align:center;}
+  .selector-lead{font-size:0.95rem;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:3.5rem;max-width:420px;}
+  .mapa-wrap{position:relative;width:100%;max-width:580px;margin:0 auto;}
+  .mapa-svg{width:100%;height:auto;filter:drop-shadow(0 8px 32px rgba(0,0,0,0.5));}
+  .barri-zona{fill:#1e1e38;stroke:rgba(255,255,255,0.07);stroke-width:1.5;cursor:not-allowed;}
+  .barri-zona.actiu{fill:#252545;stroke:rgba(212,167,106,0.25);cursor:pointer;transition:fill 0.2s,stroke 0.2s;}
+  .barri-zona.actiu:hover{fill:#2e2e5a;stroke:var(--gold);stroke-width:2;}
+  .barri-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;fill:rgba(255,255,255,0.18);pointer-events:none;}
+  .barri-label.actiu{fill:rgba(255,255,255,0.65);}
+  .tooltip{position:absolute;background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border-radius:3px;pointer-events:none;opacity:0;transition:opacity 0.15s;white-space:nowrap;transform:translateX(-50%);}
+  .tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--gold);}
+  .prest-note{text-align:center;margin-top:1.8rem;font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+
+  /* ── CONTINGUT ── */
+  #contingut{display:none;background:var(--cream);}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  .doc-hero{min-height:38vh;background:var(--black);display:flex;align-items:flex-end;padding:100px 5vw 4rem;position:relative;overflow:hidden;}
+  .doc-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--gold);}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;padding:0;margin-bottom:1.8rem;transition:color 0.2s;}
+  .back-btn:hover{color:var(--gold);}
+  .section-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.8rem;}
+  .doc-title{font-family:'Anton',sans-serif;font-size:clamp(3rem,7vw,5.5rem);text-transform:uppercase;line-height:0.92;color:#fff;margin-bottom:1.2rem;}
+  .doc-lead{font-size:1rem;color:rgba(255,255,255,0.5);line-height:1.8;font-weight:300;max-width:540px;}
+  .tabs-bar{background:var(--cream-mid);border-bottom:2px solid var(--cream-dark);position:sticky;top:64px;z-index:90;}
+  .tabs-inner{display:flex;padding:0 5vw;overflow-x:auto;}
+  .tab-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-mid);background:none;border:none;border-bottom:3px solid transparent;padding:1.1rem 1.8rem;cursor:pointer;white-space:nowrap;transition:color 0.2s,border-color 0.2s;margin-bottom:-2px;}
+  .tab-btn:hover{color:var(--text);}
+  .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+  .doc-section{display:none;padding:80px 5vw;}
+  .doc-section.active{display:block;animation:fadeIn 0.35s ease both;}
+
+  /* LOCALS */
+  .locals-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;}
+  .locals-title{font-family:'Anton',sans-serif;font-size:clamp(2rem,4vw,3.2rem);text-transform:uppercase;color:var(--text);line-height:1;}
+  .locals-count{font-family:'Anton',sans-serif;font-size:3.5rem;color:var(--gold);line-height:1;}
+  .locals-count-label{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);}
+  .locals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+  .local-card{background:var(--white);border:1.5px solid var(--cream-dark);border-radius:6px;padding:1.8rem;transition:border-color 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;}
+  .local-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);}
+  .local-card:hover{border-color:var(--gold);box-shadow:var(--shadow);}
+  .local-any{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;}
+  .local-nom{font-family:'Anton',sans-serif;font-size:1.3rem;text-transform:uppercase;color:var(--text);margin-bottom:0.3rem;}
+  .local-tipus{font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.8rem;}
+  .local-motiu{font-size:0.85rem;color:var(--text-mid);line-height:1.6;margin-bottom:1rem;}
+  .local-anys{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);background:var(--cream-mid);display:inline-block;padding:3px 10px;border-radius:20px;}
+  .afegir-btn{display:inline-flex;align-items:center;gap:8px;margin-top:3rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text);border:2px solid var(--text);padding:10px 22px;border-radius:3px;transition:all 0.2s;cursor:pointer;background:none;}
+  .afegir-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--black);}
+
+  /* VEUS */
+  #veus{background:var(--cream-mid);}
+  .big-title{font-family:'Anton',sans-serif;font-size:clamp(2rem,4vw,3.2rem);text-transform:uppercase;color:var(--text);line-height:1;margin-bottom:0.8rem;}
+  .sec-lead{font-size:0.95rem;color:var(--text-mid);line-height:1.8;max-width:520px;margin-bottom:2rem;}
+  .veus-empty{text-align:center;padding:5rem 2rem;}
+  .veus-empty .ei{font-size:3rem;display:block;margin-bottom:1rem;}
+  .veus-empty p{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-mid);}
+  .link-gold{display:inline-block;margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1.5px solid var(--gold);padding:9px 20px;border-radius:3px;transition:all 0.2s;}
+  .link-gold:hover{background:var(--gold);color:var(--black);}
+
+  /* XIFRES */
+  #xifres{background:var(--black);}
+  #xifres .big-title{color:#fff;}
+  .xifres-lead{font-size:0.95rem;color:rgba(255,255,255,0.45);line-height:1.8;max-width:520px;margin-bottom:3.5rem;}
+  .xifres-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;}
+  .xifra-card{background:#1e1e2e;border:1.5px solid rgba(212,167,106,0.15);border-radius:6px;padding:2rem;transition:border-color 0.2s;}
+  .xifra-card:hover{border-color:var(--gold);}
+  .xifra-num{font-family:'Anton',sans-serif;font-size:3.2rem;color:var(--gold);line-height:1;margin-bottom:0.4rem;}
+  .xifra-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;margin-bottom:0.5rem;}
+  .xifra-desc{font-size:0.8rem;color:rgba(255,255,255,0.38);line-height:1.6;}
+  .xifres-font{margin-top:2.5rem;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.2);}
+
+  footer{background:var(--black);color:#fff;padding:2.5rem 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:2px solid var(--gold);}
+  .footer-brand{font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:12px;}
+  .footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.25);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;}
+
+  @media(max-width:960px){.nav-links{display:none!important;}.hamburger{display:flex!important;}}
+  @media(max-width:600px){.doc-section{padding:60px 5vw;}.tab-btn{padding:1rem 1rem;font-size:0.72rem;}.locals-header{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-wrap"><img src="./hero.jpg" alt="Abans Que Tanqui" style="width:40px;height:40px;object-fit:contain;"></div>
+    Abans Que Tanqui
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#inici">Inici</a></li>
+    <li><a href="index.html#qui-som">Qui Som</a></li>
+    <li><a href="index.html#projectes">Projectes</a></li>
+    <li><a href="index.html#problema">El Problema</a></li>
+    <li><a href="index.html#mapa">Mapa</a></li>
+    <li><a href="index.html#actualitat">Actualitat</a></li>
+    <li><a href="index.html#diagnostic">Diagnòstic</a></li>
+    <li><a href="documentar.html" class="active">Documentar</a></li>
+    <li><a href="index.html#contacte" class="nav-cta">Contacte</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#inici" onclick="closeMenu()">Inici</a>
+  <a href="index.html#qui-som" onclick="closeMenu()">Qui Som</a>
+  <a href="index.html#projectes" onclick="closeMenu()">Projectes</a>
+  <a href="index.html#problema" onclick="closeMenu()">El Problema</a>
+  <a href="index.html#mapa" onclick="closeMenu()">Mapa</a>
+  <a href="index.html#actualitat" onclick="closeMenu()">Actualitat</a>
+  <a href="index.html#diagnostic" onclick="closeMenu()">Diagnòstic</a>
+  <a href="documentar.html">Documentar</a>
+  <a href="index.html#contacte" onclick="closeMenu()">Contacte</a>
+</div>
+
+<!-- ══ PANTALLA 1: MAPA ══ -->
+<div id="selector">
+  <span class="selector-tag">Memòria · Barcelona</span>
+  <h1 class="selector-title">Tria<br>un barri</h1>
+  <p class="selector-lead">Clica un barri per veure els locals tancats, les veus i les dades. De moment, Gràcia és l'únic actiu.</p>
+
+  <div class="mapa-wrap">
+    <div class="tooltip" id="tip"></div>
+    <svg class="mapa-svg" viewBox="0 0 500 430" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Fons mar -->
+      <path d="M90,340 L250,315 L275,310 L430,275 L450,370 L60,390 Z" fill="#0a1628" opacity="0.8"/>
+      <text fill="rgba(255,255,255,0.1)" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="700" letter-spacing="0.22em" x="255" y="358" text-anchor="middle">MAR MEDITERRÀNIA</text>
+
+      <!-- SANTS-MONTJUÏC -->
+      <polygon class="barri-zona" points="42,255 100,248 118,275 108,335 58,348 38,305"/>
+      <text class="barri-label" x="76" y="296" text-anchor="middle">Sants-</text>
+      <text class="barri-label" x="76" y="308" text-anchor="middle">Montjuïc</text>
+
+      <!-- LES CORTS -->
+      <polygon class="barri-zona" points="60,185 122,178 122,220 100,248 42,255 50,210"/>
+      <text class="barri-label" x="85" y="222" text-anchor="middle">Les Corts</text>
+
+      <!-- SARRIÀ-ST GERVASI -->
+      <polygon class="barri-zona" points="90,95 178,90 178,178 122,178 60,185 65,130"/>
+      <text class="barri-label" x="122" y="148" text-anchor="middle">Sarrià-</text>
+      <text class="barri-label" x="122" y="160" text-anchor="middle">St Gervasi</text>
+
+      <!-- GRÀCIA (actiu) -->
+      <polygon class="barri-zona actiu" id="gpoly"
+        points="178,135 248,128 262,170 260,218 178,218"
+        onclick="entrarBarri()"
+        onmouseenter="showTip(event,'Gràcia · 3 locals tancats')"
+        onmouseleave="hideTip()"/>
+      <text class="barri-label actiu" x="218" y="178" text-anchor="middle" pointer-events="none">Gràcia</text>
+
+      <!-- Punt pulsant Gràcia -->
+      <circle cx="218" cy="173" r="5" fill="var(--gold)" pointer-events="none" opacity="0.85">
+        <animate attributeName="r" values="5;9;5" dur="2.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.85;0.3;0.85" dur="2.2s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- EIXAMPLE -->
+      <polygon class="barri-zona" points="122,220 178,218 260,218 268,280 248,295 118,295"/>
+      <text class="barri-label" x="192" y="260" text-anchor="middle">Eixample</text>
+
+      <!-- CIUTAT VELLA -->
+      <polygon class="barri-zona" points="248,295 268,280 285,285 278,312 252,318"/>
+      <text class="barri-label" x="263" y="302" text-anchor="middle" font-size="9">Ciutat Vella</text>
+
+      <!-- HORTA-GUINARDÓ -->
+      <polygon class="barri-zona" points="248,128 328,115 348,158 316,200 262,170"/>
+      <text class="barri-label" x="298" y="158" text-anchor="middle">Horta-</text>
+      <text class="barri-label" x="298" y="170" text-anchor="middle">Guinardó</text>
+
+      <!-- NOU BARRIS -->
+      <polygon class="barri-zona" points="178,72 318,58 328,115 248,128 178,135"/>
+      <text class="barri-label" x="252" y="100" text-anchor="middle">Nou Barris</text>
+
+      <!-- SANT ANDREU -->
+      <polygon class="barri-zona" points="318,58 402,68 412,135 348,158 328,115"/>
+      <text class="barri-label" x="362" y="110" text-anchor="middle">Sant Andreu</text>
+
+      <!-- SANT MARTÍ -->
+      <polygon class="barri-zona" points="348,158 412,135 442,205 432,278 316,270 285,285 268,280 260,218 316,200"/>
+      <text class="barri-label" x="378" y="222" text-anchor="middle">Sant Martí</text>
+
+    </svg>
+    <p class="prest-note">La resta de barris, properament</p>
+  </div>
+</div>
+
+<!-- ══ PANTALLA 2: CONTINGUT ══ -->
+<div id="contingut">
+  <div class="doc-hero">
+    <div>
+      <button class="back-btn" onclick="tornarMapa()">← Canviar de barri</button>
+      <span class="section-tag">Gràcia · Barcelona · 2026</span>
+      <h1 class="doc-title">Documentar<br>és resistir.</h1>
+      <p class="doc-lead">Locals tancats, veus de comerciants i dades del barri. Perquè la memòria és la primera forma d'actuar.</p>
+    </div>
+  </div>
+
+  <div class="tabs-bar">
+    <div class="tabs-inner">
+      <button class="tab-btn active" onclick="showTab('locals',this)">Locals tancats 2026</button>
+      <button class="tab-btn" onclick="showTab('veus',this)">Veus del barri</button>
+      <button class="tab-btn" onclick="showTab('xifres',this)">El barri en xifres</button>
+    </div>
+  </div>
+
+  <div class="doc-section active" id="locals">
+    <div class="locals-header">
+      <div>
+        <span class="section-tag">Gràcia · 2026</span>
+        <div class="locals-title">Locals tancats</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="locals-count">3</div>
+        <div class="locals-count-label">registrats fins ara</div>
+      </div>
+    </div>
+    <div class="locals-grid">
+      <div class="local-card">
+        <div class="local-any">Febrer 2026</div>
+        <div class="local-nom">Forn Santa Clara</div>
+        <div class="local-tipus">Forn de pa · Travessera de Gràcia</div>
+        <div class="local-motiu">Van tancar quan el propietari els va comunicar la pujada del lloguer fins a 3.000€ mensuals, el doble del que pagaven.</div>
+        <span class="local-anys">80 anys d'història</span>
+      </div>
+      <div class="local-card">
+        <div class="local-any">Febrer 2026</div>
+        <div class="local-nom">Calçats Conesa</div>
+        <div class="local-tipus">Sabateria · Vila de Gràcia</div>
+        <div class="local-motiu">Cinc generacions de la mateixa família. Van tancar per motius familiars i per la manca d'ajudes públiques per als comerços històrics.</div>
+        <span class="local-anys">145 anys d'història</span>
+      </div>
+      <div class="local-card">
+        <div class="local-any">Febrer 2026</div>
+        <div class="local-nom">Cafè Reunión</div>
+        <div class="local-tipus">Cafeteria · Plaça de la Llibertat, 2</div>
+        <div class="local-motiu">Punt de trobada dels veïns del Mercat de la Llibertat. Avui a la persiana hi ha el rètol d'una agència immobiliària.</div>
+        <span class="local-anys">12 anys al barri</span>
+      </div>
+    </div>
+    <button class="afegir-btn" onclick="alert('Properament podràs afegir casos. Per ara, escriu-nos a abansquetanqui@gmail.com')">+ Afegir un local tancat</button>
+  </div>
+
+  <div class="doc-section" id="veus">
+    <span class="section-tag">Comerciants · Veïns · Gràcia</span>
+    <div class="big-title">Veus del barri</div>
+    <p class="sec-lead">Converses amb les persones que fan vius els barris. Comerciants, veïns, memòria oral.</p>
+    <div class="veus-empty">
+      <span class="ei">🎙️</span>
+      <p>Les primeres entrevistes, aviat.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;font-weight:400;letter-spacing:0;text-transform:none;">Si tens una història que compartir, escriu-nos.</p>
+      <a href="index.html#contacte" class="link-gold">Compartir la meva història →</a>
+    </div>
+  </div>
+
+  <div class="doc-section" id="xifres">
+    <span class="section-tag">Dades · Context · Gràcia</span>
+    <div class="big-title">El barri<br>en xifres</div>
+    <p class="xifres-lead">Dades per entendre l'abast del problema. Fonts: informes propis i estudis publicats.</p>
+    <div class="xifres-grid">
+      <div class="xifra-card">
+        <div class="xifra-num">+30%</div>
+        <div class="xifra-label">Pujada del lloguer comercial</div>
+        <div class="xifra-desc">Increment mitjà dels lloguers comercials a Gràcia en els últims 5 anys.</div>
+      </div>
+      <div class="xifra-card">
+        <div class="xifra-num">1 de 3</div>
+        <div class="xifra-label">Locals buits o turístics</div>
+        <div class="xifra-desc">Proporció estimada de locals que han canviat d'ús o han quedat buits als eixos principals.</div>
+      </div>
+      <div class="xifra-card">
+        <div class="xifra-num">80%</div>
+        <div class="xifra-label">Sense assessorament</div>
+        <div class="xifra-desc">Dels comerços entrevistats no saben a on acudir quan tenen un problema amb el lloguer.</div>
+      </div>
+      <div class="xifra-card">
+        <div class="xifra-num">+145</div>
+        <div class="xifra-label">Anys de memòria perduts</div>
+        <div class="xifra-desc">Anys d'història acumulats entre els tres locals tancats a Gràcia al febrer de 2026.</div>
+      </div>
+    </div>
+    <p class="xifres-font">Fonts: informe propi, Tot Barcelona, Observatori del Comerç de Barcelona · Dades en revisió permanent</p>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="./hero.jpg" alt="" style="width:32px;height:32px;object-fit:contain;">
+      Abans Que Tanqui
+    </div>
+    <span class="footer-copy">abansquetanqui@gmail.com · Barcelona</span>
+  </footer>
+</div>
+
+<script>
+  function toggleMenu(){document.querySelector('.hamburger').classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open');}
+  function closeMenu(){document.querySelector('.hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+
+  function entrarBarri(){
+    document.getElementById('selector').style.display='none';
+    var c=document.getElementById('contingut');
+    c.style.display='block';
+    c.style.animation='fadeIn 0.5s ease both';
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  function tornarMapa(){
+    document.getElementById('contingut').style.display='none';
+    document.getElementById('selector').style.display='flex';
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  function showTab(id,btn){
+    document.querySelectorAll('.doc-section').forEach(function(s){s.classList.remove('active');});
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function showTip(e,txt){
+    var t=document.getElementById('tip');
+    var wrap=t.parentElement.getBoundingClientRect();
+    var r=e.target.getBoundingClientRect();
+    t.textContent=txt;
+    t.style.left=(r.left+r.width/2-wrap.left)+'px';
+    t.style.top=(r.top-wrap.top-44)+'px';
+    t.style.opacity='1';
+  }
+  function hideTip(){document.getElementById('tip').style.opacity='0';}
+</script>
+</body>
+</html>
