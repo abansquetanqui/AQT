@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qui som · Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1B3327;--forest-mid:#2A5040;--forest-lt:#3A6B55;--bg:#F7F6F1;--white:#FFFFFF;--red:#C42B10;--red-lt:#E84328;--text:#1A1A17;--muted:#6E786A;--border:#DFE0D8;--card:#EEEEE8;--card2:#E4EBE6;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--forest);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-cta{background:var(--red);color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-cta:hover{background:var(--red-lt) !important;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
+.nav-burger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.75);border-radius:2px;transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--forest);border-top:1px solid rgba(255,255,255,0.08);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;padding:12px 24px;}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--red);color:#fff !important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
+
+.page-header{background:var(--forest);padding:52px 52px 48px;}
+.page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(157,207,180,0.7);margin-bottom:10px;}
+.page-header h1{font-family:'Lora',Georgia,serif;font-size:clamp(32px,3.5vw,48px);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px;}
+.page-header p{font-size:15px;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.7;}
+
+.section-wrap{padding:72px 52px;}
+.section-wrap.white{background:var(--white);}
+.section-wrap.bg{background:var(--bg);}
+.section-wrap.forest{background:var(--forest);}
+
+.origen-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.origen-text h2{font-family:'Lora',Georgia,serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;line-height:1.2;color:var(--text);margin-bottom:20px;letter-spacing:-0.02em;}
+.origen-text h2 em{font-style:italic;color:var(--forest-lt);}
+.origen-text p{font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:16px;}
+.origen-callout{background:var(--forest);border-radius:8px;padding:32px;color:#fff;}
+.origen-callout-kicker{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(157,207,180,0.7);margin-bottom:10px;}
+.origen-callout blockquote{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;line-height:1.5;color:#fff;font-style:italic;margin-bottom:12px;}
+.origen-callout cite{font-size:12px;color:rgba(255,255,255,0.4);}
+
+.valors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
+.valor{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:32px 28px;}
+.valor-icon{width:44px;height:44px;background:var(--card2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.valor-title{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:700;color:var(--text);margin-bottom:10px;}
+.valor-text{font-size:14px;line-height:1.7;color:var(--muted);}
+
+.equip-intro{max-width:600px;margin-bottom:48px;}
+.equip-intro h2{font-family:'Lora',Georgia,serif;font-size:clamp(26px,2.8vw,36px);font-weight:700;color:var(--text);margin-bottom:16px;letter-spacing:-0.02em;}
+.equip-intro p{font-size:15px;line-height:1.8;color:var(--muted);}
+
+.equip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.persona{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.persona-foto{height:160px;background:var(--card2);display:flex;align-items:center;justify-content:center;position:relative;}
+.persona-foto-bg{position:absolute;inset:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 14px,rgba(27,51,39,0.04) 14px,rgba(27,51,39,0.04) 15px);}
+.persona-foto-initial{position:relative;z-index:1;font-family:'Lora',Georgia,serif;font-size:40px;font-weight:700;color:var(--forest-lt);opacity:0.5;}
+.persona-body{padding:20px;}
+.persona-nom{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.persona-rol{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--forest-lt);margin-bottom:10px;}
+.persona-bio{font-size:13px;line-height:1.65;color:var(--muted);}
+.persona-buscada{background:var(--forest);border-color:var(--forest);}
+.persona-buscada .persona-foto{background:var(--forest-mid);}
+.persona-buscada .persona-nom,.persona-buscada .persona-bio{color:#fff;}
+.persona-buscada .persona-rol{color:rgba(157,207,180,0.8);}
+.persona-buscada .persona-foto-initial{color:#9DCFB4;opacity:0.4;}
+
+.referents-layout{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.referent{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:28px;}
+.referent-lloc{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(157,207,180,0.6);margin-bottom:8px;}
+.referent-nom{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;}
+.referent-text{font-size:13.5px;line-height:1.65;color:rgba(255,255,255,0.5);}
+
+.seccio-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-lt);margin-bottom:8px;}
+.seccio-title{font-family:'Lora',Georgia,serif;font-size:clamp(24px,2.4vw,32px);font-weight:700;color:var(--text);letter-spacing:-0.02em;margin-bottom:32px;}
+
+.cta-final{background:var(--forest);padding:80px 52px;text-align:center;}
+.cta-final-text{font-family:'Lora',Georgia,serif;font-size:clamp(28px,3vw,40px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;max-width:600px;margin:0 auto 32px;}
+.cta-final-text em{font-style:italic;color:#9DCFB4;}
+.cta-final-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{background:var(--red);color:#fff;padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
+.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-outline{color:rgba(255,255,255,0.7);padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,0.25);}
+.cta-btn-outline:hover{color:#fff;border-color:rgba(255,255,255,0.6);}
+
+footer{background:#111C16;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:260px;margin-bottom:20px;}
+.footer-social{display:flex;gap:10px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.07);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:18px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.25);}
+.footer-entity{font-size:11.5px;color:rgba(157,207,180,0.5);font-weight:500;}
+
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+  .page-header{padding:36px 20px 32px;}
+  .section-wrap{padding:48px 20px;}
+  .origen-layout{grid-template-columns:1fr;}
+  .valors-grid{grid-template-columns:1fr;}
+  .equip-grid{grid-template-columns:1fr;}
+  .referents-layout{grid-template-columns:1fr;}
+  .cta-final{padding:60px 20px;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="qui-som.html" class="active">Qui som</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-kicker">Qui som</div>
+  <h1>Una iniciativa nascuda<br>al barri, per al barri.</h1>
+  <p>Avant Que Tanqui és una cooperativa de treball en constitució, impulsada per veïnes de Gràcia convençudes que el comerç local és un bé comú que val la pena defensar.</p>
+</div>
+
+<!-- Origen -->
+<section class="section-wrap white">
+  <div class="origen-layout">
+    <div class="origen-text">
+      <h2>Per què hem <em>creat</em> AQT?</h2>
+      <p>El tancament de la Ferreteria Camps, amb 90 anys d'història al barri, va ser el detonant. Però darrere hi havia un patró repetit: lloguers que es multipliquen, propietaris que venen, comerços emblemàtics que desapareixen un a un.</p>
+      <p>Ens vam preguntar: i si en lloc de lamentar-ho, actuéssim abans que tanquin? No per preservar la nostàlgia, sinó per garantir que el barri manté la seva diversitat, identitat i teixit social.</p>
+      <p>AQT neix com a cooperativa de treball perquè creiem que la millor manera de protegir el comerç local és treure'l del mercat especulatiu, posar-lo en mans de la comunitat, i gestionar-lo amb criteris cooperatius i socials.</p>
+    </div>
+    <div class="origen-callout">
+      <div class="origen-callout-kicker">El punt de partida</div>
+      <blockquote>"Quan tanca un comerç de tota la vida, no tanca un negoci. Tanca un punt de trobada del barri."</blockquote>
+      <cite>— Veïna de Gràcia, febrer 2026</cite>
+    </div>
+  </div>
+</section>
+
+<!-- Valors -->
+<section class="section-wrap bg">
+  <div class="seccio-kicker">Els nostres principis</div>
+  <div class="seccio-title">Com treballem</div>
+  <div class="valors-grid">
+    <div class="valor">
+      <div class="valor-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3A6B55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="valor-title">Cooperativisme real</div>
+      <div class="valor-text">Les treballadores són sòcies amb veu i vot. No hi ha cap propietari extern que extregui beneficis. Tot el que es genera es reinverteix en nous locals o en millorar les condicions de treball.</div>
+    </div>
+    <div class="valor">
+      <div class="valor-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3A6B55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="valor-title">Arrelament al barri</div>
+      <div class="valor-text">Actuem a Gràcia perquè el coneixem, però el model és replicable. Cada decisió té en compte l'impacte sobre el teixit social i comercial del barri, no només els números.</div>
+    </div>
+    <div class="valor">
+      <div class="valor-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3A6B55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="valor-title">Patrimoni comú permanent</div>
+      <div class="valor-text">Un cop adquirit, un local surt del mercat especulatiu per sempre. No es ven, no es revalua per expulsar. És un patrimoni col·lectiu gestionat per al bé comú.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Equip -->
+<section class="section-wrap white">
+  <div class="equip-intro">
+    <div class="seccio-kicker">L'equip</div>
+    <h2>Qui hi ha darrere del projecte</h2>
+    <p>AQT és en fase de constitució. Ara mateix estem captant les sòcies fundadores que formaran el nucli inicial de la cooperativa. Si vols ser-ne part, el moment és ara.</p>
+  </div>
+  <div class="equip-grid">
+    <div class="persona">
+      <div class="persona-foto">
+        <div class="persona-foto-bg"></div>
+        <div class="persona-foto-initial">A</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-nom">Alba</div>
+        <div class="persona-rol">Impulsora · Coordinació</div>
+        <div class="persona-bio">Veïna de Gràcia i emprenedora social. Impulsa AQT des de la convicció que les cooperatives de treball poden ser el vehicle per recuperar el comerç local.</div>
+      </div>
+    </div>
+    <div class="persona persona-buscada">
+      <div class="persona-foto">
+        <div class="persona-foto-bg"></div>
+        <div class="persona-foto-initial">?</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-nom">Sòcia fundadora</div>
+        <div class="persona-rol">Posicions obertes</div>
+        <div class="persona-bio">Cerquem persones amb experiència en gestió comercial, dret cooperatiu, comunicació, finances o simplement amb ganes de construir alguna cosa important.</div>
+      </div>
+    </div>
+    <div class="persona persona-buscada">
+      <div class="persona-foto">
+        <div class="persona-foto-bg"></div>
+        <div class="persona-foto-initial">?</div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-nom">Sòcia fundadora</div>
+        <div class="persona-rol">Posicions obertes</div>
+        <div class="persona-bio">La cooperativa necessita una base fundadora diversa. Juristes, economistes, comunicadores, arquitectes o professionals compromesos amb el barri.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Referents -->
+<section class="section-wrap forest">
+  <div class="seccio-kicker" style="color:rgba(157,207,180,0.7)">Ens inspirem en</div>
+  <div class="seccio-title" style="color:#fff;margin-bottom:32px;">Models que funcionen al món</div>
+  <div class="referents-layout">
+    <div class="referent">
+      <div class="referent-lloc">Liverpool, Regne Unit</div>
+      <div class="referent-nom">Homebaked Community Land Trust</div>
+      <div class="referent-text">Una cooperativa que va recuperar una fleca centenària a Liverpool, posant-la en mans de la comunitat. 10 anys demostrant que un altre model és viable.</div>
+    </div>
+    <div class="referent">
+      <div class="referent-lloc">Minneapolis, EUA</div>
+      <div class="referent-nom">NEIC (Northeast Investment Cooperative)</div>
+      <div class="referent-text">Cooperativa d'inversió veïnal que adquireix locals comercials per mantenir la diversitat econòmica als barris i evitar la gentrificació.</div>
+    </div>
+    <div class="referent">
+      <div class="referent-lloc">Philadelphia, EUA</div>
+      <div class="referent-nom">Kensington Corridor Trust</div>
+      <div class="referent-text">Un trust comunitari que gestiona locals comercials al corredor Kensington, evitant el desplaçament i garantint lloguers assequibles per a comerços locals.</div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final">
+  <div class="cta-final-text">Vols <em>formar part</em> d'AQT?</div>
+  <div class="cta-final-actions">
+    <a class="cta-btn-primary" href="participa.html">Participar com a sòcia</a>
+    <a class="cta-btn-outline" href="contacte.html">Escriu-nos →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local al barri de Gràcia, Barcelona.</div>
+      <div class="footer-social">
+        <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+        <a href="contacte.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Més</div>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('nav-burger'),mobileNav=document.getElementById('nav-mobile');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open');});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open');}));
+</script>
+</body>
+</html>
