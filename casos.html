@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casos documentats — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:    #1B3327;
+  --forest-mid:#2A5040;
+  --forest-lt: #3A6B55;
+  --bg:        #F7F6F1;
+  --white:     #FFFFFF;
+  --red:       #C42B10;
+  --red-lt:    #E84328;
+  --text:      #1A1A17;
+  --mid:       #3D3D38;
+  --muted:     #6E786A;
+  --border:    #DFE0D8;
+  --card:      #EEEEE8;
+  --card2:     #E4EBE6;
+  --amber:     #D97706;
+  --green-ok:  #2A7A4B;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--forest); padding: 0 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; position: sticky; top: 0; z-index: 1000;
+}
+.nav-logo {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px; font-weight: 700; color: #fff;
+  letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; text-decoration: none;
+}
+.nav-logo-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65);
+  text-decoration: none; transition: color 0.15s; letter-spacing: 0.01em;
+}
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+.nav-cta {
+  background: var(--red); color: #fff !important;
+  padding: 8px 18px; border-radius: 3px; font-size: 13px; font-weight: 600;
+  transition: background 0.15s !important;
+}
+.nav-cta:hover { background: var(--red-lt) !important; }
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100;
+}
+.nav-burger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.75); border-radius: 2px; transition: all 0.25s; }
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--forest); border-top: 1px solid rgba(255,255,255,0.08);
+  z-index: 999; flex-direction: column; padding: 16px 0 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a { font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.7); text-decoration: none; padding: 12px 24px; transition: color 0.15s, background 0.15s; }
+.nav-mobile a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.nav-mobile .nav-cta { margin: 8px 24px 0; background: var(--red); color: #fff !important; padding: 12px 20px; border-radius: 4px; text-align: center; font-weight: 600; }
+
+/* ─── HERO ─── */
+.page-hero {
+  background: var(--forest); padding: 72px 52px 64px;
+}
+.page-hero-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(157,207,180,0.7); margin-bottom: 16px;
+}
+.page-hero h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(36px, 3.5vw, 52px); font-weight: 700;
+  line-height: 1.1; color: #fff; letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.page-hero h1 em { font-style: italic; color: #9DCFB4; }
+.page-hero-sub {
+  font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.5); max-width: 520px;
+}
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 44px;
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.stat-num {
+  font-family: 'Lora', Georgia, serif; font-size: 32px; font-weight: 700;
+  color: #fff; display: block; line-height: 1; letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 11px; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-top: 5px;
+}
+
+/* ─── FILTRES ─── */
+.filtres-bar {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 52px; display: flex; align-items: center; gap: 8px; height: 56px; position: sticky; top: 64px; z-index: 100;
+}
+.filtre-btn {
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border);
+  background: none; color: var(--muted); cursor: pointer; transition: all 0.15s;
+  letter-spacing: 0.01em;
+}
+.filtre-btn:hover { border-color: var(--forest-lt); color: var(--forest); }
+.filtre-btn.actiu { background: var(--forest); border-color: var(--forest); color: #fff; }
+.filtre-dot {
+  display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle;
+}
+.dot-risc { background: var(--amber); }
+.dot-tancat { background: var(--red); }
+.dot-recuperat { background: #4CAF8A; }
+
+/* ─── CASOS GRID ─── */
+.casos-section { padding: 52px 52px 80px; }
+.casos-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+
+/* Targetes normals */
+.cas-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 6px;
+  overflow: hidden; display: flex; flex-direction: column;
+  cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
+}
+.cas-card:hover { box-shadow: 0 8px 32px rgba(27,51,39,0.1); transform: translateY(-2px); }
+
+.cas-photo {
+  height: 140px; background: var(--card2); position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.cas-photo-bg {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(27,51,39,0.06) 22px, rgba(27,51,39,0.06) 23px),
+    repeating-linear-gradient(90deg, transparent, transparent 22px, rgba(27,51,39,0.06) 22px, rgba(27,51,39,0.06) 23px);
+}
+.cas-status {
+  position: absolute; bottom: 12px; left: 12px;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; background: var(--red); color: #fff;
+}
+.cas-status.risc     { background: var(--amber); color: #fff; }
+.cas-status.tancat   { background: var(--red); }
+.cas-status.recuperat { background: var(--green-ok); }
+
+.cas-body { padding: 20px 20px 18px; flex: 1; display: flex; flex-direction: column; }
+.cas-loc { font-size: 11px; color: var(--muted); margin-bottom: 7px; }
+.cas-title {
+  font-family: 'Lora', Georgia, serif; font-size: 19px; font-weight: 600;
+  color: var(--text); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 10px;
+}
+.cas-resum { font-size: 13px; line-height: 1.65; color: var(--muted); flex: 1; margin-bottom: 16px; }
+.cas-link {
+  font-size: 12px; font-weight: 600; color: var(--forest-lt);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+
+/* Targeta CTA */
+.cas-card.cta-card {
+  background: var(--forest); border-color: var(--forest); cursor: default;
+}
+.cas-card.cta-card:hover { transform: none; box-shadow: 0 4px 20px rgba(27,51,39,0.2); }
+.cta-card-inner {
+  padding: 36px 28px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+}
+.cta-card-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(157,207,180,0.7); margin-bottom: 16px;
+}
+.cta-card-title {
+  font-family: 'Lora', Georgia, serif; font-size: 22px; font-weight: 700;
+  color: #fff; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 14px;
+}
+.cta-card-text { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,0.5); margin-bottom: 28px; flex: 1; }
+.cta-card-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--red); color: #fff; padding: 12px 22px; border-radius: 4px;
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  transition: background 0.15s; width: fit-content;
+}
+.cta-card-btn:hover { background: var(--red-lt); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(10,20,15,0.7);
+  z-index: 2000; display: flex; align-items: center; justify-content: center;
+  padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); border-radius: 10px; max-width: 640px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  transform: translateY(12px); transition: transform 0.2s;
+  position: relative;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+
+.modal-header {
+  background: var(--forest); padding: 32px 36px 28px; border-radius: 10px 10px 0 0;
+}
+.modal-status {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 2px; color: #fff; display: inline-block; margin-bottom: 14px;
+}
+.modal-status.risc     { background: var(--amber); }
+.modal-status.tancat   { background: var(--red); }
+.modal-status.recuperat { background: var(--green-ok); }
+.modal-title {
+  font-family: 'Lora', Georgia, serif; font-size: 28px; font-weight: 700;
+  color: #fff; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 8px;
+}
+.modal-loc { font-size: 12.5px; color: rgba(255,255,255,0.45); }
+
+.modal-body { padding: 32px 36px 36px; }
+.modal-desc { font-size: 14.5px; line-height: 1.8; color: var(--mid); margin-bottom: 28px; }
+
+.modal-fases { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 28px; }
+.modal-fase {
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.modal-fase:last-child { border-bottom: none; }
+.modal-fase-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 2px; flex-shrink: 0; margin-top: 2px;
+}
+.badge-problema    { background: rgba(196,43,16,0.1); color: var(--red); }
+.badge-intervencio { background: rgba(58,107,85,0.1); color: var(--forest-lt); }
+.badge-resultat    { background: rgba(42,122,75,0.1); color: var(--green-ok); }
+.modal-fase-text { font-size: 13.5px; line-height: 1.6; color: var(--mid); }
+
+.modal-data { font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 18px; }
+
+.modal-close {
+  position: absolute; top: 18px; right: 20px;
+  background: rgba(255,255,255,0.12); border: none; cursor: pointer;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.22); }
+.modal-close svg { display: block; }
+
+/* ─── FOOTER ─── */
+footer { background: #111C16; padding: 60px 52px 0; color: rgba(255,255,255,0.6); }
+.footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 52px; }
+.footer-brand { font-family: 'Lora', Georgia, serif; font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
+.footer-brand-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
+.footer-desc { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.4); max-width: 260px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a { width: 34px; height: 34px; background: rgba(255,255,255,0.07); border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.15s; }
+.footer-social a:hover { background: rgba(255,255,255,0.14); }
+.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 9px; transition: color 0.15s; }
+.footer-col a:hover { color: rgba(255,255,255,0.9); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 18px 0; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); }
+.footer-entity { font-size: 11.5px; color: rgba(157,207,180,0.5); font-weight: 500; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .page-hero { padding: 52px 24px 44px; }
+  .filtres-bar { padding: 0 20px; overflow-x: auto; gap: 6px; }
+  .casos-section { padding: 36px 20px 60px; }
+  .casos-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .modal-header { padding: 28px 24px 22px; }
+  .modal-body { padding: 24px 24px 28px; }
+  .modal-title { font-size: 22px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-dot"></div>
+    Abans Que Tanqui
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="casos.html" class="active">Casos</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="qui-som.html">Qui som</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="casos.html">Casos</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-kicker">Casos documentats</div>
+  <h1>Cada persiana que baixa<br>té una <em>història.</em></h1>
+  <p class="page-hero-sub">Documentem els casos reals de comerços en risc o tancats al barri de Gràcia. Noms, fets i intervencions concretes.</p>
+  <div class="hero-stats">
+    <div>
+      <span class="stat-num">2</span>
+      <div class="stat-label">Casos documentats</div>
+    </div>
+    <div>
+      <span class="stat-num">1</span>
+      <div class="stat-label">En risc actiu</div>
+    </div>
+    <div>
+      <span class="stat-num">1</span>
+      <div class="stat-label">Tancat definitivament</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTRES -->
+<div class="filtres-bar">
+  <button class="filtre-btn actiu" data-filtre="tots">Tots</button>
+  <button class="filtre-btn" data-filtre="risc"><span class="filtre-dot dot-risc"></span>En risc</button>
+  <button class="filtre-btn" data-filtre="tancat"><span class="filtre-dot dot-tancat"></span>Tancats</button>
+  <button class="filtre-btn" data-filtre="recuperat"><span class="filtre-dot dot-recuperat"></span>Recuperats</button>
+</div>
+
+<!-- CASOS -->
+<section class="casos-section">
+  <div class="casos-grid" id="casos-grid">
+
+    <!-- Cas 1: Ferreteria Camps -->
+    <div class="cas-card" data-estat="tancat" data-id="ferreteria-camps">
+      <div class="cas-photo">
+        <div class="cas-photo-bg"></div>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--forest-lt)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:1;opacity:0.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        <div class="cas-status tancat">Tancat</div>
+      </div>
+      <div class="cas-body">
+        <div class="cas-loc">📍 Vila de Gràcia, Barcelona</div>
+        <div class="cas-title">Ferreteria Camps</div>
+        <div class="cas-resum">90 anys de servei al barri. Un lloguer de 15.000 €/mes va fer impossible la continuïtat. Va tancar el febrer de 2026.</div>
+        <div class="cas-link">Llegir el cas <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+
+    <!-- Cas 2: Forn Santa Clara -->
+    <div class="cas-card" data-estat="risc" data-id="forn-santa-clara">
+      <div class="cas-photo">
+        <div class="cas-photo-bg"></div>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--forest-lt)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:1;opacity:0.5"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+        <div class="cas-status risc">En risc</div>
+      </div>
+      <div class="cas-body">
+        <div class="cas-loc">📍 Vila de Gràcia, Barcelona</div>
+        <div class="cas-title">Forn Santa Clara</div>
+        <div class="cas-resum">El propietari va doblar el lloguer sense preavís. El forn porta quatre generacions al barri. La mediació amb el propietari segueix oberta.</div>
+        <div class="cas-link">Llegir el cas <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+
+    <!-- Targeta CTA -->
+    <div class="cas-card cta-card">
+      <div class="cta-card-inner">
+        <div>
+          <div class="cta-card-label">Conèixes un cas?</div>
+          <div class="cta-card-title">Tu pots ser el primer en alertar-nos.</div>
+          <div class="cta-card-text">Si saps d'un comerç en risc de tancament al barri, explica'ns-ho. Cada cas que documentem és un pas cap a la solució.</div>
+        </div>
+        <a class="cta-card-btn" href="contacte.html">
+          Explica'ns el cas
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close" aria-label="Tancar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-header">
+      <div class="modal-status" id="modal-status"></div>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-loc" id="modal-loc"></div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-fases" id="modal-fases"></div>
+      <div class="modal-data" id="modal-data"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local al barri de Gràcia, Barcelona.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.6)"/></svg></a>
+        <a href="#" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="participa.html">Col·laboradors</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Més</div>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="casos.html">Casos</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+// ─── DADES DELS CASOS ───
+const casos = {
+  'ferreteria-camps': {
+    estat: 'tancat',
+    estatLabel: 'Tancat · Febrer 2026',
+    titol: 'Ferreteria Camps',
+    loc: '📍 Vila de Gràcia, Barcelona · Activa des de 1936',
+    desc: 'La Ferreteria Camps va ser durant 90 anys un dels comerços més emblemàtics de la Vila de Gràcia. Especialitzada en ferreteria tradicional i productes de bricolatge, era un punt de referència per a veïnes i professionals del barri. El 2023, el propietari de l\'immoble va iniciar una escalada de lloguer que va passar de 3.200 € a 15.000 € mensuals en menys de tres anys. Cap volum de vendes podia absorbir aquest increment.',
+    fases: [
+      { badge: 'badge-problema', label: 'Problema', text: 'Lloguer incrementat fins a 15.000 €/mes. Pressió del propietari per recuperar el local per a ús turístic.' },
+      { badge: 'badge-intervencio', label: 'Intervenció', text: 'AQT va contactar amb el comerciant i va explorar alternatives: relleu cooperatiu, mediació amb el propietari i opcions de reubicació.' },
+      { badge: 'badge-resultat', label: 'Resultat', text: 'Sense acord possible. Tancament definitiu el febrer de 2026. El local va quedar buit. El cas va impulsar la constitució formal d\'AQT.' },
+    ],
+    data: 'Documentat el gener de 2026 · Tancat el febrer de 2026'
+  },
+  'forn-santa-clara': {
+    estat: 'risc',
+    estatLabel: 'En risc · Mediació en curs',
+    titol: 'Forn Santa Clara',
+    loc: '📍 Vila de Gràcia, Barcelona · Quatre generacions',
+    desc: 'El Forn Santa Clara és un dels pocs forns artesans que queden a la Vila de Gràcia. Porta més de 80 anys al mateix local, amb quatre generacions de la mateixa família. El 2025, el propietari de l\'immoble va doblar el lloguer d\'un dia per l\'altre, invocant una clàusula d\'actualització que els advocats del forn consideren abusiva. Sense acord, el forn es veuria forçat a tancar o a traslladar-se, perdent la clientela de tota la vida.',
+    fases: [
+      { badge: 'badge-problema', label: 'Problema', text: 'Lloguer doblat sense preavís raonable. Clàusula d\'actualització aplicada de forma agressiva. El forn no pot assumir el nou import.' },
+      { badge: 'badge-intervencio', label: 'Intervenció', text: 'AQT ha iniciat mediació amb el propietari i ha posat en contacte la família amb assessorament jurídic especialitzat en dret comercial.' },
+      { badge: 'badge-resultat', label: 'Situació actual', text: 'Negociació oberta. El forn continua obert mentre es resol el conflicte. En seguiment actiu per part d\'AQT.' },
+    ],
+    data: 'Documentat el novembre de 2025 · En seguiment actiu'
+  }
+};
+
+// ─── MODAL ───
+const overlay = document.getElementById('modal-overlay');
+const modalClose = document.getElementById('modal-close');
+
+function obrirModal(id) {
+  const c = casos[id];
+  if (!c) return;
+
+  document.getElementById('modal-status').textContent = c.estatLabel;
+  document.getElementById('modal-status').className = 'modal-status ' + c.estat;
+  document.getElementById('modal-title').textContent = c.titol;
+  document.getElementById('modal-loc').textContent = c.loc;
+  document.getElementById('modal-desc').textContent = c.desc;
+  document.getElementById('modal-data').textContent = c.data;
+
+  const fasesEl = document.getElementById('modal-fases');
+  fasesEl.innerHTML = c.fases.map(f => `
+    <div class="modal-fase">
+      <span class="modal-fase-badge ${f.badge}">${f.label}</span>
+      <span class="modal-fase-text">${f.text}</span>
+    </div>
+  `).join('');
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function tancarModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.cas-card:not(.cta-card)').forEach(card => {
+  card.addEventListener('click', () => obrirModal(card.dataset.id));
+});
+modalClose.addEventListener('click', tancarModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) tancarModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') tancarModal(); });
+
+// ─── FILTRES ───
+document.querySelectorAll('.filtre-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('actiu'));
+    btn.classList.add('actiu');
+    const filtre = btn.dataset.filtre;
+    document.querySelectorAll('.cas-card:not(.cta-card)').forEach(card => {
+      card.style.display = (filtre === 'tots' || card.dataset.estat === filtre) ? '' : 'none';
+    });
+  });
+});
+
+// ─── HAMBURGER ───
+const burger = document.getElementById('nav-burger');
+const mobileNav = document.getElementById('nav-mobile');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
