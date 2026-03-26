@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de casos · Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --forest:#1B3327; --forest-mid:#2A5040; --forest-lt:#3A6B55;
+  --bg:#F7F6F1; --white:#FFFFFF; --red:#C42B10; --red-lt:#E84328;
+  --text:#1A1A17; --mid:#3D3D38; --muted:#6E786A;
+  --border:#DFE0D8; --card:#EEEEE8; --card2:#E4EBE6;
+  --amber:#D97706; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--forest);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.15s;letter-spacing:0.01em;}
+.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-cta{background:var(--red);color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s !important;}
+.nav-cta:hover{background:var(--red-lt) !important;}
+
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
+.nav-burger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.75);border-radius:2px;transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--forest);border-top:1px solid rgba(255,255,255,0.08);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;padding:12px 24px;transition:color 0.15s,background 0.15s;}
+.nav-mobile a:hover{color:#fff;background:rgba(255,255,255,0.05);}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--red);color:#fff !important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
+
+.page-header{background:var(--forest);padding:52px 52px 48px;}
+.page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(157,207,180,0.7);margin-bottom:10px;}
+.page-header h1{font-family:'Lora',Georgia,serif;font-size:clamp(32px,3.5vw,48px);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px;}
+.page-header p{font-size:15px;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.7;}
+
+.mapa-full-wrap{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 64px - 160px);}
+#mapa-full{z-index:1;}
+.mapa-panel{background:var(--white);border-left:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 64px);}
+.mapa-panel-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:10;}
+.mapa-panel-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:12px;}
+.filtres{display:flex;gap:8px;flex-wrap:wrap;}
+.filtre-btn{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:none;cursor:pointer;color:var(--muted);transition:all 0.15s;}
+.filtre-btn.active-risc{background:rgba(217,119,6,0.1);border-color:var(--amber);color:#B45309;}
+.filtre-btn.active-tancat{background:rgba(196,43,16,0.1);border-color:var(--red);color:var(--red);}
+.filtre-btn.active-recuperat{background:rgba(42,122,75,0.1);border-color:var(--green-ok);color:var(--green-ok);}
+.filtre-btn.active-all{background:var(--forest);border-color:var(--forest);color:#fff;}
+
+.casos-list{padding:0 0 20px;}
+.cas-item{padding:20px 28px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
+.cas-item:hover{background:var(--bg);}
+.cas-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:8px;}
+.cas-badge.risc{background:rgba(217,119,6,0.1);color:#B45309;}
+.cas-badge.tancat{background:rgba(196,43,16,0.1);color:var(--red);}
+.cas-badge.recuperat{background:rgba(42,122,75,0.1);color:var(--green-ok);}
+.cas-nom{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.cas-desc{font-size:12.5px;color:var(--muted);line-height:1.5;}
+
+.mapa-stats-bar{background:var(--forest);padding:20px 52px;display:flex;gap:40px;}
+.mapa-stat{display:flex;flex-direction:column;}
+.mapa-stat-num{font-family:'Lora',Georgia,serif;font-size:28px;font-weight:700;color:#fff;line-height:1;}
+.mapa-stat-label{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+
+.leaflet-popup-content-wrapper{border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+.popup-title{font-weight:700;color:#1A1A17;margin-bottom:4px;}
+.popup-cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:6px;}
+.popup-cat.risc{background:rgba(217,119,6,0.12);color:#B45309;}
+.popup-cat.tancat{background:rgba(196,43,16,0.1);color:#C42B10;}
+.popup-cat.recuperat{background:rgba(42,122,75,0.12);color:#2A7A4B;}
+.popup-text{color:#6E786A;line-height:1.5;}
+
+footer{background:#111C16;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:260px;margin-bottom:20px;}
+.footer-social{display:flex;gap:10px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.07);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.14);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:18px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.25);}
+.footer-entity{font-size:11.5px;color:rgba(157,207,180,0.5);font-weight:500;}
+
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+  .page-header{padding:36px 20px 32px;}
+  .mapa-full-wrap{grid-template-columns:1fr;grid-template-rows:360px 1fr;}
+  #mapa-full{height:360px;}
+  .mapa-panel{max-height:none;border-left:none;border-top:1px solid var(--border);}
+  .mapa-stats-bar{padding:16px 20px;gap:20px;flex-wrap:wrap;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html" class="active">Mapa</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="qui-som.html">Qui som</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-kicker">Mapa de casos</div>
+  <h1>Comerços en risc a Gràcia.</h1>
+  <p>Cada punt representa un comerç documentat. El mapa s'actualitza a mesura que treballem sobre el terreny.</p>
+</div>
+
+<div class="mapa-stats-bar">
+  <div class="mapa-stat"><span class="mapa-stat-num">14</span><div class="mapa-stat-label">En risc</div></div>
+  <div class="mapa-stat"><span class="mapa-stat-num">7</span><div class="mapa-stat-label">Tancats</div></div>
+  <div class="mapa-stat"><span class="mapa-stat-num">2</span><div class="mapa-stat-label">Recuperats</div></div>
+  <div class="mapa-stat"><span class="mapa-stat-num">23</span><div class="mapa-stat-label">Total documentats</div></div>
+</div>
+
+<div class="mapa-full-wrap">
+  <div id="mapa-full"></div>
+  <div class="mapa-panel">
+    <div class="mapa-panel-header">
+      <div class="mapa-panel-title">Casos documentats</div>
+      <div class="filtres">
+        <button class="filtre-btn active-all" data-filtre="tot" onclick="filtrar(this,'tot')">Tots</button>
+        <button class="filtre-btn" data-filtre="risc" onclick="filtrar(this,'risc')">En risc</button>
+        <button class="filtre-btn" data-filtre="tancat" onclick="filtrar(this,'tancat')">Tancats</button>
+        <button class="filtre-btn" data-filtre="recuperat" onclick="filtrar(this,'recuperat')">Recuperats</button>
+      </div>
+    </div>
+    <div class="casos-list" id="casos-list"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local al barri de Gràcia, Barcelona.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.6)"/></svg></a>
+        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Més</div>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+const colors = { risc:'#D97706', tancat:'#C42B10', recuperat:'#4CAF8A' };
+const labels = { risc:'En risc', tancat:'Tancat', recuperat:'Recuperat' };
+
+const punts = [
+  { lat:41.4043, lng:2.1547, nom:'Ferreteria Camps',    cat:'tancat',    desc:'90 anys obert. Tancament febrer 2026.' },
+  { lat:41.4021, lng:2.1562, nom:'Forn Santa Clara',    cat:'risc',      desc:'Lloguer doblat. Mediació en curs.' },
+  { lat:41.4055, lng:2.1530, nom:'Herbolari Cal Verd',  cat:'recuperat', desc:'Traspàs cooperatiu. Obert des de gener 2026.' },
+  { lat:41.4010, lng:2.1575, nom:'Impremta Molina',     cat:'risc',      desc:'Propietari vol vendre el local.' },
+  { lat:41.4065, lng:2.1555, nom:'Carnisseria Can Ros', cat:'tancat',    desc:'Tancat el desembre 2025. Local buit.' },
+  { lat:41.4038, lng:2.1510, nom:'Farmàcia Vergés',     cat:'risc',      desc:'Renovació de lloguer pendent.' },
+  { lat:41.4028, lng:2.1590, nom:'Llibreria Canigó',    cat:'risc',      desc:'Propietari jubilat sense relleu.' },
+  { lat:41.4050, lng:2.1500, nom:'Colmado La Parra',    cat:'risc',      desc:'Lloguer triplicat en 4 anys.' },
+  { lat:41.4015, lng:2.1540, nom:'Drogueria Cortés',    cat:'tancat',    desc:'Tancat octubre 2025. Ara és un Wok.' },
+  { lat:41.4070, lng:2.1520, nom:'Taller Méndez',       cat:'risc',      desc:'Mecànica independent. Nova zona turística.' },
+];
+
+const map = L.map('mapa-full', { center:[41.4035,2.1544], zoom:15, scrollWheelZoom:false });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+  attribution:'&copy; <a href="https://carto.com/">CARTO</a>', subdomains:'abcd', maxZoom:19
+}).addTo(map);
+
+function makeIcon(color){
+  return L.divIcon({
+    className:'',
+    html:`<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25)"></div>`,
+    iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10]
+  });
+}
+
+const markers = [];
+punts.forEach((p,i) => {
+  const m = L.marker([p.lat,p.lng],{icon:makeIcon(colors[p.cat])})
+    .addTo(map)
+    .bindPopup(`<div class="popup-cat ${p.cat}">${labels[p.cat]}</div><div class="popup-title">${p.nom}</div><div class="popup-text">${p.desc}</div>`);
+  markers.push({marker:m, data:p});
+});
+
+function renderLlista(filtre){
+  const list = document.getElementById('casos-list');
+  list.innerHTML = '';
+  punts.filter(p => filtre==='tot' || p.cat===filtre).forEach((p,i) => {
+    const div = document.createElement('div');
+    div.className = 'cas-item';
+    div.innerHTML = `<div class="cas-badge ${p.cat}">${labels[p.cat]}</div><div class="cas-nom">${p.nom}</div><div class="cas-desc">${p.desc}</div>`;
+    div.addEventListener('click',() => {
+      map.setView([p.lat,p.lng],16);
+      markers.find(m=>m.data.nom===p.nom).marker.openPopup();
+    });
+    list.appendChild(div);
+  });
+}
+
+function filtrar(btn, filtre){
+  document.querySelectorAll('.filtre-btn').forEach(b=>{
+    b.className='filtre-btn';
+  });
+  if(filtre==='tot') btn.classList.add('active-all');
+  else btn.classList.add('active-'+filtre);
+  renderLlista(filtre);
+}
+
+renderLlista('tot');
+
+const burger = document.getElementById('nav-burger');
+const mobileNav = document.getElementById('nav-mobile');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open');});
+mobileNav.querySelectorAll('a').forEach(a=>{a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open');});});
+</script>
+</body>
+</html>
