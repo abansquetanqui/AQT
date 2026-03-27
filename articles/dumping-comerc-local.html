@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Què és el dumping i com afecta el comerç local? — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:    #1B3327;
+  --forest-mid:#2A5040;
+  --forest-lt: #3A6B55;
+  --bg:        #F7F6F1;
+  --white:     #FFFFFF;
+  --red:       #C42B10;
+  --red-lt:    #E84328;
+  --text:      #1A1A17;
+  --mid:       #3D3D38;
+  --muted:     #6E786A;
+  --border:    #DFE0D8;
+  --card:      #EEEEE8;
+  --card2:     #E4EBE6;
+  --amber:     #D97706;
+  --green-ok:  #2A7A4B;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--forest);
+  padding: 0 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-logo {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.15s;
+  letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: #fff; }
+.nav-back {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.15s;
+  letter-spacing: 0.01em;
+}
+.nav-back:hover { color: #fff; }
+
+/* ─── ARTICLE HERO ─── */
+.article-hero {
+  background: var(--forest);
+  padding: 80px 52px 60px;
+  color: #fff;
+}
+.article-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.article-cat {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  background: var(--red);
+  padding: 5px 13px;
+  border-radius: 3px;
+}
+.article-date {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.02em;
+}
+.article-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.article-subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  max-width: 720px;
+}
+
+/* ─── ARTICLE BODY ─── */
+.article-body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 72px 52px;
+  background: var(--white);
+}
+.article-body p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: var(--text);
+  font-weight: 400;
+}
+.article-body p strong { font-weight: 600; }
+.article-body h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.article-body h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 32px 0 16px;
+  line-height: 1.2;
+}
+.article-body ul {
+  margin: 0 0 24px 0;
+  list-style: none;
+}
+.article-body ul li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+.article-body ul li::before {
+  content: '→';
+  color: var(--red);
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+}
+
+/* ─── PULL QUOTE ─── */
+.pull-quote {
+  border-left: 4px solid var(--red);
+  padding: 28px 28px;
+  margin: 48px 0;
+  background: var(--card2);
+  border-radius: 0 4px 4px 0;
+}
+.pull-quote p {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0 !important;
+}
+.pull-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-style: normal;
+}
+
+/* ─── DEF BOX ─── */
+.def-box {
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 24px;
+  margin: 40px 0;
+  background: var(--card);
+}
+.def-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+  display: block;
+}
+.def-box p { margin-bottom: 0 !important; font-size: 15px !important; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 40px 0;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.compare-col {
+  padding: 28px;
+}
+.compare-col:first-child { border-right: 2px solid var(--border); }
+.compare-col h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid;
+  letter-spacing: -0.01em;
+}
+.compare-col.negatiu h3 { color: var(--red); border-color: var(--red); }
+.compare-col.positiu h3 { color: var(--green-ok); border-color: var(--green-ok); }
+.compare-col ul { margin: 0; }
+.compare-col ul li { font-size: 14px; padding-left: 20px; margin-bottom: 10px; }
+.compare-col.negatiu ul li::before { color: var(--red); }
+.compare-col.positiu ul li::before { color: var(--green-ok); }
+
+/* ─── DUMPING CARDS ─── */
+.dumping-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 40px 0;
+}
+.dumping-card {
+  background: var(--card);
+  border-radius: 6px;
+  padding: 24px;
+  border-left: 3px solid var(--red);
+}
+.dumping-card .icon { font-size: 24px; margin-bottom: 12px; display: block; }
+.dumping-card h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.dumping-card p { font-size: 14px; color: var(--mid); line-height: 1.6; margin: 0 !important; }
+
+/* ─── STAT ─── */
+.stat-block {
+  background: var(--forest);
+  border-radius: 6px;
+  padding: 40px;
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  color: #fff;
+}
+.stat-num {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.stat-desc {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* ─── CTA BOX ─── */
+.cta-box {
+  background: var(--forest);
+  border-radius: 6px;
+  padding: 40px;
+  margin: 48px 0;
+  text-align: center;
+  color: #fff;
+}
+.cta-box p { margin-bottom: 12px !important; font-size: 16px !important; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.cta-btn {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.15s;
+  display: inline-block;
+}
+.cta-btn-primary { background: var(--red); color: #fff; }
+.cta-btn-primary:hover { background: var(--red-lt); }
+.cta-btn-secondary { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+.cta-btn-secondary:hover { border-color: var(--red); }
+
+/* ─── ARTICLE FOOTER ─── */
+.article-footer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 52px 72px;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.article-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  background: var(--card);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+}
+.back-link {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--red);
+  text-decoration: none;
+}
+.back-link:hover { color: var(--red-lt); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--forest);
+  color: rgba(255,255,255,0.7);
+  padding: 56px 52px 32px;
+  margin-top: 72px;
+}
+.footer-copy {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+  nav, .article-body, .article-footer { padding-left: 24px; padding-right: 24px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-col:first-child { border-right: none; border-bottom: 2px solid var(--border); }
+  .dumping-grid { grid-template-columns: 1fr; }
+  .stat-block { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-dot"></div>
+    AQT
+  </a>
+  <a class="nav-back" href="index.html">← Tornar</a>
+</nav>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Análisis</span>
+      <span class="article-date">Febrer 2026</span>
+    </div>
+    <h1 class="article-title">Què és el dumping i com afecta el comerç local?</h1>
+    <p class="article-subtitle">Darrere de molts tancaments hi ha una estratègia concreta i poc visible. Entendre-la és el primer pas per no normalitzar-la.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="article-body">
+  <p><strong>El dumping comercial</strong> és una pràctica que consisteix a vendre productes per sota del seu preu de cost o del preu de mercat. Sona simple, però darrere hi ha una lògica que destrueix el teixit comercial local.</p>
+
+  <h2>Com funciona el dumping al barri?</h2>
+  <p>Les grans cadenes utilitzen el dumping per colonitzar sectors on el comerç tradicional dominava. Venen cinc pans per 1,50€ quan el cost és de 2€, sabent que els forns petits no poden competir. Sumen dues estratègies:</p>
+
+  <div class="dumping-grid">
+    <div class="dumping-card">
+      <span class="icon">📉</span>
+      <h3>Economia d'escala</h3>
+      <p>Els grans grups concentren producció i distribució, reduint costos unitaris que els petits no aconsegueixen.</p>
+    </div>
+    <div class="dumping-card">
+      <span class="icon">💰</span>
+      <h3>Subsidi creuada</h3>
+      <p>Venen amb pèrdua en una categoria per atraure clients, i recuperen marges en altres productes o punts de venda.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"No és que nosaltres siguin mals. És que tenen un model que ens deixa sense opcions."</p>
+    <cite>Propietari de forn tradicional, Gràcia, 2025</cite>
+  </div>
+
+  <h2>Per què el dumping és més que un preu baix</h2>
+
+  <div class="compare-grid">
+    <div class="compare-col negatiu">
+      <h3>Efectes del dumping</h3>
+      <ul>
+        <li>Destrueix marges dels forns locals</li>
+        <li>Obliga a tancar o baixar salaris</li>
+        <li>Desapareix la qualitat artesanal</li>
+        <li>S'erodeix l'economia del barri</li>
+      </ul>
+    </div>
+    <div class="compare-col positiu">
+      <h3>Construcció cooperativa</h3>
+      <ul>
+        <li>Preus justos per a la qualitat</li>
+        <li>Salaris dignes pels treballadors</li>
+        <li>Reinversió en el barri</li>
+        <li>Control comunitari del comerç</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>El context legal i regulatori</h2>
+  <p>A Europa, el dumping no està completament prohibit. Existeix la "Directiva sobre les pràctiques comercials deslleials" (2005/29/CE), però és aplicada de forma irregular. A Espanya, la Llei de defensa de la competència té limitacions en casos de dumping a preus de cost.</p>
+
+  <div class="def-box">
+    <span class="def-label">Important</span>
+    <p>Els organismes de control (CNMC a Espanya) intervenen quan el dumping és "predi" —es demostra intencionalitat de destruir la competència. Però el "dumping passiu" —vendre per sota de cost sense mala fe declarada— és més difícil de perseguir.</p>
+  </div>
+
+  <div class="stat-block">
+    <div class="stat-num">300</div>
+    <div class="stat-desc">forns de barrio han tancat a Espanya en la última década per pressió de grups de dumping sistemàtic.</div>
+  </div>
+
+  <h2>Casos concrets a Gràcia</h2>
+  <p>A Gràcia, hem documentat múltiples casos on cadenes han entrat al barri aplicant preus de 20-30% per sota de la mitjana local. El Forn Santa Clara va patir una reducció de vendes del 45% en sis mesos. La Carnisseria Roig va veure com els seus clients es desviaven a una nova sàtèl·lit de Carnes Premium que venia carn de granja per 30% menys.</p>
+
+  <h2>Què podem fer?</h2>
+  <p>La resposta no és reglamentació sols. La solució és construir estructures que funcioni amb altres lògiques:</p>
+  <ul>
+    <li><strong>Compra col·lectiva:</strong> Grups de consumidores que negocien preus justos directes amb productors.</li>
+    <li><strong>Traspàs cooperatiu:</strong> Quan un comerç tanca, la comunitat pot recomprar-lo com a cooperativa.</li>
+    <li><strong>Murs de la comunitat:</strong> Transparència en preus, origenn de productes, salaris pagats.</li>
+    <li><strong>Consum conscient:</strong> Escollit pagar més per mantenir el teixit local viu.</li>
+  </ul>
+
+  <div class="cta-box">
+    <p>El dumping és una estratègia de extinció. La cooperació és una estratègia de supervivència.</p>
+    <div class="cta-actions">
+      <a class="cta-btn cta-btn-primary" href="participa.html">Vull participar</a>
+      <a class="cta-btn cta-btn-secondary" href="projecte.html">Saber més</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<section class="article-footer">
+  <div class="article-tags">
+    <span class="article-tag">Economia</span>
+    <span class="article-tag">Comerç local</span>
+    <span class="article-tag">Gràcia</span>
+  </div>
+  <a class="back-link" href="index.html">← Tornar a l'inici</a>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local</div>
+</footer>
+
+</body>
+</html>
