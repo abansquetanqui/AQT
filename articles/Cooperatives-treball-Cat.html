@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooperatives de treball al comerç — Abans Que Tanqui</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Lora&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --forest:    #1B3327;
+  --forest-mid:#2A5040;
+  --forest-lt: #3A6B55;
+  --bg:        #F7F6F1;
+  --white:     #FFFFFF;
+  --red:       #C42B10;
+  --red-lt:    #E84328;
+  --text:      #1A1A17;
+  --mid:       #3D3D38;
+  --muted:     #6E786A;
+  --border:    #DFE0D8;
+  --card:      #EEEEE8;
+  --card2:     #E4EBE6;
+  --amber:     #D97706;
+  --green-ok:  #2A7A4B;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--forest);
+  padding: 0 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-logo {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.15s;
+  letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: #fff; }
+.nav-back {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.15s;
+  letter-spacing: 0.01em;
+}
+.nav-back:hover { color: #fff; }
+
+/* ─── ARTICLE HERO ─── */
+.article-hero {
+  background: var(--forest);
+  padding: 80px 52px 60px;
+  color: #fff;
+}
+.article-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.article-cat {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  background: var(--red);
+  padding: 5px 13px;
+  border-radius: 3px;
+}
+.article-date {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.02em;
+}
+.article-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.article-subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  max-width: 720px;
+}
+
+/* ─── ARTICLE BODY ─── */
+.article-body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 72px 52px;
+  background: var(--white);
+}
+.article-body p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: var(--text);
+  font-weight: 400;
+}
+.article-body p strong { font-weight: 600; }
+.article-body h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.article-body h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 32px 0 16px;
+  line-height: 1.2;
+}
+.article-body ul {
+  margin: 0 0 24px 0;
+  list-style: none;
+}
+.article-body ul li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+.article-body ul li::before {
+  content: '→';
+  color: var(--red);
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+}
+
+/* ─── PULL QUOTE ─── */
+.pull-quote {
+  border-left: 4px solid var(--red);
+  padding: 28px 28px;
+  margin: 48px 0;
+  background: var(--card2);
+  border-radius: 0 4px 4px 0;
+}
+.pull-quote p {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0 !important;
+}
+.pull-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-style: normal;
+}
+
+/* ─── DEF BOX ─── */
+.def-box {
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 24px;
+  margin: 40px 0;
+  background: var(--card);
+}
+.def-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+  display: block;
+}
+.def-box p { margin-bottom: 0 !important; font-size: 15px !important; }
+
+/* ─── COMPARE GRID ─── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 40px 0;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.compare-col {
+  padding: 28px;
+}
+.compare-col:first-child { border-right: 2px solid var(--border); }
+.compare-col h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid;
+  letter-spacing: -0.01em;
+}
+.compare-col.negatiu h3 { color: var(--red); border-color: var(--red); }
+.compare-col.positiu h3 { color: var(--green-ok); border-color: var(--green-ok); }
+.compare-col ul { margin: 0; }
+.compare-col ul li { font-size: 14px; padding-left: 20px; margin-bottom: 10px; }
+.compare-col.negatiu ul li::before { color: var(--red); }
+.compare-col.positiu ul li::before { color: var(--green-ok); }
+
+/* ─── DUMPING CARDS ─── */
+.dumping-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 40px 0;
+}
+.dumping-card {
+  background: var(--card);
+  border-radius: 6px;
+  padding: 24px;
+  border-left: 3px solid var(--red);
+}
+.dumping-card .icon { font-size: 24px; margin-bottom: 12px; display: block; }
+.dumping-card h3 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.dumping-card p { font-size: 14px; color: var(--mid); line-height: 1.6; margin: 0 !important; }
+
+/* ─── STAT ─── */
+.stat-block {
+  background: var(--forest);
+  border-radius: 6px;
+  padding: 40px;
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  color: #fff;
+}
+.stat-num {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.stat-desc {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* ─── CTA BOX ─── */
+.cta-box {
+  background: var(--forest);
+  border-radius: 6px;
+  padding: 40px;
+  margin: 48px 0;
+  text-align: center;
+  color: #fff;
+}
+.cta-box p { margin-bottom: 12px !important; font-size: 16px !important; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.cta-btn {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.15s;
+  display: inline-block;
+}
+.cta-btn-primary { background: var(--red); color: #fff; }
+.cta-btn-primary:hover { background: var(--red-lt); }
+.cta-btn-secondary { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+.cta-btn-secondary:hover { border-color: var(--red); }
+
+/* ─── ARTICLE FOOTER ─── */
+.article-footer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 52px 72px;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.article-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  background: var(--card);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+}
+.back-link {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--red);
+  text-decoration: none;
+}
+.back-link:hover { color: var(--red-lt); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--forest);
+  color: rgba(255,255,255,0.7);
+  padding: 56px 52px 32px;
+  margin-top: 72px;
+}
+.footer-copy {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+  nav, .article-body, .article-footer { padding-left: 24px; padding-right: 24px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-col:first-child { border-right: none; border-bottom: 2px solid var(--border); }
+  .dumping-grid { grid-template-columns: 1fr; }
+  .stat-block { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">
+    <div class="nav-logo-dot"></div>
+    AQT
+  </a>
+  <a class="nav-back" href="../actualitat.html">← Tornar</a>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Marc legal</span>
+      <span class="article-date">Març 2026</span>
+    </div>
+    <h1 class="article-title">Cooperatives de treball al sector comercial</h1>
+    <p class="article-subtitle">Què permet el marc legal a Catalunya i què no resol.</p>
+  </div>
+</section>
+
+<section class="article-body">
+
+<p>Les <strong>cooperatives de treball associat</strong> són una eina consolidada a Catalunya per desenvolupar activitat econòmica amb govern democràtic.</p>
+
+<h2>Què són</h2>
+<ul>
+  <li>Propietat compartida pels treballadors</li>
+  <li>Gestió democràtica (1 persona = 1 vot)</li>
+  <li>Repartiment equitatiu dels beneficis</li>
+</ul>
+
+<div class="def-box">
+  <span class="def-label">Marc legal</span>
+  <p>Regulades per la Llei de cooperatives de Catalunya, que estableix el seu funcionament i drets.</p>
+</div>
+
+<h2>Aplicació al comerç</h2>
+<p>Permeten mantenir negocis oberts amb una lògica diferent a l’empresa tradicional.</p>
+
+<div class="compare-grid">
+  <div class="compare-col negatiu">
+    <h3>Model tradicional</h3>
+    <ul>
+      <li>Dependència del propietari</li>
+      <li>Pressió per maximitzar beneficis</li>
+      <li>Desconnexió amb el territori</li>
+    </ul>
+  </div>
+  <div class="compare-col positiu">
+    <h3>Cooperativa</h3>
+    <ul>
+      <li>Control dels treballadors</li>
+      <li>Objectius socials</li>
+      <li>Arrelament local</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Limitació clau</h2>
+
+<div class="pull-quote">
+  <p>Una cooperativa pot gestionar el negoci, però no controla el local.</p>
+</div>
+
+<p>Això significa que continua exposada a pujades de lloguer i especulació.</p>
+
+<h2>Conclusió</h2>
+<p>Les cooperatives són una eina potent, però insuficient per si soles. Necessiten combinar-se amb models de propietat del local.</p>
+
+<div class="cta-box">
+  <p>Per protegir el comerç, cal actuar també sobre la propietat.</p>
+  <div class="cta-actions">
+    <a class="cta-btn cta-btn-primary" href="../participa.html">Participar</a>
+    <a class="cta-btn cta-btn-secondary" href="../projecte.html">Veure projecte</a>
+  </div>
+</div>
+
+</section>
+
+<section class="article-footer">
+  <div class="article-tags">
+    <span class="article-tag">Legal</span>
+    <span class="article-tag">Catalunya</span>
+    <span class="article-tag">Cooperatives</span>
+  </div>
+  <a class="back-link" href="../actualitat.html">← Tornar a l'actualitat</a>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Abans Que Tanqui</div>
+</footer>
+
+</body>
+</html>
