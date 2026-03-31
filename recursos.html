@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos per a comerciants · Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:       #1A1A18;
+  --ink-mid:   #3A3A37;
+  --ink-muted: #6B6B67;
+  --bg:        #FAFAF8;
+  --bg-warm:   #F3F2EE;
+  --white:     #FFFFFF;
+  --red:       #C8392B;
+  --red-lt:    #E04030;
+  --border:    #E2E1DC;
+  --border-dk: #C8C7C0;
+  --green-ok:  #2A7A4B;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; position: sticky; top: 0; z-index: 1000;
+}
+.nav-logo {
+  font-family: 'Lora', serif; font-size: 17px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+}
+.nav-logo-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; color: var(--ink-muted);
+  text-decoration: none; transition: color 0.15s; letter-spacing: 0.01em;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important; color: var(--white) !important;
+  padding: 8px 18px; border-radius: 3px; font-size: 13px; font-weight: 600;
+  transition: background 0.15s !important;
+}
+.nav-cta:hover { background: var(--ink-mid) !important; }
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 8px;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink-mid); border-radius: 2px; transition: all 0.25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--white); border-top: 1px solid var(--border);
+  z-index: 999; flex-direction: column; padding: 16px 0 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-size: 15px; font-weight: 500; color: var(--ink-muted);
+  text-decoration: none; padding: 12px 24px; transition: color 0.15s, background 0.15s;
+}
+.nav-mobile a:hover { color: var(--ink); background: var(--bg-warm); }
+.nav-mobile .nav-cta {
+  margin: 8px 24px 0; background: var(--ink); color: #fff !important;
+  padding: 12px 20px; border-radius: 4px; text-align: center; font-weight: 600;
+}
+
+/* ─── HERO CAPÇALERA ─── */
+.page-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 52px 52px;
+}
+.page-header-inner { max-width: 760px; }
+.page-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+}
+.page-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.02em;
+  color: var(--ink); margin-bottom: 18px;
+}
+.page-intro {
+  font-size: 16px; line-height: 1.75; color: var(--ink-muted); max-width: 600px;
+}
+
+/* ─── WRAP GENERAL ─── */
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 0 52px 96px; }
+
+/* ─── SECCIÓ ─── */
+.recursos-seccio { padding-top: 64px; }
+.seccio-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding-bottom: 20px; border-bottom: 2px solid var(--border); margin-bottom: 36px;
+}
+.seccio-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 6px;
+}
+.seccio-title {
+  font-family: 'Lora', serif; font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: var(--ink);
+}
+.seccio-desc {
+  font-size: 14px; color: var(--ink-muted); max-width: 480px; line-height: 1.65; margin-top: 8px;
+}
+
+/* ─── GUIES ─── */
+.guies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.guia-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none; color: inherit;
+}
+.guia-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.guia-card-top {
+  background: var(--ink); padding: 32px 28px 28px;
+  position: relative; overflow: hidden;
+}
+.guia-card-top::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg, transparent, transparent 24px,
+    rgba(255,255,255,0.02) 24px, rgba(255,255,255,0.02) 25px
+  );
+}
+.guia-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; margin-bottom: 16px;
+  background: var(--red); color: #fff; position: relative; z-index: 1;
+}
+.guia-title {
+  font-family: 'Lora', serif; font-size: 22px; font-weight: 700;
+  color: #fff; line-height: 1.2; letter-spacing: -0.01em;
+  position: relative; z-index: 1;
+}
+.guia-body { padding: 24px 28px 28px; flex: 1; display: flex; flex-direction: column; }
+.guia-desc {
+  font-size: 14px; line-height: 1.7; color: var(--ink-muted);
+  margin-bottom: 20px; flex: 1;
+}
+.guia-topics { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.guia-topic {
+  font-size: 11px; font-weight: 500; color: var(--ink-mid);
+  background: var(--bg-warm); border: 1px solid var(--border);
+  padding: 3px 10px; border-radius: 20px;
+}
+.guia-link {
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  text-decoration: none; border-bottom: 1.5px solid var(--border-dk);
+  padding-bottom: 1px; width: fit-content;
+  transition: color 0.15s, border-color 0.15s;
+}
+.guia-card:hover .guia-link { color: var(--red); border-color: var(--red); }
+
+/* Propera guia placeholder */
+.guia-card.proxim .guia-card-top { background: var(--bg-warm); }
+.guia-card.proxim .guia-title { color: var(--ink-muted); }
+.guia-card.proxim .guia-tag { background: var(--border); color: var(--ink-muted); }
+.proxim-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--ink-muted); margin-top: 8px;
+}
+.proxim-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-dk); }
+
+/* ─── ASSESSORAMENT ─── */
+.assessorament-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.assessorament-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 4px; padding: 24px 22px;
+  display: flex; flex-direction: column;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.assessorament-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); transform: translateY(-1px); }
+.assessorament-icon {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: var(--bg-warm); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; flex-shrink: 0;
+}
+.assessorament-nom {
+  font-size: 15px; font-weight: 700; color: var(--ink);
+  margin-bottom: 6px; line-height: 1.3;
+}
+.assessorament-desc {
+  font-size: 13px; line-height: 1.65; color: var(--ink-muted);
+  margin-bottom: 16px; flex: 1;
+}
+.assessorament-link {
+  font-size: 12.5px; font-weight: 600; color: var(--ink-mid);
+  text-decoration: none; border-bottom: 1.5px solid var(--border-dk);
+  padding-bottom: 1px; width: fit-content;
+  transition: color 0.15s, border-color 0.15s;
+}
+.assessorament-link:hover { color: var(--ink); border-color: var(--ink); }
+.assessorament-card.destacat { background: var(--ink); border-color: var(--ink); }
+.assessorament-card.destacat .assessorament-icon {
+  background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.15);
+}
+.assessorament-card.destacat .assessorament-nom { color: #fff; }
+.assessorament-card.destacat .assessorament-desc { color: rgba(255,255,255,0.5); }
+.assessorament-card.destacat .assessorament-link {
+  color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.25);
+  background: var(--red); border: none; padding: 9px 18px;
+  border-radius: 4px; font-size: 13px;
+}
+.assessorament-card.destacat .assessorament-link:hover {
+  background: var(--red-lt); color: #fff;
+}
+
+/* ─── CTA FINAL ─── */
+.cta-final {
+  background: var(--ink); padding: 64px 52px; text-align: center; margin-top: 80px;
+}
+.cta-final-text {
+  font-family: 'Lora', serif; font-size: clamp(24px, 2.5vw, 36px); font-weight: 700;
+  color: #fff; line-height: 1.2; letter-spacing: -0.02em;
+  max-width: 600px; margin: 0 auto 32px;
+}
+.cta-final-text em { font-style: italic; color: var(--red); }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-primary {
+  background: var(--red); color: #fff; padding: 13px 26px; border-radius: 4px;
+  font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.15s;
+}
+.cta-btn-primary:hover { background: var(--red-lt); }
+.cta-btn-outline {
+  color: rgba(255,255,255,0.65); padding: 13px 26px; border-radius: 4px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.2); transition: color 0.15s, border-color 0.15s;
+}
+.cta-btn-outline:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+/* ─── FOOTER ─── */
+footer { background: #111110; padding: 60px 52px 0; color: rgba(255,255,255,0.6); }
+.footer-grid {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 52px;
+}
+.footer-brand {
+  font-family: 'Lora', serif; font-size: 16px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 9px; margin-bottom: 14px;
+}
+.footer-brand-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
+.footer-desc { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.35); max-width: 260px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 34px; height: 34px; background: rgba(255,255,255,0.06); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; transition: background 0.15s;
+}
+.footer-social a:hover { background: rgba(255,255,255,0.12); }
+.footer-col-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 14px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: rgba(255,255,255,0.45);
+  text-decoration: none; margin-bottom: 9px; transition: color 0.15s;
+}
+.footer-col a:hover { color: rgba(255,255,255,0.9); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06); padding: 18px 0;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.2); }
+.footer-entity { font-size: 11.5px; color: rgba(255,255,255,0.35); font-weight: 500; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .page-header { padding: 40px 20px 36px; }
+  .page-wrap { padding: 0 20px 64px; }
+  .guies-grid { grid-template-columns: 1fr; }
+  .assessorament-grid { grid-template-columns: 1fr; }
+  .cta-final { padding: 52px 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-dot"></div>Abans Que Tanqui
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="recursos.html" class="active">Recursos</a>
+    <a href="qui-som.html">Qui som</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="recursos.html">Recursos</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<!-- CAPÇALERA -->
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-kicker">Recursos</div>
+    <h1 class="page-title">Eines per defensar<br>el teu comerç.</h1>
+    <p class="page-intro">Guies pràctiques i llocs on pots anar a demanar ajuda. Perquè no hagis d'afrontar-ho sol quan el propietari truca a la porta.</p>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- GUIES -->
+  <section class="recursos-seccio" id="guies">
+    <div class="seccio-header">
+      <div>
+        <div class="seccio-kicker">Guies pràctiques</div>
+        <div class="seccio-title">Escrites per AQT.</div>
+        <p class="seccio-desc">Informació concreta basada en casos reals. Sense tecnicismes innecessaris.</p>
+      </div>
+    </div>
+
+    <div class="guies-grid">
+
+      <a class="guia-card" href="guies/guia-pujada-lloguer.html">
+        <div class="guia-card-top">
+          <div class="guia-tag">Lloguers</div>
+          <div class="guia-title">El propietari et vol pujar el lloguer. Què pots fer?</div>
+        </div>
+        <div class="guia-body">
+          <p class="guia-desc">Rebre un avís de pujada no significa que hagis d'acceptar ni marxar. Tens drets — i alguns potser no coneixes. Guia pas a pas per saber com actuar.</p>
+          <div class="guia-topics">
+            <span class="guia-topic">Drets legals</span>
+            <span class="guia-topic">Negociació</span>
+            <span class="guia-topic">IPC 2026</span>
+            <span class="guia-topic">Tempteig i retracte</span>
+          </div>
+          <span class="guia-link">Llegir la guia →</span>
+        </div>
+      </a>
+
+      <a class="guia-card" href="guies/guia-alternatives-tancament.html">
+        <div class="guia-card-top">
+          <div class="guia-tag">Continuïtat</div>
+          <div class="guia-title">Estàs pensant en tancar. Però hi ha alternatives.</div>
+        </div>
+        <div class="guia-body">
+          <p class="guia-desc">Molts comerços tanquen sense saber que hi havia sortida. Traspàs, relleu generacional, model cooperatiu... Aquestes opcions existeixen i funcionen.</p>
+          <div class="guia-topics">
+            <span class="guia-topic">Traspàs</span>
+            <span class="guia-topic">Relleu</span>
+            <span class="guia-topic">Cooperativa</span>
+            <span class="guia-topic">Reconversió</span>
+          </div>
+          <span class="guia-link">Llegir la guia →</span>
+        </div>
+      </a>
+
+      <div class="guia-card proxim">
+        <div class="guia-card-top">
+          <div class="guia-tag">Pròximament</div>
+          <div class="guia-title">Com llegir un contracte de lloguer comercial.</div>
+        </div>
+        <div class="guia-body">
+          <p class="guia-desc">Les clàusules que has de revisar abans de signar o renovar. Quines et protegeixen i quines et deixen desemparat.</p>
+          <div class="proxim-badge">
+            <div class="proxim-dot"></div>
+            En preparació
+          </div>
+        </div>
+      </div>
+
+      <div class="guia-card proxim">
+        <div class="guia-card-top">
+          <div class="guia-tag">Pròximament</div>
+          <div class="guia-title">Dumping comercial: com reconèixer-lo i documentar-lo.</div>
+        </div>
+        <div class="guia-body">
+          <p class="guia-desc">Quan una pujada de lloguer no és una pujada de lloguer, sinó una estratègia per fer-te fora. Com identificar-ho i com actuar.</p>
+          <div class="proxim-badge">
+            <div class="proxim-dot"></div>
+            En preparació
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ASSESSORAMENT -->
+  <section class="recursos-seccio" id="assessorament">
+    <div class="seccio-header">
+      <div>
+        <div class="seccio-kicker">Assessorament extern</div>
+        <div class="seccio-title">On pots anar ara mateix.</div>
+        <p class="seccio-desc">Entitats i serveis gratuïts o de baix cost on un comerciant en risc pot trobar orientació jurídica, financera o laboral.</p>
+      </div>
+    </div>
+
+    <div class="assessorament-grid">
+
+      <div class="assessorament-card destacat">
+        <div class="assessorament-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="assessorament-nom">Explica'ns el teu cas</div>
+        <div class="assessorament-desc">Estàs en risc de tancament? Escriu-nos. T'escoltem, t'orientem i si cal t'acompanyem en el procés. Sense compromisos.</div>
+        <a class="assessorament-link" href="contacte.html">Contacta amb AQT →</a>
+      </div>
+
+      <div class="assessorament-card">
+        <div class="assessorament-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div class="assessorament-nom">Barcelona Activa</div>
+        <div class="assessorament-desc">Assessorament gratuït per a autònoms i pimes: jurídic, financer, laboral i de continuïtat de negoci. Servei públic de l'Ajuntament de Barcelona.</div>
+        <a class="assessorament-link" href="https://www.barcelonactiva.cat" target="_blank" rel="noopener">barcelonactiva.cat →</a>
+      </div>
+
+      <div class="assessorament-card">
+        <div class="assessorament-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
+        </div>
+        <div class="assessorament-nom">Federació de Comerç de Barcelona</div>
+        <div class="assessorament-desc">Representa el petit comerç de la ciutat. Orientació, formació i connexió amb altres comerciants i associacions de barri.</div>
+        <a class="assessorament-link" href="https://www.comerc.barcelona" target="_blank" rel="noopener">comerc.barcelona →</a>
+      </div>
+
+      <div class="assessorament-card">
+        <div class="assessorament-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="assessorament-nom">PIMEC</div>
+        <div class="assessorament-desc">Patronal de la petita i mitjana empresa. Assessorament jurídic i laboral per a autònoms i micropimes a tot Catalunya.</div>
+        <a class="assessorament-link" href="https://www.pimec.org" target="_blank" rel="noopener">pimec.org →</a>
+      </div>
+
+      <div class="assessorament-card">
+        <div class="assessorament-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </div>
+        <div class="assessorament-nom">Associació de comerciants del teu barri</div>
+        <div class="assessorament-desc">Cada barri de Barcelona té la seva associació. Sovint és el primer lloc on trucar: coneixen el context local i poden fer de mediadors amb propietaris.</div>
+        <a class="assessorament-link" href="https://ajuntament.barcelona.cat/comerc/ca/associacions-de-comerciants" target="_blank" rel="noopener">Troba la teva →</a>
+      </div>
+
+      <div class="assessorament-card">
+        <div class="assessorament-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="assessorament-nom">Sindicat de Llogateres</div>
+        <div class="assessorament-desc">Especialitzats en drets dels llogateres. Útil si el conflicte principal és el lloguer del local i necessites orientació legal o suport col·lectiu.</div>
+        <a class="assessorament-link" href="https://sindicatdellogateres.org" target="_blank" rel="noopener">sindicatdellogateres.org →</a>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-text">
+    No trobeu el que busqueu?<br><em>Escriviu-nos directament.</em>
+  </div>
+  <div class="cta-actions">
+    <a class="cta-btn-primary" href="contacte.html">Contactar</a>
+    <a class="cta-btn-outline" href="participa.html">Participar →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local al barri de Gràcia, Barcelona.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="#" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="participa.html">Col·laboradors</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Recursos</div>
+      <a href="recursos.html#guies">Guies pràctiques</a>
+      <a href="recursos.html#assessorament">Assessorament</a>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+const burger = document.getElementById('nav-burger');
+const mobileNav = document.getElementById('nav-mobile');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
