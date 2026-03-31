@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abans Que Tanqui · Cooperativa de comerç local a Gràcia</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --ink:       #1A1A18;
+  --ink-mid:   #3A3A37;
+  --ink-muted: #6B6B67;
+  --bg:        #FAFAF8;
+  --bg-warm:   #F3F2EE;
+  --white:     #FFFFFF;
+  --red:       #C8392B;
+  --red-lt:    #E04030;
+  --text:      #1A1A18;
+  --muted:     #6B6B67;
+  --border:    #E2E1DC;
+  --border-dk: #C8C7C0;
+  --card:      #F3F2EE;
+  --amber:     #C47A00;
+  --green-ok:  #2A7A4B;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.nav-logo {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+  letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--white) !important;
+  padding: 8px 18px;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s !important;
+}
+.nav-cta:hover { background: var(--ink-mid) !important; color: var(--white) !important; }
+
+/* ─── SHARED ─── */
+.section-wrap { padding: 72px 52px; }
+.section-wrap.white { background: var(--white); }
+.section-wrap.bg    { background: var(--bg-warm); }
+.section-wrap.dark  { background: var(--ink); }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 44px;
+}
+.section-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 7px;
+}
+.section-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; color: var(--text);
+}
+.section-more {
+  font-size: 13px; font-weight: 600; color: var(--ink-mid);
+  text-decoration: none; border-bottom: 1.5px solid var(--border-dk);
+  padding-bottom: 1px; white-space: nowrap; transition: color 0.15s, border-color 0.15s;
+}
+.section-more:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 540px; overflow: hidden;
+}
+.hero-content {
+  padding: 72px 56px 68px 52px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; border: 1px solid var(--border);
+  padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 28px; width: fit-content;
+}
+.hero-tag span { width: 6px; height: 6px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
+h1.hero-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(48px, 5vw, 72px); font-weight: 700;
+  line-height: 1.03; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 20px;
+}
+h1.hero-title em { font-style: italic; color: var(--red); }
+.hero-sub {
+  font-size: 15px; line-height: 1.7;
+  color: var(--muted); max-width: 420px; margin-bottom: 36px;
+}
+.hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ink); color: #fff; padding: 13px 24px; border-radius: 4px;
+  font-size: 13.5px; font-weight: 600; text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-primary:hover { background: var(--ink-mid); transform: translateY(-1px); }
+.btn-ghost {
+  color: var(--ink-mid); font-size: 13.5px; font-weight: 500;
+  text-decoration: none; padding-bottom: 2px;
+  border-bottom: 1px solid var(--border-dk);
+  transition: color 0.15s, border-color 0.15s;
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+.hero-stats {
+  display: flex; gap: 32px; padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: 'Lora', Georgia, serif; font-size: 32px; font-weight: 700;
+  color: var(--ink); display: block; line-height: 1; letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-top: 5px;
+}
+.hero-visual { position: relative; overflow: hidden; }
+
+/* ─── SLIDER ─── */
+.slider { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.slider-track {
+  display: flex; height: 100%;
+  transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
+}
+.slide { min-width: 100%; height: 100%; position: relative; overflow: hidden; flex-shrink: 0; }
+.slide-bg { position: absolute; inset: 0; }
+.slide-grain {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(-45deg, transparent, transparent 32px, rgba(255,255,255,0.025) 32px, rgba(255,255,255,0.025) 33px),
+    repeating-linear-gradient(45deg, transparent, transparent 32px, rgba(255,255,255,0.015) 32px, rgba(255,255,255,0.015) 33px);
+}
+.slide-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 36px 32px; z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+}
+.slide-status {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; margin-bottom: 12px; width: fit-content;
+}
+.slide-status.tancat    { background: var(--red); color: #fff; }
+.slide-status.risc      { background: rgba(196,122,0,0.9); color: #fff; }
+.slide-status.recuperat { background: rgba(42,122,75,0.9); color: #fff; }
+.slide-loc {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.slide-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(28px, 2.8vw, 40px); font-weight: 700;
+  color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 10px;
+}
+.slide-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.slide-sticker {
+  position: absolute; top: 24px; right: 24px; z-index: 3;
+  background: var(--bg); border-left: 4px solid var(--red);
+  padding: 8px 14px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--text); text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35); transform: rotate(1.5deg);
+}
+.slider-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  z-index: 10; transition: background 0.15s;
+}
+.slider-arrow:hover { background: rgba(255,255,255,0.25); }
+.slider-arrow.prev { left: 16px; }
+.slider-arrow.next { right: 16px; }
+.slider-dots {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 10;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.35); border: none; cursor: pointer;
+  padding: 0; transition: background 0.2s, width 0.25s;
+}
+.dot.active { background: #fff; width: 18px; border-radius: 3px; }
+
+/* ─── PROBLEMA ─── */
+.problema-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.problema-text h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(28px, 2.8vw, 40px); font-weight: 700;
+  line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px;
+}
+.problema-text h2 em { font-style: italic; color: var(--red); }
+.problema-text p { font-size: 15px; line-height: 1.75; color: var(--muted); max-width: 460px; }
+.problema-quotes { display: flex; flex-direction: column; gap: 16px; }
+.problema-quote {
+  background: var(--white); border: 1px solid var(--border);
+  border-left: 3px solid var(--ink); padding: 20px 24px; border-radius: 0 4px 4px 0;
+}
+.problema-quote p {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--text); letter-spacing: -0.01em;
+}
+.problema-quote span {
+  display: block; font-size: 12px; color: var(--muted); margin-top: 8px; font-style: italic;
+}
+
+/* ─── QUÈ FA AQT ─── */
+.passos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pas {
+  background: var(--white); border: 1px solid var(--border); border-radius: 4px;
+  padding: 36px 28px 32px; transition: box-shadow 0.2s, transform 0.2s;
+}
+.pas:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.pas-num {
+  font-family: 'Lora', Georgia, serif; font-size: 56px; font-weight: 700;
+  color: var(--border); line-height: 1; letter-spacing: -0.04em; display: block; margin-bottom: 20px;
+}
+.pas-icon {
+  width: 44px; height: 44px; background: var(--bg-warm); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.pas-title {
+  font-family: 'Lora', Georgia, serif; font-size: 22px; font-weight: 700;
+  color: var(--text); margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.pas-text { font-size: 14px; line-height: 1.7; color: var(--muted); }
+
+/* ─── MAPA ─── */
+.mapa-section { padding: 0; }
+.mapa-inner { display: grid; grid-template-columns: 1fr 320px; }
+#mapa-leaflet { height: 480px; z-index: 1; }
+.mapa-sidebar {
+  background: var(--ink); padding: 44px 32px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.mapa-sidebar-title {
+  font-family: 'Lora', Georgia, serif; font-size: 22px; font-weight: 700;
+  color: #fff; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+.mapa-sidebar-sub {
+  font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,0.45); margin-bottom: 28px;
+}
+.mapa-llegenda { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.mapa-llegenda-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.65);
+}
+.mapa-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.mapa-dot.risc     { background: var(--amber); }
+.mapa-dot.tancat   { background: var(--red); }
+.mapa-dot.recuperat { background: #4CAF8A; }
+.mapa-btn {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: #fff; padding: 12px 20px; border-radius: 4px; font-size: 13px; font-weight: 600;
+  text-decoration: none; text-align: center; display: block; transition: background 0.15s;
+}
+.mapa-btn:hover { background: rgba(255,255,255,0.15); }
+.mapa-stats {
+  display: flex; gap: 20px; padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08); margin-top: 24px;
+}
+.mapa-stat-num {
+  font-family: 'Lora', Georgia, serif; font-size: 28px; font-weight: 700;
+  color: #fff; display: block; line-height: 1;
+}
+.mapa-stat-label {
+  font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;
+}
+
+/* ─── HISTÒRIES ─── */
+.histories-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 20px; }
+.historia-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 4px;
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.historia-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.historia-card.featured { background: var(--ink); border-color: var(--ink); }
+.historia-photo {
+  height: 160px; background: #E2E1DC; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.historia-card.featured .historia-photo { background: #2A2A28; height: 200px; }
+.historia-photo-bg {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(0,0,0,0.04) 22px, rgba(0,0,0,0.04) 23px),
+    repeating-linear-gradient(90deg, transparent, transparent 22px, rgba(0,0,0,0.04) 22px, rgba(0,0,0,0.04) 23px);
+}
+.historia-card.featured .historia-photo-bg {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(255,255,255,0.03) 22px, rgba(255,255,255,0.03) 23px),
+    repeating-linear-gradient(90deg, transparent, transparent 22px, rgba(255,255,255,0.03) 22px, rgba(255,255,255,0.03) 23px);
+}
+.historia-status {
+  position: absolute; bottom: 14px; left: 14px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px;
+  background: var(--red); color: #fff;
+}
+.historia-status.recuperat { background: var(--green-ok); }
+.historia-body { padding: 22px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.historia-loc { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
+.historia-card.featured .historia-loc { color: rgba(255,255,255,0.35); }
+.historia-title {
+  font-family: 'Lora', Georgia, serif; font-size: 20px; font-weight: 600;
+  color: var(--text); margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.25;
+}
+.historia-card.featured .historia-title { color: #fff; font-size: 22px; }
+.historia-fases { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; flex: 1; }
+.historia-fase {
+  display: flex; gap: 10px; font-size: 12.5px; line-height: 1.5; color: var(--muted);
+}
+.historia-card.featured .historia-fase { color: rgba(255,255,255,0.45); }
+.historia-fase-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 2px; flex-shrink: 0; margin-top: 2px; white-space: nowrap;
+}
+.fase-problema    { background: rgba(200,57,43,0.1); color: var(--red); }
+.fase-intervencio { background: rgba(26,26,24,0.08); color: var(--ink-mid); }
+.fase-resultat    { background: rgba(42,122,75,0.1); color: var(--green-ok); }
+.historia-card.featured .fase-problema    { background: rgba(200,57,43,0.25); color: #F08070; }
+.historia-card.featured .fase-intervencio { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+.historia-card.featured .fase-resultat    { background: rgba(76,175,138,0.2); color: #6FCFAA; }
+.historia-link {
+  font-size: 12.5px; font-weight: 600; color: var(--ink-mid); text-decoration: none;
+  border-bottom: 1.5px solid var(--border-dk); padding-bottom: 1px;
+  width: fit-content; transition: color 0.15s, border-color 0.15s;
+}
+.historia-link:hover { color: var(--ink); border-color: var(--ink); }
+.historia-card.featured .historia-link { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.2); }
+.historia-card.featured .historia-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+/* ─── PARTICIPA ─── */
+.participa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.participa-bloc {
+  border: 1px solid var(--border); border-radius: 4px; padding: 36px 28px 32px;
+  background: var(--white); display: flex; flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.participa-bloc:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.participa-bloc.destacat { background: var(--ink); border-color: var(--ink); }
+.participa-icon {
+  width: 48px; height: 48px; border-radius: 8px; background: var(--bg-warm);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+}
+.participa-bloc.destacat .participa-icon { background: rgba(255,255,255,0.08); }
+.participa-cap {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px;
+}
+.participa-bloc.destacat .participa-cap { color: rgba(255,255,255,0.4); }
+.participa-title {
+  font-family: 'Lora', Georgia, serif; font-size: 21px; font-weight: 700;
+  color: var(--text); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 12px;
+}
+.participa-bloc.destacat .participa-title { color: #fff; }
+.participa-text {
+  font-size: 13.5px; line-height: 1.7; color: var(--muted); margin-bottom: 28px; flex: 1;
+}
+.participa-bloc.destacat .participa-text { color: rgba(255,255,255,0.45); }
+.participa-btn {
+  display: inline-block; padding: 11px 20px; border-radius: 4px; font-size: 13px;
+  font-weight: 600; text-decoration: none; text-align: center;
+  background: var(--card); color: var(--text); border: 1px solid var(--border);
+  transition: background 0.15s, transform 0.1s;
+}
+.participa-btn:hover { background: var(--border); transform: translateY(-1px); }
+.participa-bloc.destacat .participa-btn { background: var(--red); color: #fff; border-color: var(--red); }
+.participa-bloc.destacat .participa-btn:hover { background: var(--red-lt); }
+
+/* ─── ACTUALITAT ─── */
+.noticies-list { display: flex; flex-direction: column; }
+.noticia-row {
+  display: grid; grid-template-columns: 180px 1fr 160px;
+  gap: 28px; align-items: start; padding: 28px 0; border-top: 1px solid var(--border);
+}
+.noticia-row:last-child { border-bottom: 1px solid var(--border); }
+.noticia-thumb {
+  height: 110px; background: var(--bg-warm); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex-shrink: 0; position: relative;
+}
+.noticia-thumb-bg {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 7px, rgba(0,0,0,0.03) 7px, rgba(0,0,0,0.03) 8px);
+}
+.noticia-date { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+.noticia-title {
+  font-family: 'Lora', Georgia, serif; font-size: 18px; font-weight: 600;
+  color: var(--text); line-height: 1.3; margin-bottom: 9px; letter-spacing: -0.01em;
+}
+.noticia-text { font-size: 13px; line-height: 1.6; color: var(--muted); }
+.noticia-action { display: flex; justify-content: flex-end; align-items: flex-start; padding-top: 2px; }
+.noticia-link {
+  font-size: 12.5px; font-weight: 600; color: var(--ink-mid); text-decoration: none;
+  border-bottom: 1.5px solid var(--border-dk); padding-bottom: 1px; white-space: nowrap; transition: color 0.15s, border-color 0.15s;
+}
+.noticia-link:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ─── CTA FINAL ─── */
+.cta-final { background: var(--ink); padding: 80px 52px; text-align: center; }
+.cta-final-text {
+  font-family: 'Lora', Georgia, serif; font-size: clamp(28px, 3vw, 44px); font-weight: 700;
+  color: #fff; line-height: 1.2; letter-spacing: -0.02em; max-width: 680px; margin: 0 auto 36px;
+}
+.cta-final-text em { font-style: italic; color: var(--red); }
+.cta-final-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-primary {
+  background: var(--red); color: #fff; padding: 14px 28px; border-radius: 4px;
+  font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.15s, transform 0.1s;
+}
+.cta-btn-primary:hover { background: var(--red-lt); transform: translateY(-1px); }
+.cta-btn-outline {
+  color: rgba(255,255,255,0.65); padding: 14px 28px; border-radius: 4px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.2); transition: color 0.15s, border-color 0.15s;
+}
+.cta-btn-outline:hover { color: #fff; border-color: rgba(255,255,255,0.55); }
+
+/* ─── FOOTER ─── */
+footer { background: #111110; padding: 60px 52px 0; color: rgba(255,255,255,0.6); }
+.footer-grid {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 52px;
+}
+.footer-brand {
+  font-family: 'Lora', Georgia, serif; font-size: 16px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 9px; margin-bottom: 14px;
+}
+.footer-brand-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
+.footer-desc { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.35); max-width: 260px; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 34px; height: 34px; background: rgba(255,255,255,0.06); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; transition: background 0.15s;
+}
+.footer-social a:hover { background: rgba(255,255,255,0.12); }
+.footer-col-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 14px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: rgba(255,255,255,0.45);
+  text-decoration: none; margin-bottom: 9px; transition: color 0.15s;
+}
+.footer-col a:hover { color: rgba(255,255,255,0.9); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06); padding: 18px 0;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.2); }
+.footer-entity { font-size: 11.5px; color: rgba(255,255,255,0.35); font-weight: 500; }
+
+/* ─── LEAFLET POPUP ─── */
+.leaflet-popup-content-wrapper {
+  border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 13px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+.popup-title { font-weight: 700; color: #1A1A18; margin-bottom: 4px; }
+.popup-cat {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-bottom: 6px;
+}
+.popup-cat.risc     { background: rgba(196,122,0,0.1); color: var(--amber); }
+.popup-cat.tancat   { background: rgba(200,57,43,0.1); color: var(--red); }
+.popup-cat.recuperat { background: rgba(42,122,75,0.12); color: var(--green-ok); }
+.popup-text { color: #6B6B67; line-height: 1.5; }
+
+/* ─── HAMBURGER ─── */
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink-mid); border-radius: 2px; transition: all 0.25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--white); border-top: 1px solid var(--border);
+  z-index: 999; flex-direction: column; padding: 16px 0 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-size: 15px; font-weight: 500; color: var(--ink-mid);
+  text-decoration: none; padding: 12px 24px; transition: color 0.15s, background 0.15s;
+}
+.nav-mobile a:hover { color: var(--ink); background: var(--bg-warm); }
+.nav-mobile .nav-cta {
+  margin: 8px 24px 0; background: var(--ink); color: #fff !important;
+  padding: 12px 20px; border-radius: 4px; text-align: center; font-weight: 600;
+}
+.nav-mobile .nav-cta:hover { background: var(--ink-mid) !important; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-content { padding: 48px 24px 44px; }
+  .section-wrap { padding: 52px 20px; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .problema-layout { grid-template-columns: 1fr; gap: 36px; }
+  .passos-grid { grid-template-columns: 1fr; }
+  .mapa-inner { grid-template-columns: 1fr; }
+  #mapa-leaflet { height: 340px; }
+  .histories-grid { grid-template-columns: 1fr; }
+  .participa-grid { grid-template-columns: 1fr; }
+  .noticia-row { grid-template-columns: 1fr; }
+  .noticia-thumb { width: 100%; height: 140px; }
+  .noticia-action { justify-content: flex-start; }
+  .cta-final { padding: 60px 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-dot"></div>
+    Abans Que Tanqui
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="qui-som.html">Qui som</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<!-- 1. HERO -->
+<section class="hero" id="inici">
+  <div class="hero-content">
+    <div>
+      <div class="hero-tag"><span></span>Iniciativa cooperativa · Gràcia, Barcelona</div>
+      <h1 class="hero-title">Abans Que<br>Tanqui</h1>
+      <p class="hero-sub">Evitem que els comerços de barri desapareguin i recuperem els locals per a la comunitat.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="contacte.html">Tens un comerç en risc?</a>
+        <a class="btn-ghost" href="projecte.html">Vull conèixer el projecte →</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">23</span>
+        <div class="stat-label">Comerços identificats</div>
+      </div>
+      <div>
+        <span class="stat-num">4</span>
+        <div class="stat-label">Casos documentats</div>
+      </div>
+      <div>
+        <span class="stat-num">138</span>
+        <div class="stat-label">Persones involucrades</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="slider" id="hero-slider">
+      <div class="slider-track" id="slider-track">
+
+        <div class="slide">
+          <div class="slide-bg" style="background:url('fleca-santa-rita.jpg') center/cover no-repeat;"></div>
+          <div class="slide-grain"></div>
+          <div class="slide-content">
+            <div class="slide-status tancat">Tancada</div>
+            <div class="slide-loc"><svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Vila de Gràcia</div>
+            <div class="slide-title">Fleca<br>Santa Rita</div>
+            <div class="slide-desc">Persiana abaixada. Un altre forn artesà que desapareix.</div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-bg" style="background:url('local-alquiler.jpg') center/cover no-repeat;"></div>
+          <div class="slide-grain"></div>
+          <div class="slide-content">
+            <div class="slide-status tancat">Local buit</div>
+            <div class="slide-loc"><svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Gràcia, Barcelona</div>
+            <div class="slide-title">Local en<br>alquiler</div>
+            <div class="slide-desc">"Foragits Sants." El barri ja ho diu tot.</div>
+          </div>
+          <div class="slide-sticker">DISPONIBLE</div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-bg" style="background:#0C1E14;"></div>
+          <div class="slide-grain"></div>
+          <div class="slide-content">
+            <div class="slide-status recuperat">Recuperat</div>
+            <div class="slide-loc"><svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Vila de Gràcia</div>
+            <div class="slide-title">Herbolari<br>Cal Verd</div>
+            <div class="slide-desc">Traspàs a cooperativa. Obert des de gener 2026.</div>
+          </div>
+        </div>
+
+        <div class="slide">
+          <div class="slide-bg" style="background:#1C1008;"></div>
+          <div class="slide-grain"></div>
+          <div class="slide-content">
+            <div class="slide-status risc">En risc</div>
+            <div class="slide-loc"><svg width="10" height="10" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Vila de Gràcia</div>
+            <div class="slide-title">Cafè<br>Reunión</div>
+            <div class="slide-desc">45 anys servint el barri. Renovació de lloguer pendent.</div>
+          </div>
+        </div>
+
+      </div>
+      <button class="slider-arrow prev" id="slider-prev" aria-label="Anterior">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="slider-arrow next" id="slider-next" aria-label="Següent">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="slider-dots" id="slider-dots">
+        <button class="dot active" data-i="0"></button>
+        <button class="dot" data-i="1"></button>
+        <button class="dot" data-i="2"></button>
+        <button class="dot" data-i="3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROBLEMA -->
+<section class="section-wrap white" id="problema">
+  <div class="problema-layout">
+    <div class="problema-text">
+      <div class="section-kicker">El problema</div>
+      <h2>Els comerços no tanquen<br>per falta de clients.<br><em>Tanquen per lloguers<br>i especulació.</em></h2>
+      <p>Darrere de cada persiana abaixada hi ha una història de pressió immobiliària, desnonaments encoberts i models de negoci que prioritzen la rendibilitat sobre el teixit social dels barris.</p>
+    </div>
+    <div class="problema-quotes">
+      <div class="problema-quote">
+        <p>"El lloguer va passar de 2.000 a 8.000 € en tres anys. No hi havia manera de sobreviure."</p>
+        <span>Propietari d'una ferreteria de 90 anys, Vila de Gràcia</span>
+      </div>
+      <div class="problema-quote">
+        <p>"El propietari va doblar el lloguer d'un dia per l'altre. La clientela de tota la vida no va ser suficient."</p>
+        <span>Forn artesà, Vila de Gràcia</span>
+      </div>
+      <div class="problema-quote">
+        <p>"Quan tanca un comerç de tota la vida, no tanca un negoci. Tanca un punt de trobada del barri."</p>
+        <span>Veïna de Gràcia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. QUÈ FA AQT -->
+<section class="section-wrap bg" id="que-fem">
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">Què fa AQT</div>
+      <div class="section-title">El nostre model en 3 passos.</div>
+    </div>
+    <a class="section-more" href="projecte.html">Veure el projecte complet →</a>
+  </div>
+  <div class="passos-grid">
+    <div class="pas">
+      <span class="pas-num">01</span>
+      <div class="pas-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="pas-title">Detectem</div>
+      <div class="pas-text">Identifiquem comerços en risc i locals buits a través de treball de camp, converses directes amb comerciants i anàlisi del teixit comercial del barri.</div>
+    </div>
+    <div class="pas">
+      <span class="pas-num">02</span>
+      <div class="pas-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="pas-title">Intervenim</div>
+      <div class="pas-text">Mediem amb propietaris i busquem solucions alternatives al tancament: relleu generacional, canvis de model, acords de lloguer just o transicions cooperatives.</div>
+    </div>
+    <div class="pas">
+      <span class="pas-num">03</span>
+      <div class="pas-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 00-7.65 0l-.77.78-.77-.78a5.4 5.4 0 00-7.65 7.65l1.06 1.06L12 21.23l7.36-7.94 1.06-1.06a5.4 5.4 0 000-7.65z"/></svg>
+      </div>
+      <div class="pas-title">Protegim</div>
+      <div class="pas-text">Impulsem una cooperativa per adquirir locals i garantir la continuïtat del comerç de proximitat, amb sous dignes i gestió col·lectiva del patrimoni comercial del barri.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. MAPA -->
+<section class="mapa-section" id="mapa">
+  <div class="mapa-inner">
+    <div id="mapa-leaflet"></div>
+    <div class="mapa-sidebar">
+      <div>
+        <div class="section-kicker" style="color:rgba(200,57,43,0.7);margin-bottom:12px">Mapa de casos</div>
+        <div class="mapa-sidebar-title">Comerços en risc a Gràcia.</div>
+        <div class="mapa-sidebar-sub">Cada punt representa un comerç documentat. El mapa s'actualitza a mesura que treballem sobre el terreny.</div>
+        <div class="mapa-llegenda">
+          <div class="mapa-llegenda-item"><div class="mapa-dot risc"></div>En risc de tancament</div>
+          <div class="mapa-llegenda-item"><div class="mapa-dot tancat"></div>Tancat recentment</div>
+          <div class="mapa-llegenda-item"><div class="mapa-dot recuperat"></div>Recuperat per la comunitat</div>
+        </div>
+        <a class="mapa-btn" href="mapa.html">Veure mapa complet →</a>
+      </div>
+      <div class="mapa-stats">
+        <div><span class="mapa-stat-num">14</span><div class="mapa-stat-label">En risc</div></div>
+        <div><span class="mapa-stat-num">7</span><div class="mapa-stat-label">Tancats</div></div>
+        <div><span class="mapa-stat-num">2</span><div class="mapa-stat-label">Recuperats</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. HISTÒRIES -->
+<section class="section-wrap white" id="histories">
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">Casos documentats</div>
+      <div class="section-title">Històries concretes.</div>
+    </div>
+    <a class="section-more" href="casos.html">Veure tots els casos →</a>
+  </div>
+  <div class="histories-grid">
+    <div class="historia-card featured">
+      <div class="historia-photo">
+        <div class="historia-photo-bg"></div>
+        <div style="position:relative;z-index:1;opacity:0.2">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="historia-status">Tancat · Febrer 2026</div>
+      </div>
+      <div class="historia-body">
+        <div class="historia-loc">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="rgba(255,255,255,0.4)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Vila de Gràcia, Barcelona
+        </div>
+        <div class="historia-title">Ferreteria Camps</div>
+        <div class="historia-fases">
+          <div class="historia-fase"><span class="historia-fase-label fase-problema">Problema</span>Lloguer de 15.000 €/mes i caiguda de clientela tradicional.</div>
+          <div class="historia-fase"><span class="historia-fase-label fase-intervencio">Intervenció</span>Contacte amb el propietari i exploració de relleu cooperatiu.</div>
+          <div class="historia-fase"><span class="historia-fase-label fase-resultat">Resultat</span>Sense acord. Tancament definitiu. El cas impulsa la nostra acció.</div>
+        </div>
+        <a class="historia-link" href="casos.html">Llegir el cas →</a>
+      </div>
+    </div>
+    <div class="historia-card">
+      <div class="historia-photo">
+        <div class="historia-photo-bg"></div>
+        <div style="position:relative;z-index:1;opacity:0.2">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6"><path d="M3 9l1-5h16l1 5M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
+        </div>
+        <div class="historia-status">En risc</div>
+      </div>
+      <div class="historia-body">
+        <div class="historia-loc">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="#6B6B67"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Vila de Gràcia
+        </div>
+        <div class="historia-title">Forn Santa Clara</div>
+        <div class="historia-fases">
+          <div class="historia-fase"><span class="historia-fase-label fase-problema">Problema</span>Lloguer doblat sense preavís.</div>
+          <div class="historia-fase"><span class="historia-fase-label fase-intervencio">Intervenció</span>Mediació amb propietari en curs.</div>
+          <div class="historia-fase"><span class="historia-fase-label fase-resultat">Resultat</span>Negociació oberta. En seguiment actiu.</div>
+        </div>
+        <a class="historia-link" href="casos.html">Llegir el cas →</a>
+      </div>
+    </div>
+    <div class="historia-card">
+      <div class="historia-photo">
+        <div class="historia-photo-bg"></div>
+        <div style="position:relative;z-index:1;opacity:0.2">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <div class="historia-status recuperat">Recuperat</div>
+      </div>
+      <div class="historia-body">
+        <div class="historia-loc">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="#6B6B67"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Vila de Gràcia
+        </div>
+        <div class="historia-title">Herbolari Cal Verd</div>
+        <div class="historia-fases">
+          <div class="historia-fase"><span class="historia-fase-label fase-problema">Problema</span>Jubilació sense relleu familiar.</div>
+          <div class="historia-fase"><span class="historia-fase-label fase-intervencio">Intervenció</span>Connexió amb sòcies interessades.</div>
+          <div class="historia-fase"><span class="historia-fase-label fase-resultat">Resultat</span>Traspàs a cooperativa. Obert des de gener 2026.</div>
+        </div>
+        <a class="historia-link" href="casos.html">Llegir el cas →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PARTICIPA -->
+<section class="section-wrap bg" id="participa">
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">Participa</div>
+      <div class="section-title">Cada persona compta.</div>
+    </div>
+    <a class="section-more" href="participa.html">Veure totes les opcions →</a>
+  </div>
+  <div class="participa-grid">
+    <div class="participa-bloc destacat">
+      <div class="participa-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/><path d="M9 9v12"/><path d="M15 9v12"/></svg>
+      </div>
+      <div class="participa-cap">Comerços</div>
+      <div class="participa-title">Tens risc de tancament?</div>
+      <div class="participa-text">Si la pressió del lloguer et supera, no tens relleu o estàs pensant en tancar, explica'ns el teu cas. Potser hi ha alternatives reals que encara no has explorat.</div>
+      <a class="participa-btn" href="participa.html">Explica'ns el teu cas →</a>
+    </div>
+    <div class="participa-bloc">
+      <div class="participa-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="participa-cap">Ciutadania</div>
+      <div class="participa-title">Vols ajudar a protegir el comerç?</div>
+      <div class="participa-text">Pots col·laborar com a sòcia, voluntària, o simplement difondre el projecte. El comerç de barri és de totes, i defensar-lo és una tasca col·lectiva.</div>
+      <a class="participa-btn" href="participa.html">Vull ajudar →</a>
+    </div>
+    <div class="participa-bloc">
+      <div class="participa-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="participa-cap">Col·laboradors</div>
+      <div class="participa-title">Vols col·laborar amb el projecte?</div>
+      <div class="participa-text">Si ets jurista, economista, arquitecta, comunicadora o tens habilitats útils, podem treballar junts. Ens interessen professionals compromesos amb el barri.</div>
+      <a class="participa-btn" href="contacte.html">Posem-nos en contacte →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. ACTUALITAT -->
+<section class="section-wrap white" id="actualitat">
+  <div class="section-header">
+    <div>
+      <div class="section-kicker">Actualitat</div>
+      <div class="section-title">El que passa als barris.</div>
+    </div>
+    <a class="section-more" href="actualitat.html">Veure tots els articles →</a>
+  </div>
+  <div class="noticies-list">
+    <div class="noticia-row">
+      <div class="noticia-thumb">
+        <div class="noticia-thumb-bg"></div>
+        <span style="position:relative;z-index:1;opacity:0.4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+      </div>
+      <div class="noticia-content">
+        <div class="noticia-date">Febrer 2026</div>
+        <div class="noticia-title">Què és el dumping i com afecta el comerç local?</div>
+        <div class="noticia-text">Darrere de molts tancaments hi ha una estratègia concreta i poc visible. Entendre-la és el primer pas per no normalitzar-la.</div>
+      </div>
+      <div class="noticia-action"><a class="noticia-link" href="articles/dumping-comerc-local.html">Llegir l'article →</a></div>
+    </div>
+    <div class="noticia-row">
+      <div class="noticia-thumb">
+        <div class="noticia-thumb-bg"></div>
+        <span style="position:relative;z-index:1;opacity:0.4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
+      </div>
+      <div class="noticia-content">
+        <div class="noticia-date">Febrer 2026</div>
+        <div class="noticia-title">Cinc grans grups, 300 establiments: com les cadenes esborren els forns</div>
+        <div class="noticia-text">Un model de negoci que expulsa progressivament els forns artesans amb un buit legal que els afavoreix.</div>
+      </div>
+      <div class="noticia-action"><a class="noticia-link" href="articles/forns-cadenes.html">Llegir l'article →</a></div>
+    </div>
+    <div class="noticia-row">
+      <div class="noticia-thumb">
+        <div class="noticia-thumb-bg"></div>
+        <span style="position:relative;z-index:1;opacity:0.4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3"/></svg></span>
+      </div>
+      <div class="noticia-content">
+        <div class="noticia-date">Febrer 2026</div>
+        <div class="noticia-title">La Ferreteria Camps abaixa la persiana després de 90 anys</div>
+        <div class="noticia-text">Un lloguer de 15.000 € mensuals i la caiguda de clientela tradicional acaben amb un dels comerços més emblemàtics de Gràcia.</div>
+      </div>
+      <div class="noticia-action"><a class="noticia-link" href="articles/ferreteria-camps.html">Llegir l'article →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-text">
+    Si no actuem <em>abans que tanquin,</em><br>ja és massa tard.
+  </div>
+  <div class="cta-final-actions">
+    <a class="cta-btn-primary" href="contacte.html">Contactar</a>
+    <a class="cta-btn-outline" href="participa.html">Participar →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local al barri de Gràcia, Barcelona.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="#" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="participa.html">Col·laboradors</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Més</div>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+// ─── SLIDER ───
+const track = document.getElementById('slider-track');
+const dots = document.querySelectorAll('.dot');
+const total = 4;
+let current = 0;
+let autoTimer;
+
+function goTo(i) {
+  current = (i + total) % total;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  dots.forEach((d, j) => d.classList.toggle('active', j === current));
+}
+
+function startAuto() {
+  autoTimer = setInterval(() => goTo(current + 1), 4500);
+}
+
+document.getElementById('slider-next').addEventListener('click', () => { clearInterval(autoTimer); goTo(current + 1); startAuto(); });
+document.getElementById('slider-prev').addEventListener('click', () => { clearInterval(autoTimer); goTo(current - 1); startAuto(); });
+dots.forEach(d => d.addEventListener('click', () => { clearInterval(autoTimer); goTo(+d.dataset.i); startAuto(); }));
+
+startAuto();
+const burger = document.getElementById('nav-burger');
+const mobileNav = document.getElementById('nav-mobile');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  });
+});
+
+// ─── MAPA LEAFLET ───
+const map = L.map('mapa-leaflet', {
+  center: [41.4035, 2.1544],
+  zoom: 15,
+  zoomControl: true,
+  scrollWheelZoom: false
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+function makeIcon(color) {
+  return L.divIcon({
+    className: '',
+    html: `<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.2)"></div>`,
+    iconSize: [14,14], iconAnchor: [7,7], popupAnchor: [0,-10]
+  });
+}
+
+const colors = { risc: '#C47A00', tancat: '#C8392B', recuperat: '#2A7A4B' };
+const labels = { risc: 'En risc', tancat: 'Tancat', recuperat: 'Recuperat' };
+
+const punts = [
+  { lat:41.4043, lng:2.1547, nom:'Ferreteria Camps',    cat:'tancat',    desc:'90 anys obert. Tancament febrer 2026.' },
+  { lat:41.4021, lng:2.1562, nom:'Forn Santa Clara',    cat:'risc',      desc:'Lloguer doblat. Mediació en curs.' },
+  { lat:41.4055, lng:2.1530, nom:'Herbolari Cal Verd',  cat:'recuperat', desc:'Traspàs cooperatiu. Obert des de gener 2026.' },
+  { lat:41.4010, lng:2.1575, nom:'Impremta Molina',     cat:'risc',      desc:'Propietari vol vendre el local.' },
+  { lat:41.4065, lng:2.1555, nom:'Carnisseria Can Ros', cat:'tancat',    desc:'Tancat el desembre 2025. Local buit.' },
+  { lat:41.4038, lng:2.1510, nom:'Farmàcia Vergés',     cat:'risc',      desc:'Renovació de lloguer pendent.' },
+  { lat:41.4028, lng:2.1590, nom:'Llibreria Canigó',    cat:'risc',      desc:'Propietari jubilat sense relleu.' },
+];
+
+punts.forEach(p => {
+  L.marker([p.lat, p.lng], { icon: makeIcon(colors[p.cat]) })
+    .addTo(map)
+    .bindPopup(`<div class="popup-cat ${p.cat}">${labels[p.cat]}</div><div class="popup-title">${p.nom}</div><div class="popup-text">${p.desc}</div>`);
+});
+</script>
+</body>
+</html>
