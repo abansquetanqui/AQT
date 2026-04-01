@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Com funciona el Kensington Corridor Trust — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
+  --bg:#FAFAF8; --bg-warm:#F3F2EE; --white:#FFFFFF;
+  --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
+  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F3F2EE;
+  --amber:#C47A00; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.nav-back:hover{color:var(--ink);border-color:var(--ink);}
+
+.article-hero{background:var(--white);border-bottom:2px solid var(--border);padding:72px 52px 60px;}
+.article-hero-inner{max-width:760px;margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.article-cat{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-ok);background:rgba(42,122,75,0.08);padding:5px 13px;border-radius:2px;border:1px solid rgba(42,122,75,0.2);}
+.article-date{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.04em;}
+.article-read-time{font-size:12px;color:var(--muted);}
+h1.article-title{font-family:'Lora',Georgia,serif;font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;margin-bottom:20px;letter-spacing:-0.025em;color:var(--ink);}
+.article-subtitle{font-size:17px;line-height:1.7;color:var(--muted);max-width:680px;}
+
+.article-body{max-width:760px;margin:0 auto;padding:64px 52px;}
+.article-body p{font-size:16px;line-height:1.85;margin-bottom:24px;color:var(--text);}
+.article-body p strong{font-weight:600;color:var(--ink);}
+.article-body h2{font-family:'Lora',Georgia,serif;font-size:26px;font-weight:700;color:var(--ink);margin:52px 0 20px;line-height:1.2;letter-spacing:-0.01em;}
+.article-body h3{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:700;color:var(--ink);margin:36px 0 14px;line-height:1.2;}
+.article-body ul{margin:0 0 24px 0;list-style:none;}
+.article-body ul li{font-size:16px;line-height:1.8;color:var(--text);margin-bottom:10px;padding-left:22px;position:relative;}
+.article-body ul li::before{content:'→';color:var(--red);font-weight:700;position:absolute;left:0;font-size:14px;top:2px;}
+
+.pull-quote{border-left:3px solid var(--green-ok);padding:24px 28px;margin:44px 0;background:rgba(42,122,75,0.04);border-radius:0 4px 4px 0;border:1px solid rgba(42,122,75,0.15);border-left:3px solid var(--green-ok);}
+.pull-quote p{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:600;line-height:1.55;color:var(--ink);margin:0!important;}
+.pull-quote cite{display:block;margin-top:12px;font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:36px 0;border:1.5px solid var(--border);border-radius:4px;overflow:hidden;}
+.compare-col{padding:24px 26px;}
+.compare-col:first-child{border-right:1.5px solid var(--border);}
+.compare-col h3{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid;letter-spacing:-0.01em;margin-top:0;}
+.compare-col.negatiu h3{color:var(--red);border-color:var(--red);}
+.compare-col.positiu h3{color:var(--green-ok);border-color:var(--green-ok);}
+.compare-col ul{margin:0;}
+.compare-col ul li{font-size:14px;padding-left:18px;margin-bottom:10px;color:var(--text);}
+.compare-col.negatiu ul li::before{color:var(--red);}
+.compare-col.positiu ul li::before{color:var(--green-ok);}
+
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:36px 0;}
+.model-card{background:var(--bg-warm);border-radius:4px;padding:22px 24px;border:1px solid var(--border);border-top:3px solid var(--green-ok);}
+.model-card h3{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:var(--ink);margin:0 0 10px;line-height:1.2;}
+.model-card p{font-size:14px;color:var(--muted);line-height:1.65;margin:0!important;}
+
+.info-box{border:1.5px solid var(--border);border-radius:4px;padding:22px 24px;margin:36px 0;background:var(--bg-warm);}
+.info-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block;}
+.info-box p{margin-bottom:8px!important;font-size:14.5px!important;line-height:1.7;}
+.info-box p:last-child{margin-bottom:0!important;}
+
+.stat-block{background:var(--ink);border-radius:4px;padding:36px 40px;margin:40px 0;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.stat-num{font-family:'Lora',Georgia,serif;font-size:60px;font-weight:700;color:var(--green-ok);line-height:1;flex-shrink:0;letter-spacing:-0.02em;}
+.stat-desc{font-size:15px;font-weight:400;line-height:1.65;color:rgba(255,255,255,0.75);}
+.stat-source{font-size:11px;color:rgba(255,255,255,0.35);margin-top:6px;}
+
+.cta-box{background:var(--ink);border-radius:4px;padding:40px;margin:48px 0;text-align:center;}
+.cta-box-text{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;color:#fff;line-height:1.5;margin-bottom:24px;}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn{font-size:13px;font-weight:600;padding:12px 24px;text-decoration:none;border-radius:3px;transition:all 0.15s;display:inline-block;}
+.cta-btn-primary{background:var(--red);color:#fff;}
+.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-secondary{background:transparent;color:rgba(255,255,255,0.7);border:1.5px solid rgba(255,255,255,0.25);}
+.cta-btn-secondary:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.article-foot{max-width:760px;margin:0 auto;padding:28px 52px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.article-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);background:var(--bg-warm);padding:5px 13px;border-radius:20px;border:1px solid var(--border);}
+.back-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.back-link:hover{color:var(--ink);border-color:var(--ink);}
+
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.12);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .article-hero{padding:48px 20px 40px;}
+  .article-body{padding:44px 20px;}
+  .article-foot{padding:24px 20px 48px;}
+  .model-grid{grid-template-columns:1fr;}
+  .compare-grid{grid-template-columns:1fr;}
+  .compare-col:first-child{border-right:none;border-bottom:1.5px solid var(--border);}
+  .stat-block{flex-direction:column;text-align:center;padding:28px 24px;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <a class="nav-back" href="../actualitat.html">← Tornar a l'actualitat</a>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Model de referència</span>
+      <span class="article-date">Novembre 2025</span>
+      <span class="article-read-time">· 6 min de lectura</span>
+    </div>
+    <h1 class="article-title">Com funciona el Kensington Corridor Trust a Philadelphia</h1>
+    <p class="article-subtitle">Un fons comunitari que ha adquirit locals comercials per protegir el comerç local davant la gentrificació. Controlar els immobles és controlar el futur del barri.</p>
+  </div>
+</section>
+
+<section class="article-body">
+
+  <p>El <strong>Kensington Corridor Trust</strong> (KCT) és una organització sense ànim de lucre fundada el 2020 al barri de Kensington, a Philadelphia (Pennsylvania, EUA). El seu objectiu és adquirir locals comercials en mans d'inversors externs i transferir-ne la propietat a una estructura comunitària permanent, garantint que el comerç local no pugui ser expulsat per pujades de lloguer especulatives.</p>
+
+  <p>Kensington és un barri de classe treballadora amb una llarga tradició industrial i comercial, que en les últimes dècades ha patit desinversió, empobriment i, més recentment, una pressió immobiliària creixent vinculada a processos de gentrificació. El KCT neix precisament per intervenir abans que la pressió faci irreversible la transformació del teixit comercial.</p>
+
+  <h2>El problema que vol resoldre</h2>
+
+  <p>La gentrificació comercial segueix un patró conegut: els lloguers pugen, els negocis locals no poden pagar, tanquen i són substituïts per establiments orientats a una clientela de renda alta o per franquícies nacionals. El resultat és un barri que ja no reconeix els seus residents originals.</p>
+
+  <p>La particularitat del KCT és que identifica la propietat dels immobles com el node central del problema. Mentre els locals pertanyin a inversors amb lògica especulativa, cap mesura de suport als negocis resoldrà el problema de fons. La solució ha de ser estructural: canviar qui és propietari.</p>
+
+  <div class="pull-quote">
+    <p>"Si no controles el local, no controles el teu futur com a negoci ni com a barri."</p>
+    <cite>Kensington Corridor Trust, declaració de principis</cite>
+  </div>
+
+  <h2>Com funciona el model</h2>
+
+  <div class="model-grid">
+    <div class="model-card">
+      <h3>Adquisició d'immobles</h3>
+      <p>El KCT compra locals comercials al corredor principal del barri, prioritzant els que estan en risc de ser adquirits per inversors externs o de quedar buits.</p>
+    </div>
+    <div class="model-card">
+      <h3>Propietat comunitària permanent</h3>
+      <p>Els immobles adquirits queden en mans del Trust de manera indefinida. No es poden vendre al mercat especulatiu. La comunitat manté el control sobre l'ús futur.</p>
+    </div>
+    <div class="model-card">
+      <h3>Lloguers assequibles</h3>
+      <p>Els locals es cedeixen a negocis locals amb lloguers inferiors al mercat, calculats en funció de la viabilitat del negoci i l'impacte comunitari, no del màxim que el mercat pugui suportar.</p>
+    </div>
+    <div class="model-card">
+      <h3>Govern participatiu</h3>
+      <p>Les decisions estratègiques del KCT impliquen residents, comerciants i organitzacions locals. El model de governança és deliberatiu i prioritza les veus del barri per sobre dels interessos externs.</p>
+    </div>
+  </div>
+
+  <h2>Finançament i inversió ciutadana</h2>
+
+  <p>El KCT s'ha finançat a través d'una combinació de fonts que el distingeix dels models tradicionals de desenvolupament urbà:</p>
+
+  <ul>
+    <li><strong>Subvencions públiques</strong> de la ciutat de Philadelphia i d'organismes estatals de desenvolupament econòmic comunitari</li>
+    <li><strong>Inversió d'impacte</strong> de fundacions i inversors que accepten rendiments baixos a canvi d'impacte social mesurable</li>
+    <li><strong>Participacions comunitàries</strong>: residents del barri poden invertir quantitats petites i convertir-se en copropietaris simbòlics del projecte</li>
+    <li><strong>Donacions</strong> d'individus i empreses locals compromesos amb la missió</li>
+  </ul>
+
+  <p>Aquest model de finançament divers és deliberat: evita la dependència d'una sola font i distribueix el poder entre múltiples actors amb interessos alineats.</p>
+
+  <div class="compare-grid">
+    <div class="compare-col negatiu">
+      <h3>Mercat immobiliari convencional</h3>
+      <ul>
+        <li>Propietat privada amb objectiu de rendiment màxim</li>
+        <li>Lloguers revisables a l'alça en cada renovació</li>
+        <li>Desconnexió entre propietari i vida del barri</li>
+        <li>Expulsió dels negocis menys rendibles</li>
+      </ul>
+    </div>
+    <div class="compare-col positiu">
+      <h3>Model Kensington Corridor Trust</h3>
+      <ul>
+        <li>Propietat comunitària permanent i no especulativa</li>
+        <li>Lloguers basats en viabilitat i impacte social</li>
+        <li>Governança participativa amb residents i comerciants</li>
+        <li>Estabilitat a llarg termini per als negocis locals</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Resultats documentats</h2>
+
+  <p>El KCT va ser fundat el 2020 i els seus primers anys d'activitat han coincidit amb un context de pressions immobiliàries intenses a Philadelphia. Malgrat la seva joventut com a organització, ha aconseguit adquirir diversos locals al corredor comercial principal i ha mantingut o atret negocis locals en espais que d'altra manera haurien estat objecte d'especulació.</p>
+
+  <p>El projecte ha estat reconegut per organitzacions com la National Community Reinvestment Coalition i citat en publicacions acadèmiques sobre desenvolupament econòmic comunitari com un model prometedor de <em>community wealth building</em> aplicat al comerç de proximitat.</p>
+
+  <div class="stat-block">
+    <div>
+      <div class="stat-num">2020</div>
+      <div class="stat-desc">Any de fundació del KCT, en plena pandèmia i en un moment de màxima vulnerabilitat per al comerç local de Kensington. El projecte va néixer com a resposta urgent a una crisi estructural.</div>
+      <div class="stat-source">Font: Kensington Corridor Trust (kensingtoncorridor.org)</div>
+    </div>
+  </div>
+
+  <h2>Diferències amb el model Homebaked</h2>
+
+  <p>El KCT i el projecte Homebaked de Liverpool comparteixen la mateixa lògica central —la propietat comunitària dels immobles com a condició per a la sostenibilitat del comerç local— però s'implementen de maneres diferenciades:</p>
+
+  <ul>
+    <li>Homebaked és un projecte únic centrat en un sol edifici i un sol negoci (el forn). El KCT treballa a escala de corredor comercial, amb l'objectiu d'adquirir múltiples locals al llarg d'un eix urbà.</li>
+    <li>Homebaked combina en un sol projecte la propietat de l'immoble, la gestió del negoci i l'habitatge. El KCT se centra exclusivament en els locals comercials.</li>
+    <li>El KCT té una dimensió de política pública més explícita: treballa activament amb l'Ajuntament de Philadelphia i busca influir en les normatives de zonificació i desenvolupament econòmic.</li>
+  </ul>
+
+  <div class="info-box">
+    <span class="info-label">Community Wealth Building</span>
+    <p>El <em>community wealth building</em> és un enfocament de desenvolupament econòmic que prioritza la propietat col·lectiva, la democràcia econòmica i la reinversió local dels excedents. A diferència del model de desenvolupament convencional, que atreu capital extern i accepta que els beneficis surtin del territori, el <em>community wealth building</em> busca construir estructures econòmiques arrelades que retinguin la riquesa al barri.</p>
+    <p>A l'estat espanyol no existeix una figura jurídica equivalent al Trust anglosaxó, però algunes de les seves funcions poden exercir-se a través de fundacions comunitàries, cooperatives de serveis o patrimonis municipals de sòl destinats a usos socials.</p>
+  </div>
+
+  <h2>Aplicabilitat al context català</h2>
+
+  <p>El model KCT és difícilment trasllatable de manera directa a Catalunya per raons jurídiques i de context: el Trust anglosaxó no té equivalent exacte en el dret civil català, i la tradició de inversió d'impacte és menys desenvolupada. Però els principis que l'articulent sí que son aplicables.</p>
+
+  <p>A Catalunya, instruments com els patrimonis municipals de sòl, les cooperatives de serveis o les fundacions d'utilitat pública podrien exercir funcions similars: adquirir locals comercials, mantenir-los fora del mercat especulatiu i cedir-los a negocis locals amb criteris socials. El que manca no és tant el marc jurídic com la voluntat política i la capitalització inicial.</p>
+
+  <div class="cta-box">
+    <div class="cta-box-text">Controlar el local és controlar el futur del barri. Aquesta és la lliçó de Kensington, i és la mateixa lliçó de Gràcia.</div>
+    <div class="cta-actions">
+      <a class="cta-btn cta-btn-primary" href="../participa.html">Participar en el projecte</a>
+      <a class="cta-btn cta-btn-secondary" href="../projecte.html">Conèixer el model AQT</a>
+    </div>
+  </div>
+
+</section>
+
+<div class="article-foot">
+  <div class="article-tags">
+    <span class="article-tag">Models internacionals</span>
+    <span class="article-tag">Propietat comunitària</span>
+    <span class="article-tag">Philadelphia</span>
+    <span class="article-tag">Gentrificació</span>
+  </div>
+  <a class="back-link" href="../actualitat.html">← Tornar a l'actualitat</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="../contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="../projecte.html">El projecte</a>
+      <a href="../index.html#que-fem">Com funciona</a>
+      <a href="../qui-som.html">Qui som</a>
+      <a href="../mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="../participa.html">Tens un comerç?</a>
+      <a href="../participa.html">Vull ajudar</a>
+      <a href="../contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Recursos</div>
+      <a href="../actualitat.html">Actualitat</a>
+      <a href="../qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+</body>
+</html>

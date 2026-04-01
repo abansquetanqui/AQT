@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Com les cadenes esborren els forns de barri — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
+  --bg:#FAFAF8; --bg-warm:#F3F2EE; --white:#FFFFFF;
+  --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
+  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F3F2EE;
+  --amber:#C47A00; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.nav-back:hover{color:var(--ink);border-color:var(--ink);}
+
+.article-hero{background:var(--white);border-bottom:2px solid var(--border);padding:72px 52px 60px;}
+.article-hero-inner{max-width:760px;margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.article-cat{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);background:var(--bg-warm);padding:5px 13px;border-radius:2px;border:1px solid var(--border);}
+.article-date{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.04em;}
+.article-read-time{font-size:12px;color:var(--muted);}
+h1.article-title{font-family:'Lora',Georgia,serif;font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;margin-bottom:20px;letter-spacing:-0.025em;color:var(--ink);}
+.article-subtitle{font-size:17px;line-height:1.7;color:var(--muted);max-width:680px;}
+
+.article-body{max-width:760px;margin:0 auto;padding:64px 52px;}
+.article-body p{font-size:16px;line-height:1.85;margin-bottom:24px;color:var(--text);}
+.article-body p strong{font-weight:600;color:var(--ink);}
+.article-body h2{font-family:'Lora',Georgia,serif;font-size:26px;font-weight:700;color:var(--ink);margin:52px 0 20px;line-height:1.2;letter-spacing:-0.01em;}
+.article-body h3{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:700;color:var(--ink);margin:36px 0 14px;line-height:1.2;}
+.article-body ul{margin:0 0 24px 0;list-style:none;}
+.article-body ul li{font-size:16px;line-height:1.8;color:var(--text);margin-bottom:10px;padding-left:22px;position:relative;}
+.article-body ul li::before{content:'→';color:var(--red);font-weight:700;position:absolute;left:0;font-size:14px;top:2px;}
+
+.pull-quote{border-left:3px solid var(--red);padding:24px 28px;margin:44px 0;background:var(--bg-warm);border-radius:0 4px 4px 0;}
+.pull-quote p{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:600;line-height:1.55;color:var(--ink);margin:0!important;}
+.pull-quote cite{display:block;margin-top:12px;font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+
+.table-compare{width:100%;border-collapse:collapse;margin:36px 0;border:1.5px solid var(--border);border-radius:4px;overflow:hidden;}
+.table-compare thead{background:var(--bg-warm);}
+.table-compare th{padding:14px 16px;text-align:left;font-size:12px;font-weight:700;color:var(--ink);border-bottom:2px solid var(--border);letter-spacing:0.04em;text-transform:uppercase;}
+.table-compare td{padding:13px 16px;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--text);line-height:1.5;}
+.table-compare tr:last-child td{border-bottom:none;}
+.table-compare tbody tr:hover td{background:var(--bg-warm);}
+
+.info-box{border:1.5px solid var(--border);border-radius:4px;padding:22px 24px;margin:36px 0;background:var(--bg-warm);}
+.info-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block;}
+.info-box p{margin-bottom:0!important;font-size:14.5px!important;line-height:1.7;}
+
+.stat-block{background:var(--ink);border-radius:4px;padding:36px 40px;margin:40px 0;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.stat-num{font-family:'Lora',Georgia,serif;font-size:60px;font-weight:700;color:var(--red);line-height:1;flex-shrink:0;letter-spacing:-0.02em;}
+.stat-desc{font-size:15px;font-weight:400;line-height:1.65;color:rgba(255,255,255,0.75);}
+.stat-source{font-size:11px;color:rgba(255,255,255,0.35);margin-top:6px;}
+
+.cta-box{background:var(--ink);border-radius:4px;padding:40px;margin:48px 0;text-align:center;}
+.cta-box-text{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;color:#fff;line-height:1.5;margin-bottom:24px;}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn{font-size:13px;font-weight:600;padding:12px 24px;text-decoration:none;border-radius:3px;transition:all 0.15s;display:inline-block;}
+.cta-btn-primary{background:var(--red);color:#fff;}
+.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-secondary{background:transparent;color:rgba(255,255,255,0.7);border:1.5px solid rgba(255,255,255,0.25);}
+.cta-btn-secondary:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.article-foot{max-width:760px;margin:0 auto;padding:28px 52px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.article-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);background:var(--bg-warm);padding:5px 13px;border-radius:20px;border:1px solid var(--border);}
+.back-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.back-link:hover{color:var(--ink);border-color:var(--ink);}
+
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.12);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .article-hero{padding:48px 20px 40px;}
+  .article-body{padding:44px 20px;}
+  .article-foot{padding:24px 20px 48px;}
+  .stat-block{flex-direction:column;text-align:center;padding:28px 24px;}
+  .table-compare th,.table-compare td{padding:10px 12px;font-size:13px;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <a class="nav-back" href="../actualitat.html">← Tornar a l'actualitat</a>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Anàlisi</span>
+      <span class="article-date">Febrer 2026</span>
+      <span class="article-read-time">· 6 min de lectura</span>
+    </div>
+    <h1 class="article-title">Com les cadenes esborren els forns de barri</h1>
+    <p class="article-subtitle">Un model de negoci que expulsa progressivament els forns artesans amb un buit legal que els afavoreix. La pressió no és accidental: és estructural.</p>
+  </div>
+</section>
+
+<section class="article-body">
+
+  <p>A Espanya, les grans cadenes de distribució alimentària han colonitzat el sector de la fleca en les últimes dues dècades. El mecanisme combina economies d'escala, integració vertical i, en alguns casos, preus per sota de cost en productes concrets per atraure clients i desplaçar la competència local. El resultat és visible a qualsevol barri: menys forns artesans, més punts de venda de pa industrial.</p>
+
+  <h2>Els principals actors del sector</h2>
+
+  <p>El mercat de la fleca industrial a Espanya està dominat per un nombre reduït de grups amb estratègies molt diferenciades. Les dades corresponen a estimacions sectorials publicades per la Federació Espanyola de Flequers i el sector de distribució alimentària:</p>
+
+  <table class="table-compare">
+    <thead>
+      <tr>
+        <th>Grup</th>
+        <th>Model de negoci</th>
+        <th>Avantatge competitiu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Grupo Bimbo Iberia</strong></td>
+        <td>Distribució massiva en supermercats i petits comerços</td>
+        <td>Economia d'escala industrial; producció centralitzada</td>
+      </tr>
+      <tr>
+        <td><strong>Grans superfícies (Mercadona, Carrefour, Lidl…)</strong></td>
+        <td>Forns integrats dins els propis establiments</td>
+        <td>Cost zero de local; trànsit de clients captiu</td>
+      </tr>
+      <tr>
+        <td><strong>Cadenes de forns urbans (Granier, La Masia…)</strong></td>
+        <td>Franquícies amb producció semi-industrial</td>
+        <td>Imatge artesanal amb costos de cadena</td>
+      </tr>
+      <tr>
+        <td><strong>Operadors de restauració ràpida</strong></td>
+        <td>Pa com a producte d'atracció (croissants, entrepans)</td>
+        <td>Subvenció creuada amb begudes i altres productes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pull-quote">
+    <p>"Nosaltres hem de pagar el local, el forn, la farina i el personal. Ells ja tenen el local pagat per vendre altres coses. No és la mateixa competència."</p>
+    <cite>Forner tradicional, Barcelona, 2025</cite>
+  </div>
+
+  <h2>L'estratègia que desplaça els forns locals</h2>
+
+  <p>La competència de les cadenes no es produeix únicament per preu. Hi ha tres mecanismes estructurals que actuen simultàniament:</p>
+
+  <h3>1. Subvenció creuada de productes</h3>
+  <p>Les grans superfícies venen pa a preus molt ajustats perquè el pa actua com a producte d'atracció: porta clients a la botiga, on es compren altres productes amb marges molt superiors. El forn de barri no pot aplicar aquesta lògica perquè el pa és el seu producte principal, no un ganxo.</p>
+
+  <h3>2. Cost zero de local</h3>
+  <p>Un forn tradicional a Gràcia paga entre 8.000 i 15.000 € mensuals de lloguer. El forn integrat dins d'un supermercat no té aquest cost: el local ja és de la cadena i el cost es distribueix entre totes les seccions. Aquesta asimetria fa impossible la competència en preu.</p>
+
+  <h3>3. Economies d'escala en producció i logística</h3>
+  <p>La producció centralitzada permet a les cadenes reduir el cost unitari de manera significativa. Un forn artesà produeix unes desenes de peces per hora; una planta industrial en produeix milers. La diferència de cost no reflecteix qualitat, sinó volum.</p>
+
+  <div class="info-box">
+    <span class="info-label">Marc legal</span>
+    <p>La Llei de competència deslleial (Llei 3/1991) recull la venda a pèrdua com a pràctica potencialment deslleial, però únicament quan es pot provar la intenció de perjudicar la competència. La subvenció creuada —vendre pa barat per guanyar clients per a altres productes— no constitueix venda a pèrdua en sentit estricte i és, per tant, completament legal.</p>
+  </div>
+
+  <h2>Les dades del sector a Espanya</h2>
+
+  <p>Segons la Federació Espanyola de Flequers, el nombre de fleques artesanals a Espanya ha caigut de manera sostinguda en la darrera dècada. El sector estima que s'han perdut al voltant del 30% dels establiments tradicionals entre 2013 i 2023, passant d'aproximadament 20.000 a menys de 14.000. Les causes principals identificades pel sector són tres: la pressió de les grans superfícies, l'increment dels lloguers comercials i la dificultat de relleu generacional.</p>
+
+  <div class="stat-block">
+    <div>
+      <div class="stat-num">~30%</div>
+      <div class="stat-desc">de reducció en el nombre de fleques artesanals a Espanya en l'última dècada, segons estimacions de la Federació Espanyola de Flequers.</div>
+      <div class="stat-source">Font: Federació Espanyola de Flequers, dades sectorials 2023</div>
+    </div>
+  </div>
+
+  <h2>El cost invisible dels tancaments</h2>
+
+  <p>Quan un forn de barri tanca, es perd molt més que un punt de venda de pa. Els tancaments arrosseguen amb ells:</p>
+
+  <ul>
+    <li>Llocs de treball artesanal amb formació específica, difícilment reemplaçables</li>
+    <li>Coneixement local acumulat durant dècades: preferències, ingredients, temporades</li>
+    <li>Un espai de relació social que les cadenes no repliquen</li>
+    <li>Diversitat de producte: cada forn artesà té un repertori propi que desapareix amb ell</li>
+  </ul>
+
+  <p>Els barris amb major concentració de comerç artesanal mostren índexs més alts de cohesió social i de percepció de seguretat, segons estudis de sociologia urbana. La desaparició dels comerços de proximitat no és només una qüestió econòmica.</p>
+
+  <div class="cta-box">
+    <div class="cta-box-text">La resposta no és regular les cadenes. La resposta és construir forns cooperatius que no competeixen en preu, sinó que ofereixen allò que les cadenes no poden: arrelament, qualitat i comunitat.</div>
+    <div class="cta-actions">
+      <a class="cta-btn cta-btn-primary" href="../participa.html">Participar en el projecte</a>
+      <a class="cta-btn cta-btn-secondary" href="../projecte.html">Conèixer el model</a>
+    </div>
+  </div>
+
+</section>
+
+<div class="article-foot">
+  <div class="article-tags">
+    <span class="article-tag">Economia</span>
+    <span class="article-tag">Fleca artesana</span>
+    <span class="article-tag">Competència</span>
+    <span class="article-tag">Dades</span>
+  </div>
+  <a class="back-link" href="../actualitat.html">← Tornar a l'actualitat</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="../contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="../projecte.html">El projecte</a>
+      <a href="../index.html#que-fem">Com funciona</a>
+      <a href="../qui-som.html">Qui som</a>
+      <a href="../mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="../participa.html">Tens un comerç?</a>
+      <a href="../participa.html">Vull ajudar</a>
+      <a href="../contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Recursos</div>
+      <a href="../actualitat.html">Actualitat</a>
+      <a href="../qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+</body>
+</html>

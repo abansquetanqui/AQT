@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Ferreteria Camps abaixa la persiana després de 90 anys — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
+  --bg:#FAFAF8; --bg-warm:#F3F2EE; --white:#FFFFFF;
+  --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
+  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F3F2EE;
+  --amber:#C47A00; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.nav-back:hover{color:var(--ink);border-color:var(--ink);}
+
+/* ARTICLE HERO */
+.article-hero{background:var(--white);border-bottom:2px solid var(--border);padding:72px 52px 60px;}
+.article-hero-inner{max-width:760px;margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.article-cat{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);background:rgba(200,57,43,0.08);padding:5px 13px;border-radius:2px;border:1px solid rgba(200,57,43,0.2);}
+.article-date{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.04em;}
+.article-read-time{font-size:12px;color:var(--muted);}
+h1.article-title{font-family:'Lora',Georgia,serif;font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;margin-bottom:20px;letter-spacing:-0.025em;color:var(--ink);}
+.article-subtitle{font-size:17px;line-height:1.7;color:var(--muted);max-width:680px;}
+
+/* ARTICLE BODY */
+.article-body{max-width:760px;margin:0 auto;padding:64px 52px;}
+.article-body p{font-size:16px;line-height:1.85;margin-bottom:24px;color:var(--text);}
+.article-body p strong{font-weight:600;color:var(--ink);}
+.article-body h2{font-family:'Lora',Georgia,serif;font-size:26px;font-weight:700;color:var(--ink);margin:52px 0 20px;line-height:1.2;letter-spacing:-0.01em;}
+.article-body h3{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:700;color:var(--ink);margin:36px 0 14px;line-height:1.2;}
+.article-body ul{margin:0 0 24px 0;list-style:none;}
+.article-body ul li{font-size:16px;line-height:1.8;color:var(--text);margin-bottom:10px;padding-left:22px;position:relative;}
+.article-body ul li::before{content:'→';color:var(--red);font-weight:700;position:absolute;left:0;font-size:14px;top:2px;}
+
+/* PULL QUOTE */
+.pull-quote{border-left:3px solid var(--red);padding:24px 28px;margin:44px 0;background:var(--bg-warm);border-radius:0 4px 4px 0;}
+.pull-quote p{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:600;line-height:1.55;color:var(--ink);margin:0!important;}
+.pull-quote cite{display:block;margin-top:12px;font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+
+/* TIMELINE */
+.timeline{margin:40px 0;padding-left:4px;}
+.timeline-item{display:flex;gap:22px;margin-bottom:28px;position:relative;}
+.timeline-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.timeline-marker{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.timeline-marker.inici{background:var(--green-ok);}
+.timeline-marker.neutral{background:var(--border-dk);}
+.timeline-marker.risc{background:var(--amber);}
+.timeline-marker.final{background:var(--red);}
+.timeline-line{width:1px;background:var(--border);flex:1;margin:6px 0;}
+.timeline-content h4{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.timeline-content p{font-size:14px;line-height:1.7;margin-bottom:0!important;color:var(--muted);}
+
+/* INFO BOX */
+.info-box{border:1.5px solid var(--border);border-radius:4px;padding:22px 24px;margin:36px 0;background:var(--bg-warm);}
+.info-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block;}
+.info-box p{margin-bottom:0!important;font-size:14.5px!important;line-height:1.7;}
+
+/* STAT */
+.stat-block{background:var(--ink);border-radius:4px;padding:36px 40px;margin:40px 0;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.stat-num{font-family:'Lora',Georgia,serif;font-size:60px;font-weight:700;color:var(--red);line-height:1;flex-shrink:0;letter-spacing:-0.02em;}
+.stat-desc{font-size:15px;font-weight:400;line-height:1.65;color:rgba(255,255,255,0.75);}
+
+/* CTA BOX */
+.cta-box{background:var(--ink);border-radius:4px;padding:40px;margin:48px 0;text-align:center;}
+.cta-box-text{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;color:#fff;line-height:1.5;margin-bottom:24px;}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn{font-size:13px;font-weight:600;padding:12px 24px;text-decoration:none;border-radius:3px;transition:all 0.15s;display:inline-block;}
+.cta-btn-primary{background:var(--red);color:#fff;}
+.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-secondary{background:transparent;color:rgba(255,255,255,0.7);border:1.5px solid rgba(255,255,255,0.25);}
+.cta-btn-secondary:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+/* ARTICLE FOOTER */
+.article-foot{max-width:760px;margin:0 auto;padding:28px 52px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.article-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);background:var(--bg-warm);padding:5px 13px;border-radius:20px;border:1px solid var(--border);}
+.back-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.back-link:hover{color:var(--ink);border-color:var(--ink);}
+
+/* FOOTER */
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);margin-top:0;}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.12);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .article-hero{padding:48px 20px 40px;}
+  .article-body{padding:44px 20px;}
+  .article-foot{padding:24px 20px 48px;}
+  .stat-block{flex-direction:column;text-align:center;padding:28px 24px;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="../index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <a class="nav-back" href="../actualitat.html">← Tornar a l'actualitat</a>
+</nav>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Cas documentat</span>
+      <span class="article-date">Febrer 2026</span>
+      <span class="article-read-time">· 6 min de lectura</span>
+    </div>
+    <h1 class="article-title">La Ferreteria Camps abaixa la persiana després de 90 anys</h1>
+    <p class="article-subtitle">Un lloguer de 15.000 € mensuals i la caiguda de la clientela tradicional acaben amb un dels comerços més emblemàtics de Gràcia. La seva història va impulsar la creació d'Abans Que Tanqui.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="article-body">
+
+  <p><strong>Gener de 2026.</strong> La Ferreteria Camps, al carrer de Verdi 45, tanca les portes. Nou dècades de martells, claus, vidres i confiança. Nou dècades de barri. En dos mesos, la façana estava renovada. En tres, hi obria una botiga de telefonia.</p>
+
+  <h2>La història de Camps</h2>
+
+  <p>La ferreteria va obrir el 1936. El pare de l'actual propietari, Josep Maria, va comprar el local per 4.000 pessetes. Era un baix de barri, com els altres. Josep Maria va aprendre l'ofici al costat del seu pare i, als 35 anys, ja dirigia el negoci. Els seus fills, Teresa i Pere, hi van créixer. Durant dècades, Camps va ser el lloc on els veïns de Gràcia acudien per:</p>
+
+  <ul>
+    <li>Resoldre petites reparacions a casa</li>
+    <li>Cercar consell sobre materials i eines</li>
+    <li>Trobar solucions a problemes de construcció antiga</li>
+    <li>Un tracte personal que cap gran superfície podia oferir</li>
+  </ul>
+
+  <p>Camps no era només una ferreteria. Era una institució del barri.</p>
+
+  <div class="pull-quote">
+    <p>"Aquí han crescut els meus fills. Van venir a comprar un clau amb cinc anys, acompanyats pel seu pare. Aquí van aprendre que el barri funciona si tothom s'ajuda."</p>
+    <cite>Veïna de Gràcia, 45 anys al barri</cite>
+  </div>
+
+  <h2>El gir: quan els propietaris es jubilen</h2>
+
+  <p>Josep Maria va arribar als 65 anys amb el negoci en funcionament però amb els marges cada vegada més reduïts. Els seus fills, adults, havien construït trajectòries professionals fora del comerç i no volien continuar. La rendibilitat de la ferreteria havia caigut progressivament per la pressió de les grans superfícies:</p>
+
+  <ul>
+    <li><strong>Leroy Merlin</strong> i <strong>Bricomart</strong>, ubicats a menys de 15 minuts en cotxe</li>
+    <li>La creixent compra en línia, especialment a través d'Amazon</li>
+    <li>La pèrdua del client jove, menys fidel al comerç de proximitat</li>
+  </ul>
+
+  <p>Els marges, que tradicionalment se situaven entre el 30 i el 35%, van caure al voltant del 15-18%. Els veïns de tota la vida continuaven comprant a Camps, però no eren suficients per sostenir el negoci davant dels nous costos.</p>
+
+  <h2>El cop de gràcia: la renegociació del lloguer</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker inici"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2008 — Lloguer estable</h4>
+        <p>Camps pagava 3.200 €/mes. El local pertanyia a una propietària veïna del barri, amb qui la relació era estable i de mutu respecte.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker neutral"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2014 — Canvi de propietari</h4>
+        <p>La propietària mor. L'immoble passa als seus hereus, que decideixen vendre la cartera de pisos. El nou propietari té com a objectiu maximitzar la rendibilitat del patrimoni.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker risc"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2015 — Primera pujada</h4>
+        <p>El lloguer salta a 6.800 €/mes. Josep Maria negocia i acorda quedar-se en 5.900 €. El negoci aguanta, però l'equilibri ja és fràgil.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker risc"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2020 — Pujada en pandèmia</h4>
+        <p>Malgrat el tancament forçat per la COVID-19, el lloguer puja a 9.500 €. Josep Maria envia una carta de negociació. La resposta és clara: "Aquesta és la taxa de mercat."</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker final"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2023 — Última pujada</h4>
+        <p>Nova renovació del contracte: 15.000 €/mes. La ferreteria factura al voltant de 180.000 € anuals bruts. Després de pagar lloguer, nòmines i costos fixos, el marge net es fa inviable.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker risc"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2025 — La decisió</h4>
+        <p>Josep Maria, amb 74 anys, vol jubilar-se. Els fills no continuen. Intenta negociar una sortida anticipada del contracte, però el propietari manté les condicions íntegres.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker final"></div></div>
+      <div class="timeline-content">
+        <h4>2026 — Tancament</h4>
+        <p>La Ferreteria Camps abaixa la persiana. Tres mesos després, el local acull una botiga de telefonia d'una gran cadena.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Per què no s'ha salvat?</h2>
+
+  <p>Camps tenia opcions sobre la taula. Cap no va prosperar.</p>
+
+  <h3>Opció 1: Compra col·lectiva (no va prosperar)</h3>
+  <p>El 2024, un grup de veïns va proposar crear una cooperativa per adquirir el negoci i mantenir-lo obert. Josep Maria hi estava disposat, però el propietari de l'immoble es va negar a reduir el lloguer. Sense un preu assequible, el model cooperatiu no era viable financerament.</p>
+
+  <h3>Opció 2: Traslladar-se a un altre local (no va prosperar)</h3>
+  <p>Els lloguers comercials al barri de Gràcia se situen en l'actualitat entre 10.000 i 18.000 € mensuals per a locals de dimensions similars. Els espais més econòmics es troben en zones allunyades de la clientela habitual. A 74 anys, Josep Maria no podia assumir el risc d'un trasllat.</p>
+
+  <h3>Opció 3: Relleu generacional (no va prosperar)</h3>
+  <p>Els fills havien construït trajectòries professionals en altres sectors. Tornar a una ferreteria amb marges ajustats i lloguer elevat no era una opció realista per a ells.</p>
+
+  <div class="stat-block">
+    <div class="stat-num">90</div>
+    <div class="stat-desc">anys de servei al barri. Un lloguer de 15.000 € mensuals va fer impossible la continuïtat d'un negoci que mai havia fallat als seus veïns.</div>
+  </div>
+
+  <h2>Què passa ara?</h2>
+
+  <p>Josep Maria es jubila. El local va quedar buit uns mesos i aviat va ser ocupat per un establiment de telefonia d'una gran cadena. El procés s'ha repetit centenars de vegades a Barcelona: un comerç de proximitat tanca, el local s'encareix, i el que n'ocupa el lloc té capacitat per absorbir el cost que el comerç local no podia pagar.</p>
+
+  <p>No hi ha un únic culpable en aquest relat. Hi ha una lògica de mercat immobiliari que afavoreix els usos de màxima rendibilitat, i un marc legal que no protegeix la continuïtat del teixit comercial de proximitat. El resultat és visible en qualsevol barri de Barcelona: menys ferreteries, menys forns, menys carnisseries; més franquícies, més botigues de souvenirs, més cadenes.</p>
+
+  <div class="info-box">
+    <span class="info-label">Context legal</span>
+    <p>A Espanya, la Llei d'arrendaments urbans (LAU) no estableix limitacions específiques als lloguers de locals comercials. A diferència dels habitatges, els propietaris poden fixar i revisar el preu en cada renovació contractual sense cap límit legal, la qual cosa deixa els comerços de proximitat sense protecció davant de pujades abruptes.</p>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-box-text">Per salvar un comerç com Camps cal un propietari disposat a negociar, una comunitat organitzada, polítiques de contenció del lloguer comercial, o les tres coses alhora. Abans Que Tanqui existeix per construir aquestes condicions.</div>
+    <div class="cta-actions">
+      <a class="cta-btn cta-btn-primary" href="../participa.html">Participar en el projecte</a>
+      <a class="cta-btn cta-btn-secondary" href="../projecte.html">Conèixer el projecte</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ARTICLE FOOTER -->
+<div class="article-foot">
+  <div class="article-tags">
+    <span class="article-tag">Gràcia</span>
+    <span class="article-tag">Immobiliari</span>
+    <span class="article-tag">Tancament</span>
+    <span class="article-tag">Cas documentat</span>
+  </div>
+  <a class="back-link" href="../actualitat.html">← Tornar a l'actualitat</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="../contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="../projecte.html">El projecte</a>
+      <a href="../index.html#que-fem">Com funciona</a>
+      <a href="../qui-som.html">Qui som</a>
+      <a href="../mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="../participa.html">Tens un comerç?</a>
+      <a href="../participa.html">Vull ajudar</a>
+      <a href="../contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Recursos</div>
+      <a href="../actualitat.html">Actualitat</a>
+      <a href="../qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+</body>
+</html>

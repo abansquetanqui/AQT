@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El model Homebaked: recuperar un forn des de la comunitat — Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
+  --bg:#FAFAF8; --bg-warm:#F3F2EE; --white:#FFFFFF;
+  --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
+  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F3F2EE;
+  --amber:#C47A00; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-back{font-size:13px;font-weight:600;color:var(--ink-muted);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.nav-back:hover{color:var(--ink);border-color:var(--ink);}
+
+.article-hero{background:var(--white);border-bottom:2px solid var(--border);padding:72px 52px 60px;}
+.article-hero-inner{max-width:760px;margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.article-cat{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-ok);background:rgba(42,122,75,0.08);padding:5px 13px;border-radius:2px;border:1px solid rgba(42,122,75,0.2);}
+.article-date{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.04em;}
+.article-read-time{font-size:12px;color:var(--muted);}
+h1.article-title{font-family:'Lora',Georgia,serif;font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;margin-bottom:20px;letter-spacing:-0.025em;color:var(--ink);}
+.article-subtitle{font-size:17px;line-height:1.7;color:var(--muted);max-width:680px;}
+
+.article-body{max-width:760px;margin:0 auto;padding:64px 52px;}
+.article-body p{font-size:16px;line-height:1.85;margin-bottom:24px;color:var(--text);}
+.article-body p strong{font-weight:600;color:var(--ink);}
+.article-body h2{font-family:'Lora',Georgia,serif;font-size:26px;font-weight:700;color:var(--ink);margin:52px 0 20px;line-height:1.2;letter-spacing:-0.01em;}
+.article-body h3{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:700;color:var(--ink);margin:36px 0 14px;line-height:1.2;}
+.article-body ul{margin:0 0 24px 0;list-style:none;}
+.article-body ul li{font-size:16px;line-height:1.8;color:var(--text);margin-bottom:10px;padding-left:22px;position:relative;}
+.article-body ul li::before{content:'→';color:var(--red);font-weight:700;position:absolute;left:0;font-size:14px;top:2px;}
+
+.pull-quote{border-left:3px solid var(--green-ok);padding:24px 28px;margin:44px 0;background:rgba(42,122,75,0.04);border-radius:0 4px 4px 0;border:1px solid rgba(42,122,75,0.15);border-left:3px solid var(--green-ok);}
+.pull-quote p{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:600;line-height:1.55;color:var(--ink);margin:0!important;}
+.pull-quote cite{display:block;margin-top:12px;font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+
+/* MODEL CARDS */
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:36px 0;}
+.model-card{background:var(--bg-warm);border-radius:4px;padding:22px 24px;border:1px solid var(--border);border-top:3px solid var(--green-ok);}
+.model-card h3{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:var(--ink);margin:0 0 10px;line-height:1.2;}
+.model-card p{font-size:14px;color:var(--muted);line-height:1.65;margin:0!important;}
+
+.info-box{border:1.5px solid var(--border);border-radius:4px;padding:22px 24px;margin:36px 0;background:var(--bg-warm);}
+.info-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block;}
+.info-box p{margin-bottom:0!important;font-size:14.5px!important;line-height:1.7;}
+
+/* TIMELINE */
+.timeline{margin:40px 0;padding-left:4px;}
+.timeline-item{display:flex;gap:22px;margin-bottom:28px;}
+.timeline-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.timeline-marker{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.timeline-marker.ok{background:var(--green-ok);}
+.timeline-marker.neutral{background:var(--border-dk);}
+.timeline-marker.risc{background:var(--amber);}
+.timeline-line{width:1px;background:var(--border);flex:1;margin:6px 0;}
+.timeline-content h4{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.timeline-content p{font-size:14px;line-height:1.7;margin-bottom:0!important;color:var(--muted);}
+
+.stat-block{background:var(--ink);border-radius:4px;padding:36px 40px;margin:40px 0;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.stat-num{font-family:'Lora',Georgia,serif;font-size:60px;font-weight:700;color:var(--green-ok);line-height:1;flex-shrink:0;letter-spacing:-0.02em;}
+.stat-desc{font-size:15px;font-weight:400;line-height:1.65;color:rgba(255,255,255,0.75);}
+.stat-source{font-size:11px;color:rgba(255,255,255,0.35);margin-top:6px;}
+
+.cta-box{background:var(--ink);border-radius:4px;padding:40px;margin:48px 0;text-align:center;}
+.cta-box-text{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:600;color:#fff;line-height:1.5;margin-bottom:24px;}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn{font-size:13px;font-weight:600;padding:12px 24px;text-decoration:none;border-radius:3px;transition:all 0.15s;display:inline-block;}
+.cta-btn-primary{background:var(--red);color:#fff;}
+.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-secondary{background:transparent;color:rgba(255,255,255,0.7);border:1.5px solid rgba(255,255,255,0.25);}
+.cta-btn-secondary:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.article-foot{max-width:760px;margin:0 auto;padding:28px 52px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.article-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);background:var(--bg-warm);padding:5px 13px;border-radius:20px;border:1px solid var(--border);}
+.back-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.back-link:hover{color:var(--ink);border-color:var(--ink);}
+
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.12);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .article-hero{padding:48px 20px 40px;}
+  .article-body{padding:44px 20px;}
+  .article-foot{padding:24px 20px 48px;}
+  .model-grid{grid-template-columns:1fr;}
+  .stat-block{flex-direction:column;text-align:center;padding:28px 24px;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <a class="nav-back" href="../actualitat.html">← Tornar a l'actualitat</a>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Model de referència</span>
+      <span class="article-date">Desembre 2025</span>
+      <span class="article-read-time">· 7 min de lectura</span>
+    </div>
+    <h1 class="article-title">El model Homebaked: recuperar un forn des de la comunitat</h1>
+    <p class="article-subtitle">A Liverpool, una cooperativa comunitària porta més d'una dècada demostrant que un forn pot ser propietat del barri i continuar funcionant. Aquí expliquem com ho han fet i què podem aprendre.</p>
+  </div>
+</section>
+
+<section class="article-body">
+
+  <p><strong>Homebaked Community Land Trust and Bakery</strong> és una cooperativa de Liverpool (Regne Unit) fundada el 2012 al barri d'Anfield. El que avui és un forn actiu i un referent internacional de gestió cooperativa del comerç local va néixer d'una amenaça concreta: la demolició d'un edifici amb locals comercials arran dels projectes de renovació urbanística vinculats a l'estadi del Liverpool FC.</p>
+
+  <p>El projecte ha estat documentat i estudiat per diverses universitats britàniques com a cas d'estudi de democràcia econòmica i regeneració urbana des de baix.</p>
+
+  <h2>El context: Anfield el 2012</h2>
+
+  <p>Anfield és un dels barris amb major índex de pobresa de Liverpool. A principis dels anys 2010, l'àrea al voltant de l'estadi del Liverpool FC es trobava en un procés de transformació urbana impulsat per l'Ajuntament i el club. Molts locals comercials estaven buits o amenaçats de demolició. El forn de la High Park Street, actiu des de principis del segle XX, era un d'ells.</p>
+
+  <p>Un grup de veïnes i professionals vinculats al moviment cooperatiu i a l'arquitectura participativa van decidir intervenir. L'objectiu no era simplement salvar un negoci, sinó construir una estructura de propietat que impedís que la situació es repetís.</p>
+
+  <div class="pull-quote">
+    <p>"No volíem gestionar el forn per a la comunitat. Volíem que la comunitat fos el forn."</p>
+    <cite>Homebaked Community Land Trust, web oficial</cite>
+  </div>
+
+  <h2>L'estructura: separar propietat i gestió</h2>
+
+  <p>La clau del model Homebaked és la separació entre dues entitats jurídiques diferenciades:</p>
+
+  <div class="model-grid">
+    <div class="model-card">
+      <h3>Community Land Trust (CLT)</h3>
+      <p>Entitat sense ànim de lucre que és propietària de l'immoble. El local queda fora del mercat especulatiu de manera permanent. Cap decisió de venda o canvi d'ús pot prendre's sense el consentiment de la comunitat.</p>
+    </div>
+    <div class="model-card">
+      <h3>Cooperativa de treball</h3>
+      <p>Gestiona el negoci del forn amb total autonomia operativa. Paga un lloguer social al CLT, molt per sota del mercat, cosa que fa viable el negoci. Els treballadors són socis de la cooperativa.</p>
+    </div>
+    <div class="model-card">
+      <h3>Govern democràtic</h3>
+      <p>Qualsevol veïna del barri pot convertir-se en membre del CLT. Les decisions estratègiques es prenen en assemblea. Cada membre té un vot, independentment del capital aportat.</p>
+    </div>
+    <div class="model-card">
+      <h3>Finançament comunitari</h3>
+      <p>El projecte es va finançar inicialment a través de donacions, subvencions públiques i la venda de participacions socials a veïnes i simpatitzants. No hi ha inversors externs amb ànim de lucre.</p>
+    </div>
+  </div>
+
+  <h2>Com funciona dia a dia</h2>
+
+  <p>El forn obre sis dies a la setmana i ven pa artesà, pastisseria i altres productes alimentaris. Els preus no competeixen amb els supermercats en el segment econòmic, sinó que apunten a un client que valora la qualitat, la proximitat i el model social darrere del producte.</p>
+
+  <p>A més del negoci del forn, Homebaked ha ampliat les seves activitats al llarg dels anys:</p>
+
+  <ul>
+    <li>Programes de formació en fleca per a joves del barri, alguns en situació de vulnerabilitat</li>
+    <li>Lloguer d'habitatges de protecció oficial en els pisos superiors de l'edifici</li>
+    <li>Espai comunitari per a reunions, tallers i activitats de barri</li>
+    <li>Participació en xarxes internacionals de Community Land Trusts</li>
+  </ul>
+
+  <h2>La cronologia del projecte</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker neutral"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2011 — Amenaça de demolició</h4>
+        <p>L'Ajuntament de Liverpool anuncia plans de renovació que inclouen la demolició de diversos locals a Anfield, entre ells l'antic forn de la High Park Street.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker ok"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2012 — Fundació del projecte</h4>
+        <p>Un grup de veïnes i activistes, amb el suport de l'escola d'arquitectura de la Universitat de Liverpool, constitueix el Community Land Trust i comença el procés de compra de l'immoble.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker ok"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2013 — Obertura del forn</h4>
+        <p>Homebaked Bakery obre les portes com a cooperativa de treball. El local és propietat del CLT, que el cedeix a la cooperativa amb un lloguer social.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker ok"></div><div class="timeline-line"></div></div>
+      <div class="timeline-content">
+        <h4>2016–2020 — Consolidació i ampliació</h4>
+        <p>El projecte s'estabilitza financerament. S'inicien les obres de rehabilitació dels pisos superiors per destinar-los a habitatge assequible. El model comença a ser estudiat per universitats i referenciats per organitzacions internacionals.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-left"><div class="timeline-marker ok"></div></div>
+      <div class="timeline-content">
+        <h4>2025 — Més d'una dècada actiu</h4>
+        <p>Homebaked continua operatiu, amb el forn en funcionament, habitatges socials ocupats i un programa de formació actiu. És un dels casos de referència citats habitualment en debats sobre democràcia econòmica i comerç comunitari.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-block">
+    <div>
+      <div class="stat-num">+12</div>
+      <div class="stat-desc">anys de funcionament ininterromput del forn cooperatiu, malgrat les pressions urbanístiques i econòmiques que van forçar el tancament d'altres negocis del barri.</div>
+      <div class="stat-source">Font: Homebaked Community Land Trust (homebaked.org.uk)</div>
+    </div>
+  </div>
+
+  <h2>Què fa diferent aquest model?</h2>
+
+  <p>Molts intents de salvar comerços locals fracassen perquè intenten competir en el terreny del mercat convencional: baixen preus, busquen inversors, s'endeutuen. Homebaked va en una direcció diferent: no competeix en preu, sinó que canvia les regles del joc.</p>
+
+  <p>Els elements que fan sostenible el model a llarg termini són:</p>
+
+  <ul>
+    <li><strong>El local mai no es ven:</strong> la propietat col·lectiva elimina el principal factor de vulnerabilitat del comerç local, que és el lloguer especulatiu.</li>
+    <li><strong>El negoci no ha de generar benefici per a inversors:</strong> el superàvit es reinverteix en el projecte i en el barri.</li>
+    <li><strong>La comunitat és part interessada:</strong> els clients, els veïns i els treballadors comparteixen un interès en el funcionament del forn que va més enllà de la transacció econòmica.</li>
+  </ul>
+
+  <div class="info-box">
+    <span class="info-label">Community Land Trust</span>
+    <p>Un Community Land Trust (CLT) és una organització sense ànim de lucre que adquireix i gestiona terres i immobles en benefici de la comunitat local. La propietat es manté col·lectiva de manera permanent: els béns no es poden vendre ni especular. Al Regne Unit hi ha més de 300 CLTs actius. A Espanya el model és gairebé inexistent legalment, tot i que existeixen figures jurídiques similars en el cooperativisme d'habitatge i en alguns patrimonis municipals de sòl.</p>
+  </div>
+
+  <h2>Aplicabilitat al context català</h2>
+
+  <p>El model Homebaked no és directament trasllatable a Catalunya sense adaptació: el marc jurídic és diferent, la cultura cooperativa té una tradició pròpia i les condicions del mercat immobiliari no són exactament les mateixes. Però els principis bàsics sí que son exportables.</p>
+
+  <p>A Catalunya existeix una llarga tradició cooperativista i instruments com les cooperatives de treball associat, les fundacions comunitàries o els patrimonis de sòl municipals que podrien funcionar de manera anàloga al CLT britànic. El que manca no és tant el marc legal com la voluntat política i l'organització comunitària.</p>
+
+  <p>Abans Que Tanqui estudia aquests models per veure quins elements són aplicables als casos documentats a Gràcia i altres barris de Barcelona.</p>
+
+  <div class="cta-box">
+    <div class="cta-box-text">No és teoria. A Liverpool ja funciona des de fa més d'una dècada. La pregunta és si podem construir alguna cosa semblant aquí, abans que tanquin.</div>
+    <div class="cta-actions">
+      <a class="cta-btn cta-btn-primary" href="../participa.html">Participar en el projecte</a>
+      <a class="cta-btn cta-btn-secondary" href="../projecte.html">Conèixer el model AQT</a>
+    </div>
+  </div>
+
+</section>
+
+<div class="article-foot">
+  <div class="article-tags">
+    <span class="article-tag">Cooperativisme</span>
+    <span class="article-tag">Models internacionals</span>
+    <span class="article-tag">Community Land Trust</span>
+    <span class="article-tag">Liverpool</span>
+  </div>
+  <a class="back-link" href="../actualitat.html">← Tornar a l'actualitat</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="../contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="../projecte.html">El projecte</a>
+      <a href="../index.html#que-fem">Com funciona</a>
+      <a href="../qui-som.html">Qui som</a>
+      <a href="../mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="../participa.html">Tens un comerç?</a>
+      <a href="../participa.html">Vull ajudar</a>
+      <a href="../contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Recursos</div>
+      <a href="../actualitat.html">Actualitat</a>
+      <a href="../qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+</body>
+</html>
