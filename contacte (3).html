@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacte · Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
+  --bg:#FAFAF8; --bg-warm:#F3F2EE; --white:#FFFFFF;
+  --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
+  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F3F2EE;
+  --amber:#C47A00; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-links a.active{font-weight:600;}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-cta:hover{background:var(--ink-mid)!important;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;transition:color 0.15s,background 0.15s;}
+.nav-mobile a:hover{color:var(--ink);background:var(--bg-warm);}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--ink);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
+
+/* PAGE HEADER */
+.page-header{background:var(--white);border-bottom:1px solid var(--border);padding:56px 52px 52px;}
+.page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.page-header h1{font-family:'Lora',Georgia,serif;font-size:clamp(32px,3.5vw,52px);font-weight:700;color:var(--ink);letter-spacing:-0.03em;line-height:1.08;margin-bottom:14px;}
+.page-header h1 em{font-style:italic;color:var(--red);}
+.page-header p{font-size:15px;color:var(--muted);max-width:520px;line-height:1.7;}
+
+/* CONTACTE LAYOUT */
+.contacte-wrap{max-width:1140px;margin:0 auto;padding:64px 52px;}
+.contacte-layout{display:grid;grid-template-columns:1fr 420px;gap:72px;align-items:start;}
+
+/* INFO */
+.contacte-info-title{font-family:'Lora',Georgia,serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:14px;letter-spacing:-0.015em;}
+.contacte-info-text{font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:32px;}
+
+.contacte-blocs{display:flex;flex-direction:column;gap:1px;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.contacte-bloc{background:var(--white);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;transition:background 0.15s;}
+.contacte-bloc:not(:last-child){border-bottom:1px solid var(--border);}
+.contacte-bloc:hover{background:var(--bg-warm);}
+.contacte-bloc-icon{width:40px;height:40px;background:var(--bg-warm);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border);}
+.contacte-bloc:hover .contacte-bloc-icon{background:var(--border);}
+.contacte-bloc-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.contacte-bloc-text{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:6px;}
+.contacte-bloc-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.contacte-bloc-link:hover{color:var(--ink);border-color:var(--ink);}
+
+/* HORARI BLOC */
+.horari-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;}
+.horari-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:18px 20px;}
+.horari-card-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.horari-card-val{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;}
+.horari-card-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* FORM */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:4px;}
+.form-card-head{padding:28px 32px 24px;border-bottom:1px solid var(--border);}
+.form-title{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.form-sub{font-size:13px;color:var(--muted);line-height:1.55;}
+.form-body{padding:28px 32px;}
+
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink-mid);margin-bottom:6px;letter-spacing:0.03em;text-transform:uppercase;}
+.field input,.field textarea,.field select{
+  width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:3px;
+  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--bg);
+  transition:border-color 0.15s,background 0.15s;outline:none;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--ink-mid);background:var(--white);}
+.field textarea{resize:vertical;min-height:108px;line-height:1.6;}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6B67' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+.btn-submit{width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;letter-spacing:0.01em;}
+.btn-submit:hover{background:var(--ink-mid);transform:translateY(-1px);}
+.btn-submit:disabled{opacity:0.6;cursor:default;transform:none;}
+
+.form-ok{display:none;background:rgba(42,122,75,0.06);border:1.5px solid rgba(42,122,75,0.25);border-radius:3px;padding:20px;text-align:center;margin-top:14px;}
+.form-ok-icon{width:36px;height:36px;background:var(--green-ok);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.form-ok-icon svg{display:block;}
+.form-ok-text{font-size:14px;font-weight:700;color:var(--green-ok);}
+.form-ok-sub{font-size:13px;color:var(--muted);margin-top:3px;}
+
+.form-privacy{font-size:11.5px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.5;}
+
+/* CTA */
+.cta-final{background:var(--ink);padding:72px 52px;text-align:center;}
+.cta-final-text{font-family:'Lora',Georgia,serif;font-size:clamp(24px,2.8vw,38px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;max-width:600px;margin:0 auto 28px;}
+.cta-final-text em{font-style:italic;color:var(--red);}
+.cta-final-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{background:var(--red);color:#fff;padding:13px 26px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s;}
+.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-outline{color:rgba(255,255,255,0.65);padding:13px 26px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);transition:color 0.15s,border-color 0.15s;}
+.cta-btn-outline:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+/* FOOTER */
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.12);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+  .page-header{padding:36px 20px 32px;}
+  .contacte-wrap{padding:40px 20px;}
+  .contacte-layout{grid-template-columns:1fr;gap:40px;}
+  .field-row{grid-template-columns:1fr;}
+  .horari-grid{grid-template-columns:1fr 1fr;}
+  .cta-final{padding:56px 20px;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+@media(max-width:520px){
+  .horari-grid{grid-template-columns:1fr;}
+  .form-card-head,.form-body{padding:22px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="qui-som.html">Qui som</a>
+    <a href="contacte.html" class="active">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-kicker">Contacte</div>
+  <h1>Parlem<em>.</em></h1>
+  <p>Tens un comerç en risc, vols col·laborar o simplement saber més del projecte? Escriu-nos i et responem en 48 hores.</p>
+</div>
+
+<!-- MAIN -->
+<div class="contacte-wrap">
+  <div class="contacte-layout">
+
+    <!-- INFO ESQUERRA -->
+    <div>
+      <div class="contacte-info-title">Com pots contactar-nos</div>
+      <div class="contacte-info-text">Som un equip petit en fase de constitució. La millor manera de posar-se en contacte és per correu o a través del formulari. Responem a totes les consultes.</div>
+
+      <div class="contacte-blocs">
+        <div class="contacte-bloc">
+          <div class="contacte-bloc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </div>
+          <div>
+            <div class="contacte-bloc-title">Correu electrònic</div>
+            <div class="contacte-bloc-text">Per a qualsevol consulta general.</div>
+            <a class="contacte-bloc-link" href="mailto:hola@abansquetanqui.cat">hola@abansquetanqui.cat</a>
+          </div>
+        </div>
+        <div class="contacte-bloc">
+          <div class="contacte-bloc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
+          </div>
+          <div>
+            <div class="contacte-bloc-title">Tens un comerç en risc?</div>
+            <div class="contacte-bloc-text">Ens interessa conèixer el teu cas. Explica'ns la situació i t'assessorem.</div>
+            <a class="contacte-bloc-link" href="participa.html">Veure el formulari específic →</a>
+          </div>
+        </div>
+        <div class="contacte-bloc">
+          <div class="contacte-bloc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contacte-bloc-title">On som</div>
+            <div class="contacte-bloc-text">Operem al barri de Gràcia, Barcelona. Les reunions presencials s'acorden per correu.</div>
+          </div>
+        </div>
+        <div class="contacte-bloc">
+          <div class="contacte-bloc-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <div class="contacte-bloc-title">Premsa i comunicació</div>
+            <div class="contacte-bloc-text">Per a periodistes, mitjans o col·laboracions mediàtiques.</div>
+            <a class="contacte-bloc-link" href="mailto:premsa@abansquetanqui.cat">premsa@abansquetanqui.cat</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HORARI -->
+      <div class="horari-grid">
+        <div class="horari-card">
+          <div class="horari-card-label">Resposta</div>
+          <div class="horari-card-val">48h</div>
+          <div class="horari-card-sub">Temps màxim de resposta</div>
+        </div>
+        <div class="horari-card">
+          <div class="horari-card-label">Disponibilitat</div>
+          <div class="horari-card-val">Dl–Dv</div>
+          <div class="horari-card-sub">De 9h a 18h</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULARI DRETA -->
+    <div class="form-card">
+      <div class="form-card-head">
+        <div class="form-title">Envia'ns un missatge</div>
+        <div class="form-sub">Tots els camps són confidencials. No compartim les teves dades amb tercers.</div>
+      </div>
+      <div class="form-body">
+        <div class="field-row">
+          <div class="field">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="El teu nom">
+          </div>
+          <div class="field">
+            <label for="email">Correu</label>
+            <input type="email" id="email" placeholder="tu@exemple.com">
+          </div>
+        </div>
+        <div class="field">
+          <label for="motiu">Motiu del contacte</label>
+          <select id="motiu">
+            <option value="">Selecciona una opció...</option>
+            <option>Tinc un comerç en risc</option>
+            <option>Vull ser sòcia de la cooperativa</option>
+            <option>Vull col·laborar com a voluntari/a</option>
+            <option>Sóc professional i puc ajudar</option>
+            <option>Consulta general sobre el projecte</option>
+            <option>Premsa / comunicació</option>
+            <option>Altres</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="missatge">Missatge</label>
+          <textarea id="missatge" placeholder="Explica'ns..."></textarea>
+        </div>
+        <button class="btn-submit" id="btn-submit" onclick="enviarForm()">Enviar missatge</button>
+        <div class="form-privacy">No compartim dades amb tercers. Consulta la nostra política de privacitat.</div>
+
+        <div class="form-ok" id="form-ok">
+          <div class="form-ok-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="form-ok-text">Missatge enviat correctament</div>
+          <div class="form-ok-sub">Et respondrem en les pròximes 48 hores.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-text">Si no actuem <em>abans que tanquin,</em><br>ja és massa tard.</div>
+  <div class="cta-final-actions">
+    <a class="cta-btn-primary" href="participa.html">Participar</a>
+    <a class="cta-btn-outline" href="projecte.html">Conèixer el projecte →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)"/></svg></a>
+        <a href="#" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="participa.html">Col·laboradors</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Recursos</div>
+      <a href="recursos.html#guies">Guies pràctiques</a>
+      <a href="recursos.html#assessorament">Assessorament</a>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+// NAV BURGER
+const burger=document.getElementById('nav-burger');
+const mobileNav=document.getElementById('nav-mobile');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open');});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open');}));
+
+// FORM
+function enviarForm(){
+  const nom=document.getElementById('nom').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const missatge=document.getElementById('missatge').value.trim();
+  if(!nom||!email||!missatge){
+    alert('Omple els camps obligatoris: nom, correu i missatge.');
+    return;
+  }
+  // Integrar amb Formspree, EmailJS, etc.
+  document.getElementById('form-ok').style.display='block';
+  const btn=document.getElementById('btn-submit');
+  btn.disabled=true;
+  btn.textContent='Enviat ✓';
+}
+</script>
+</body>
+</html>
