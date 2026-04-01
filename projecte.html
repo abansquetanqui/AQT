@@ -217,8 +217,8 @@ nav {
 }
 .comp-col:not(.aqt) .comp-header { background: var(--card); color: var(--muted); }
 .comp-col.aqt .comp-header {
-  background: var(--ink); color: rgba(157,207,180,0.8);
-  border-color: transparent;
+  background: var(--bg-warm); color: var(--ink);
+  border-color: var(--border);
 }
 .comp-items { padding: 8px 0; }
 .comp-item {
@@ -239,10 +239,10 @@ nav {
   margin-bottom: 4px; letter-spacing: -0.01em;
 }
 .comp-col:not(.aqt) .comp-item-title { color: var(--text); }
-.comp-col.aqt .comp-item-title { color: #fff; }
+.comp-col.aqt .comp-item-title { color:var(--ink); }
 .comp-item-text { font-size: 13px; line-height: 1.6; }
 .comp-col:not(.aqt) .comp-item-text { color: var(--muted); }
-.comp-col.aqt .comp-item-text { color: rgba(255,255,255,0.45); }
+.comp-col.aqt .comp-item-text { color: var(--muted); }
 
 /* ─── MODEL (CIRCUIT) ─── */
 .circuit-wrap {
