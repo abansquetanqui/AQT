@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de casos · Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
+  --bg:#FAFAF8; --white:#FFFFFF; --red:#C8392B; --red-lt:#E04030;
+  --text:#1A1A18; --mid:#3A3A37; --muted:#6B6B67;
+  --border:#E2E1DC;--border-dk:#C8C7C0;--bg-warm:#F3F2EE; --card:#F3F2EE; --card2:#F3F2EE;
+  --amber:#D97706; --green-ok:#2A7A4B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;letter-spacing:0.01em;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);}
+.nav-cta{background:var(--ink)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s !important;}
+.nav-cta:hover{background:var(--red-lt) !important;}
+
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;transition:color 0.15s,background 0.15s;}
+.nav-mobile a:hover{color:var(--ink);background:var(--bg);}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--red);color:#fff !important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
+
+.page-header{background:var(--ink);padding:52px 52px 48px;}
+.page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(157,207,180,0.7);margin-bottom:10px;}
+.page-header h1{font-family:'Lora',Georgia,serif;font-size:clamp(32px,3.5vw,48px);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px;}
+.page-header p{font-size:15px;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.7;}
+
+.mapa-full-wrap{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 64px - 160px);}
+#mapa-full{z-index:1;}
+.mapa-panel{background:var(--white);border-left:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 64px);}
+.mapa-panel-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:10;}
+.mapa-panel-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:12px;}
+.filtres{display:flex;gap:8px;flex-wrap:wrap;}
+.filtre-btn{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:none;cursor:pointer;color:var(--muted);transition:all 0.15s;}
+.filtre-btn.active-risc{background:rgba(217,119,6,0.1);border-color:var(--amber);color:#B45309;}
+.filtre-btn.active-tancat{background:rgba(196,43,16,0.1);border-color:var(--red);color:var(--red);}
+.filtre-btn.active-recuperat{background:rgba(42,122,75,0.1);border-color:var(--green-ok);color:var(--green-ok);}
+.filtre-btn.active-all{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+.casos-list{padding:0 0 20px;}
+.cas-item{padding:20px 28px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
+.cas-item:hover{background:var(--bg);}
+.cas-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:8px;}
+.cas-badge.risc{background:rgba(217,119,6,0.1);color:#B45309;}
+.cas-badge.tancat{background:rgba(196,43,16,0.1);color:var(--red);}
+.cas-badge.recuperat{background:rgba(42,122,75,0.1);color:var(--green-ok);}
+.cas-nom{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.cas-desc{font-size:12.5px;color:var(--muted);line-height:1.5;}
+
+.mapa-stats-bar{background:var(--ink);padding:20px 52px;display:flex;gap:40px;}
+.mapa-stat{display:flex;flex-direction:column;}
+.mapa-stat-num{font-family:'Lora',Georgia,serif;font-size:28px;font-weight:700;color:#fff;line-height:1;}
+.mapa-stat-label{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+
+.leaflet-popup-content-wrapper{border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
+.popup-title{font-weight:700;color:#1A1A17;margin-bottom:4px;}
+.popup-cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:6px;}
+.popup-cat.risc{background:rgba(217,119,6,0.12);color:#B45309;}
+.popup-cat.tancat{background:rgba(196,43,16,0.1);color:#C42B10;}
+.popup-cat.recuperat{background:rgba(42,122,75,0.12);color:#2A7A4B;}
+.popup-text{color:#6E786A;line-height:1.5;}
+
+footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:260px;margin-bottom:20px;}
+.footer-social{display:flex;gap:10px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.07);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
+.footer-social a:hover{background:rgba(255,255,255,0.14);}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:18px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.25);}
+.footer-entity{font-size:11.5px;color:rgba(157,207,180,0.5);font-weight:500;}
+
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .nav-burger{display:flex;}
+  .page-header{padding:36px 20px 32px;}
+  .mapa-full-wrap{grid-template-columns:1fr;grid-template-rows:360px 1fr;}
+  #mapa-full{height:360px;}
+  .mapa-panel{max-height:none;border-left:none;border-top:1px solid var(--border);}
+  .mapa-stats-bar{padding:16px 20px;gap:20px;flex-wrap:wrap;}
+  footer{padding:40px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <div class="nav-links">
+    <a href="index.html">Inici</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="participa.html">Participa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="recursos.html">Recursos</a>
+    <a href="qui-som.html">Qui som</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+
+  <a href="index.html">Inici</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="recursos.html">Recursos</a>
+  <a href="qui-som.html">Qui som</a>
+  <a href="contacte.html">Contacte</a>
+  <a class="nav-cta" href="participa.html">Tens un comerç?</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-kicker">Mapa de casos</div>
+  <h1>Comerços en risc a Gràcia.</h1>
+  <p>Cada punt representa un comerç documentat. El mapa s'actualitza a mesura que treballem sobre el terreny.</p>
+</div>
+
+<div class="mapa-stats-bar">
+  <div class="mapa-stat"><span class="mapa-stat-num">14</span><div class="mapa-stat-label">En risc</div></div>
+  <div class="mapa-stat"><span class="mapa-stat-num">7</span><div class="mapa-stat-label">Tancats</div></div>
+  <div class="mapa-stat"><span class="mapa-stat-num">2</span><div class="mapa-stat-label">Recuperats</div></div>
+  <div class="mapa-stat"><span class="mapa-stat-num">23</span><div class="mapa-stat-label">Total documentats</div></div>
+</div>
+
+<div class="mapa-full-wrap">
+  <div id="mapa-full"></div>
+  <div class="mapa-panel">
+    <div class="mapa-panel-header">
+      <div class="mapa-panel-title">Casos documentats</div>
+      <div class="filtres">
+        <button class="filtre-btn active-all" data-filtre="tot" onclick="filtrar(this,'tot')">Tots</button>
+        <button class="filtre-btn" data-filtre="risc" onclick="filtrar(this,'risc')">En risc</button>
+        <button class="filtre-btn" data-filtre="tancat" onclick="filtrar(this,'tancat')">Tancats</button>
+        <button class="filtre-btn" data-filtre="recuperat" onclick="filtrar(this,'recuperat')">Recuperats</button>
+      </div>
+    </div>
+    <div class="casos-list" id="casos-list"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
+      <div class="footer-social">
+        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.6)"/></svg></a>
+        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="projecte.html">El projecte</a>
+      <a href="index.html#que-fem">Com funciona</a>
+      <a href="qui-som.html">Qui som</a>
+      <a href="mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Participa</div>
+      <a href="participa.html">Tens un comerç?</a>
+      <a href="participa.html">Vull ajudar</a>
+      <a href="contacte.html">Contacte</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Més</div>
+      <a href="actualitat.html">Actualitat</a>
+      <a href="qui-som.html">Qui som</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Cooperativa de treball en constitució</span>
+  </div>
+</footer>
+
+<script>
+// ── CONFIGURACIÓ AIRTABLE ─────────────────────────────────────────────────────
+const AIRTABLE_TOKEN  = 'patnuSBb3PFtjOg6B.63f829fab0760f9f49c0d92d2e2566924b7d547f9b7debf5013880f8bfc6e5dd';   // <-- enganxa aquí el teu token
+const AIRTABLE_BASE   = 'appGuT1DQskra3f9p';
+const AIRTABLE_TABLE  = 'tblImxsEi3bEj3clb';
+// ─────────────────────────────────────────────────────────────────────────────
+
+const colors = { risc:'#C47A00', tancat:'#C8392B', recuperat:'#2A7A4B' };
+const labels  = { risc:'En risc', tancat:'Tancat',  recuperat:'Recuperat' };
+
+let punts   = [];
+let markers = [];
+let filtrActual = 'tot';
+
+// Mapa
+const map = L.map('mapa-full', { center:[41.4035,2.1544], zoom:15, scrollWheelZoom:false });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+  attribution:'&copy; <a href="https://carto.com/">CARTO</a>', subdomains:'abcd', maxZoom:19
+}).addTo(map);
+
+function makeIcon(color){
+  return L.divIcon({
+    className:'',
+    html:`<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25)"></div>`,
+    iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-10]
+  });
+}
+
+// Carrega dades d'Airtable
+async function carregarDades() {
+  document.getElementById('casos-list').innerHTML =
+    '<div style="padding:28px;color:var(--muted);font-size:13px;">Carregant comerços...</div>';
+
+  try {
+    let tots = [];
+    let offset = '';
+
+    // Airtable pagina de 100 en 100 — fem totes les pàgines
+    do {
+      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`
+        + `?filterByFormula={Actiu}=1`
+        + (offset ? `&offset=${offset}` : '');
+
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+      });
+
+      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
+      const data = await res.json();
+
+      tots = tots.concat(data.records);
+      offset = data.offset || '';
+    } while (offset);
+
+    // Convertim els registres al format intern
+    punts = tots
+      .map(r => ({
+        nom:  r.fields['Nom']       || '',
+        addr: r.fields['Adreca']    || '',
+        lat:  parseFloat(r.fields['Lat'])  || null,
+        lng:  parseFloat(r.fields['Lng'])  || null,
+        cat:  (r.fields['Categoria'] || 'risc').toLowerCase(),
+        desc: r.fields['Descripcio'] || '',
+      }))
+      .filter(p => p.lat && p.lng && p.nom); // descartem els que falten coordenades
+
+    pintarMarcadors();
+    actualitzarStats();
+    renderLlista(filtrActual);
+
+  } catch (err) {
+    console.error('Error Airtable:', err);
+    document.getElementById('casos-list').innerHTML =
+      `<div style="padding:28px;color:var(--red);font-size:13px;">
+        Error carregant les dades.<br>
+        <span style="color:var(--muted);font-size:12px;">${err.message}</span>
+      </div>`;
+  }
+}
+
+function pintarMarcadors() {
+  // Neteja marcadors anteriors
+  markers.forEach(m => map.removeLayer(m.marker));
+  markers = [];
+
+  punts.forEach(p => {
+    const color = colors[p.cat] || colors.risc;
+    const m = L.marker([p.lat, p.lng], { icon: makeIcon(color) })
+      .addTo(map)
+      .bindPopup(
+        `<div class="popup-cat ${p.cat}">${labels[p.cat] || p.cat}</div>` +
+        `<div class="popup-title">${p.nom}</div>` +
+        (p.addr ? `<div class="popup-text" style="margin-bottom:4px">${p.addr}</div>` : '') +
+        (p.desc ? `<div class="popup-text">${p.desc}</div>` : '')
+      );
+    markers.push({ marker: m, data: p });
+  });
+}
+
+function actualitzarStats() {
+  const risc      = punts.filter(p => p.cat === 'risc').length;
+  const tancat    = punts.filter(p => p.cat === 'tancat').length;
+  const recuperat = punts.filter(p => p.cat === 'recuperat').length;
+  const total     = punts.length;
+
+  // Actualitza la barra d'estadístiques
+  const nums = document.querySelectorAll('.mapa-stat-num');
+  if (nums[0]) nums[0].textContent = risc;
+  if (nums[1]) nums[1].textContent = tancat;
+  if (nums[2]) nums[2].textContent = recuperat;
+  if (nums[3]) nums[3].textContent = total;
+}
+
+function renderLlista(filtre) {
+  const list = document.getElementById('casos-list');
+  list.innerHTML = '';
+
+  const filtrats = filtre === 'tot' ? punts : punts.filter(p => p.cat === filtre);
+
+  if (filtrats.length === 0) {
+    list.innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Cap comerç en aquesta categoria.</div>';
+    return;
+  }
+
+  filtrats.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'cas-item';
+    div.innerHTML =
+      `<div class="cas-badge ${p.cat}">${labels[p.cat] || p.cat}</div>` +
+      `<div class="cas-nom">${p.nom}</div>` +
+      (p.addr ? `<div class="cas-desc" style="margin-bottom:2px">${p.addr}</div>` : '') +
+      (p.desc ? `<div class="cas-desc">${p.desc}</div>` : '');
+    div.addEventListener('click', () => {
+      map.setView([p.lat, p.lng], 17);
+      markers.find(m => m.data.nom === p.nom)?.marker.openPopup();
+    });
+    list.appendChild(div);
+  });
+}
+
+function filtrar(btn, filtre) {
+  filtrActual = filtre;
+  document.querySelectorAll('.filtre-btn').forEach(b => b.className = 'filtre-btn');
+  btn.classList.add(filtre === 'tot' ? 'active-all' : 'active-' + filtre);
+
+  // Mostra/amaga marcadors segons filtre
+  markers.forEach(({ marker, data }) => {
+    if (filtre === 'tot' || data.cat === filtre) {
+      marker.addTo(map);
+    } else {
+      map.removeLayer(marker);
+    }
+  });
+
+  renderLlista(filtre);
+}
+
+// Arrenca
+carregarDades();
+
+// Nav burger
+const burger = document.getElementById('nav-burger');
+const mobileNav = document.getElementById('nav-mobile');
+burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { burger.classList.remove('open'); mobileNav.classList.remove('open'); }));
+</script>
+</body>
+</html>
