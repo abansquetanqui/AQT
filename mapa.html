@@ -10,9 +10,9 @@
 <style>
 :root {
   --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
-  --bg:#FAFAF8; --white:#FFFFFF; --red:#C8392B; --red-lt:#E04030;
+  --bg:#F7F7F7; --white:#FFFFFF; --red:#C8392B; --red-lt:#E04030;
   --text:#1A1A18; --mid:#3A3A37; --muted:#6B6B67;
-  --border:#E2E1DC;--border-dk:#C8C7C0;--bg-warm:#F3F2EE; --card:#F3F2EE; --card2:#F3F2EE;
+  --border:#E2E1DC;--border-dk:#C8C7C0;--bg-warm:#EFEFEF; --card:#F0F0F0; --card2:#F3F2EE;
   --amber:#D97706; --green-ok:#2A7A4B;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -25,7 +25,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;letter-spacing:0.01em;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);}
-.nav-cta{background:var(--ink)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s !important;}
+.nav-cta{background:var(--cta)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s !important;}
 .nav-cta:hover{background:var(--red-lt) !important;}
 
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}

@@ -8,10 +8,10 @@
 <style>
 :root {
   --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
-  --bg:#FAFAF8; --bg-warm:#F3F2EE; --white:#FFFFFF;
+  --bg:#F7F7F7; --bg-warm:#EFEFEF; --white:#FFFFFF;
   --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
-  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F3F2EE;
-  --amber:#C47A00; --green-ok:#2A7A4B;
+  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F0F0F0;
+  --amber:#C47A00; --green-ok:#2A7A4B; --cta:#2A7A4B; --cta-lt:#348A58;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -25,8 +25,8 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);}
 .nav-links a.active{font-weight:600;}
-.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
-.nav-cta:hover{background:var(--ink-mid)!important;}
+.nav-cta{background:var(--cta)!important;color:var(--white)!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-cta:hover{background:var(--cta-lt)!important;}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -61,7 +61,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .contacte-bloc:hover .contacte-bloc-icon{background:var(--border);}
 .contacte-bloc-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;}
 .contacte-bloc-text{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:6px;}
-.contacte-bloc-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
+.contacte-bloc-link{font-size:13px;font-weight:600;color:var(--cta);text-decoration:none;border-bottom:1.5px solid var(--cta);padding-bottom:1px;transition:color 0.15s,border-color 0.15s;}
 .contacte-bloc-link:hover{color:var(--ink);border-color:var(--ink);}
 
 /* HORARI BLOC */
@@ -91,7 +91,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
 .btn-submit{width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background 0.15s,transform 0.1s;letter-spacing:0.01em;}
-.btn-submit:hover{background:var(--ink-mid);transform:translateY(-1px);}
+.btn-submit:hover{background:var(--cta-lt);transform:translateY(-1px);}
 .btn-submit:disabled{opacity:0.6;cursor:default;transform:none;}
 
 .form-ok{display:none;background:rgba(42,122,75,0.06);border:1.5px solid rgba(42,122,75,0.25);border-radius:3px;padding:20px;text-align:center;margin-top:14px;}
@@ -107,8 +107,8 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .cta-final-text{font-family:'Lora',Georgia,serif;font-size:clamp(24px,2.8vw,38px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;max-width:600px;margin:0 auto 28px;}
 .cta-final-text em{font-style:italic;color:var(--red);}
 .cta-final-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.cta-btn-primary{background:var(--red);color:#fff;padding:13px 26px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s;}
-.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-primary{background:var(--cta);color:#fff;padding:13px 26px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s;}
+.cta-btn-primary:hover{background:var(--cta-lt);}
 .cta-btn-outline{color:rgba(255,255,255,0.65);padding:13px 26px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,0.2);transition:color 0.15s,border-color 0.15s;}
 .cta-btn-outline:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
 

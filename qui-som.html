@@ -6,7 +6,7 @@
 <title>Qui som · Abans Que Tanqui</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#FAFAF8;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--bg-warm:#F3F2EE;--card:#F3F2EE;--card2:#F3F2EE;}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--bg-warm:#EFEFEF;--card:#F0F0F0;--card2:#F3F2EE;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
@@ -17,7 +17,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);}
-.nav-cta{background:var(--ink)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-cta{background:var(--cta)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;}
 .nav-cta:hover{background:var(--red-lt) !important;}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
@@ -86,8 +86,8 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .cta-final-text{font-family:'Lora',Georgia,serif;font-size:clamp(28px,3vw,40px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;max-width:600px;margin:0 auto 32px;}
 .cta-final-text em{font-style:italic;color:rgba(255,255,255,0.6);}
 .cta-final-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-.cta-btn-primary{background:var(--red);color:#fff;padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
-.cta-btn-primary:hover{background:var(--red-lt);}
+.cta-btn-primary{background:var(--cta);color:#fff;padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
+.cta-btn-primary:hover{background:var(--cta-lt);}
 .cta-btn-outline{color:rgba(255,255,255,0.7);padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,0.25);}
 .cta-btn-outline:hover{color:#fff;border-color:rgba(255,255,255,0.6);}
 
