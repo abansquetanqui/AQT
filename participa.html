@@ -3,417 +3,270 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forma part del canvi — Abans Que Tanqui</title>
+<title>Participa · Abans Que Tanqui</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:#1A1A18; --ink-mid:#3A3A37; --ink-muted:#6B6B67;
-  --bg:#F7F7F7; --bg-warm:#EFEFEF; --white:#FFFFFF;
-  --red:#C8392B; --red-lt:#E04030; --text:#1A1A18; --muted:#6B6B67;
-  --border:#E2E1DC; --border-dk:#C8C7C0; --card:#F0F0F0;
-  --mid:#3A3A37; --card2:#F3F2EE; --green-ok:#2A7A4B;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: var(--bg); color: var(--text);
-  line-height: 1.6; -webkit-font-smoothing: antialiased;
-}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--card:#F0F0F0;--sage:#C8D5B9;--sage-dk:#3A5530;--amber:#C47A00;--cta:#2A7A4B;--cta-lt:#348A58;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
 
-/* ─── NAV ─── */
-nav {
-  background: var(--white); border-bottom: 1px solid var(--border); padding: 0 52px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 64px; position: sticky; top: 0; z-index: 1000;
-}
-.nav-logo {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 17px; font-weight: 700; color: var(--ink);
-  letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; text-decoration: none;
-}
-.nav-logo-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
-.nav-links { display: flex; gap: 22px; align-items: center; }
-.nav-links a {
-  font-size: 13px; font-weight: 500; color: var(--ink-muted);
-  text-decoration: none; transition: color 0.15s;
-}
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
-.nav-cta {
-  background: var(--ink) !important; color: var(--white) !important;
-  padding: 8px 16px; border-radius: 3px; font-size: 13px; font-weight: 600;
-}
-.nav-cta:hover { background: var(--ink-mid) !important; }
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:var(--cta)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-cta:hover{background:var(--cta-lt)!important;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--cta);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;}
 
-/* ─── HERO ─── */
-.page-hero {
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  padding: 72px 52px 64px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
-}
-.page-hero-kicker {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
-}
-.page-hero h1 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: clamp(36px, 3.5vw, 52px); font-weight: 700;
-  line-height: 1.1; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 20px;
-}
-.page-hero h1 em { font-style: italic; color: var(--red); }
-.page-hero-sub {
-  font-size: 15px; line-height: 1.75; color: var(--muted); max-width: 480px;
-}
-.hero-beneficis { display: flex; flex-direction: column; gap: 16px; }
-.benefici {
-  display: flex; gap: 16px; align-items: flex-start;
-  background: var(--bg-warm);
-  border: 1px solid var(--border);
-  border-radius: 4px; padding: 18px 20px;
-}
-.benefici-icon {
-  width: 36px; height: 36px; flex-shrink: 0;
-  background: var(--border); border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-}
-.benefici-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-.benefici-text { font-size: 12px; line-height: 1.6; color: var(--muted); }
+.hero{background:var(--cta);padding:80px 52px;}
+.hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:16px;}
+.hero h1{font-family:'Lora',Georgia,serif;font-size:clamp(40px,5vw,64px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px;max-width:760px;}
+.hero h1 em{font-style:italic;color:var(--sage);}
+.hero-sub{font-size:16px;line-height:1.75;color:rgba(255,255,255,0.75);max-width:560px;}
 
-/* ─── FASES ─── */
-.fases-section { padding: 72px 52px; background: var(--white); }
-.fases-header { margin-bottom: 44px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
-.section-kicker {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--red); margin-bottom: 8px;
-}
-.fases-header h2 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: clamp(26px, 2.4vw, 36px); font-weight: 600;
-  letter-spacing: -0.02em; line-height: 1.15; color: var(--text);
-}
-.fases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.fase-card {
-  border: 1px solid var(--border); border-radius: 6px; padding: 32px 28px;
-  background: var(--bg); position: relative; overflow: hidden;
-}
-.fase-card.activa {
-  background: var(--ink); border-color: var(--ink);
-}
-.fase-num {
-  font-family: 'Lora', Georgia, serif; font-size: 52px; font-weight: 700;
-  color: var(--border); line-height: 1; letter-spacing: -0.04em; display: block; margin-bottom: 18px;
-}
-.fase-card.activa .fase-num { color: rgba(255,255,255,0.1); }
-.fase-badge {
-  display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; padding: 4px 10px; border-radius: 2px;
-  background: rgba(58,107,85,0.12); color: var(--ink-muted); margin-bottom: 14px;
-}
-.fase-card.activa .fase-badge { background: rgba(157,207,180,0.15); color: rgba(255,255,255,0.6); }
-.fase-title {
-  font-family: 'Lora', Georgia, serif; font-size: 20px; font-weight: 700;
-  color: var(--text); margin-bottom: 10px; letter-spacing: -0.01em;
-}
-.fase-card.activa .fase-title { color: #fff; }
-.fase-text { font-size: 13.5px; line-height: 1.65; color: var(--muted); }
-.fase-card.activa .fase-text { color: rgba(255,255,255,0.5); }
+.beneficis-band{background:var(--white);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);}
+.benefici{padding:36px 32px;border-right:1px solid var(--border);}
+.benefici:last-child{border-right:none;}
+.benefici-tag{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--cta);margin-bottom:12px;}
+.benefici-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-0.01em;}
+.benefici-text{font-size:13.5px;line-height:1.7;color:var(--muted);}
 
-/* ─── PERFILS SECTION ─── */
-.perfils-section { padding: 80px 52px; background: var(--bg); }
-.perfils-header { margin-bottom: 52px; }
-.perfils-header h2 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: clamp(28px, 2.6vw, 40px); font-weight: 700;
-  letter-spacing: -0.02em; line-height: 1.15; color: var(--text); margin-bottom: 12px;
-}
-.perfils-header p { font-size: 15px; line-height: 1.75; color: var(--muted); max-width: 480px; }
+.fases-wrap{padding:72px 52px;background:var(--bg-warm);}
+.fases-header{margin-bottom:44px;}
+.fases-kicker{font-family:'Lora',Georgia,serif;font-size:clamp(24px,2.8vw,36px);font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px;}
+.fases-sub{font-size:13px;color:var(--ink-muted);}
+.fases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);}
+.fase{padding:36px 28px;background:var(--white);position:relative;}
+.fase.activa{background:var(--sage);}
+.fase-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:14px;}
+.fase:not(.activa) .fase-badge{background:var(--card);color:var(--muted);}
+.fase.activa .fase-badge{background:var(--cta);color:#fff;}
+.fase-num{font-family:'Lora',Georgia,serif;font-size:48px;font-weight:700;color:var(--border);line-height:1;display:block;margin-bottom:12px;letter-spacing:-0.04em;}
+.fase.activa .fase-num{color:rgba(58,85,48,0.3);}
+.fase-title{font-family:'Lora',Georgia,serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-0.01em;}
+.fase-text{font-size:13.5px;line-height:1.7;color:var(--muted);}
+.fase.activa .fase-text{color:var(--sage-dk);}
 
-.perfils-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 52px; }
+.form-wrap{padding:72px 52px;background:var(--white);}
+.form-header{margin-bottom:44px;}
+.form-kicker{font-family:'Lora',Georgia,serif;font-size:clamp(24px,2.8vw,36px);font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px;}
+.form-sub{font-size:13px;color:var(--ink-muted);}
+.form-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.form-info{display:flex;flex-direction:column;gap:20px;}
+.info-item{border-left:3px solid var(--sage);padding-left:18px;}
+.info-item-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.info-item-text{font-size:13px;line-height:1.6;color:var(--muted);}
+.form-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:36px 32px;}
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink-mid);margin-bottom:6px;letter-spacing:0.02em;}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--border-dk);border-radius:4px;padding:10px 14px;font-size:14px;font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--white);transition:border-color 0.15s;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--cta);}
+.field textarea{min-height:80px;resize:vertical;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.check-group{display:flex;flex-direction:column;gap:10px;}
+.check-item{display:flex;align-items:flex-start;gap:10px;cursor:pointer;}
+.check-item input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;accent-color:var(--cta);margin-top:2px;}
+.check-item span{font-size:13px;color:var(--ink-mid);line-height:1.5;}
+.btn-submit{background:var(--cta);color:#fff;padding:13px 28px;border-radius:4px;font-size:14px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:8px;transition:background 0.15s;}
+.btn-submit:hover{background:var(--cta-lt);}
+.form-ok{display:none;text-align:center;padding:32px;background:var(--sage);border-radius:4px;margin-top:12px;}
+.form-ok-icon{font-size:32px;margin-bottom:12px;}
+.form-ok-title{font-family:'Lora',Georgia,serif;font-size:20px;font-weight:700;color:var(--sage-dk);margin-bottom:8px;}
+.form-ok-text{font-size:14px;color:var(--sage-dk);line-height:1.6;}
+.form-privacy{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5;}
 
-.perfil-card {
-  background: var(--white); padding: 44px 36px 40px;
-  display: flex; flex-direction: column; gap: 0;
-  border: 1px solid var(--border);
-  transition: box-shadow 0.2s;
-}
-.perfil-card:first-child { border-radius: 8px 0 0 8px; }
-.perfil-card:last-child  { border-radius: 0 8px 8px 0; }
-.perfil-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); z-index: 1; position: relative; }
+.cta-final{background:linear-gradient(135deg,#E8F0EB 0%,#F7F7F7 60%,#fff 100%);padding:80px 52px;text-align:center;}
+.cta-headline{font-family:'Lora',Georgia,serif;font-size:40px;font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin:0 auto 16px;}
+.cta-headline em{font-style:normal;}
+.cta-final-sub{font-size:15px;color:var(--ink-muted);max-width:480px;margin:0 auto 32px;line-height:1.6;}
+.cta-final-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{background:var(--cta);color:#fff;padding:14px 28px;border-radius:6px;font-size:15px;font-weight:700;text-decoration:none;transition:background 0.15s;}
+.cta-btn-primary:hover{background:var(--cta-lt);}
+.cta-btn-secondary{background:var(--red);color:#fff;padding:14px 28px;border-radius:6px;font-size:15px;font-weight:700;text-decoration:none;transition:background 0.15s;}
+.cta-btn-secondary:hover{background:var(--red-lt);}
 
-.perfil-num {
-  font-family: 'Lora', Georgia, serif; font-size: 13px; font-weight: 600;
-  color: var(--muted); letter-spacing: 0.04em; margin-bottom: 28px;
-}
-.perfil-icon {
-  width: 44px; height: 44px; border-radius: 10px;
-  background: var(--card2); display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
-}
-.perfil-title {
-  font-family: 'Lora', Georgia, serif; font-size: 22px; font-weight: 700;
-  color: var(--text); letter-spacing: -0.01em; margin-bottom: 14px; line-height: 1.2;
-}
-.perfil-desc {
-  font-size: 14px; line-height: 1.75; color: var(--muted); flex: 1; margin-bottom: 28px;
-}
-.perfil-llista {
-  list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 0;
-}
-.perfil-llista li {
-  font-size: 13px; color: var(--mid); line-height: 1.5;
-  display: flex; gap: 10px; align-items: flex-start;
-}
-.perfil-llista li::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--ink-muted); flex-shrink: 0; margin-top: 6px;
-}
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
+.footer-col a:hover{color:rgba(255,255,255,0.9);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
 
-/* ─── CTA FINAL ─── */
-.perfils-cta {
-  border-top: 1px solid var(--border); padding-top: 40px;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+@media(max-width:960px){
+  nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
+  .hero{padding:52px 20px;}
+  .beneficis-band{grid-template-columns:1fr;}
+  .benefici{border-right:none;border-bottom:1px solid var(--border);}
+  .fases-wrap,.form-wrap{padding:48px 20px;}
+  .fases-grid{grid-template-columns:1fr;}
+  .form-inner{grid-template-columns:1fr;gap:36px;}
+  .field-row{grid-template-columns:1fr;}
+  .cta-final{padding:56px 20px;}
+  footer{padding:44px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
 }
-.perfils-cta-text { font-size: 15px; color: var(--mid); line-height: 1.6; }
-.perfils-cta-text strong { color: var(--text); font-weight: 600; }
-.btn-cta {
-  background: var(--ink); color: #fff;
-  padding: 14px 32px; border-radius: 4px;
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
-  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-  transition: background 0.15s, transform 0.1s; white-space: nowrap; flex-shrink: 0;
-}
-.btn-cta:hover { background: var(--ink-muted); transform: translateY(-1px); }
-
-/* Checkboxes — kept for legacy */
-
-
-/* ─── HAMBURGER ─── */
-.nav-burger {
-  display: none; flex-direction: column; gap: 5px;
-  cursor: pointer; background: none; border: none; padding: 8px; z-index: 1100;
-}
-.nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink-mid); border-radius: 2px; transition: all 0.25s; }
-.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-burger.open span:nth-child(2) { opacity: 0; }
-.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.nav-mobile {
-  display: none; position: fixed; top: 64px; left: 0; right: 0;
-  background: var(--white); border-top: 1px solid var(--border);
-  z-index: 999; flex-direction: column; padding: 16px 0 24px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-}
-.nav-mobile.open { display: flex; }
-.nav-mobile a { font-size: 15px; font-weight: 500; color: var(--ink-muted); text-decoration: none; padding: 12px 24px; transition: color 0.15s, background 0.15s; }
-.nav-mobile a:hover { color: var(--ink); background: var(--bg-warm); }
-.nav-mobile .nav-cta { margin: 8px 24px 0; background: var(--ink); color: #fff !important; padding: 12px 20px; border-radius: 4px; text-align: center; font-weight: 600; }
-
-/* ─── FOOTER ─── */
-footer { background: #111110; padding: 56px 52px 0; color: rgba(255,255,255,0.6); }
-.footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 52px; }
-.footer-brand { font-family: 'Lora', Georgia, serif; font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
-.footer-brand-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
-.footer-desc { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.35); max-width: 240px; margin-bottom: 18px; }
-.footer-social { display: flex; gap: 10px; }
-.footer-social a { width: 34px; height: 34px; background: rgba(255,255,255,0.07); border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.15s; }
-.footer-social a:hover { background: rgba(255,255,255,0.14); }
-.footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
-.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 9px; transition: color 0.15s; }
-.footer-col a:hover { color: rgba(255,255,255,0.9); }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 18px 0; display: flex; justify-content: space-between; align-items: center; }
-.footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); }
-.footer-entity { font-size: 11.5px; color: rgba(157,207,180,0.5); font-weight: 500; }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 960px) {
-  nav { padding: 0 20px; }
-  .nav-links { display: none; }
-  .nav-burger { display: flex; }
-  .page-hero { grid-template-columns: 1fr; gap: 40px; padding: 52px 24px 44px; }
-  .fases-section { padding: 52px 20px; }
-  .fases-grid { grid-template-columns: 1fr; }
-  .perfils-section { padding: 52px 20px; }
-  .perfils-grid { grid-template-columns: 1fr; gap: 12px; }
-  .perfil-card:first-child, .perfil-card:last-child { border-radius: 8px; }
-  .perfil-card { border-radius: 8px !important; }
-  .perfils-cta { flex-direction: column; align-items: flex-start; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
-  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
-}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="index.html">
-    <div class="nav-logo-dot"></div>
-    Abans Que Tanqui
-  </a>
+  <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
   <div class="nav-links">
-    <a href="index.html">Inici</a>
-    <a href="projecte.html">Projecte</a>
-    <a href="mapa.html">Mapa</a>
-    <a href="participa.html">Participa</a>
-    <a href="actualitat.html">Actualitat</a>
-    <a href="recursos.html">Recursos</a>
-    <a href="qui-som.html">Qui som</a>
-    <a href="contacte.html">Contacte</a>
+    <a href="index.html">Inici</a><a href="projecte.html">Projecte</a><a href="mapa.html">Mapa</a>
+    <a href="participa.html">Participa</a><a href="actualitat.html">Actualitat</a>
+    <a href="recursos.html">Recursos</a><a href="qui-som.html">Qui som</a><a href="contacte.html">Contacte</a>
     <a class="nav-cta" href="participa.html">Tens un comerç?</a>
   </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Menú">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile" id="nav-mobile">
-
-  <a href="index.html">Inici</a>
-  <a href="projecte.html">Projecte</a>
-  <a href="mapa.html">Mapa</a>
-  <a href="participa.html">Participa</a>
-  <a href="actualitat.html">Actualitat</a>
-  <a href="recursos.html">Recursos</a>
-  <a href="qui-som.html">Qui som</a>
-  <a href="contacte.html">Contacte</a>
+  <a href="index.html">Inici</a><a href="projecte.html">Projecte</a><a href="mapa.html">Mapa</a>
+  <a href="participa.html">Participa</a><a href="actualitat.html">Actualitat</a>
+  <a href="recursos.html">Recursos</a><a href="qui-som.html">Qui som</a><a href="contacte.html">Contacte</a>
   <a class="nav-cta" href="participa.html">Tens un comerç?</a>
 </div>
 
 <!-- HERO -->
-<section class="page-hero">
-  <div>
-    <div class="page-hero-kicker">Participa</div>
-    <h1>Forma part<br>del <em>canvi.</em></h1>
-    <p class="page-hero-sub">Estem construint una comunitat per fer possible un model cooperatiu que preservi el comerç local. No cal ser expert en res. Cal voler ser-hi.</p>
-  </div>
-  <div class="hero-beneficis">
-    <div class="benefici">
-      <div class="benefici-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-      </div>
-      <div>
-        <div class="benefici-title">Ara: informació</div>
-        <div class="benefici-text">Rebràs actualitzacions del projecte, els casos documentats i l'evolució del model cooperatiu.</div>
-      </div>
-    </div>
-    <div class="benefici">
-      <div class="benefici-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6M2 20h20"/></svg>
-      </div>
-      <div>
-        <div class="benefici-title">Pròximament: veu</div>
-        <div class="benefici-text">Els socis fundadors participaran en les primeres decisions del projecte: quin local, com gestionar-lo, com créixer.</div>
-      </div>
-    </div>
-    <div class="benefici">
-      <div class="benefici-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div>
-        <div class="benefici-title">A futur: propietat</div>
-        <div class="benefici-text">Quan la cooperativa estigui constituïda, els socis tindran participació real en els locals que preservem.</div>
-      </div>
-    </div>
-  </div>
+<section class="hero">
+  <div class="hero-kicker">Participa</div>
+  <h1>Forma part<br>del <em>canvi.</em></h1>
+  <p class="hero-sub">Estem construint una comunitat de persones que volen fer possible un model cooperatiu per preservar el comerç local. No cal ser expert en res. Cal voler ser-hi.</p>
 </section>
 
+<!-- QUÈ OBTENS -->
+<div class="beneficis-band">
+  <div class="benefici">
+    <div class="benefici-tag">Ara</div>
+    <div class="benefici-title">Informació de primera mà</div>
+    <div class="benefici-text">Rebràs actualitzacions del projecte, els casos que anem documentant i l'evolució del model cooperatiu.</div>
+  </div>
+  <div class="benefici">
+    <div class="benefici-tag">Pròximament</div>
+    <div class="benefici-title">Veu en les decisions</div>
+    <div class="benefici-text">Els socis fundadors participaran en les primeres decisions: quin local, com gestionar-lo, com créixer.</div>
+  </div>
+  <div class="benefici">
+    <div class="benefici-tag">A futur</div>
+    <div class="benefici-title">Participació real</div>
+    <div class="benefici-text">Quan la cooperativa estigui constituïda, els socis tindran participació en els locals que preservem.</div>
+  </div>
+</div>
+
 <!-- FASES -->
-<section class="fases-section">
+<div class="fases-wrap">
   <div class="fases-header">
-    <div class="section-kicker">On som ara</div>
-    <h2>El projecte avança per fases.</h2>
+    <div class="fases-kicker">El projecte avança per fases.</div>
+    <div class="fases-sub">Ara estem a la Fase 01.</div>
   </div>
   <div class="fases-grid">
-    <div class="fase-card activa">
-      <span class="fase-num">01</span>
+    <div class="fase activa">
       <div class="fase-badge">Fase actual</div>
+      <span class="fase-num">01</span>
       <div class="fase-title">Construir comunitat</div>
       <div class="fase-text">Estem captant persones interessades, documentant casos reals i validant que el model té suport suficient per tirar endavant.</div>
     </div>
-    <div class="fase-card">
+    <div class="fase">
+      <div class="fase-badge">Fase 02</div>
       <span class="fase-num">02</span>
-      <div class="fase-badge">Pròxima fase</div>
       <div class="fase-title">Constituir la cooperativa</div>
       <div class="fase-text">Quan tinguem prou socis i el primer cas candidat identificat, formalitzem la cooperativa i fem la primera assemblea.</div>
     </div>
-    <div class="fase-card">
+    <div class="fase">
+      <div class="fase-badge">Fase 03</div>
       <span class="fase-num">03</span>
-      <div class="fase-badge">A futur</div>
       <div class="fase-title">Primer local</div>
       <div class="fase-text">Captem capital, adquirim el primer local en risc i demostrem que el model funciona. D'aquí ve la credibilitat per créixer.</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- PERFILS -->
-<section class="perfils-section">
-  <div class="perfils-header">
-    <div class="section-kicker">Com participar</div>
-    <h2>Cada persona compta.<br>Trobes el teu lloc aquí.</h2>
-    <p>Siguis qui siguis, hi ha una manera de ser part del projecte. Sense compromisos, sense pressions.</p>
+<!-- FORMULARI -->
+<div class="form-wrap" id="formulari">
+  <div class="form-header">
+    <div class="form-kicker">Apunta't a la comunitat</div>
+    <div class="form-sub">Sense compromisos econòmics ara. Estàs dient que t'interessa i que vols ser informat/ada.</div>
   </div>
-
-  <div class="perfils-grid">
-
-    <!-- COMERÇOS -->
-    <div class="perfil-card">
-      <div class="perfil-num">01</div>
-      <div class="perfil-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0 2 2 2 2 0 0 0 2-2"/><path d="M5 11v9h14v-9"/><path d="M10 15h4v5h-4z"/></svg>
+  <div class="form-inner">
+    <div class="form-info">
+      <div class="info-item">
+        <div class="info-item-title">Per què apuntar-se ara?</div>
+        <div class="info-item-text">El projecte s'activa quan hi ha prou comunitat. Cada persona que s'apunta envia un senyal clar que el model val la pena.</div>
       </div>
-      <div class="perfil-title">Tens un comerç</div>
-      <div class="perfil-desc">Si la pressió del lloguer et supera, no tens relleu familiar o estàs pensant en tancar, vols que t'escoltarem. Potser hi ha alternatives reals que encara no has explorat.</div>
-      <ul class="perfil-llista">
-        <li>Parlem del teu cas sense compromís</li>
-        <li>Explorem alternatives al tancament</li>
-        <li>Mediació amb propietaris si cal</li>
-        <li>Possibilitat de relleu cooperatiu</li>
-      </ul>
-    </div>
-
-    <!-- CIUTADANIA -->
-    <div class="perfil-card">
-      <div class="perfil-num">02</div>
-      <div class="perfil-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div class="info-item">
+        <div class="info-item-title">Sense compromisos</div>
+        <div class="info-item-text">Apuntar-se no implica cap compromís econòmic ni d'implicació. Decideixes fins on vols arribar quan tinguis tota la informació.</div>
       </div>
-      <div class="perfil-title">Ets del barri</div>
-      <div class="perfil-desc">El comerç de proximitat és de totes. Pots ajudar de moltes maneres, des de fer-te sòcia fins a simplement difondre el projecte. Cada petit gest suma.</div>
-      <ul class="perfil-llista">
-        <li>Fes-te sòcia o soci de la cooperativa</li>
-        <li>Aporta econòmicament si pots i vols</li>
-        <li>Difon el projecte al teu entorn</li>
-        <li>Resta informat/ada i decideix més endavant</li>
-      </ul>
-    </div>
-
-    <!-- COL·LABORADORS -->
-    <div class="perfil-card">
-      <div class="perfil-num">03</div>
-      <div class="perfil-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+      <div class="info-item">
+        <div class="info-item-title">Totes les aportacions compten</div>
+        <div class="info-item-text">Temps, coneixement, xarxa, capital... El projecte necessita perfils molt diversos. No cal tenir diners per ser part del canvi.</div>
       </div>
-      <div class="perfil-title">Tens un ofici</div>
-      <div class="perfil-desc">Juristes, economistes, arquitectes, comunicadors, urbanistes... El teu coneixement professional pot canviar la trajectòria d'un comerç. Busquem persones compromeses amb el barri.</div>
-      <ul class="perfil-llista">
-        <li>Assessorament legal o financer</li>
-        <li>Comunicació i difusió del projecte</li>
-        <li>Arquitectura, urbanisme i espai</li>
-        <li>Qualsevol habilitat útil és benvinguda</li>
-      </ul>
     </div>
-
+    <div class="form-card">
+      <div class="field field-row">
+        <div class="field"><label for="nom">Nom *</label><input type="text" id="nom" placeholder="El teu nom"></div>
+        <div class="field"><label for="email">Correu *</label><input type="email" id="email" placeholder="tu@exemple.com"></div>
+      </div>
+      <div class="field"><label for="barri">On vius?</label><input type="text" id="barri" placeholder="Municipi o barri"></div>
+      <div class="field">
+        <label for="motiu">Per què t'interessa</label>
+        <select id="motiu">
+          <option value="">Selecciona...</option>
+          <option>Vull defensar el comerç del meu barri</option>
+          <option>M'interessa el model cooperatiu i l'economia social</option>
+          <option>Tinc experiència en gestió de negocis i puc aportar</option>
+          <option>Vull invertir en un projecte amb impacte real</option>
+          <option>Sóc comerciant i vull estar informat/ada</option>
+          <option>Combinació de factors</option>
+          <option>Altre</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Com pots contribuir</label>
+        <div class="check-group">
+          <label class="check-item"><input type="checkbox"><span>Puc aportar temps i implicació activa</span></label>
+          <label class="check-item"><input type="checkbox"><span>Tinc coneixements útils (legal, finances, comunicació...)</span></label>
+          <label class="check-item"><input type="checkbox"><span>Estaria disposat/a a fer una aportació econòmica</span></label>
+          <label class="check-item"><input type="checkbox"><span>Conec comerços en risc candidats</span></label>
+          <label class="check-item"><input type="checkbox"><span>Per ara, vull seguir el projecte i decidir més endavant</span></label>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="enviarForm()">Vull participar →</button>
+      <div class="form-ok" id="form-ok">
+        <div class="form-ok-icon">✓</div>
+        <div class="form-ok-title">Benvingut/da a la comunitat.</div>
+        <div class="form-ok-text">T'anirem informant de l'evolució del projecte. Gràcies per voler ser-hi.</div>
+      </div>
+      <div class="form-privacy">Les teves dades s'utilitzen únicament per mantenir-te informat/ada sobre el projecte. No es comparteixen amb tercers.</div>
+    </div>
   </div>
+</div>
 
-  <!-- CTA únic -->
-  <div class="perfils-cta">
-    <div class="perfils-cta-text">
-      <strong>Vine a parlar-nos.</strong><br>
-      Explica'ns qui ets i com vols participar. T'escoltarem.
-    </div>
-    <a class="btn-cta" href="contacte.html">
-      Contacta amb nosaltres
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-headline">Tens un comerç en risc?</div>
+  <div class="cta-final-sub">Si la pressió del lloguer et supera o estàs pensant en tancar, explica'ns el teu cas. T'escoltem sense compromisos.</div>
+  <div class="cta-final-actions">
+    <a class="cta-btn-primary" href="contacte.html">Contacta'ns</a>
+    <a class="cta-btn-secondary" href="projecte.html">Conèixer el projecte</a>
   </div>
 </section>
 
@@ -424,32 +277,13 @@ footer { background: #111110; padding: 56px 52px 0; color: rgba(255,255,255,0.6)
       <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
       <div class="footer-desc">Cooperativa de treball per a la preservació del comerç local. Iniciativa social per a Catalunya.</div>
       <div class="footer-social">
-        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.6)"/></svg></a>
-        <a href="#" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+        <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+        <a href="contacte.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
       </div>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Projecte</div>
-      <a href="projecte.html">El projecte</a>
-      <a href="index.html#que-fem">Com funciona</a>
-      <a href="qui-som.html">Qui som</a>
-      <a href="mapa.html">Mapa de casos</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Participa</div>
-      <a href="participa.html">Tens un comerç?</a>
-      <a href="participa.html">Vull ajudar</a>
-      <a href="participa.html">Col·laboradors</a>
-      <a href="contacte.html">Contacte</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Recursos</div>
-      <a href="recursos.html#guies">Guies pràctiques</a>
-      <a href="recursos.html#assessorament">Assessorament</a>
-      <a href="actualitat.html">Actualitat</a>
-      <a href="qui-som.html">Qui som</a>
-    </div>
+    <div class="footer-col"><div class="footer-col-title">Projecte</div><a href="projecte.html">El projecte</a><a href="index.html#que-fem">Com funciona</a><a href="qui-som.html">Qui som</a><a href="mapa.html">Mapa de casos</a></div>
+    <div class="footer-col"><div class="footer-col-title">Participa</div><a href="contacte.html">Tens un comerç?</a><a href="participa.html">Vull ajudar</a><a href="contacte.html">Contacte</a></div>
+    <div class="footer-col"><div class="footer-col-title">Recursos</div><a href="recursos.html#guies">Guies pràctiques</a><a href="recursos.html#assessorament">Assessorament</a><a href="actualitat.html">Actualitat</a></div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
@@ -458,18 +292,16 @@ footer { background: #111110; padding: 56px 52px 0; color: rgba(255,255,255,0.6)
 </footer>
 
 <script>
-const burger = document.getElementById('nav-burger');
-const mobileNav = document.getElementById('nav-mobile');
-burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  mobileNav.classList.toggle('open');
-});
-mobileNav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    burger.classList.remove('open');
-    mobileNav.classList.remove('open');
-  });
-});
+const burger=document.getElementById('nav-burger'),mobileNav=document.getElementById('nav-mobile');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open');});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open');}));
+function enviarForm(){
+  const nom=document.getElementById('nom').value;
+  const email=document.getElementById('email').value;
+  if(!nom||!email){alert('Cal omplir el nom i el correu.');return;}
+  document.getElementById('form-ok').style.display='block';
+  document.querySelector('.btn-submit').style.display='none';
+}
 </script>
 </body>
 </html>
