@@ -148,17 +148,17 @@ h1.hero-title em{font-style:italic;color:var(--red);}
 .recursos-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .recurs-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:28px 24px;display:flex;flex-direction:column;transition:box-shadow 0.2s,transform 0.2s;text-decoration:none;color:inherit;}
 .recurs-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.07);transform:translateY(-2px);}
-.recurs-card.destacat{background:var(--ink);border-color:var(--ink);}
-.recurs-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:14px;width:fit-content;background:var(--bg-warm);color:var(--muted);border:1px solid var(--border);}
-.recurs-card.destacat .recurs-tag{background:var(--cta);color:#fff;border-color:var(--cta);}
+.recurs-card.destacat{background:var(--white);border-color:var(--border);}
+.recurs-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:14px;width:fit-content;color:var(--red);background:transparent;border:none;}
+.recurs-card.destacat .recurs-tag{color:var(--red);background:transparent;border:none;}
 .recurs-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.25;letter-spacing:-0.01em;}
-.recurs-card.destacat .recurs-title{color:#fff;}
+.recurs-card.destacat .recurs-title{color:var(--text);}
 .recurs-desc{font-size:13.5px;line-height:1.7;color:var(--muted);margin-bottom:20px;flex:1;}
-.recurs-card.destacat .recurs-desc{color:rgba(255,255,255,0.5);}
+.recurs-card.destacat .recurs-desc{color:var(--muted);}
 .recurs-link{font-size:13px;font-weight:600;color:var(--cta);text-decoration:none;border-bottom:1.5px solid var(--cta);padding-bottom:1px;width:fit-content;transition:color 0.15s,border-color 0.15s;}
 .recurs-link:hover{color:var(--cta-lt);border-color:var(--cta-lt);}
-.recurs-card.destacat .recurs-link{color:var(--red);border-color:rgba(200,57,43,0.4);}
-.recurs-card.destacat .recurs-link:hover{color:var(--red-lt);}
+.recurs-card.destacat .recurs-link{color:var(--cta);border-color:var(--cta);}
+.recurs-card.destacat .recurs-link:hover{color:var(--cta-lt);}
 
 /* PARTICIPA */
 .participa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
