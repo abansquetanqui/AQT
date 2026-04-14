@@ -89,8 +89,22 @@ h1.hero-title em{font-style:italic;color:var(--red);}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);border:none;cursor:pointer;padding:0;transition:background 0.2s,width 0.25s;}
 .dot.active{background:#fff;width:18px;border-radius:3px;}
 
-/* NOTICIES */
-.noticies-list{display:flex;flex-direction:column;}
+/* NOTICIES CARDS */
+.noticies-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.noticia-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow 0.2s,transform 0.2s;}
+.noticia-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.08);transform:translateY(-2px);}
+.noticia-card-photo{height:180px;overflow:hidden;position:relative;background:var(--card);}
+.noticia-card-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.noticia-card-badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;}
+.noticia-card-body{padding:20px;flex:1;display:flex;flex-direction:column;}
+.noticia-card-tag{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.noticia-card-tag.tancat{color:var(--red);}
+.noticia-card .noticia-date{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.noticia-card .noticia-title{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:8px;letter-spacing:-0.01em;}
+.noticia-card .noticia-text{font-size:13px;line-height:1.6;color:var(--muted);flex:1;margin-bottom:16px;}
+.noticia-card-link{font-size:13px;font-weight:600;color:var(--cta);border-bottom:1.5px solid var(--cta);padding-bottom:1px;width:fit-content;}
+
+
 .noticia-row{display:grid;grid-template-columns:160px 1fr 140px;gap:24px;align-items:start;padding:24px 0;border-top:1px solid var(--border);}
 .noticia-row:last-child{border-bottom:1px solid var(--border);}
 .noticia-thumb{height:100px;background:var(--bg-warm);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;position:relative;}
@@ -201,6 +215,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 
 /* RESPONSIVE */
 @media(max-width:960px){
+  .noticies-cards{grid-template-columns:1fr;gap:12px;}
   nav{padding:0 20px;}
   .nav-links{display:none;}
   .nav-burger{display:flex;}
@@ -344,34 +359,44 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
     </div>
     <a class="section-more" href="actualitat.html">Veure tots els articles →</a>
   </div>
-  <div class="noticies-list">
-    <div class="noticia-row">
-      <div class="noticia-thumb"><div class="noticia-thumb-bg"></div><span style="position:relative;z-index:1;opacity:0.35"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span></div>
-      <div class="noticia-content">
+  <div class="noticies-cards">
+    <a class="noticia-card" href="articles/dumping-comerc-local.html">
+      <div class="noticia-card-photo">
+        <img src="img/dumping-comerc.jpg" alt="Comerç tradicional">
+      </div>
+      <div class="noticia-card-body">
+        <div class="noticia-card-tag">Anàlisi</div>
         <div class="noticia-date">Febrer 2026</div>
         <div class="noticia-title">Què és el dumping i com afecta el comerç local?</div>
-        <div class="noticia-text">Darrere de molts tancaments hi ha una estratègia concreta i poc visible. Entendre-la és el primer pas per no normalitzar-la.</div>
+        <div class="noticia-text">Darrere de molts tancaments hi ha una estratègia concreta i poc visible.</div>
+        <div class="noticia-card-link">Llegir l'article →</div>
       </div>
-      <div class="noticia-action"><a class="noticia-link" href="articles/dumping-comerc-local.html">Llegir l'article →</a></div>
-    </div>
-    <div class="noticia-row">
-      <div class="noticia-thumb"><div class="noticia-thumb-bg"></div><span style="position:relative;z-index:1;opacity:0.35"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg></span></div>
-      <div class="noticia-content">
-        <div class="noticia-date">Febrer 2026</div>
-        <div class="noticia-title">Cinc grans grups, 300 establiments: com les cadenes esborren els forns</div>
-        <div class="noticia-text">Un model de negoci que expulsa progressivament els forns artesans amb un buit legal que els afavoreix.</div>
+    </a>
+    <a class="noticia-card" href="articles/ferreteria-camps.html">
+      <div class="noticia-card-photo">
+        <img src="img/ferreteria-camps.jpg" alt="Ferreteria Camps">
+        <div class="noticia-card-badge">Tancat</div>
       </div>
-      <div class="noticia-action"><a class="noticia-link" href="articles/forns-cadenes.html">Llegir l'article →</a></div>
-    </div>
-    <div class="noticia-row">
-      <div class="noticia-thumb"><div class="noticia-thumb-bg"></div><span style="position:relative;z-index:1;opacity:0.35"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span></div>
-      <div class="noticia-content">
+      <div class="noticia-card-body">
+        <div class="noticia-card-tag tancat">Cas documentat</div>
         <div class="noticia-date">Febrer 2026</div>
         <div class="noticia-title">La Ferreteria Camps abaixa la persiana després de 90 anys</div>
-        <div class="noticia-text">Un lloguer de 15.000 € mensuals i la caiguda de clientela tradicional acaben amb un dels comerços més emblemàtics de Gràcia.</div>
+        <div class="noticia-text">15.000 € mensuals de lloguer acaben amb un dels comerços més emblemàtics de Gràcia.</div>
+        <div class="noticia-card-link">Llegir l'article →</div>
       </div>
-      <div class="noticia-action"><a class="noticia-link" href="articles/ferreteria-camps.html">Llegir l'article →</a></div>
-    </div>
+    </a>
+    <a class="noticia-card" href="articles/forns-cadenes.html">
+      <div class="noticia-card-photo">
+        <img src="img/forns-cadenes.jpg" alt="Forn artesà">
+      </div>
+      <div class="noticia-card-body">
+        <div class="noticia-card-tag">Anàlisi</div>
+        <div class="noticia-date">Febrer 2026</div>
+        <div class="noticia-title">Cinc grans grups, 300 establiments: com les cadenes esborren els forns</div>
+        <div class="noticia-text">Un model de negoci que expulsa progressivament els forns artesans.</div>
+        <div class="noticia-card-link">Llegir l'article →</div>
+      </div>
+    </a>
   </div>
 </section>
 
