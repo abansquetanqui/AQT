@@ -313,11 +313,49 @@ if(tipusParam && ['comerc','socio','professional','altre'].includes(tipusParam))
 }
 
 function enviarForm(){
-  const nom=document.getElementById('nom').value;
-  const email=document.getElementById('email').value;
+  const nom=document.getElementById('nom').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const missatge=document.getElementById('missatge').value.trim();
   if(!nom||!email){alert('Cal omplir el nom i el correu.');return;}
-  document.getElementById('form-ok').style.display='block';
-  document.querySelector('.btn-submit').style.display='none';
+
+  // Recollir tots els camps visibles
+  const tipusActiu=document.querySelector('.tipus-btn.actiu')?.id?.replace('btn-','') || 'altre';
+  const nomComerc=document.querySelector('#camp-comerc input')?.value||'';
+  const problema=document.querySelector('#camp-comerc select')?.value||'';
+  const ambit=document.querySelector('#camp-professional select')?.value||'';
+  const checkboxes=[...document.querySelectorAll('#camp-socio input[type=checkbox]:checked')].map(c=>c.nextElementSibling.textContent).join(', ');
+
+  const btn=document.querySelector('.btn-submit');
+  btn.disabled=true;
+  btn.textContent='Enviant...';
+
+  fetch('https://formspree.io/f/xreregyp',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      nom, email, missatge,
+      tipus: tipusActiu,
+      nom_comerc: nomComerc||undefined,
+      problema: problema||undefined,
+      ambit_professional: ambit||undefined,
+      com_participar: checkboxes||undefined,
+    })
+  })
+  .then(r=>{
+    if(r.ok){
+      document.getElementById('form-ok').style.display='block';
+      btn.style.display='none';
+    } else {
+      alert('Hi ha hagut un error. Prova de nou o escriu directament a hola@abansquetanqui.cat');
+      btn.disabled=false;
+      btn.textContent='Enviar →';
+    }
+  })
+  .catch(()=>{
+    alert('Hi ha hagut un error de xarxa. Prova de nou o escriu directament a hola@abansquetanqui.cat');
+    btn.disabled=false;
+    btn.textContent='Enviar →';
+  });
 }
 </script>
 </body>
