@@ -50,7 +50,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* QUÈ FEM */
 .que-fem{padding:72px 52px;border-bottom:1px solid var(--border);}
-.que-fem-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1100px;}
+.que-fem-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1100px;margin:0 auto;}
 .que-fem-text h2{font-family:'Lora',Georgia,serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;margin-bottom:20px;}
 .que-fem-text h2 em{font-style:italic;color:var(--red);}
 .que-fem-text p{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:16px;}
@@ -66,7 +66,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* MAPA */
 .mapa-bloc{border-bottom:1px solid var(--border);}
-.mapa-header{padding:40px 52px 24px;}
+.mapa-header{padding:40px 52px 24px;max-width:1200px;margin:0 auto;}
 .mapa-header h2{font-family:'Lora',Georgia,serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;margin-bottom:8px;}
 .mapa-header p{font-size:14px;color:var(--muted);}
 .mapa-llegenda{display:flex;gap:20px;margin-top:16px;flex-wrap:wrap;}
@@ -88,6 +88,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* ACTUALITAT */
 .actualitat-bloc{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--bg-warm);}
+.actualitat-inner{max-width:1200px;margin:0 auto;}
 .actualitat-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;}
 .actualitat-header h2{font-family:'Lora',Georgia,serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
 .actualitat-link{font-size:13px;font-weight:600;color:var(--cta);text-decoration:none;border-bottom:1.5px solid var(--cta);padding-bottom:1px;white-space:nowrap;}
@@ -106,6 +107,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* CTA FINAL */
 .cta-final{background:linear-gradient(135deg,#E8F0EB 0%,#F7F7F7 60%,#fff 100%);padding:80px 52px;text-align:center;}
+.cta-final-inner{max-width:800px;margin:0 auto;}
 .cta-headline{font-family:'Lora',Georgia,serif;font-size:40px;font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin:0 auto 16px;}
 .cta-final-sub{font-size:15px;color:var(--ink-muted);max-width:480px;margin:0 auto 32px;line-height:1.6;}
 .cta-final-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
@@ -227,6 +229,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 
 <!-- ACTUALITAT -->
 <section class="actualitat-bloc" id="actualitat">
+  <div class="actualitat-inner">
   <div class="actualitat-header">
     <h2>Actualitat</h2>
     <a class="actualitat-link" href="actualitat.html">Veure tots els articles →</a>
@@ -265,6 +268,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
         <div class="article-llegir">Llegir l'article →</div>
       </div>
     </a>
+  </div>
   </div>
 </section>
 
