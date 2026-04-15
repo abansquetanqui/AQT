@@ -64,6 +64,43 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .model-nota{background:var(--bg-warm);border-left:4px solid var(--amber);padding:18px 22px;font-size:14px;line-height:1.65;color:var(--ink-mid);margin-top:24px;}
 .model-nota a{color:var(--cta);font-weight:600;text-decoration:none;}
 
+/* CAPES VISUALS */
+.capes-wrap{margin-top:44px;display:flex;flex-direction:column;gap:2px;background:var(--border);}
+.capa-visual{background:var(--white);padding:32px 36px;display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;}
+.capa-visual.fosc{background:var(--ink);}
+.capa-esquerra{}
+.capa-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.capa-visual.fosc .capa-label{color:rgba(200,213,185,0.7);}
+.capa-nom{font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.01em;}
+.capa-visual.fosc .capa-nom{color:#fff;}
+.capa-desc{font-size:14px;line-height:1.75;color:var(--muted);margin-top:8px;}
+.capa-visual.fosc .capa-desc{color:rgba(255,255,255,0.45);}
+
+/* PERFILS */
+.perfils-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.perfil-mini{background:var(--bg-warm);border-radius:4px;padding:18px 18px 16px;}
+.perfil-mini-tag{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.perfil-mini-title{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2;}
+.perfil-mini-text{font-size:12px;line-height:1.6;color:var(--muted);}
+.perfil-mini-cas{font-size:11px;color:var(--ink-muted);font-style:italic;margin-bottom:8px;}
+
+/* PARTICIPACIÓ */
+.part-mini{display:flex;flex-direction:column;gap:10px;}
+.part-mini-item{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,0.06);border-radius:4px;padding:14px 16px;}
+.part-mini-icon{width:32px;height:32px;border-radius:6px;background:rgba(200,213,185,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.part-mini-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.part-mini-text{font-size:12px;line-height:1.5;color:rgba(255,255,255,0.45);}
+
+/* LLEGIR MÉS */
+.model-llegir{display:flex;align-items:center;justify-content:space-between;background:var(--bg-warm);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-top:24px;text-decoration:none;transition:background 0.15s;}
+.model-llegir:hover{background:var(--border);}
+.model-llegir-text{font-size:14px;font-weight:600;color:var(--ink);}
+.model-llegir-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.model-llegir-arrow{font-size:20px;color:var(--ink-muted);}
+
+.frase-model{border-left:3px solid var(--border-dk);padding:16px 20px;margin:32px 0 0;}
+.frase-model p{font-family:'Lora',Georgia,serif;font-size:17px;font-style:italic;line-height:1.6;color:var(--ink-mid);margin:0;}
+
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:44px;}
 .stat-bloc{border-left:3px solid var(--sage);padding-left:20px;}
@@ -104,6 +141,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   .cta-final{padding:56px 20px;}
   footer{padding:44px 20px 0;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .capa-visual{grid-template-columns:1fr;}
+  .perfils-mini{grid-template-columns:1fr;}
 }
 @media(max-width:480px){
   .model-grid{grid-template-columns:1fr;}
@@ -211,29 +250,136 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 <div class="bloc" id="model">
   <div class="bloc-inner">
     <div class="bloc-kicker">Com funciona</div>
-    <h2>Detectar. Actuar. Reinvertir.</h2>
-    <div class="model-grid">
-      <div class="model-step">
-        <div class="model-num">01</div>
-        <div class="model-title">Detectem</div>
-        <div class="model-text">Treball de camp continu al barri. Converses amb comerciants. Identificació de casos per urgència, viabilitat i impacte social.</div>
-      </div>
-      <div class="model-step">
-        <div class="model-num">02</div>
-        <div class="model-title">Analitzem</div>
-        <div class="model-text">Valorem si el negoci és viable sense pressió immobiliària. Tres variables: urgència, marge econòmic i arrel al barri.</div>
-      </div>
-      <div class="model-step">
-        <div class="model-num">03</div>
-        <div class="model-title">Actuem</div>
-        <div class="model-text">L'entitat adquireix el local i garanteix la continuïtat del negoci. El barri no perd el comerç.</div>
-      </div>
-      <div class="model-step">
-        <div class="model-num">04</div>
-        <div class="model-title">Reinvertim</div>
-        <div class="model-text">Els excedents es destinen al pròxim cas identificat. El sistema creix a mesura que demostra que funciona.</div>
-      </div>
+    <h2>Tres capes. Una lògica.</h2>
+    <div class="bloc-text">
+      <p>AQT no gestiona negocis. Gestiona locals. Adquireix els espais comercials en risc, els treu del mercat especulatiu per sempre, i facilita que comerciants, grups o individus els puguin gestionar sense por.</p>
     </div>
+
+    <div class="frase-model">
+      <p>"No gestionem el teu negoci. Gestionem el local perquè tu puguis gestionar el teu negoci sense por."</p>
+    </div>
+
+    <div class="capes-wrap">
+
+      <!-- CAPA 1 -->
+      <div class="capa-visual">
+        <div class="capa-esquerra">
+          <div class="capa-label">Capa 1</div>
+          <div class="capa-nom">El sòl</div>
+          <div class="capa-desc">AQT adquireix el local i el treu del mercat per sempre. El lloguer es calcula sobre costos reals, no sobre el mercat. El local mai no es ven.</div>
+        </div>
+        <div>
+          <div class="model-grid" style="margin-top:0;">
+            <div class="model-step">
+              <div class="model-num">01</div>
+              <div class="model-title">Detectem</div>
+              <div class="model-text">Treball de camp al barri. Converses amb comerciants. Identificació de casos per urgència, viabilitat i arrel al barri.</div>
+            </div>
+            <div class="model-step">
+              <div class="model-num">02</div>
+              <div class="model-title">Analitzem</div>
+              <div class="model-text">Valorem si el negoci és viable sense pressió immobiliària. Tres variables: urgència, marge econòmic i impacte social.</div>
+            </div>
+            <div class="model-step">
+              <div class="model-num">03</div>
+              <div class="model-title">Adquirim</div>
+              <div class="model-text">L'entitat compra o assegura el local a llarg termini. El local surt del mercat especulatiu de manera permanent.</div>
+            </div>
+            <div class="model-step">
+              <div class="model-num">04</div>
+              <div class="model-title">Reinvertim</div>
+              <div class="model-text">Els ingressos dels lloguers justos es destinen al proper cas. El sistema creix a mesura que demostra que funciona.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPA 2 -->
+      <div class="capa-visual">
+        <div class="capa-esquerra">
+          <div class="capa-label">Capa 2</div>
+          <div class="capa-nom">El comerç</div>
+          <div class="capa-desc">El gestor paga una quota justa i estable. AQT acompanya la constitució del projecte si cal. Hi ha tres perfils possibles.</div>
+        </div>
+        <div class="perfils-mini">
+          <div class="perfil-mini">
+            <div class="perfil-mini-tag">Perfil 01 · Continuïtat</div>
+            <div class="perfil-mini-title">El comerciant que vol continuar</div>
+            <div class="perfil-mini-cas">Cas: Ferreteria Camps. Negoci viable, lloguer inassumible.</div>
+            <div class="perfil-mini-text">Segueix gestionant el negoci com sempre, però amb una quota justa i un contracte estable. AQT adquireix el local.</div>
+          </div>
+          <div class="perfil-mini">
+            <div class="perfil-mini-tag">Perfil 02 · Col·lectiu</div>
+            <div class="perfil-mini-title">Un grup que vol gestionar un comerç</div>
+            <div class="perfil-mini-cas">Cas: veïns que volen recuperar la fleca del barri.</div>
+            <div class="perfil-mini-text">El grup s'organitza com a cooperativa. AQT custòdia el local i acompanya la constitució del projecte.</div>
+          </div>
+          <div class="perfil-mini">
+            <div class="perfil-mini-tag">Perfil 03 · Nou projecte</div>
+            <div class="perfil-mini-title">Una persona amb un projecte viable</div>
+            <div class="perfil-mini-cas">Cas: vol obrir però no pot assumir un lloguer de mercat.</div>
+            <div class="perfil-mini-text">AQT li cedeix el local a preu just. La comunitat participa en decidir quin ús es prioritza.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPA 3 -->
+      <div class="capa-visual fosc">
+        <div class="capa-esquerra">
+          <div class="capa-label">Capa 3</div>
+          <div class="capa-nom">La comunitat</div>
+          <div class="capa-desc">Quatre maneres de ser part del projecte. Cadascuna amb un perfil i una funció diferent.</div>
+        </div>
+        <div class="part-mini">
+          <div class="part-mini-item">
+            <div class="part-mini-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div>
+              <div class="part-mini-title">Sòcia / Soci — Governança</div>
+              <div class="part-mini-text">Vots a les assemblees, decisions estratègiques. Quota simbòlica anual. Qui és sòcia co-decideix quin local, quin ús, quin gestor.</div>
+            </div>
+          </div>
+          <div class="part-mini-item">
+            <div class="part-mini-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div>
+              <div class="part-mini-title">Inversora de capital pacient — Finançament</div>
+              <div class="part-mini-text">Préstec participatiu a llarg termini (5–10 anys) via Coop57 o directament. Retorn modest (1–2%) o purament social. No és una donació: es recupera.</div>
+            </div>
+          </div>
+          <div class="part-mini-item">
+            <div class="part-mini-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div class="part-mini-title">Participant comunitària — Vinculació</div>
+              <div class="part-mini-text">Aportació periòdica petita (10–50€/mes) que dona participació en el patrimoni col·lectiu del barri. Ser propietària d'un tros de Gràcia.</div>
+            </div>
+          </div>
+          <div class="part-mini-item">
+            <div class="part-mini-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div>
+              <div class="part-mini-title">Professional col·laboradora — Coneixement</div>
+              <div class="part-mini-text">Juristes, arquitectes, economistes, comunicadors. Treball real valorat que construeix el model. Ara mateix: dret cooperatiu i finances ètiques.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <a class="model-llegir" href="model.html">
+      <div>
+        <div class="model-llegir-text">Llegir el model complet →</div>
+        <div class="model-llegir-sub">Fonaments, decisions pendents, referents internacionals i fases del pilot.</div>
+      </div>
+      <div class="model-llegir-arrow">→</div>
+    </a>
+
     <div class="model-nota"><strong>Estat actual:</strong> AQT és un projecte en fase de disseny i validació. Ara mateix s'està construint el pipeline de comerços en risc, definint l'estructura jurídica i buscant les persones i el capital necessaris per activar el primer cas. <a href="contacte.html">Vols ser-ne part? →</a></div>
   </div>
 </div>
