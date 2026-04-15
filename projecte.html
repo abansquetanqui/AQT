@@ -30,7 +30,8 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile .nav-cta{margin:8px 24px 0;background:var(--cta);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;}
 
 /* HERO */
-.hero{padding:80px 52px 72px;border-bottom:2px solid var(--ink);max-width:900px;margin:0 auto;}
+.hero{padding:80px 52px 72px;border-bottom:2px solid var(--ink);}
+.hero-inner{max-width:900px;margin:0 auto;}
 .hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:20px;}
 .hero h1{font-family:'Lora',Georgia,serif;font-size:clamp(40px,5vw,64px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:24px;}
 .hero h1 em{font-style:italic;color:var(--red);}
@@ -243,9 +244,11 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-kicker">El projecte</div>
-  <h1>Preservem el comerç<br>de barri. <em>Ara.</em></h1>
-  <p class="hero-sub">Abans Que Tanqui és una cooperativa en constitució que adquireix locals comercials en risc per treure'ls del mercat especulatiu i garantir-ne la continuïtat per a la comunitat.</p>
+  <div class="hero-inner">
+    <div class="hero-kicker">El projecte</div>
+    <h1>Preservem el comerç<br>de barri. <em>Ara.</em></h1>
+    <p class="hero-sub">Abans Que Tanqui és una iniciativa que proposa adquirir locals comercials en risc per treure'ls del mercat especulatiu i garantir-ne la continuïtat per a la comunitat.</p>
+  </div>
 </div>
 
 <!-- QUI SOM -->
@@ -587,8 +590,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 
     <a class="model-llegir" href="model.html">
       <div>
-        <div class="model-llegir-text">Llegir el model complet →</div>
-        <div class="model-llegir-sub">El model complet: fonaments, referents, decisions pendents i fases del pilot.</div>
+        <div class="model-llegir-text">Llegir el model complet</div>
+        <div class="model-llegir-sub">Fonaments, referents, decisions pendents i fases del pilot.</div>
       </div>
       <div class="model-llegir-arrow">→</div>
     </a>
