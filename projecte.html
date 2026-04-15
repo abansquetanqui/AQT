@@ -64,42 +64,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .model-nota{background:var(--bg-warm);border-left:4px solid var(--amber);padding:18px 22px;font-size:14px;line-height:1.65;color:var(--ink-mid);margin-top:24px;}
 .model-nota a{color:var(--cta);font-weight:600;text-decoration:none;}
 
-/* CAPES VISUALS */
-.capes-wrap{margin-top:44px;display:flex;flex-direction:column;gap:2px;background:var(--border);}
-.capa-visual{background:var(--white);padding:32px 36px;display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;}
-.capa-visual.fosc{background:var(--ink);}
-.capa-esquerra{}
-.capa-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.capa-visual.fosc .capa-label{color:rgba(200,213,185,0.7);}
-.capa-nom{font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.01em;}
-.capa-visual.fosc .capa-nom{color:#fff;}
-.capa-desc{font-size:14px;line-height:1.75;color:var(--muted);margin-top:8px;}
-.capa-visual.fosc .capa-desc{color:rgba(255,255,255,0.45);}
 
-/* PERFILS */
-.perfils-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.perfil-mini{background:var(--bg-warm);border-radius:4px;padding:18px 18px 16px;}
-.perfil-mini-tag{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.perfil-mini-title{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2;}
-.perfil-mini-text{font-size:12px;line-height:1.6;color:var(--muted);}
-.perfil-mini-cas{font-size:11px;color:var(--ink-muted);font-style:italic;margin-bottom:8px;}
-
-/* PARTICIPACIÓ */
-.part-mini{display:flex;flex-direction:column;gap:10px;}
-.part-mini-item{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,0.06);border-radius:4px;padding:14px 16px;}
-.part-mini-icon{width:32px;height:32px;border-radius:6px;background:rgba(200,213,185,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.part-mini-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
-.part-mini-text{font-size:12px;line-height:1.5;color:rgba(255,255,255,0.45);}
-
-/* LLEGIR MÉS */
-.model-llegir{display:flex;align-items:center;justify-content:space-between;background:var(--bg-warm);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-top:24px;text-decoration:none;transition:background 0.15s;}
-.model-llegir:hover{background:var(--border);}
-.model-llegir-text{font-size:14px;font-weight:600;color:var(--ink);}
-.model-llegir-sub{font-size:12px;color:var(--muted);margin-top:2px;}
-.model-llegir-arrow{font-size:20px;color:var(--ink-muted);}
-
-.frase-model{border-left:3px solid var(--border-dk);padding:16px 20px;margin:32px 0 0;}
-.frase-model p{font-family:'Lora',Georgia,serif;font-size:17px;font-style:italic;line-height:1.6;color:var(--ink-mid);margin:0;}
 
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:44px;}
@@ -148,6 +113,112 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   .model-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
 }
+/* HERO */
+.hero{background:var(--ink);padding:64px 48px 56px;text-align:center;}
+.hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;}
+.hero h1{font-family:'Lora',serif;font-size:clamp(36px,5vw,60px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:16px;}
+.hero h1 em{font-style:italic;color:var(--sage);}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto;}
+
+/* WRAP */
+.page{max-width:960px;margin:0 auto;padding:0 48px 80px;}
+
+/* SECCIÓ */
+.s{padding:72px 0;border-bottom:1px solid var(--border);}
+.s:last-child{border-bottom:none;}
+.s-kicker{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;text-align:center;}
+.s-title{font-family:'Lora',serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;text-align:center;margin-bottom:48px;}
+
+/* ── SECCIÓ 1: EL PROBLEMA ── */
+.problema-grid{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;align-items:center;margin-bottom:48px;}
+.problema-bloc{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:32px 28px;text-align:center;}
+.problema-bloc.dolent .pb-icon-wrap{background:rgba(200,57,43,0.08);}
+.problema-bloc.bo .pb-icon-wrap{background:rgba(42,122,75,0.08);}
+.pb-icon-wrap{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.pb-title{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.pb-text{font-size:13px;line-height:1.65;color:var(--muted);}
+.problema-arrow{text-align:center;font-size:28px;color:var(--border);}
+
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.stat-item{text-align:center;padding:24px;background:var(--white);border:1px solid var(--border);border-radius:6px;}
+.stat-num{font-family:'Lora',serif;font-size:36px;font-weight:700;color:var(--ink);letter-spacing:-0.03em;display:block;line-height:1;}
+.stat-num.red{color:var(--red);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;}
+
+/* ── SECCIÓ 2: LES TRES CAPES ── */
+.capes{display:flex;flex-direction:column;gap:2px;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
+.capa{display:grid;grid-template-columns:280px 1fr;min-height:160px;}
+.capa-info{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;}
+.capa-num{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;}
+.capa-1 .capa-num{color:var(--red);}
+.capa-2 .capa-num{color:var(--amber);}
+.capa-3 .capa-num{color:var(--cta);}
+.capa-1{background:var(--white);}
+.capa-2{background:var(--bg);}
+.capa-3{background:var(--ink);}
+.capa-3 .capa-num{color:var(--sage);}
+.capa-name{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;margin-bottom:6px;}
+.capa-3 .capa-name{color:#fff;}
+.capa-desc{font-size:13px;line-height:1.6;color:var(--muted);}
+.capa-3 .capa-desc{color:rgba(255,255,255,0.45);}
+.capa-il{padding:36px 32px;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--border);}
+.capa-3 .capa-il{border-left-color:rgba(255,255,255,0.08);}
+
+/* ── SECCIÓ 3: EL COMERCIANT ── */
+.perfils{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;}
+.perfil{background:var(--white);padding:36px 28px;}
+.perfil-num{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+.perfil-il{margin-bottom:20px;}
+.perfil-name{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.2;}
+.perfil-cas{font-size:11px;font-style:italic;color:var(--muted);margin-bottom:10px;}
+.perfil-desc{font-size:13px;line-height:1.65;color:var(--muted);}
+.perfil-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-bottom:14px;}
+.tag-r{background:rgba(200,57,43,0.08);color:var(--red);}
+.tag-a{background:rgba(196,122,0,0.08);color:var(--amber);}
+.tag-g{background:rgba(42,122,75,0.08);color:var(--cta);}
+
+/* ── SECCIÓ 4: LA COMUNITAT ── */
+.comunitat{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;}
+.com-item{background:var(--white);padding:32px 28px;display:flex;gap:20px;align-items:flex-start;}
+.com-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.com-icon.gov{background:rgba(200,57,43,0.08);}
+.com-icon.fin{background:rgba(42,122,75,0.08);}
+.com-icon.vin{background:rgba(196,122,0,0.08);}
+.com-icon.pro{background:rgba(26,26,24,0.05);}
+.com-title{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.com-sub{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.com-desc{font-size:13px;line-height:1.65;color:var(--muted);}
+
+/* ── SECCIÓ 5: EL LOOP ── */
+.loop{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:nowrap;margin-bottom:32px;}
+.loop-step{text-align:center;flex:1;}
+.loop-circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;border:2px solid var(--border);}
+.loop-step:nth-child(1) .loop-circle{background:rgba(200,57,43,0.06);border-color:rgba(200,57,43,0.2);}
+.loop-step:nth-child(3) .loop-circle{background:rgba(196,122,0,0.06);border-color:rgba(196,122,0,0.2);}
+.loop-step:nth-child(5) .loop-circle{background:rgba(42,122,75,0.06);border-color:rgba(42,122,75,0.2);}
+.loop-step:nth-child(7) .loop-circle{background:rgba(26,26,24,0.05);border-color:var(--border);}
+.loop-label{font-size:13px;font-weight:600;color:var(--ink);}
+.loop-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+.loop-arrow{font-size:20px;color:var(--border);flex-shrink:0;padding:0 4px;margin-bottom:24px;}
+
+/* CTA */
+.cta-final{background:var(--ink);border-radius:8px;padding:52px;text-align:center;margin-top:72px;}
+.cta-final h2{font-family:'Lora',serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
+.cta-final p{font-size:15px;color:rgba(255,255,255,0.45);margin-bottom:28px;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-p{background:var(--cta);color:#fff;padding:13px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
+.btn-s{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:13px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.12);}
+
+@media(max-width:768px){
+  .topbar,.hero,.page{padding-left:20px;padding-right:20px;}
+  .problema-grid{grid-template-columns:1fr;}.problema-arrow{transform:rotate(90deg);}
+  .stat-row{grid-template-columns:1fr 1fr;}
+  .capa{grid-template-columns:1fr;}.capa-il{display:none;}
+  .perfils{grid-template-columns:1fr;}
+  .comunitat{grid-template-columns:1fr;}
+  .loop{flex-wrap:wrap;gap:8px;}.loop-arrow{display:none;}
+}
+
 </style>
 </head>
 <body>
@@ -247,140 +318,281 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 </div>
 
 <!-- MODEL -->
-<div class="bloc" id="model">
-  <div class="bloc-inner">
-    <div class="bloc-kicker">Com funciona</div>
-    <h2>Tres capes. Una lògica.</h2>
-    <div class="bloc-text">
-      <p>AQT no gestiona negocis. Gestiona locals. Adquireix els espais comercials en risc, els treu del mercat especulatiu per sempre, i facilita que comerciants, grups o individus els puguin gestionar sense por.</p>
+<div class="bloc" id="model" style="padding:0;">
+  <div style="max-width:960px;margin:0 auto;padding:72px 52px;">
+    <div class="bloc-kicker" style="text-align:center;">Com funciona</div>
+    <div style="font-family:'Lora',Georgia,serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;text-align:center;margin-bottom:48px;">Tres capes. Una lògica.</div>
+<!-- 1. EL PROBLEMA -->
+  <div class="s">
+    <div class="s-kicker">Per què existim</div>
+    <div class="s-title">El mercat expulsa el comerç local.<br>AQT elimina la causa.</div>
+
+    <div class="problema-grid">
+      <div class="problema-bloc dolent">
+        <div class="pb-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8392B" stroke-width="1.5"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a2 2 0 004 0 2 2 0 004 0 2 2 0 004 0 2 2 0 004 0"/><path d="M5 11v9h14v-9"/><line x1="10" y1="14" x2="10" y2="20"/><line x1="14" y1="14" x2="14" y2="20"/></svg>
+        </div>
+        <div class="pb-title">Local al mercat especulatiu</div>
+        <div class="pb-text">El propietari puja el lloguer. El comerç no pot pagar. Tanca. El local queda buit o entra una cadena.</div>
+      </div>
+      <div class="problema-arrow">→</div>
+      <div class="problema-bloc bo">
+        <div class="pb-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2A7A4B" stroke-width="1.5"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a2 2 0 004 0 2 2 0 004 0 2 2 0 004 0 2 2 0 004 0"/><path d="M5 11v9h14v-9"/><path d="M10 15h4v5h-4z"/></svg>
+        </div>
+        <div class="pb-title">Local sota custòdia AQT</div>
+        <div class="pb-text">AQT adquireix el local. El lloguer és just i estable. El comerç continua. El barri no perd res.</div>
+      </div>
     </div>
 
-    <div class="frase-model">
-      <p>"No gestionem el teu negoci. Gestionem el local perquè tu puguis gestionar el teu negoci sense por."</p>
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-num red">11.000</span>
+        <div class="stat-label">comerços perduts a Catalunya en una dècada</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num red">+40%</span>
+        <div class="stat-label">augment de lloguers comercials a Barcelona 2015–2024</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num red">15.000€</span>
+        <div class="stat-label">lloguer mensual que va tancar la Ferreteria Camps, 90 anys oberta</div>
+      </div>
     </div>
+  </div>
 
-    <div class="capes-wrap">
+  <!-- 2. LES TRES CAPES -->
+  <div class="s">
+    <div class="s-kicker">L'estructura</div>
+    <div class="s-title">Tres capes que es necessiten mútuament.</div>
+
+    <div class="capes">
 
       <!-- CAPA 1 -->
-      <div class="capa-visual">
-        <div class="capa-esquerra">
-          <div class="capa-label">Capa 1</div>
-          <div class="capa-nom">El sòl</div>
-          <div class="capa-desc">AQT adquireix el local i el treu del mercat per sempre. El lloguer es calcula sobre costos reals, no sobre el mercat. El local mai no es ven.</div>
+      <div class="capa capa-1">
+        <div class="capa-info">
+          <div class="capa-num">Capa 1 · El sòl</div>
+          <div class="capa-name">Custòdia permanent</div>
+          <div class="capa-desc">AQT adquireix el local i el treu del mercat per sempre. Quota justa basada en costos reals. El local mai no es ven.</div>
         </div>
-        <div>
-          <div class="model-grid" style="margin-top:0;">
-            <div class="model-step">
-              <div class="model-num">01</div>
-              <div class="model-title">Detectem</div>
-              <div class="model-text">Treball de camp al barri. Converses amb comerciants. Identificació de casos per urgència, viabilitat i arrel al barri.</div>
-            </div>
-            <div class="model-step">
-              <div class="model-num">02</div>
-              <div class="model-title">Analitzem</div>
-              <div class="model-text">Valorem si el negoci és viable sense pressió immobiliària. Tres variables: urgència, marge econòmic i impacte social.</div>
-            </div>
-            <div class="model-step">
-              <div class="model-num">03</div>
-              <div class="model-title">Adquirim</div>
-              <div class="model-text">L'entitat compra o assegura el local a llarg termini. El local surt del mercat especulatiu de manera permanent.</div>
-            </div>
-            <div class="model-step">
-              <div class="model-num">04</div>
-              <div class="model-title">Reinvertim</div>
-              <div class="model-text">Els ingressos dels lloguers justos es destinen al proper cas. El sistema creix a mesura que demostra que funciona.</div>
-            </div>
-          </div>
+        <div class="capa-il">
+          <svg width="220" height="120" viewBox="0 0 220 120" fill="none">
+            <!-- Local mercat -->
+            <rect x="10" y="40" width="60" height="70" rx="2" fill="#F7F7F7" stroke="#E2E1DC" stroke-width="1.5"/>
+            <polygon points="40,15 10,40 70,40" fill="#E2E1DC"/>
+            <rect x="25" y="70" width="30" height="40" rx="1" fill="#E2E1DC"/>
+            <!-- Fletxa -->
+            <line x1="80" y1="75" x2="100" y2="75" stroke="#C8392B" stroke-width="2" stroke-dasharray="4 3"/>
+            <polygon points="100,70 110,75 100,80" fill="#C8392B"/>
+            <!-- Cèrcol "fora mercat" -->
+            <circle cx="165" cy="75" r="40" fill="rgba(42,122,75,0.06)" stroke="#2A7A4B" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <!-- Local dins cèrcol -->
+            <rect x="145" y="55" width="40" height="45" rx="2" fill="#fff" stroke="#2A7A4B" stroke-width="1.5"/>
+            <polygon points="165,38 145,55 185,55" fill="#C8D5B9"/>
+            <rect x="157" y="78" width="16" height="22" rx="1" fill="#C8D5B9"/>
+            <text x="165" y="118" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#2A7A4B" font-weight="600" letter-spacing="0.05em">FORA DEL MERCAT</text>
+          </svg>
         </div>
       </div>
 
       <!-- CAPA 2 -->
-      <div class="capa-visual">
-        <div class="capa-esquerra">
-          <div class="capa-label">Capa 2</div>
-          <div class="capa-nom">El comerç</div>
-          <div class="capa-desc">El gestor paga una quota justa i estable. AQT acompanya la constitució del projecte si cal. Hi ha tres perfils possibles.</div>
+      <div class="capa capa-2">
+        <div class="capa-info">
+          <div class="capa-num">Capa 2 · El comerç</div>
+          <div class="capa-name">Gestió lliure</div>
+          <div class="capa-desc">El comerciant gestiona el negoci com sempre. AQT facilita que grups o individus puguin accedir a un local a preu just.</div>
         </div>
-        <div class="perfils-mini">
-          <div class="perfil-mini">
-            <div class="perfil-mini-tag">Perfil 01 · Continuïtat</div>
-            <div class="perfil-mini-title">El comerciant que vol continuar</div>
-            <div class="perfil-mini-cas">Cas: Ferreteria Camps. Negoci viable, lloguer inassumible.</div>
-            <div class="perfil-mini-text">Segueix gestionant el negoci com sempre, però amb una quota justa i un contracte estable. AQT adquireix el local.</div>
-          </div>
-          <div class="perfil-mini">
-            <div class="perfil-mini-tag">Perfil 02 · Col·lectiu</div>
-            <div class="perfil-mini-title">Un grup que vol gestionar un comerç</div>
-            <div class="perfil-mini-cas">Cas: veïns que volen recuperar la fleca del barri.</div>
-            <div class="perfil-mini-text">El grup s'organitza com a cooperativa. AQT custòdia el local i acompanya la constitució del projecte.</div>
-          </div>
-          <div class="perfil-mini">
-            <div class="perfil-mini-tag">Perfil 03 · Nou projecte</div>
-            <div class="perfil-mini-title">Una persona amb un projecte viable</div>
-            <div class="perfil-mini-cas">Cas: vol obrir però no pot assumir un lloguer de mercat.</div>
-            <div class="perfil-mini-text">AQT li cedeix el local a preu just. La comunitat participa en decidir quin ús es prioritza.</div>
-          </div>
+        <div class="capa-il">
+          <svg width="220" height="120" viewBox="0 0 220 120" fill="none">
+            <!-- Tres figures -->
+            <!-- Figura 1: comerciant sol -->
+            <circle cx="45" cy="38" r="12" fill="#F0F0F0" stroke="#C8C7C0" stroke-width="1.5"/>
+            <path d="M25 80 Q45 60 65 80" fill="#F0F0F0" stroke="#C8C7C0" stroke-width="1.5"/>
+            <text x="45" y="100" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#6B6B67">Comerciant</text>
+            <!-- Figures grup -->
+            <circle cx="120" cy="35" r="10" fill="#F0F0F0" stroke="#C8C7C0" stroke-width="1.5"/>
+            <circle cx="140" cy="35" r="10" fill="#F0F0F0" stroke="#C8C7C0" stroke-width="1.5"/>
+            <circle cx="130" cy="20" r="10" fill="#F0F0F0" stroke="#C8C7C0" stroke-width="1.5"/>
+            <path d="M105 80 Q130 58 155 80" fill="#F0F0F0" stroke="#C8C7C0" stroke-width="1.5"/>
+            <text x="130" y="100" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#6B6B67">Grup / Coop</text>
+            <!-- Figura nou -->
+            <circle cx="195" cy="38" r="12" fill="#E8F0E4" stroke="#2A7A4B" stroke-width="1.5"/>
+            <text x="195" y="43" text-anchor="middle" font-family="DM Sans" font-size="14" fill="#2A7A4B">+</text>
+            <path d="M175 80 Q195 60 215 80" fill="#E8F0E4" stroke="#2A7A4B" stroke-width="1.5"/>
+            <text x="195" y="100" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#2A7A4B">Nou projecte</text>
+          </svg>
         </div>
       </div>
 
       <!-- CAPA 3 -->
-      <div class="capa-visual fosc">
-        <div class="capa-esquerra">
-          <div class="capa-label">Capa 3</div>
-          <div class="capa-nom">La comunitat</div>
-          <div class="capa-desc">Quatre maneres de ser part del projecte. Cadascuna amb un perfil i una funció diferent.</div>
+      <div class="capa capa-3">
+        <div class="capa-info">
+          <div class="capa-num">Capa 3 · La comunitat</div>
+          <div class="capa-name">Governança i capital</div>
+          <div class="capa-desc">La comunitat governa, finança i es vincula. Quatre formes de participar, cadascuna amb una funció diferent.</div>
         </div>
-        <div class="part-mini">
-          <div class="part-mini-item">
-            <div class="part-mini-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
-            <div>
-              <div class="part-mini-title">Sòcia / Soci — Governança</div>
-              <div class="part-mini-text">Vots a les assemblees, decisions estratègiques. Quota simbòlica anual. Qui és sòcia co-decideix quin local, quin ús, quin gestor.</div>
-            </div>
-          </div>
-          <div class="part-mini-item">
-            <div class="part-mini-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-            </div>
-            <div>
-              <div class="part-mini-title">Inversora de capital pacient — Finançament</div>
-              <div class="part-mini-text">Préstec participatiu a llarg termini (5–10 anys) via Coop57 o directament. Retorn modest (1–2%) o purament social. No és una donació: es recupera.</div>
-            </div>
-          </div>
-          <div class="part-mini-item">
-            <div class="part-mini-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <div>
-              <div class="part-mini-title">Participant comunitària — Vinculació</div>
-              <div class="part-mini-text">Aportació periòdica petita (10–50€/mes) que dona participació en el patrimoni col·lectiu del barri. Ser propietària d'un tros de Gràcia.</div>
-            </div>
-          </div>
-          <div class="part-mini-item">
-            <div class="part-mini-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(200,213,185,0.8)" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            </div>
-            <div>
-              <div class="part-mini-title">Professional col·laboradora — Coneixement</div>
-              <div class="part-mini-text">Juristes, arquitectes, economistes, comunicadors. Treball real valorat que construeix el model. Ara mateix: dret cooperatiu i finances ètiques.</div>
-            </div>
-          </div>
+        <div class="capa-il">
+          <svg width="220" height="120" viewBox="0 0 220 120" fill="none">
+            <!-- Cercle central AQT -->
+            <circle cx="110" cy="60" r="28" fill="rgba(200,213,185,0.12)" stroke="rgba(200,213,185,0.4)" stroke-width="1.5"/>
+            <text x="110" y="56" text-anchor="middle" font-family="Lora, serif" font-size="11" fill="#C8D5B9" font-weight="700">AQT</text>
+            <text x="110" y="70" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.3)">patrimoni</text>
+            <!-- 4 nodes -->
+            <circle cx="40" cy="25" r="16" fill="rgba(200,57,43,0.15)" stroke="rgba(200,57,43,0.3)" stroke-width="1"/>
+            <text x="40" y="21" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.6)">Sòcies</text>
+            <text x="40" y="32" text-anchor="middle" font-family="DM Sans" font-size="7" fill="rgba(255,255,255,0.35)">Govern</text>
+            <line x1="55" y1="35" x2="84" y2="48" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+            <circle cx="180" cy="25" r="16" fill="rgba(42,122,75,0.15)" stroke="rgba(42,122,75,0.3)" stroke-width="1"/>
+            <text x="180" y="21" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.6)">Inversió</text>
+            <text x="180" y="32" text-anchor="middle" font-family="DM Sans" font-size="7" fill="rgba(255,255,255,0.35)">Capital</text>
+            <line x1="165" y1="35" x2="136" y2="48" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+            <circle cx="40" cy="95" r="16" fill="rgba(196,122,0,0.15)" stroke="rgba(196,122,0,0.3)" stroke-width="1"/>
+            <text x="40" y="91" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.6)">10–50€</text>
+            <text x="40" y="102" text-anchor="middle" font-family="DM Sans" font-size="7" fill="rgba(255,255,255,0.35)">Vinculació</text>
+            <line x1="55" y1="85" x2="84" y2="72" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+            <circle cx="180" cy="95" r="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <text x="180" y="91" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(255,255,255,0.6)">Expertesa</text>
+            <text x="180" y="102" text-anchor="middle" font-family="DM Sans" font-size="7" fill="rgba(255,255,255,0.35)">Coneixement</text>
+            <line x1="165" y1="85" x2="136" y2="72" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          </svg>
         </div>
       </div>
 
     </div>
+  </div>
 
-    <a class="model-llegir" href="model-visual.html">
+  <!-- 3. ELS TRES PERFILS -->
+  <div class="s">
+    <div class="s-kicker">Qui gestiona el comerç</div>
+    <div class="s-title">Tres perfils. Una lògica comuna.</div>
+
+    <div class="perfils">
+      <div class="perfil">
+        <div class="perfil-num">Perfil 01</div>
+        <div class="perfil-tag tag-r">Continuïtat</div>
+        <div class="perfil-il">
+          <svg width="80" height="72" viewBox="0 0 80 72" fill="none">
+            <!-- Botiga -->
+            <rect x="10" y="28" width="60" height="40" rx="2" fill="#FFF5F5" stroke="#C8392B" stroke-width="1.5"/>
+            <polygon points="40,8 10,28 70,28" fill="#C8392B" opacity="0.15"/>
+            <line x1="10" y1="28" x2="40" y2="8" stroke="#C8392B" stroke-width="1.5"/>
+            <line x1="70" y1="28" x2="40" y2="8" stroke="#C8392B" stroke-width="1.5"/>
+            <!-- Porta -->
+            <rect x="32" y="48" width="16" height="20" rx="1" fill="#C8392B" opacity="0.2"/>
+            <!-- Persona dins -->
+            <circle cx="40" cy="38" r="6" fill="#C8392B" opacity="0.4"/>
+            <!-- Check estabilitat -->
+            <circle cx="62" cy="14" r="10" fill="#2A7A4B"/>
+            <path d="M57 14 L61 18 L68 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="perfil-name">El comerciant que vol continuar</div>
+        <div class="perfil-cas">Ex: Ferreteria Camps — viable, lloguer inassumible</div>
+        <div class="perfil-desc">Continua gestionant el negoci com sempre. AQT compra el local. El lloguer es calcula sobre costos reals.</div>
+      </div>
+
+      <div class="perfil">
+        <div class="perfil-num">Perfil 02</div>
+        <div class="perfil-tag tag-a">Col·lectiu</div>
+        <div class="perfil-il">
+          <svg width="80" height="72" viewBox="0 0 80 72" fill="none">
+            <!-- Tres persones -->
+            <circle cx="20" cy="22" r="9" fill="#FFF8EC" stroke="#C47A00" stroke-width="1.5"/>
+            <circle cx="40" cy="16" r="9" fill="#FFF8EC" stroke="#C47A00" stroke-width="1.5"/>
+            <circle cx="60" cy="22" r="9" fill="#FFF8EC" stroke="#C47A00" stroke-width="1.5"/>
+            <!-- Cos grup -->
+            <path d="M5 55 Q20 38 35 55" fill="#FFF8EC" stroke="#C47A00" stroke-width="1.5"/>
+            <path d="M25 50 Q40 33 55 50" fill="#FFF8EC" stroke="#C47A00" stroke-width="1.5" opacity="0.6"/>
+            <path d="M45 55 Q60 38 75 55" fill="#FFF8EC" stroke="#C47A00" stroke-width="1.5"/>
+            <!-- Fletxa cap avall = cooperativa -->
+            <line x1="40" y1="57" x2="40" y2="68" stroke="#C47A00" stroke-width="1.5" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <div class="perfil-name">Un grup que vol gestionar un comerç</div>
+        <div class="perfil-cas">Ex: veïns que volen recuperar la fleca del barri</div>
+        <div class="perfil-desc">S'organitzen com a cooperativa. AQT custòdia el local i acompanya la constitució del projecte.</div>
+      </div>
+
+      <div class="perfil">
+        <div class="perfil-num">Perfil 03</div>
+        <div class="perfil-tag tag-g">Nou projecte</div>
+        <div class="perfil-il">
+          <svg width="80" height="72" viewBox="0 0 80 72" fill="none">
+            <!-- Persona amb idea -->
+            <circle cx="40" cy="22" r="12" fill="#E8F0E4" stroke="#2A7A4B" stroke-width="1.5"/>
+            <!-- Bombeta -->
+            <circle cx="60" cy="12" r="10" fill="#2A7A4B" opacity="0.1" stroke="#2A7A4B" stroke-width="1"/>
+            <path d="M57 10 Q60 6 63 10 Q64 13 62 15 L58 15 Q56 13 57 10Z" fill="#2A7A4B" opacity="0.6"/>
+            <line x1="59" y1="16" x2="61" y2="16" stroke="#2A7A4B" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Cos -->
+            <path d="M20 62 Q40 44 60 62" fill="#E8F0E4" stroke="#2A7A4B" stroke-width="1.5"/>
+            <!-- Clau local -->
+            <circle cx="40" cy="50" r="8" fill="#2A7A4B" opacity="0.12" stroke="#2A7A4B" stroke-width="1"/>
+            <path d="M37 50 h6 M40 47 v6" stroke="#2A7A4B" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="perfil-name">Una persona amb un projecte viable</div>
+        <div class="perfil-cas">Ex: vol obrir però no pot assumir un lloguer de mercat</div>
+        <div class="perfil-desc">AQT li cedeix el local a preu just. La comunitat participa en decidir quin ús es prioritza.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. EL LOOP -->
+  <div class="s">
+    <div class="s-kicker">El sistema</div>
+    <div class="s-title">Un loop que creix sol.</div>
+
+    <div class="loop">
+      <div class="loop-step">
+        <div class="loop-circle">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8392B" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="loop-label">Detectem</div>
+        <div class="loop-sub">Comerç en risc</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-circle">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.5"><path d="M3 9l1-5h16l1 5M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
+        </div>
+        <div class="loop-label">Adquirim</div>
+        <div class="loop-sub">El local</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-circle">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2A7A4B" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <div class="loop-label">Activem</div>
+        <div class="loop-sub">El gestor</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-circle">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <div class="loop-label">Reinvertim</div>
+        <div class="loop-sub">Següent cas</div>
+      </div>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:6px;padding:24px 28px;display:flex;align-items:center;gap:16px;">
+      <div style="width:8px;height:8px;background:var(--amber);border-radius:50%;flex-shrink:0;"></div>
+      <p style="font-size:14px;line-height:1.65;color:var(--muted);"><strong style="color:var(--ink);">Estat actual:</strong> AQT és un projecte en fase de disseny i validació. S'està construint el pipeline de comerços, definint l'estructura jurídica i buscant les persones i el capital per activar el primer cas.</p>
+    </div>
+
+    <a class="model-llegir" href="model.html">
       <div>
         <div class="model-llegir-text">Llegir el model complet →</div>
-        <div class="model-llegir-sub">Fonaments, decisions pendents, referents internacionals i fases del pilot.</div>
+        <div class="model-llegir-sub">El model complet: fonaments, referents, decisions pendents i fases del pilot.</div>
       </div>
       <div class="model-llegir-arrow">→</div>
     </a>
 
-    <div class="model-nota"><strong>Estat actual:</strong> AQT és un projecte en fase de disseny i validació. Ara mateix s'està construint el pipeline de comerços en risc, definint l'estructura jurídica i buscant les persones i el capital necessaris per activar el primer cas. <a href="contacte.html">Vols ser-ne part? →</a></div>
   </div>
 </div>
 
@@ -390,7 +602,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   <div class="cta-final-sub">El comerç de barri és patrimoni comunitari. Defensar-lo és una tasca col·lectiva.</div>
   <div class="cta-final-actions">
     <a class="cta-btn-primary" href="contacte.html">Participa ara</a>
-    <a class="cta-btn-secondary" href="contacte.html">Tinc un comerç en risc</a>
+    <a class="cta-btn-secondary" href="contacte.html?tipus=comerc">Tinc un comerç en risc</a>
   </div>
 </section>
 
