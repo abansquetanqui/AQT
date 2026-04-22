@@ -146,8 +146,21 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
       <div class="section-title">Articles recents</div>
     </div>
   </div>
-  <div class="articles-grid">
-    <div class="article-card">
+  <div class="articles-grid" id="articles-grid">
+    <div class="article-card article-item">
+      <div class="article-card-photo">
+        <div class="article-card-photo-bg"></div>
+        <svg style="position:relative;z-index:1;opacity:0.2" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="article-card-body">
+        <div class="article-tag analisi">Anàlisi</div>
+        <div class="article-date">Abril 2026</div>
+        <div class="article-title">El lloguer comercial no té límits. I és legal.</div>
+        <div class="article-excerpt">L'habitatge té índexs de contenció i zones tensades. El comerç local no té res d'això. La llei tracta la ferreteria centenària igual que un local d'oficines.</div>
+        <a class="article-link" href="articles/lloguer-comercial-sense-regulacio.html">Llegir l'article →</a>
+      </div>
+    </div>
+    <div class="article-card article-item">
       <div class="article-card-photo">
         <img src="img/dumping-comerc.jpg" alt="Comerç tradicional" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
@@ -159,7 +172,7 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
         <a class="article-link" href="articles/dumping-comerc-local.html">Llegir l'article →</a>
       </div>
     </div>
-    <div class="article-card">
+    <div class="article-card article-item">
       <div class="article-card-photo">
         <img src="img/forns-cadenes.jpg" alt="Forn artesà" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
@@ -171,18 +184,6 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
         <a class="article-link" href="articles/forns-cadenes.html">Llegir l'article →</a>
       </div>
     </div>
-    <div class="article-card">
-      <div class="article-card-photo">
-        <img src="img/gracia-placa.jpg" alt="Plaça de Gràcia" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="article-card-body">
-        <div class="article-tag" style="background:rgba(217,119,6,0.1);color:#B45309;">Context</div>
-        <div class="article-date">Gener 2026</div>
-        <div class="article-title">Gràcia perd un comerç cada setmana: les dades de 2025</div>
-        <div class="article-excerpt">El barri ha registrat el nombre més alt de tancaments comercials dels últims deu anys. Quins sectors han patit més?</div>
-        <span style="font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0.04em;">Pròximament</span>
-      </div>
-    </div>
   </div>
 
   <!-- Llista articles més antics -->
@@ -192,8 +193,8 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
       <div class="section-title">Més articles</div>
     </div>
   </div>
-  <div class="articles-llista">
-    <div class="article-row">
+  <div class="articles-llista" id="articles-llista">
+    <div class="article-row article-item">
       <div class="article-row-photo">
         <img src="img/homebaked.jpg" alt="Homebaked Community Bakery" style="width:100%;height:100%;object-fit:cover;">
       </div>
@@ -204,7 +205,7 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
         <a class="article-link" href="articles/hombacked.html">Llegir →</a>
       </div>
     </div>
-    <div class="article-row">
+    <div class="article-row article-item">
       <div class="article-row-photo">
         <img src="img/kensington-avenue.jpg" alt="Kensington Avenue Philadelphia" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
       </div>
@@ -215,7 +216,7 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
         <a class="article-link" href="articles/kensington.html">Llegir →</a>
       </div>
     </div>
-    <div class="article-row">
+    <div class="article-row article-item">
       <div class="article-row-photo">
         <div class="article-row-photo-bg"></div>
         <svg style="position:relative;z-index:1;opacity:0.2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A18" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -229,7 +230,41 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
     </div>
   </div>
 
+  <!-- Paginació -->
+  <div id="paginacio" style="display:flex;justify-content:center;gap:8px;margin:48px 0 0;"></div>
+
 </div>
+
+<script>
+const ARTICLES_PER_PAGINA = 4;
+const tots = document.querySelectorAll('.article-item');
+let paginaActual = 1;
+const totalPagines = Math.ceil(tots.length / ARTICLES_PER_PAGINA);
+
+function mostrarPagina(p) {
+  paginaActual = p;
+  tots.forEach((el, i) => {
+    el.style.display = (i >= (p-1)*ARTICLES_PER_PAGINA && i < p*ARTICLES_PER_PAGINA) ? '' : 'none';
+  });
+  renderPaginacio();
+  window.scrollTo({top: document.getElementById('articles-grid').offsetTop - 80, behavior: 'smooth'});
+}
+
+function renderPaginacio() {
+  const div = document.getElementById('paginacio');
+  if (totalPagines <= 1) { div.style.display = 'none'; return; }
+  div.innerHTML = '';
+  for (let i = 1; i <= totalPagines; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.style.cssText = 'width:36px;height:36px;border-radius:4px;border:1px solid ' + (i===paginaActual ? '#1A1A18' : '#E2E1DC') + ';background:' + (i===paginaActual ? '#1A1A18' : '#fff') + ';color:' + (i===paginaActual ? '#fff' : '#6B6B67') + ';font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;';
+    btn.onclick = () => mostrarPagina(i);
+    div.appendChild(btn);
+  }
+}
+
+mostrarPagina(1);
+</script>
 
 <footer>
   <div class="footer-grid">
