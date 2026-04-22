@@ -10,6 +10,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
 nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
 .nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
@@ -26,71 +27,58 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile.open{display:flex;}
 .nav-mobile a{font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;padding:12px 24px;}
 .nav-mobile .nav-cta{margin:8px 24px 0;background:var(--cta);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;}
-.hero{background:var(--ink);padding:80px 52px 72px;text-align:center;}
+
+/* HERO */
+.hero{background:var(--ink);padding:88px 52px 80px;text-align:center;}
 .hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage);margin-bottom:20px;opacity:0.7;}
 .hero h1{font-family:'Lora',serif;font-size:clamp(38px,5vw,64px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px;}
 .hero h1 em{font-style:italic;color:var(--sage);}
 .hero-sub{font-size:17px;line-height:1.8;color:rgba(255,255,255,0.45);max-width:560px;margin:0 auto;}
-.wrap{max-width:860px;margin:0 auto;padding:80px 52px;}
-.wrap.gris{background:var(--bg);}
-.s-kicker{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
-.s-title{font-family:'Lora',serif;font-size:clamp(26px,3vw,40px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;margin-bottom:32px;}
+
+/* SECCIONS */
+.s{max-width:760px;margin:0 auto;padding:80px 52px;}
+.s-kicker{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.s-title{font-family:'Lora',serif;font-size:clamp(28px,3vw,42px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;margin-bottom:28px;}
 .s-title em{font-style:italic;color:var(--red);}
-.s-text{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:16px;}
-.divider{border:none;border-top:1px solid var(--border);margin:0;}
-.comparativa{display:grid;grid-template-columns:1fr 40px 1fr;gap:0;align-items:center;margin:40px 0;}
-.comp-bloc{border:1px solid var(--border);border-radius:6px;padding:28px 24px;}
-.comp-bloc.dolent{border-color:rgba(200,57,43,0.2);background:rgba(200,57,43,0.02);}
-.comp-bloc.bo{border-color:rgba(42,122,75,0.2);background:rgba(42,122,75,0.02);}
-.comp-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;}
-.comp-bloc.dolent .comp-label{color:var(--red);}
-.comp-bloc.bo .comp-label{color:var(--cta);}
-.comp-title{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;}
-.comp-text{font-size:13px;line-height:1.65;color:var(--muted);}
-.comp-arrow{text-align:center;font-size:22px;color:var(--border);}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:6px;overflow:hidden;margin-top:32px;}
-.stat{background:var(--white);padding:24px 20px;text-align:center;}
-.stat-num{font-family:'Lora',serif;font-size:38px;font-weight:700;color:var(--red);letter-spacing:-0.03em;display:block;line-height:1;}
-.stat-label{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;}
-.rols{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:40px;}
-.rol{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);}
-.rol:last-child{border-bottom:none;}
-.rol-esquerra{padding:28px 24px;border-right:1px solid var(--border);}
-.rol-num{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-.rol-name{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--ink);}
-.rol-dreta{padding:28px 28px;}
-.rol-desc{font-size:15px;line-height:1.75;color:var(--ink-mid);}
-.rol-desc strong{color:var(--ink);}
+.s-lead{font-size:18px;line-height:1.85;color:var(--ink-mid);margin-bottom:0;}
+.divider{border:none;border-top:1px solid var(--border);}
+.gris{background:var(--bg);}
+
+/* VALORS */
+.valors{display:flex;flex-direction:column;gap:0;margin-top:40px;border-top:1px solid var(--border);}
+.valor{padding:24px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:baseline;}
+.valor-name{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);}
+.valor-text{font-size:15px;line-height:1.75;color:var(--ink-mid);}
+
+/* COM FUNCIONA */
 .funcions{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:40px;}
 .funcio{background:var(--white);padding:32px 24px;}
-.funcio-num{font-family:'Lora',serif;font-size:48px;font-weight:700;color:var(--border);line-height:1;display:block;margin-bottom:12px;letter-spacing:-0.04em;}
-.funcio-name{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.funcio-num{font-family:'Lora',serif;font-size:44px;font-weight:700;color:var(--border);line-height:1;display:block;margin-bottom:12px;letter-spacing:-0.04em;}
+.funcio-name{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px;}
 .funcio-text{font-size:13px;line-height:1.65;color:var(--muted);}
-.perfils{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:40px;}
-.perfil{background:var(--white);padding:32px 24px;}
-.perfil-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-bottom:12px;}
-.tag-r{background:rgba(200,57,43,0.08);color:var(--red);}
-.tag-a{background:rgba(196,122,0,0.08);color:var(--amber);}
-.tag-g{background:rgba(42,122,75,0.08);color:var(--cta);}
-.perfil-num{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
-.perfil-name{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2;}
-.perfil-cas{font-size:11px;font-style:italic;color:var(--muted);margin-bottom:10px;}
-.perfil-desc{font-size:13px;line-height:1.65;color:var(--muted);}
-.estat{background:var(--bg);border-left:4px solid var(--amber);padding:24px 28px;border-radius:0 6px 6px 0;margin-top:32px;}
-.estat-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
-.estat-text{font-size:15px;line-height:1.75;color:var(--ink-mid);}
-.estat-text strong{color:var(--ink);}
-.model-link{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:6px;padding:22px 28px;margin-top:24px;text-decoration:none;transition:border-color 0.15s,background 0.15s;}
+
+.model-link{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:6px;padding:22px 28px;margin-top:32px;text-decoration:none;transition:border-color 0.15s,background 0.15s;}
 .model-link:hover{border-color:var(--ink);background:var(--bg);}
+.model-link-left{flex:1;}
 .model-link-text{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);}
 .model-link-sub{font-size:13px;color:var(--muted);margin-top:4px;}
 .model-link-arrow{font-size:20px;color:var(--muted);flex-shrink:0;margin-left:16px;}
+
+/* ON SOM ARA */
+.estat{border-left:4px solid var(--amber);padding:24px 28px;border-radius:0 6px 6px 0;background:rgba(196,122,0,0.04);margin-top:40px;}
+.estat-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.estat-text{font-size:15px;line-height:1.75;color:var(--ink-mid);}
+.estat-text strong{color:var(--ink);}
+
+/* CTA FINAL */
 .cta-final{background:var(--ink);padding:80px 52px;text-align:center;}
 .cta-final h2{font-family:'Lora',serif;font-size:clamp(26px,3vw,40px);font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:14px;}
-.cta-final p{font-size:15px;color:rgba(255,255,255,0.4);margin-bottom:32px;max-width:420px;margin-left:auto;margin-right:auto;}
+.cta-final p{font-size:15px;color:rgba(255,255,255,0.4);margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;}
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
 .btn-p{background:var(--cta);color:#fff;padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
 .btn-s{background:transparent;color:rgba(255,255,255,0.6);padding:14px 28px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);}
+
+/* FOOTER */
 footer{background:#111110;padding:56px 52px 0;}
 .footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
 .footer-brand{font-family:'Lora',serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
@@ -104,21 +92,19 @@ footer{background:#111110;padding:56px 52px 0;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
 .footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
 .footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{padding:56px 24px;}
-  .wrap{padding:56px 24px;}
-  .comparativa{grid-template-columns:1fr;gap:12px;}.comp-arrow{transform:rotate(90deg);}
-  .stats{grid-template-columns:1fr 1fr;}
-  .rol{grid-template-columns:1fr;}.rol-esquerra{border-right:none;padding-bottom:0;}
+  .s{padding:56px 24px;}
+  .valor{grid-template-columns:1fr;gap:8px;}
   .funcions{grid-template-columns:1fr 1fr;}
-  .perfils{grid-template-columns:1fr;}
   .cta-final{padding:56px 24px;}
   footer{padding:44px 20px 0;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
 }
 @media(max-width:480px){
-  .funcions,.stats{grid-template-columns:1fr;}
+  .funcions{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
 }
 </style>
@@ -144,176 +130,111 @@ footer{background:#111110;padding:56px 52px 0;}
   <a class="nav-cta" href="contacte.html">Tens un comerç?</a>
 </div>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-kicker">El projecte · Iniciativa en fase de disseny</div>
-  <h1>Locals comercials<br>en cessió d'ús.<br><em>Per sempre.</em></h1>
-  <p class="hero-sub">El mateix model que apliquen les cooperatives d'habitatge a Catalunya, aplicat al comerç de proximitat.</p>
+  <div class="hero-kicker">El projecte</div>
+  <h1>Treure els locals<br>del mercat.<br><em>Per sempre.</em></h1>
+  <p class="hero-sub">AQT és una iniciativa cooperativa per preservar el comerç de proximitat a Gràcia adquirint locals i cedint-los en ús estable als comerços que hi viuen.</p>
 </div>
 
 <hr class="divider">
 
-<!-- 1. EL PROBLEMA -->
-<div class="wrap">
-  <div class="s-kicker">Per què existim</div>
-  <div class="s-title">El comerç no tanca perquè<br>el barri no el vol.<br><em>Tanca perquè el mercat l'expulsa.</em></div>
-
-  <div class="comparativa">
-    <div class="comp-bloc dolent">
-      <div class="comp-label">Ara — mercat especulatiu</div>
-      <div class="comp-title">El propietari puja el lloguer</div>
-      <div class="comp-text">El comerç no pot pagar. Tanca. El local queda buit o entra una cadena. El barri perd una part de si mateix.</div>
-    </div>
-    <div class="comp-arrow">→</div>
-    <div class="comp-bloc bo">
-      <div class="comp-label">Amb AQT — cessió d'ús</div>
-      <div class="comp-title">La cooperativa compra el local</div>
-      <div class="comp-text">El local surt del mercat per sempre. El comerç paga una quota basada en costos reals. El barri no perd res.</div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat">
-      <span class="stat-num">11.000</span>
-      <div class="stat-label">comerços perduts a Catalunya en una dècada</div>
-    </div>
-    <div class="stat">
-      <span class="stat-num">+40%</span>
-      <div class="stat-label">augment de lloguers comercials a Barcelona 2015–2024</div>
-    </div>
-    <div class="stat">
-      <span class="stat-num">15.000€</span>
-      <div class="stat-label">lloguer mensual que va tancar la Ferreteria Camps després de 90 anys</div>
-    </div>
-  </div>
+<!-- MISSIÓ -->
+<div class="s">
+  <div class="s-kicker">Missió</div>
+  <div class="s-title">El comerç local tanca<br>perquè el mercat <em>l'expulsa.</em></div>
+  <p class="s-lead">Els comerços de barri no desapareixen per falta de clients. Desapareixen perquè el mercat immobiliari els fa fora: lloguers que es doblen d'un dia per l'altre, propietaris que especulen, locals buits que esperen una cadena. AQT intervé a l'arrel del problema comprant el local, traient-lo del mercat especulatiu per sempre i cedint-lo en ús a preu just al comerç que hi vol continuar.</p>
 </div>
 
 <hr class="divider">
 
-<!-- 2. TRES ROLS -->
-<div class="wrap gris">
+<!-- VALORS -->
+<div class="s gris" style="max-width:100%;padding:0;">
+<div class="s" style="background:transparent;">
+  <div class="s-kicker">Valors</div>
+  <div class="s-title">El que ens guia.</div>
+
+  <div class="valors">
+    <div class="valor">
+      <div class="valor-name">Propietat col·lectiva</div>
+      <div class="valor-text">Els locals adquirits per AQT no es poden vendre mai. Passen a ser patrimoni col·lectiu permanent, fora del mercat especulatiu per sempre.</div>
+    </div>
+    <div class="valor">
+      <div class="valor-name">Cessió d'ús, no lloguer</div>
+      <div class="valor-text">Els comerços no paguen un lloguer de mercat. Paguen una quota que cobreix els costos reals del local. El mateix principi que apliquen les cooperatives d'habitatge a Catalunya.</div>
+    </div>
+    <div class="valor">
+      <div class="valor-name">Governança democràtica</div>
+      <div class="valor-text">Una sòcia, un vot. Les decisions les pren l'assemblea, no un propietari privat. Els comerços que hi operen formen part de la cooperativa i hi tenen veu.</div>
+    </div>
+    <div class="valor">
+      <div class="valor-name">Reinversió total</div>
+      <div class="valor-text">Els excedents de la cooperativa no es reparteixen. Es reinverteixen íntegrament en l'adquisició del proper local. Ningú s'enriqueix amb AQT.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- COM FUNCIONA -->
+<div class="s">
   <div class="s-kicker">Com funciona</div>
-  <div class="s-title">Tres rols.<br><em>Una separació clara.</em></div>
-  <p class="s-text">AQT separa tres dimensions: qui és propietari del local, qui gestiona el negoci, i qui governa la cooperativa.</p>
-
-  <div class="rols">
-    <div class="rol">
-      <div class="rol-esquerra">
-        <div class="rol-num">Rol 01</div>
-        <div class="rol-name">AQT</div>
-      </div>
-      <div class="rol-dreta">
-        <div class="rol-desc"><strong>Propietària i custòdia del local.</strong> Compra l'immoble, el treu del mercat especulatiu i el manté com a patrimoni col·lectiu permanent. No intervé en la gestió del negoci. El local no es pot vendre mai.</div>
-      </div>
-    </div>
-    <div class="rol">
-      <div class="rol-esquerra">
-        <div class="rol-num">Rol 02</div>
-        <div class="rol-name">Comerços sòcies</div>
-      </div>
-      <div class="rol-dreta">
-        <div class="rol-desc"><strong>Gestionen el negoci amb autonomia total.</strong> Conserven el 100% dels beneficis. Paguen una quota mensual que cobreix els costos reals del local — no un lloguer de mercat. Són sòcies de la cooperativa amb veu a l'assemblea.</div>
-      </div>
-    </div>
-    <div class="rol">
-      <div class="rol-esquerra">
-        <div class="rol-num">Rol 03</div>
-        <div class="rol-name">Sòcies col·laboradores</div>
-      </div>
-      <div class="rol-dreta">
-        <div class="rol-desc"><strong>Veïnes, professionals i persones que sostenen el projecte.</strong> Aporten capital pacient. Participen en la governança amb els mateixos drets de vot. No intervenen en els negocis.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- 3. QUATRE FUNCIONS -->
-<div class="wrap">
-  <div class="s-kicker">El cicle</div>
-  <div class="s-title">Quatre funcions.<br><em>Un sistema que s'alimenta sol.</em></div>
+  <div class="s-title">Quatre funcions.<br><em>Un cicle que es retroalimenta.</em></div>
+  <p class="s-lead">El model combina detecció primerenca, suport als comerços en risc, adquisició col·lectiva dels locals i reinversió dels excedents. Cada local preservat alimenta la capacitat d'actuar en el següent.</p>
 
   <div class="funcions">
     <div class="funcio">
       <span class="funcio-num">01</span>
       <div class="funcio-name">Detecció</div>
-      <div class="funcio-text">Treball de camp al barri. Identificació de comerços en risc abans que el procés sigui irreversible.</div>
+      <div class="funcio-text">Identifiquem comerços en risc al barri abans que el procés sigui irreversible.</div>
     </div>
     <div class="funcio">
       <span class="funcio-num">02</span>
       <div class="funcio-name">Defensa</div>
-      <div class="funcio-text">Orientació legal, mediació amb propietaris i alternatives al tancament immediat.</div>
+      <div class="funcio-text">Orientació legal, mediació i alternatives al tancament immediat.</div>
     </div>
     <div class="funcio">
       <span class="funcio-num">03</span>
       <div class="funcio-name">Adquisició</div>
-      <div class="funcio-text">La cooperativa compra el local. El comerç continua. El barri no perd res.</div>
+      <div class="funcio-text">La cooperativa compra el local. El comerç continua amb quota justa i estabilitat indefinida.</div>
     </div>
     <div class="funcio">
       <span class="funcio-num">04</span>
       <div class="funcio-name">Reinversió</div>
-      <div class="funcio-text">Els excedents van al proper local. El sistema creix sense dependre de subvencions indefinides.</div>
+      <div class="funcio-text">Els excedents van al proper local. Sense subvencions indefinides.</div>
     </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- 4. TRES PERFILS -->
-<div class="wrap gris">
-  <div class="s-kicker">Qui pot accedir a un local</div>
-  <div class="s-title">Tres perfils.<br><em>Un sol principi.</em></div>
-
-  <div class="perfils">
-    <div class="perfil">
-      <div class="perfil-num">Perfil 01</div>
-      <div class="perfil-tag tag-r">Continuïtat</div>
-      <div class="perfil-name">El comerç que vol continuar</div>
-      <div class="perfil-cas">Ex: Ferreteria Camps — viable, lloguer inassumible</div>
-      <div class="perfil-desc">AQT compra el local. El comerç continua al mateix lloc, ara pagant quota a la cooperativa en comptes de lloguer al propietari anterior.</div>
-    </div>
-    <div class="perfil">
-      <div class="perfil-num">Perfil 02</div>
-      <div class="perfil-tag tag-a">Col·lectiu</div>
-      <div class="perfil-name">Un grup que vol gestionar un comerç</div>
-      <div class="perfil-cas">Ex: veïns que volen recuperar la fleca del barri</div>
-      <div class="perfil-desc">S'organitzen cooperativament. AQT custòdia el local i acompanya la constitució del projecte.</div>
-    </div>
-    <div class="perfil">
-      <div class="perfil-num">Perfil 03</div>
-      <div class="perfil-tag tag-g">Nou projecte</div>
-      <div class="perfil-name">Una persona amb un projecte viable</div>
-      <div class="perfil-cas">Ex: vol obrir però els lloguers de Gràcia fan impossible arrencar</div>
-      <div class="perfil-desc">AQT li cedeix el local a quota justa. La comunitat participa en decidir quin ús es prioritza.</div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- 5. ON SOM ARA -->
-<div class="wrap">
-  <div class="s-kicker">Estat actual</div>
-  <div class="s-title">En construcció.<br><em>Amb honestedat.</em></div>
-
-  <div class="estat">
-    <div class="estat-label">Abril 2026</div>
-    <div class="estat-text"><strong>AQT no és encara una cooperativa constituïda.</strong> Estem en fase de disseny del model jurídic i financer, en diàleg amb Coòpolis, La Dinamo Fundació i Sostre Cívic. Estem documentant casos reals al barri i construint el grup impulsor.</div>
   </div>
 
   <a class="model-link" href="model.html">
-    <div>
-      <div class="model-link-text">Llegir el model complet</div>
-      <div class="model-link-sub">La quota, els beneficis, el finançament, la governança — tot el detall.</div>
+    <div class="model-link-left">
+      <div class="model-link-text">Veure el model complet</div>
+      <div class="model-link-sub">Qui paga què, com es governa, com es finança l'adquisició — tots els detalls.</div>
     </div>
     <div class="model-link-arrow">→</div>
   </a>
 </div>
 
-<!-- CTA FINAL -->
+<hr class="divider">
+
+<!-- ON SOM ARA -->
+<div class="s gris" style="max-width:100%;padding:0;">
+<div class="s" style="background:transparent;">
+  <div class="s-kicker">On som ara</div>
+  <div class="s-title">En construcció.<br><em>Amb honestedat.</em></div>
+  <p class="s-lead">AQT és un projecte real, però transparent sobre el seu estat actual.</p>
+
+  <div class="estat">
+    <div class="estat-label">Abril 2026</div>
+    <div class="estat-text"><strong>AQT no és encara una cooperativa constituïda.</strong> Estem en fase de disseny del model jurídic i financer, en diàleg amb Coòpolis, La Dinamo Fundació i Sostre Cívic. Estem documentant casos reals al barri de Gràcia i construint el grup impulsor fundador. Si vols formar-ne part, ara és el moment.</div>
+  </div>
+</div>
+</div>
+
+<!-- CTA -->
 <div class="cta-final">
-  <h2>Tens un comerç en risc?<br>O vols formar part del projecte?</h2>
-  <p>Estem construint AQT des de zero i necessitem persones que s'hi vulguin implicar.</p>
+  <h2>Tens un comerç en risc?<br>O vols ser-ne part?</h2>
+  <p>Estem construint AQT des de zero. Necessitem comerços, veïnes i professionals que s'hi vulguin implicar.</p>
   <div class="cta-btns">
     <a class="btn-p" href="contacte.html">Contactar</a>
     <a class="btn-s" href="mapa.html">Veure el mapa de casos</a>
