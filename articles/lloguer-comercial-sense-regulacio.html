@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El lloguer comercial: la llei que protegeix el propietari · AQT</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--border:#E2E1DC;--border-dk:#C8C7C0;--cta:#2A7A4B;--cta-lt:#348A58;--muted:#6B6B67;--amber:#C47A00;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:var(--cta)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--cta);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;}
+.breadcrumb{background:var(--bg-warm);border-bottom:1px solid var(--border);padding:0 52px;height:44px;display:flex;align-items:center;gap:8px;}
+.breadcrumb a{font-size:12px;font-weight:500;color:var(--ink-muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--ink);}
+.breadcrumb-sep{font-size:12px;color:var(--border-dk);}
+.breadcrumb-current{font-size:12px;color:var(--ink);font-weight:500;}
+.article-hero{background:var(--ink);padding:56px 52px 52px;}
+.article-hero-inner{max-width:720px;margin:0 auto;}
+.article-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
+.article-cat{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:4px 10px;border-radius:2px;}
+.article-date{font-size:12px;color:rgba(255,255,255,0.4);font-weight:500;}
+.article-read-time{font-size:12px;color:rgba(255,255,255,0.4);}
+h1.article-title{font-family:'Lora',Georgia,serif;font-size:clamp(28px,4vw,46px);font-weight:700;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin-bottom:16px;}
+.article-subtitle{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.55);max-width:620px;}
+.article-body{max-width:720px;margin:0 auto;padding:56px 24px 80px;}
+.article-body p{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:20px;}
+.article-body p strong{color:var(--ink);font-weight:600;}
+.article-body h2{font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;line-height:1.2;margin:48px 0 16px;}
+.article-body h3{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:0.04em;text-transform:uppercase;margin:28px 0 10px;}
+.pull-quote{border-left:3px solid var(--red);padding:16px 24px;margin:32px 0;background:var(--bg-warm);border-radius:0 4px 4px 0;}
+.pull-quote p{font-family:'Lora',Georgia,serif;font-size:17px;font-style:italic;line-height:1.65;color:var(--ink);margin:0 0 8px!important;}
+.pull-quote cite{font-size:12px;color:var(--muted);font-style:normal;font-weight:500;}
+.info-box{background:var(--bg-warm);border:1px solid var(--border);border-radius:4px;padding:22px 24px;margin:28px 0;}
+.info-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.info-box p{font-size:14px;line-height:1.7;color:var(--ink-mid);margin-bottom:10px!important;}
+.info-box p:last-child{margin-bottom:0!important;}
+.info-box strong{color:var(--ink);font-weight:600;}
+.stat-block{background:var(--ink);border-radius:6px;padding:32px 36px;margin:32px 0;}
+.stat-num{font-family:'Lora',Georgia,serif;font-size:52px;font-weight:700;color:#fff;line-height:1;letter-spacing:-0.03em;display:block;margin-bottom:12px;}
+.stat-desc{font-size:14px;line-height:1.65;color:rgba(255,255,255,0.5);}
+.stat-source{font-size:11px;color:rgba(255,255,255,0.25);margin-top:8px;display:block;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+.compare-col{border-radius:4px;padding:22px 24px;}
+.compare-col h3{font-size:13px;font-weight:700;margin-bottom:14px;letter-spacing:0.02em;text-transform:uppercase;}
+.compare-col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+.compare-col ul li{font-size:13px;line-height:1.6;padding-left:16px;position:relative;}
+.compare-col ul li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;}
+.compare-col.negatiu{background:rgba(200,57,43,0.05);border:1px solid rgba(200,57,43,0.15);}
+.compare-col.negatiu h3{color:var(--red);}
+.compare-col.negatiu ul li::before{background:var(--red);}
+.compare-col.negatiu ul li{color:var(--ink-mid);}
+.compare-col.positiu{background:rgba(42,122,75,0.05);border:1px solid rgba(42,122,75,0.15);}
+.compare-col.positiu h3{color:var(--cta);}
+.compare-col.positiu ul li::before{background:var(--cta);}
+.compare-col.positiu ul li{color:var(--ink-mid);}
+table.table-compare{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px;}
+table.table-compare thead th{background:var(--ink);color:#fff;padding:12px 16px;text-align:left;font-size:12px;font-weight:600;letter-spacing:0.04em;}
+table.table-compare tbody td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--ink-mid);vertical-align:top;}
+table.table-compare tbody tr:nth-child(even){background:var(--bg-warm);}
+table.table-compare tbody td strong{color:var(--ink);}
+.cta-box{background:var(--ink);border-radius:6px;padding:36px;margin-top:48px;}
+.cta-box-text{font-family:'Lora',Georgia,serif;font-size:19px;font-style:italic;line-height:1.5;color:#fff;margin-bottom:24px;}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.cta-btn{display:inline-block;padding:12px 24px;border-radius:4px;font-size:13.5px;font-weight:600;text-decoration:none;transition:background 0.15s;}
+.cta-btn-primary{background:var(--cta);color:#fff;}
+.cta-btn-primary:hover{background:var(--cta-lt);}
+footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.footer-brand{font-family:'Lora',serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.35);max-width:240px;}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:9px;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:16px 0;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.2);}
+.footer-entity{font-size:11.5px;color:rgba(255,255,255,0.35);font-weight:500;}
+@media(max-width:960px){
+  nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
+  .breadcrumb{padding:0 20px;}
+  .article-hero{padding:40px 24px 36px;}
+  .article-body{padding:40px 20px 60px;}
+  .compare-grid{grid-template-columns:1fr;}
+  footer{padding:44px 20px 0;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <div class="nav-links">
+    <a href="../projecte.html">Projecte</a>
+    <a href="../mapa.html">Mapa</a>
+    <a href="../actualitat.html" class="active">Actualitat</a>
+    <a href="../contacte.html">Contacte</a>
+    <a class="nav-cta" href="../contacte.html">Tens un comerç?</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="../projecte.html">Projecte</a>
+  <a href="../mapa.html">Mapa</a>
+  <a href="../actualitat.html">Actualitat</a>
+  <a href="../contacte.html">Contacte</a>
+  <a class="nav-cta" href="../contacte.html">Tens un comerç?</a>
+</div>
+
+<div class="breadcrumb">
+  <a href="../index.html">Inici</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="../actualitat.html">Actualitat</a>
+  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">El lloguer comercial i la llei</span>
+</div>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta">
+      <span class="article-cat">Anàlisi</span>
+      <span class="article-date">Abril 2026</span>
+      <span class="article-read-time">· 8 min de lectura</span>
+    </div>
+    <h1 class="article-title">El lloguer comercial no té límits. I és legal.</h1>
+    <p class="article-subtitle">L'habitatge té índexs de contenció, zones tensades i protecció legal. El comerç local no té res d'això. La llei tracta la ferreteria centenària exactament igual que un local d'oficines corporatives.</p>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>Quan parlem de la crisi del comerç local, sovint posem el focus en Amazon, en els canvis d'hàbits de consum o en la pandèmia. Però hi ha una causa estructural que sol quedar en segon pla, potser perquè és la més incòmoda: <strong>el marc legal que regula els lloguers comercials és radicalment diferent del que regula l'habitatge</strong>, i el diferencial és sempre a favor del propietari.</p>
+
+  <p>Des del 2024, l'habitatge a Catalunya compta amb índexs de referència de preus, zones de mercat residencial tensionat, limitació de rendes per a grans tenidors i pròrrogues extraordinàries de fins a dos anys. Unes mesures imperfectes i insuficients, però mesures al cap i a la fi. El lloguer comercial, en canvi, s'ha quedat exactament on estava fa trenta anys: a la intempèrie de la llibertat de pacte.</p>
+
+  <h2>Quan la llei diu "lliure pacte", el fort sempre guanya</h2>
+
+  <p>La Llei d'Arrendaments Urbans (LAU), aprovada el 1994 i reformada diverses vegades des de llavors, estableix un règim molt diferent per a l'habitatge i per als locals comercials. Per als primers, la llei fixa durades mínimes, pròrrogues obligatòries i, des del 2024, un sistema de contenció de rendes. Per als locals comercials, la llei opta per una fórmula diferent: <strong>"deixar al lliure pacte de les parts tots els elements del contracte"</strong>.</p>
+
+  <p>En teoria, el lliure pacte sona a equilibri. Dues parts acorden lliurement les condicions. En la pràctica, les parts no estan en peu d'igualtat. El propietari té el local. El comerciant necessita el local. I el mercat immobiliari —especialment en els centres urbans de les grans ciutats— ha posat el propietari en una posició de força creixent.</p>
+
+  <div class="pull-quote">
+    <p>En la regulació dels arrendaments de locals de negocis, la Llei d'Arrendaments Urbans opta per deixar al lliure pacte de les parts tots els elements del contracte.</p>
+    <cite>Portal del Comerciant, Generalitat de Catalunya</cite>
+  </div>
+
+  <p>Això vol dir que, a diferència de l'habitatge, en un local comercial:</p>
+
+  <p><strong>No hi ha durada mínima legal.</strong> Si no es pacta, el contracte s'entén celebrat per un any. Un any. Una ferreteria que inverteix en reformes, estoc i clientela pot perdre el local al cap de 365 dies si el propietari no vol renovar.</p>
+
+  <p><strong>No hi ha limitació de preu.</strong> En renovar el contracte, el propietari pot demanar qualsevol preu. No hi ha topall, no hi ha índex de referència, no hi ha contenció de rendes. Si el mercat ha pujat un 60%, el propietari pot exigir un 60% més. O un 100%. O el que vulgui.</p>
+
+  <p><strong>No hi ha pròrroga obligatòria.</strong> Quan acaba el contracte, el propietari pot no renovar-lo sense cap obligació d'indemnització significativa. El comerç perd el local sense tenir cap dret a continuar-hi.</p>
+
+  <h2>La bretxa habitatge-comerç: un forat cada vegada més gran</h2>
+
+  <p>La disparitat entre la regulació de l'habitatge i la del comerç no sempre ha estat tan pronunciada. Fins als anys noranta, la LAU de 1964 oferia als locals comercials un cert grau de protecció: els arrendataris podien subarrendar, cedir el local i fins i tot tenien dret a mantenir el contracte per a hereus que continuessin l'activitat. Era imperfecte, però existia un reconeixement que el local comercial no és un bé qualsevol.</p>
+
+  <p>La reforma del 1994 ho va canviar. Va establir el principi de llibertat de pacte per als locals i va eliminar la majoria de proteccions. El raonament era liberal: el mercat s'autoreguala. El problema és que el mercat de l'habitatge va rebre protecció addicional progressiva —especialment accelerada des del 2022— mentre que el mercat comercial va quedar estancat en el paradigma del 1994.</p>
+
+  <div class="compare-grid">
+    <div class="compare-col negatiu">
+      <h3>Lloguer comercial avui</h3>
+      <ul>
+        <li>Lliure pacte: sense límit de preu</li>
+        <li>Sense durada mínima legal (1 any per defecte)</li>
+        <li>Sense pròrroga obligatòria</li>
+        <li>Sense índex de referència</li>
+        <li>Sense zones tensades comercials</li>
+        <li>Propietari pot no renovar sense causa</li>
+      </ul>
+    </div>
+    <div class="compare-col positiu">
+      <h3>Lloguer d'habitatge avui</h3>
+      <ul>
+        <li>Contenció de rendes en 271 municipis catalans</li>
+        <li>Durada mínima de 5 anys (persona física)</li>
+        <li>Pròrroga extraordinària de fins a 2 anys</li>
+        <li>Índex de referència de preus (IRAV)</li>
+        <li>Zones de mercat residencial tensionat</li>
+        <li>Règim especial per a grans tenidors</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>El resultat d'aquesta divergència és visible als carrers de qualsevol barri urbà: mentre que la regularització dels lloguers d'habitatge ha generat un debat polític intens i mesures concretes —tot i que insuficients—, els locals comercials segueixen exposats al mercat sense cap xarxa.</p>
+
+  <h2>El debat que acaba d'arribar a la política</h2>
+
+  <p>Fins fa molt poc, la regulació del lloguer comercial era pràcticament absent del debat polític. El focus estava en l'habitatge. Però a l'abril del 2026, diverses forces parlamentàries —entre elles ERC— han posat sobre la taula propostes per limitar els preus dels lloguers comercials, congelar pujades o reforçar el control públic sobre les rendes comercials.</p>
+
+  <p>El debat ha generat reaccions diverses. Des del sector immobiliari, els arguments contra la regulació reprodueixen els mateixos que es feien servir contra la regulació de l'habitatge: que limitaria la inversió, que reduiria l'oferta de locals, que distorsionaria el mercat. Des del sector comercial, la posició és diferent: la desregulació dels darrers trenta anys ha generat exactament allò que s'argumentava que no passaria —menys comerç local, menys diversitat comercial, menys arrelament als barris.</p>
+
+  <div class="info-box">
+    <span class="info-label">Context legal — Abril 2026</span>
+    <p>La Generalitat de Catalunya prepara una futura Llei d'Arrendament de Béns que, per primera vegada, regularia de manera específica els contractes de lloguer de locals comercials, fins ara subjectes exclusivament a la LAU estatal i al lliure pacte entre parts. El text, encara en fase de memòria preliminar, preveu tractar de manera diferenciada el lloguer d'habitatge habitual, els lloguers temporals i <strong>els arrendaments de locals de negoci</strong>. Si s'aprovés, seria el canvi legislatiu més significatiu per al comerç local en tres dècades.</p>
+  </div>
+
+  <h2>Quan el local val més buit que ocupat</h2>
+
+  <p>Hi ha una dinàmica que la llei actual no aborda i que explica bona part dels locals buits als centres urbans: <strong>per a un propietari amb expectatives especulatives, un local buit pot ser més rendible que un local ocupat</strong>.</p>
+
+  <p>Un local ocupat genera una renda estable però limitada. Un local buit permet esperar l'inquilí ideal —generalment una franquícia o una cadena amb capacitat per pagar preus de mercat elevats— sense cap pressió legal per posar-lo en circulació. No existeix cap mecanisme que penalitzi la desocupació prolongada dels locals comercials, a diferència d'alguns països europeus que apliquen tributs sobre locals buits o obliguen a justificar la desocupació.</p>
+
+  <p>El resultat és paradoxal: en els barris amb més pressió immobiliària, els locals buits tendeixen a acumular-se no per manca de demanda, sinó per excés d'expectatives especulatives. El comerciant que vol continuar no pot pagar el que demana el propietari. El propietari prefereix esperar algú que sí que pugui. I mentrestant, el local roman tancat.</p>
+
+  <div class="stat-block">
+    <span class="stat-num">+40%</span>
+    <div class="stat-desc">Augment dels lloguers comercials a Barcelona entre 2015 i 2024, sense cap limitació legal aplicable. En el mateix període, els lloguers d'habitatge van rebre progressivament mesures de contenció que van frenar parcialment l'increment.</div>
+    <span class="stat-source">Font: Ajuntament de Barcelona, informes de mercats immobiliaris</span>
+  </div>
+
+  <h2>Per què la regulació de l'habitatge no va solucionar el problema comercial</h2>
+
+  <p>Un error freqüent és assumir que les mesures de contenció de l'habitatge —les zones tensades, els índexs de referència— beneficien indirectament el comerç. No és cert. Les mesures de contenció de rendes aprovades des del 2022 s'apliquen <strong>exclusivament als contractes d'arrendament d'habitatge habitual</strong>. Queden expressament exclosos els lloguers de temporada, els locals comercials i el lloguer d'habitacions.</p>
+
+  <p>Per tant, mentre que un pis a Gràcia té el preu de lloguer limitat per llei, el local de la planta baixa del mateix edifici no té cap limitació. El propietari —que pot ser el mateix— pot gestionar amb règims radicalment oposats dos espais al mateix immoble.</p>
+
+  <h2>El que la llei no protegeix, el mercat no ho protegirà</h2>
+
+  <p>El comerç local és un bé comú urbà. Genera cohesió social, manté l'activitat a peu de carrer, preserva la memòria del barri i sosté l'economia de proximitat. Però el mercat no valora els béns comuns: valora la rendibilitat. I la rendibilitat d'un local en un barri central d'una gran ciutat és, en el model actual, incompatible amb la supervivència d'un comerç de proximitat.</p>
+
+  <p>L'argument que el mercat s'autoreguala i que la competència entre propietaris fixarà preus raonables no ha funcionat en tres dècades. Al contrari: la concentració de la propietat immobiliària comercial, la financerització del sector i l'expansió de les cadenes han creat un mercat on el comerç local té cada vegada menys marge.</p>
+
+  <div class="pull-quote">
+    <p>La manca de regulació actual en l'arrendament dels locals de negoci fa que no es pugui garantir l'estabilitat dels projectes comercials que depenen d'una ubicació concreta.</p>
+    <cite>Memòria preliminar, Llei d'Arrendament de Béns, Generalitat de Catalunya</cite>
+  </div>
+
+  <p>La resposta no és necessàriament regular el preu —un debat complex amb arguments legítims en tots dos sentits. Però sí que existeixen eines intermèdies que altres països ja apliquen: durades mínimes de contracte més llargues, pròrrogues obligatòries vinculades a la viabilitat del negoci, drets de tempteig i retracte per a les comunitats quan un local canvia de mans, o penalitzacions per desocupació prolongada.</p>
+
+  <p>Mentre el marc legal no canviï, la única resposta estructural al problema és treure els locals del mercat especulatiu. I és exactament el que vol fer AQT.</p>
+
+  <div class="cta-box">
+    <div class="cta-box-text">Mentre la llei no protegeix el comerç local, la comunitat ha de fer-ho.</div>
+    <div class="cta-actions">
+      <a class="cta-btn cta-btn-primary" href="../projecte.html">Conèixer el model AQT</a>
+      <a class="cta-btn" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);" href="../contacte.html">Contactar</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
+      <div class="footer-desc">Iniciativa per a la preservació del comerç local de proximitat. En construcció a Catalunya.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Projecte</div>
+      <a href="../projecte.html">El projecte</a>
+      <a href="../model.html">El model</a>
+      <a href="../mapa.html">Mapa de casos</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Actualitat</div>
+      <a href="../actualitat.html">Tots els articles</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contacte</div>
+      <a href="../contacte.html">Contactar</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
+    <span class="footer-entity">Projecte en fase de constitució · 2026</span>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('nav-burger'),mobileNav=document.getElementById('nav-mobile');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open');});
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open');}));
+</script>
+</body>
+</html>
