@@ -406,20 +406,27 @@ const burger=document.getElementById('nav-burger'),mobileNav=document.getElement
 burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open');});
 mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open');}));
 
-const map=L.map('mapa-leaflet',{center:[41.4035,2.1544],zoom:15,zoomControl:true,scrollWheelZoom:false});
+const map=L.map('mapa-leaflet',{center:[41.4035,2.1544],zoom:14,zoomControl:true,scrollWheelZoom:false});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; <a href="https://carto.com/">CARTO</a>',subdomains:'abcd',maxZoom:19}).addTo(map);
 function makeIcon(color){return L.divIcon({className:'',html:`<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.2)"></div>`,iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10]});}
 const colors={risc:'#C47A00',tancat:'#C8392B',recuperat:'#2A7A4B'};
 const labels={risc:'En risc',tancat:'Tancat',recuperat:'Recuperat'};
-const punts=[
-  {lat:41.4043,lng:2.1547,nom:'Ferreteria Camps',cat:'tancat',desc:'90 anys obert. Tancament febrer 2026.'},
-  {lat:41.4021,lng:2.1562,nom:'Forn Santa Clara',cat:'risc',desc:'Lloguer doblat. Mediació en curs.'},
-  {lat:41.4010,lng:2.1575,nom:'Impremta Molina',cat:'risc',desc:'Propietari vol vendre el local.'},
-  {lat:41.4065,lng:2.1555,nom:'Carnisseria Can Ros',cat:'tancat',desc:'Tancat el desembre 2025. Local buit.'},
-  {lat:41.4038,lng:2.1510,nom:'Farmàcia Vergés',cat:'risc',desc:'Renovació de lloguer pendent.'},
-  {lat:41.4028,lng:2.1590,nom:'Llibreria Canigó',cat:'risc',desc:'Propietari jubilat sense relleu.'},
-];
-punts.forEach(p=>{L.marker([p.lat,p.lng],{icon:makeIcon(colors[p.cat])}).addTo(map).bindPopup(`<div class="popup-cat ${p.cat}">${labels[p.cat]}</div><div class="popup-title">${p.nom}</div><div class="popup-text">${p.desc}</div>`);});
+
+fetch('https://api.airtable.com/v0/appGuT1DQskra3f9p/tblImxsEi3bEj3clb?filterByFormula={Actiu}=1',{
+  headers:{Authorization:'Bearer patnuSBb3PFtjOg6B.45b031e3b5da717b082606371329a107f2dbe5ef5cbe670027da112a4d8653a1'}
+})
+.then(r=>r.json())
+.then(data=>{
+  data.records.forEach(r=>{
+    const f=r.fields;
+    if(!f.Lat||!f.Lng) return;
+    const cat=f.Categoria||'tancat';
+    L.marker([f.Lat,f.Lng],{icon:makeIcon(colors[cat]||colors.tancat)})
+      .addTo(map)
+      .bindPopup(`<div class="popup-cat ${cat}">${labels[cat]||cat}</div><div class="popup-title">${f.Nom||''}</div><div class="popup-text">${f['Descripció']||''}</div>`);
+  });
+})
+.catch(()=>{});
 </script>
 </body>
 </html>
