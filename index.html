@@ -48,21 +48,22 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .btn-ghost{color:#fff;font-size:14px;font-weight:600;text-decoration:none;padding:11px 20px;border:2px solid rgba(255,255,255,0.5);border-radius:4px;transition:border-color 0.15s;}
 .btn-ghost:hover{border-color:#fff;}
 
-/* QUÈ FEM */
-.que-fem{padding:72px 52px;border-bottom:1px solid var(--border);}
-.que-fem-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.que-fem-text h2{font-family:'Lora',Georgia,serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;margin-bottom:20px;}
-.que-fem-text h2 em{font-style:italic;color:var(--red);}
-.que-fem-text p{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:16px;}
-.que-fem-text p:last-of-type{margin-bottom:24px;}
-.que-fem-link{font-size:14px;font-weight:600;color:var(--cta);text-decoration:none;border-bottom:1.5px solid var(--cta);padding-bottom:1px;}
-.passos{display:flex;flex-direction:column;gap:0;max-width:480px;}
-.pas{padding:20px 0;border-bottom:1px solid var(--border);display:flex;gap:20px;align-items:flex-start;}
-.pas:first-child{padding-top:0;}
-.pas:last-child{border-bottom:none;}
-.pas-num{font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--red);flex-shrink:0;width:24px;padding-top:3px;}
-.pas-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
-.pas-text{font-size:13.5px;line-height:1.65;color:var(--muted);}
+/* CINC PASSOS */
+.que-fem{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--bg-warm);}
+.que-fem-header{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:24px;border-bottom:2px solid var(--border);margin-bottom:36px;}
+.que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.4vw,30px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;}
+.que-fem-link{font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;border-bottom:1.5px solid var(--border-dk);padding-bottom:1px;white-space:nowrap;}
+.passos{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.pas{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:24px 18px 20px;display:flex;flex-direction:column;transition:box-shadow 0.2s;}
+.pas:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.pas.destacat{border-left:3px solid var(--red);}
+.pas-num{font-family:'Lora',Georgia,serif;font-size:30px;font-weight:700;color:var(--border-dk);line-height:1;margin-bottom:12px;}
+.pas-icon{width:34px;height:34px;background:var(--bg-warm);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.pas-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.3;}
+.pas-text{font-size:12.5px;line-height:1.65;color:var(--muted);flex:1;}
+.pas-link{font-size:12px;font-weight:600;color:var(--red);text-decoration:none;margin-top:12px;display:inline-block;}
+.pas-link:hover{text-decoration:underline;}
 
 /* MAPA */
 .mapa-bloc{border-bottom:1px solid var(--border);}
@@ -135,7 +136,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
-  .que-fem{padding:48px 20px;}.que-fem-inner{grid-template-columns:1fr;gap:40px;}
+  .que-fem{padding:48px 20px;}.passos{grid-template-columns:1fr 1fr;gap:10px;}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
   .actualitat-bloc{padding:48px 20px;}
@@ -183,32 +184,55 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 </section>
 
 <!-- QUÈ FEM -->
-<section class="que-fem">
-  <div class="que-fem-inner">
-    <div class="que-fem-text">
-      <h2>No documentem la pèrdua.<br><em>L'evitem.</em></h2>
-      <p>Els comerços locals no tanquen perquè el barri no els vulgui. Tanquen perquè el mercat immobiliari els expulsa: lloguers doblats, propietaris que especulen, falta de relleu generacional.</p>
-      <p>Abans Que Tanqui és una iniciativa que proposa adquirir locals comercials quan la pressió immobiliària amenaça un comerç viable. Treure el local del mercat especulatiu és l'única manera d'evitar el tancament de manera permanent.</p>
-      <a class="que-fem-link" href="projecte.html">Llegir més sobre el projecte →</a>
+<section class="que-fem" id="que-fem">
+  <div class="que-fem-header">
+    <div>
+      <div class="que-fem-kicker">Com participar</div>
+      <div class="que-fem-title">AQT en cinc passos</div>
     </div>
-    <div class="passos">
-      <div class="pas">
-        <div class="pas-num">01</div>
-        <div><div class="pas-title">Detectem</div><div class="pas-text">Treball de camp al barri per identificar comerços en risc abans que sigui irreversible.</div></div>
-      </div>
-      <div class="pas">
-        <div class="pas-num">02</div>
-        <div><div class="pas-title">Analitzem</div><div class="pas-text">Valorem urgència, viabilitat econòmica i arrel al barri de cada cas.</div></div>
-      </div>
-      <div class="pas">
-        <div class="pas-num">03</div>
-        <div><div class="pas-title">Actuem</div><div class="pas-text">L'entitat adquireix el local. El barri no perd el comerç.</div></div>
-      </div>
-      <div class="pas">
-        <div class="pas-num">04</div>
-        <div><div class="pas-title">Reinvertim</div><div class="pas-text">Els excedents es destinen al proper cas. El sistema creix sol.</div></div>
-      </div>
+    <a class="que-fem-link" href="projecte.html">Veure el projecte complet →</a>
+  </div>
+  <div class="passos">
+
+    <div class="pas">
+      <div class="pas-num">01</div>
+      <div class="pas-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="pas-title">Entén el problema</div>
+      <div class="pas-text">Explora el mapa de tancaments. Veu la realitat del comerç a la Gràcia. Cada punt és un comerç que ha desaparegut o està en risc.</div>
+      <a class="pas-link" href="mapa.html">Veure el mapa →</a>
     </div>
+
+    <div class="pas">
+      <div class="pas-num">02</div>
+      <div class="pas-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      <div class="pas-title">Consumeix local</div>
+      <div class="pas-text">Cada euro al comerç de proximitat genera fins a 5 vegades més impacte a l'economia del barri que comprar a grans superfícies.</div>
+      <a class="pas-link" href="recursos.html">Calcular l'impacte →</a>
+    </div>
+
+    <div class="pas">
+      <div class="pas-num">03</div>
+      <div class="pas-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+      <div class="pas-title">Difon</div>
+      <div class="pas-text">Segueix-nos, comparteix, vine a les sessions obertes. Com més gent conegui el projecte, més força tenim per actuar.</div>
+      <a class="pas-link" href="participa.html">Com difondre →</a>
+    </div>
+
+    <div class="pas destacat">
+      <div class="pas-num">04</div>
+      <div class="pas-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="pas-title">Suma't</div>
+      <div class="pas-text">Fes-te sòcia fundadora. Les primeres que diuen que sí abans que res existeixi són les que fan possible que existeixi.</div>
+      <a class="pas-link" href="participa.html">Vull ser sòcia →</a>
+    </div>
+
+    <div class="pas">
+      <div class="pas-num">05</div>
+      <div class="pas-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="pas-title">El barri creix</div>
+      <div class="pas-text">Cada local adquirit és un local que no tornarà mai al mercat especulatiu. La Gràcia recupera el que és seu.</div>
+    </div>
+
   </div>
 </section>
 
