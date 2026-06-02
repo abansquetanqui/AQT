@@ -249,7 +249,7 @@ async function carregarDades() {
         lat:  parseFloat(r.fields['Lat'])  || null,
         lng:  parseFloat(r.fields['Lng'])  || null,
         cat:  (r.fields['Categoria'] || 'risc').toLowerCase(),
-        desc: r.fields['Descripcio'] || '',
+        desc: r.fields['Descripció'] || '',
       }))
       .filter(p => p.lat && p.lng && p.nom); // descartem els que falten coordenades
 
