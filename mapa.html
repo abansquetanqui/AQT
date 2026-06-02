@@ -73,6 +73,14 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .popup-cat.recuperat{background:rgba(42,122,75,0.12);color:#2A7A4B;}
 .popup-text{color:#6E786A;line-height:1.5;}
 
+/* GRÀFICS */
+.grafics-bloc{padding:56px 52px;background:var(--white);border-top:1px solid var(--border);}
+.grafics-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--border);}
+.grafics-kicker{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+.grafics-title{font-family:'Lora',Georgia,serif;font-size:clamp(20px,2vw,26px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
+.grafics-nota{font-size:12px;color:var(--muted);max-width:280px;text-align:right;line-height:1.5;}
+.grafics-inner{max-width:700px;margin:0 auto;}
+
 footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
 .footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
 .footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px;}
@@ -151,6 +159,19 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
     <div class="casos-list" id="casos-list"></div>
   </div>
 </div>
+
+<section class="grafics-bloc">
+  <div class="grafics-header">
+    <div>
+      <div class="grafics-kicker">Dades en construcció</div>
+      <div class="grafics-title">Tancaments documentats per any</div>
+    </div>
+    <div class="grafics-nota">Mostra els casos verificats que tenim fins ara. La base de dades creix contínuament.</div>
+  </div>
+  <div class="grafics-inner">
+    <canvas id="chart-anys" height="220"></canvas>
+  </div>
+</section>
 
 <footer>
   <div class="footer-grid">
@@ -256,6 +277,7 @@ async function carregarDades() {
     pintarMarcadors();
     actualitzarStats();
     renderLlista(filtrActual);
+    renderGrafic();
 
   } catch (err) {
     console.error('Error Airtable:', err);
@@ -352,6 +374,62 @@ const burger = document.getElementById('nav-burger');
 const mobileNav = document.getElementById('nav-mobile');
 burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { burger.classList.remove('open'); mobileNav.classList.remove('open'); }));
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+function renderGrafic() {
+  const anys = {};
+  punts.forEach(p => {
+    const match = p.desc.match(/\b(202[0-9])\b/);
+    const any = match ? match[1] : 'Desconegut';
+    if(any === 'Desconegut') return;
+    anys[any] = (anys[any] || 0) + 1;
+  });
+
+  const labels = Object.keys(anys).sort();
+  const valors = labels.map(a => anys[a]);
+
+  const ctx = document.getElementById('chart-anys');
+  if(!ctx) return;
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Tancaments documentats',
+        data: valors,
+        backgroundColor: '#C8392B',
+        borderRadius: 4,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.parsed.y + ' cas' + (ctx.parsed.y !== 1 ? 'os' : '')
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, font: { family: 'DM Sans', size: 12 }, color: '#6B6B67' },
+          grid: { color: '#E2E1DC' },
+          border: { display: false }
+        },
+        x: {
+          ticks: { font: { family: 'DM Sans', size: 13, weight: '600' }, color: '#1A1A18' },
+          grid: { display: false },
+          border: { display: false }
+        }
+      }
+    }
+  });
+}
 </script>
 </body>
 </html>
