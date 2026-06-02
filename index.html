@@ -48,6 +48,17 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .btn-ghost{color:#fff;font-size:14px;font-weight:600;text-decoration:none;padding:11px 20px;border:2px solid rgba(255,255,255,0.5);border-radius:4px;transition:border-color 0.15s;}
 .btn-ghost:hover{border-color:#fff;}
 
+/* MISSIÓ */
+.missio-bloc{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--white);}
+.missio-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.missio-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.missio-title{font-family:'Lora',Georgia,serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;margin-bottom:16px;}
+.missio-title em{font-style:italic;color:var(--red);}
+.missio-bloc p{font-size:15px;line-height:1.8;color:var(--ink-mid);margin-bottom:20px;}
+.missio-link{font-size:13px;font-weight:600;color:var(--red);text-decoration:none;border-bottom:1.5px solid var(--red);padding-bottom:1px;}
+.missio-imgs{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;}
+.missio-img{width:100%;height:auto;border-radius:8px;}
+
 /* CINC PASSOS */
 .que-fem{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--bg-warm);}
 .que-fem-header{text-align:center;margin-bottom:36px;}
@@ -139,6 +150,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
+  .missio-bloc{padding:48px 20px;}.missio-inner{grid-template-columns:1fr;gap:32px;}
   .que-fem{padding:48px 20px;}.passos{grid-template-columns:1fr;}.passos-row2{grid-template-columns:1fr;max-width:100%;}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
@@ -182,6 +194,22 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
     <div class="hero-actions">
       <a class="btn-primary" href="contacte.html">Participa ara</a>
       <a class="btn-ghost" href="projecte.html">Conèixer el projecte →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSIÓ -->
+<section class="missio-bloc">
+  <div class="missio-inner">
+    <div class="missio-text">
+      <div class="missio-kicker">Qui som</div>
+      <h2 class="missio-title">No és nostàlgia.<br><em>És propietat.</em></h2>
+      <p>Els comerços de barri no tanquen perquè ningú hi va. Tanquen perquè els locals estan en mans del mercat especulatiu. AQT vol canviar qui és el propietari, no qui és el client.</p>
+      <a class="missio-link" href="projecte.html">Llegir més sobre el projecte →</a>
+    </div>
+    <div class="missio-imgs">
+      <img src="img/mapa-ilustracio.png" alt="Mapa de barri amb pins de comerços" class="missio-img">
+      <img src="img/comunitat-ilustracio.png" alt="Persones del barri intercanviant" class="missio-img">
     </div>
   </div>
 </section>
