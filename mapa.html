@@ -79,7 +79,11 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .grafics-kicker{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
 .grafics-title{font-family:'Lora',Georgia,serif;font-size:clamp(20px,2vw,26px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
 .grafics-nota{font-size:12px;color:var(--muted);max-width:280px;text-align:right;line-height:1.5;}
-.grafics-inner{max-width:700px;margin:0 auto;}
+.grafics-inner{width:100%;}
+.grafics-row{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start;}
+.grafic-subtitol{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.grafic-pie{display:flex;flex-direction:column;align-items:center;}
+.grafic-pie canvas{max-width:220px;}
 
 footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
 .footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
@@ -105,7 +109,9 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
   #mapa-full{height:360px;}
   .mapa-panel{max-height:none;border-left:none;border-top:1px solid var(--border);}
   .mapa-stats-bar{padding:16px 20px;gap:20px;flex-wrap:wrap;}
-  footer{padding:40px 20px 0;}
+  .grafics-bloc{padding:40px 20px;}
+  .grafics-header{flex-direction:column;align-items:flex-start;gap:8px;}.grafics-nota{text-align:left;max-width:100%;}
+  .grafics-row{grid-template-columns:1fr;gap:32px;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
   .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
 }
@@ -164,12 +170,21 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
   <div class="grafics-header">
     <div>
       <div class="grafics-kicker">Dades en construcció</div>
-      <div class="grafics-title">Tancaments documentats per any</div>
+      <div class="grafics-title">Tancaments documentats</div>
     </div>
     <div class="grafics-nota">Mostra els casos verificats que tenim fins ara. La base de dades creix contínuament.</div>
   </div>
   <div class="grafics-inner">
-    <canvas id="chart-anys" height="220"></canvas>
+    <div class="grafics-row">
+      <div class="grafic-timeline">
+        <div class="grafic-subtitol">Per any</div>
+        <canvas id="chart-anys" height="220"></canvas>
+      </div>
+      <div class="grafic-pie">
+        <div class="grafic-subtitol">Per districte</div>
+        <canvas id="chart-districtes" height="220"></canvas>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -377,58 +392,90 @@ mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
+function getDistricte(p) {
+  const a = (p.addr + ' ' + p.desc).toLowerCase();
+  if(a.includes('gràcia') || a.includes('gracia') || a.includes('gran de gràcia') || a.includes('travessera de gràcia') || a.includes('llibertat')) return 'Gràcia';
+  if(a.includes('gòtic') || a.includes('gothic') || a.includes('petritxol') || a.includes('call') || a.includes('escudellers') || a.includes('palla') || a.includes('portaferrissa')) return 'Ciutat Vella';
+  if(a.includes('raval') || a.includes('cera')) return 'Ciutat Vella';
+  if(a.includes('sant pere') || a.includes('ribera')) return 'Ciutat Vella';
+  if(a.includes('eixample') || a.includes('roger de llúria') || a.includes('passeig de gràcia') || a.includes('diagonal')) return 'Eixample';
+  if(a.includes('sant antoni') || a.includes('tamarit') || a.includes('parlament')) return 'Eixample';
+  if(a.includes('sants') || a.includes('esplugues')) return 'Sants-Montjuïc';
+  if(a.includes('sant andreu') || a.includes('versalles')) return 'Sant Andreu';
+  if(a.includes('clot') || a.includes('muntanya')) return 'Sant Martí';
+  return 'Altres';
+}
+
 function renderGrafic() {
   const anys = {};
   punts.forEach(p => {
     const match = p.desc.match(/\b(202[0-9])\b/);
-    const any = match ? match[1] : 'Desconegut';
-    if(any === 'Desconegut') return;
+    const any = match ? match[1] : null;
+    if(!any) return;
     anys[any] = (anys[any] || 0) + 1;
   });
 
-  const labels = Object.keys(anys).sort();
-  const valors = labels.map(a => anys[a]);
+  const labelsAnys = Object.keys(anys).sort();
+  const valorsAnys = labelsAnys.map(a => anys[a]);
 
-  const ctx = document.getElementById('chart-anys');
-  if(!ctx) return;
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Tancaments documentats',
-        data: valors,
-        backgroundColor: '#C8392B',
-        borderRadius: 4,
-        borderSkipped: false,
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => ctx.parsed.y + ' cas' + (ctx.parsed.y !== 1 ? 'os' : '')
-          }
-        }
+  const ctxAnys = document.getElementById('chart-anys');
+  if(ctxAnys) {
+    new Chart(ctxAnys, {
+      type: 'bar',
+      data: {
+        labels: labelsAnys,
+        datasets: [{
+          label: 'Tancaments',
+          data: valorsAnys,
+          backgroundColor: '#C8392B',
+          borderRadius: 4,
+          borderSkipped: false,
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: 'DM Sans', size: 12 }, color: '#6B6B67' },
-          grid: { color: '#E2E1DC' },
-          border: { display: false }
-        },
-        x: {
-          ticks: { font: { family: 'DM Sans', size: 13, weight: '600' }, color: '#1A1A18' },
-          grid: { display: false },
-          border: { display: false }
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + ' cas' + (c.parsed.y !== 1 ? 'os' : '') } } },
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 1, font: { family: 'DM Sans', size: 12 }, color: '#6B6B67' }, grid: { color: '#E2E1DC' }, border: { display: false } },
+          x: { ticks: { font: { family: 'DM Sans', size: 13, weight: '600' }, color: '#1A1A18' }, grid: { display: false }, border: { display: false } }
         }
       }
-    }
+    });
+  }
+
+  const districtes = {};
+  punts.forEach(p => {
+    const d = getDistricte(p);
+    districtes[d] = (districtes[d] || 0) + 1;
   });
+
+  const labelsD = Object.keys(districtes).sort((a,b) => districtes[b] - districtes[a]);
+  const valorsD = labelsD.map(d => districtes[d]);
+  const colors = ['#C8392B','#C47A00','#2A7A4B','#1A5A8A','#6B3A7A','#5A6B3A','#3A5A6B'];
+
+  const ctxD = document.getElementById('chart-districtes');
+  if(ctxD) {
+    new Chart(ctxD, {
+      type: 'doughnut',
+      data: {
+        labels: labelsD,
+        datasets: [{
+          data: valorsD,
+          backgroundColor: colors.slice(0, labelsD.length),
+          borderWidth: 2,
+          borderColor: '#fff',
+        }]
+      },
+      options: {
+        responsive: true,
+        cutout: '55%',
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 11 }, color: '#6B6B67', padding: 10, boxWidth: 12 } },
+          tooltip: { callbacks: { label: c => c.label + ': ' + c.parsed + ' casos' } }
+        }
+      }
+    });
+  }
 }
 </script>
 </body>
