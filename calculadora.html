@@ -6,70 +6,105 @@
 <title>Calculadora d'impacte · Abans Que Tanqui</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--amber:#C47A00;--cta:#2A7A4B;--cta-lt:#348A58;}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--border:#E2E1DC;--border-dk:#C8C7C0;--amber:#C47A00;--cta:#2A7A4B;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
 
+/* NAV */
 nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
 .nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
 .nav-links{display:flex;gap:22px;align-items:center;}
-.nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;}
 .nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--ink)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;}
 .nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;}
 .nav-mobile.open{display:flex;}
-.nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;}
+.nav-mobile a{font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;padding:12px 24px;}
 
 /* HEADER */
 .page-header{background:var(--white);border-bottom:1px solid var(--border);padding:56px 52px 48px;}
 .page-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
 .page-title{font-family:'Lora',serif;font-size:clamp(32px,4vw,52px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:14px;}
 .page-title em{font-style:italic;color:var(--red);}
-.page-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px;}
+.page-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:580px;}
 
-/* CALCULADORA */
-.calc-wrap{padding:64px 52px;max-width:820px;margin:0 auto;}
+/* CONTEXT */
+.context-bloc{background:var(--ink);padding:32px 52px;}
+.context-inner{max-width:820px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+.context-item{border-left:3px solid rgba(255,255,255,0.15);padding-left:16px;}
+.context-num{font-family:'Lora',serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1;}
+.context-label{font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px;line-height:1.4;}
 
-.calc-bloc{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:40px;}
-.calc-label{font-size:13px;font-weight:600;color:var(--ink-mid);margin-bottom:8px;letter-spacing:0.01em;}
-.calc-amount{font-family:'Lora',serif;font-size:52px;font-weight:700;color:var(--ink);letter-spacing:-0.03em;line-height:1;margin-bottom:4px;}
-.calc-amount span{font-size:24px;font-weight:400;color:var(--muted);}
-.calc-slider{width:100%;margin:16px 0 8px;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;}
-.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--ink);cursor:pointer;border:3px solid var(--white);box-shadow:0 0 0 1px var(--border-dk);}
-.calc-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--ink);cursor:pointer;border:3px solid var(--white);}
-.calc-range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:40px;}
+/* CALC WRAP */
+.calc-wrap{padding:48px 52px;max-width:820px;margin:0 auto;}
 
-.calc-results{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;padding-top:32px;border-top:2px solid var(--border);}
-.result-card{border-radius:6px;padding:24px;}
-.result-card.local{background:#EAF3EE;border:1px solid #B8D9C4;}
-.result-card.gran{background:#FDF0EE;border:1px solid #F0C4BC;}
-.result-kicker{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;}
-.result-card.local .result-kicker{color:var(--cta);}
-.result-card.gran .result-kicker{color:var(--red);}
-.result-num{font-family:'Lora',serif;font-size:40px;font-weight:700;letter-spacing:-0.03em;line-height:1;margin-bottom:6px;}
-.result-card.local .result-num{color:var(--cta);}
-.result-card.gran .result-num{color:var(--red);}
-.result-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+/* CATEGORIES */
+.cats-title{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-0.01em;}
+.cats-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.cats-grid{display:flex;flex-direction:column;gap:12px;}
+.cat-row{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:18px 20px;}
+.cat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.cat-left{display:flex;align-items:center;gap:10px;}
+.cat-icon{font-size:18px;width:36px;height:36px;background:var(--bg-warm);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.cat-name{font-size:14px;font-weight:600;color:var(--ink);}
+.cat-name span{font-size:12px;font-weight:400;color:var(--muted);display:block;margin-top:1px;}
+.cat-amount{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
+.cat-amount small{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;color:var(--muted);}
+.cat-slider{width:100%;-webkit-appearance:none;appearance:none;height:3px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;}
+.cat-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--amber);cursor:pointer;border:2.5px solid var(--white);box-shadow:0 0 0 1px var(--border-dk);}
+.cat-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--amber);cursor:pointer;border:2.5px solid var(--white);}
+.cat-pct-wrap{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+.cat-pct-label{font-size:11px;color:var(--muted);}
+.cat-pct-val{font-size:12px;font-weight:600;color:var(--amber);}
+.cat-pct-slider{width:55%;-webkit-appearance:none;appearance:none;height:3px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;}
+.cat-pct-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--cta);cursor:pointer;border:2px solid var(--white);}
+.cat-pct-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--cta);cursor:pointer;border:2px solid var(--white);}
 
-.calc-diferencia{background:var(--ink);border-radius:6px;padding:24px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-.dif-text{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.5;}
-.dif-text strong{color:#fff;font-size:16px;display:block;margin-bottom:2px;}
-.dif-num{font-family:'Lora',serif;font-size:36px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-0.02em;flex-shrink:0;}
+/* RESULTAT TOTAL */
+.resultat-bloc{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:32px;margin-top:24px;}
+.res-title{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.res-card{border-radius:5px;padding:20px;}
+.res-card.local{background:#EAF3EE;border:1px solid #B8D9C4;}
+.res-card.gran{background:#FDF0EE;border:1px solid #F0C4BC;}
+.res-kicker{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.res-card.local .res-kicker{color:var(--cta);}
+.res-card.gran .res-kicker{color:var(--red);}
+.res-num{font-family:'Lora',serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;line-height:1;margin-bottom:4px;}
+.res-card.local .res-num{color:var(--cta);}
+.res-card.gran .res-num{color:var(--red);}
+.res-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+.res-dif{background:var(--ink);border-radius:5px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;}
+.res-dif-text{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;}
+.res-dif-text strong{color:#fff;display:block;margin-bottom:2px;}
+.res-dif-num{font-family:'Lora',serif;font-size:34px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-0.02em;flex-shrink:0;}
+
+/* MISSATGE CONTEXTUAL */
+.res-context{border-left:3px solid var(--red);background:#FDF6F5;padding:16px 20px;border-radius:0 4px 4px 0;margin-bottom:20px;}
+.res-context p{font-size:13px;color:var(--ink-mid);line-height:1.65;}
+.res-context p + p{margin-top:8px;}
+
+/* COMPARTIR */
+.compartir{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.compartir-label{font-size:12px;font-weight:600;color:var(--muted);}
+.btn-compartir{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:3px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer;border:none;}
+.btn-twitter{background:#000;color:#fff;}
+.btn-whatsapp{background:#25D366;color:#fff;}
+.btn-copy{background:var(--bg-warm);color:var(--ink);border:1px solid var(--border);}
 
 /* NOTA */
-.calc-nota{background:var(--bg-warm);border-radius:6px;padding:20px 24px;margin-top:32px;font-size:12.5px;color:var(--muted);line-height:1.65;}
-.calc-nota strong{color:var(--ink-mid);}
+.calc-nota{background:var(--bg-warm);border-radius:6px;padding:18px 22px;margin-top:24px;font-size:12px;color:var(--muted);line-height:1.65;}
 
 /* CTA */
 .calc-cta{text-align:center;padding:56px 52px;border-top:1px solid var(--border);}
-.calc-cta-title{font-family:'Lora',serif;font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-0.02em;}
-.calc-cta-sub{font-size:14px;color:var(--muted);margin-bottom:24px;}
-.btn-primary{background:var(--ink);color:#fff;padding:13px 24px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;transition:background 0.15s;}
-.btn-primary:hover{background:var(--ink-mid);}
+.calc-cta-title{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-0.02em;}
+.calc-cta-sub{font-size:14px;color:var(--muted);margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;}
+.btn-primary{background:var(--ink);color:#fff;padding:12px 22px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;}
 
 /* FOOTER */
 footer{background:#111110;padding:32px 52px;display:flex;justify-content:space-between;align-items:center;}
@@ -77,13 +112,17 @@ footer{background:#111110;padding:32px 52px;display:flex;justify-content:space-b
 .footer-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
 .footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
 
+/* ANIMACIÓ */
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+.updated{animation:pulse 0.3s ease;}
+
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .page-header{padding:40px 20px 32px;}
-  .calc-wrap{padding:40px 20px;}
-  .calc-bloc{padding:24px 20px;}
-  .calc-results{grid-template-columns:1fr;}
-  .calc-diferencia{flex-direction:column;text-align:center;}
+  .context-bloc{padding:24px 20px;}.context-inner{grid-template-columns:1fr;}
+  .calc-wrap{padding:32px 20px;}
+  .res-grid{grid-template-columns:1fr;}
+  .res-dif{flex-direction:column;text-align:center;}
   .calc-cta{padding:40px 20px;}
   footer{padding:24px 20px;flex-direction:column;gap:10px;text-align:center;}
 }
@@ -99,7 +138,7 @@ footer{background:#111110;padding:32px 52px;display:flex;justify-content:space-b
     <a href="actualitat.html">Actualitat</a>
     <a href="recursos.html">Recursos</a>
     <a href="contacte.html">Contacte</a>
-    <a class="nav-cta" href="contacte.html?tipus=comerc">Tens un comerç?</a>
+    <a class="nav-cta" href="contacte.html">Suma't</a>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
@@ -109,118 +148,265 @@ footer{background:#111110;padding:32px 52px;display:flex;justify-content:space-b
   <a href="actualitat.html">Actualitat</a>
   <a href="recursos.html">Recursos</a>
   <a href="contacte.html">Contacte</a>
-  <a class="nav-cta" href="contacte.html?tipus=comerc">Tens un comerç?</a>
 </div>
 
 <div class="page-header">
-  <div class="page-kicker">Eina de conscienciació</div>
-  <h1 class="page-title">Cada euro<br><em>és una decisió.</em></h1>
-  <p class="page-sub">Quan compres al comerç de barri, la major part dels diners es queda al barri. Quan compres a grans superfícies, la major part marxa. Calcula la diferència.</p>
+  <div class="page-kicker">Cada euro és una decisió</div>
+  <h1 class="page-title">Consumir local <em>importa.</em><br>Però no n'hi ha prou.</h1>
+  <p class="page-sub">Quan compres al comerç de barri, la major part dels diners queda al barri. Calcula quant impacte generes amb les teves decisions de consum quotidià — i entén per què, tot i això, els comerços segueixen tancant.</p>
 </div>
 
-<div class="calc-wrap">
-  <div class="calc-bloc">
-    <div class="calc-label">Quant gastes al mes en consum quotidià?</div>
-    <div class="calc-amount" id="display-amount">200 <span>€/mes</span></div>
-    <input type="range" class="calc-slider" id="slider" min="50" max="1000" step="10" value="200">
-    <div class="calc-range-labels"><span>50 €</span><span>1.000 €</span></div>
-
-    <div class="calc-label">D'aquest consum, quin percentatge fas al comerç local?</div>
-    <div class="calc-amount" id="display-pct">50 <span>%</span></div>
-    <input type="range" class="calc-slider" id="slider-pct" min="0" max="100" step="5" value="50">
-    <div class="calc-range-labels"><span>0%</span><span>100%</span></div>
-
-    <div class="calc-results">
-      <div class="result-card local">
-        <div class="result-kicker">Impacte al barri · Comerç local</div>
-        <div class="result-num" id="res-local">636 €</div>
-        <div class="result-desc">Retorna a l'economia local per cada 100 € gastats al comerç de proximitat.</div>
-      </div>
-      <div class="result-card gran">
-        <div class="result-kicker">Impacte al barri · Gran superfície</div>
-        <div class="result-num" id="res-gran">47 €</div>
-        <div class="result-desc">Retorna a l'economia local per cada 100 € gastats a cadenes i grans superfícies.</div>
-      </div>
+<div class="context-bloc">
+  <div class="context-inner">
+    <div class="context-item">
+      <div class="context-num">63,6€</div>
+      <div class="context-label">de cada 100€ gastats al comerç local queden a l'economia del barri</div>
     </div>
-
-    <div class="calc-diferencia">
-      <div class="dif-text">
-        <strong id="dif-title">Amb les teves decisions actuals</strong>
-        generes <span id="dif-local-any"></span> d'impacte local a l'any.<br>
-        Si tot fos a grans superfícies, en generaries <span id="dif-gran-any"></span>.
-      </div>
-      <div class="dif-num" id="dif-num">+589 €</div>
+    <div class="context-item">
+      <div class="context-num">4,7€</div>
+      <div class="context-label">de cada 100€ gastats a grans superfícies queden al barri</div>
     </div>
-
-    <div class="calc-nota">
-      <strong>Sobre les dades:</strong> El multiplicador del comerç local (63,6%) i de les grans superfícies (47%) provenen d'estudis d'economia local del Regne Unit i els EUA àmpliament citats en la literatura acadèmica sobre impacte econòmic del comerç de proximitat. Les xifres exactes varien per territori i tipologia de comerç — aquesta eina és orientativa.
+    <div class="context-item">
+      <div class="context-num">16,85€/m²</div>
+      <div class="context-label">preu mitjà del lloguer comercial a Barcelona el 2025. Inassequible per al petit comerç.</div>
     </div>
   </div>
 </div>
 
+<div class="calc-wrap">
+  <div class="cats-title">Calcula el teu impacte per categories</div>
+  <p class="cats-sub">Mou els sliders per indicar quant gastes i quin percentatge fas al comerç local de barri.</p>
+
+  <div class="cats-grid" id="cats-grid">
+
+    <div class="cat-row" data-cat="alimentacio">
+      <div class="cat-top">
+        <div class="cat-left">
+          <div class="cat-icon">🛒</div>
+          <div class="cat-name">Alimentació<span>Mercat, fruiteria, forn, carnisseria...</span></div>
+        </div>
+        <div class="cat-amount"><span class="cat-val">120</span> <small>€/mes</small></div>
+      </div>
+      <input type="range" class="cat-slider" min="0" max="400" step="10" value="120">
+      <div class="cat-pct-wrap">
+        <span class="cat-pct-label">% al comerç local:</span>
+        <input type="range" class="cat-pct-slider" min="0" max="100" step="5" value="60">
+        <span class="cat-pct-val">60%</span>
+      </div>
+    </div>
+
+    <div class="cat-row" data-cat="oci">
+      <div class="cat-top">
+        <div class="cat-left">
+          <div class="cat-icon">🎭</div>
+          <div class="cat-name">Oci i cultura<span>Bars, restaurants, llibreries, cinema...</span></div>
+        </div>
+        <div class="cat-amount"><span class="cat-val">80</span> <small>€/mes</small></div>
+      </div>
+      <input type="range" class="cat-slider" min="0" max="400" step="10" value="80">
+      <div class="cat-pct-wrap">
+        <span class="cat-pct-label">% al comerç local:</span>
+        <input type="range" class="cat-pct-slider" min="0" max="100" step="5" value="70">
+        <span class="cat-pct-val">70%</span>
+      </div>
+    </div>
+
+    <div class="cat-row" data-cat="roba">
+      <div class="cat-top">
+        <div class="cat-left">
+          <div class="cat-icon">👗</div>
+          <div class="cat-name">Roba i complements<span>Boutiques, sabateries, merceries...</span></div>
+        </div>
+        <div class="cat-amount"><span class="cat-val">50</span> <small>€/mes</small></div>
+      </div>
+      <input type="range" class="cat-slider" min="0" max="300" step="10" value="50">
+      <div class="cat-pct-wrap">
+        <span class="cat-pct-label">% al comerç local:</span>
+        <input type="range" class="cat-pct-slider" min="0" max="100" step="5" value="30">
+        <span class="cat-pct-val">30%</span>
+      </div>
+    </div>
+
+    <div class="cat-row" data-cat="serveis">
+      <div class="cat-top">
+        <div class="cat-left">
+          <div class="cat-icon">✂️</div>
+          <div class="cat-name">Serveis<span>Perruqueria, neteja, reparacions...</span></div>
+        </div>
+        <div class="cat-amount"><span class="cat-val">40</span> <small>€/mes</small></div>
+      </div>
+      <input type="range" class="cat-slider" min="0" max="200" step="10" value="40">
+      <div class="cat-pct-wrap">
+        <span class="cat-pct-label">% al comerç local:</span>
+        <input type="range" class="cat-pct-slider" min="0" max="100" step="5" value="80">
+        <span class="cat-pct-val">80%</span>
+      </div>
+    </div>
+
+    <div class="cat-row" data-cat="llar">
+      <div class="cat-top">
+        <div class="cat-left">
+          <div class="cat-icon">🏠</div>
+          <div class="cat-name">Llar i ferreteria<span>Drogueries, ferreteries, floristeries...</span></div>
+        </div>
+        <div class="cat-amount"><span class="cat-val">30</span> <small>€/mes</small></div>
+      </div>
+      <input type="range" class="cat-slider" min="0" max="200" step="10" value="30">
+      <div class="cat-pct-wrap">
+        <span class="cat-pct-label">% al comerç local:</span>
+        <input type="range" class="cat-pct-slider" min="0" max="100" step="5" value="50">
+        <span class="cat-pct-val">50%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESULTAT -->
+  <div class="resultat-bloc" id="resultat">
+    <div class="res-title">El teu impacte anual estimat</div>
+    <div class="res-grid">
+      <div class="res-card local">
+        <div class="res-kicker">Amb el teu consum actual</div>
+        <div class="res-num" id="res-actual">0 €</div>
+        <div class="res-desc">queden a l'economia local each any gràcies a les teves decisions de compra.</div>
+      </div>
+      <div class="res-card gran">
+        <div class="res-kicker">Si tot fos a grans superfícies</div>
+        <div class="res-num" id="res-gran">0 €</div>
+        <div class="res-desc">és el que quedaria al barri si totes les teves compres anessin a cadenes.</div>
+      </div>
+    </div>
+    <div class="res-dif">
+      <div class="res-dif-text">
+        <strong>La diferència que fa el teu consum local</strong>
+        Cada any, les teves decisions generen <span id="res-dif-extra">0 €</span> més d'impacte al barri que si compressis tot a grans superfícies.
+      </div>
+      <div class="res-dif-num" id="res-dif-num">0 €</div>
+    </div>
+
+    <div class="res-context">
+      <p id="res-missatge">Ajusta els sliders per veure el teu impacte.</p>
+      <p>Però recorda: <strong>consumir local no és suficient per salvar els comerços</strong>. Si el propietari del local puja el lloguer demà, el teu consum no pot evitar el tancament. Per això existeix AQT — per atacar la causa, no el símptoma.</p>
+    </div>
+
+    <div class="compartir">
+      <span class="compartir-label">Comparteix el teu impacte:</span>
+      <button class="btn-compartir btn-twitter" id="btn-twitter">𝕏 Twitter</button>
+      <button class="btn-compartir btn-whatsapp" id="btn-whatsapp">WhatsApp</button>
+      <button class="btn-compartir btn-copy" id="btn-copy">📋 Copiar</button>
+    </div>
+  </div>
+
+  <div class="calc-nota">
+    <strong>Sobre les dades:</strong> Els multiplicadors (63,6% per al comerç local, 4,7% per a grans superfícies) provenen d'estudis d'impacte econòmic local del Regne Unit i els EUA citats àmpliament en la literatura acadèmica sobre economia de proximitat. La dada de 16,85€/m² de lloguer comercial prové de l'Observatori de l'Agència de Desenvolupament Econòmic de l'AMB (2025). Totes les xifres són orientatives.
+  </div>
+</div>
+
 <div class="calc-cta">
-  <div class="calc-cta-title">Consumir local ajuda. Però no és suficient.</div>
-  <div class="calc-cta-sub">Si el local on compres demà pugés el lloguer i tanqués, el teu consum no podria evitar-ho. Per això existeix AQT.</div>
-  <a class="btn-primary" href="participa.html">Suma't al projecte →</a>
+  <div class="calc-cta-title">Consumir local ajuda. Però no n'hi ha prou.</div>
+  <div class="calc-cta-sub">El problema no és que la gent no compri al barri. El problema és que ningú regula el que costa tenir un local al barri.</div>
+  <a class="btn-primary" href="contacte.html">Suma't al projecte →</a>
 </div>
 
 <footer>
   <div class="footer-brand"><div class="footer-dot"></div>Abans Que Tanqui</div>
-  <div class="footer-copy">© 2026 Abans Que Tanqui · Cooperativa en constitució · Gràcia, Barcelona</div>
+  <div class="footer-copy">© 2026 Abans Que Tanqui · En construcció · Gràcia, Barcelona</div>
 </footer>
 
 <script>
-const slider = document.getElementById('slider');
-const sliderPct = document.getElementById('slider-pct');
-const displayAmount = document.getElementById('display-amount');
-const displayPct = document.getElementById('display-pct');
-const resLocal = document.getElementById('res-local');
-const resGran = document.getElementById('res-gran');
-const difNum = document.getElementById('dif-num');
-const difLocalAny = document.getElementById('dif-local-any');
-const difGranAny = document.getElementById('dif-gran-any');
-
 const MULT_LOCAL = 0.636;
 const MULT_GRAN = 0.047;
 
-function fmt(n) {
-  return Math.round(n).toLocaleString('ca-ES') + ' €';
+function fmt(n){return Math.round(n).toLocaleString('ca-ES') + ' €';}
+
+function getCategories(){
+  const rows = document.querySelectorAll('.cat-row');
+  let totalLocal = 0, totalGran = 0, totalSpend = 0;
+  rows.forEach(row => {
+    const spend = parseInt(row.querySelector('.cat-slider').value);
+    const pct = parseInt(row.querySelector('.cat-pct-slider').value) / 100;
+    const local = spend * pct;
+    const gran = spend * (1 - pct);
+    totalLocal += local * MULT_LOCAL;
+    totalGran += gran * MULT_GRAN;
+    totalSpend += spend;
+  });
+  return {totalLocal, totalGran, totalSpend};
 }
 
-function update() {
-  const total = parseInt(slider.value);
-  const pct = parseInt(sliderPct.value) / 100;
-
-  const local = total * pct;
-  const gran = total * (1 - pct);
-
-  const impLocal = local * MULT_LOCAL + gran * MULT_GRAN;
-  const impGranTotal = total * MULT_GRAN;
-  const impLocalTotal = total * MULT_LOCAL;
-
-  displayAmount.innerHTML = total + ' <span>€/mes</span>';
-  displayPct.innerHTML = sliderPct.value + ' <span>%</span>';
-
-  resLocal.textContent = fmt(impLocalTotal / total * 100) .replace('€','') + ' €';
-  resGran.textContent = fmt(impGranTotal / total * 100).replace('€','') + ' €';
-
-  const anyLocal = impLocal * 12;
-  const anyGran = impGranTotal * 12;
-  const dif = anyLocal - anyGran;
-
-  difLocalAny.textContent = fmt(anyLocal);
-  difGranAny.textContent = fmt(anyGran);
-  difNum.textContent = '+' + fmt(dif);
+function getMissatge(totalLocal, totalGran, totalSpend){
+  const pctLocal = totalSpend > 0 ? (totalLocal / (totalSpend * MULT_LOCAL)) * 100 : 0;
+  if(pctLocal > 70) return '🌱 El teu perfil de consum és molt local. Ets part de la solució — i saps que no n\'hi ha prou.';
+  if(pctLocal > 40) return '📊 Fas un consum mixt. Cada categoria on pots augmentar el percentatge local multiplica el teu impacte al barri.';
+  return '⚠️ La major part del teu consum va a grans cadenes. Canviar algunes categories podria generar centenars d\'euros més d\'impacte local cada any.';
 }
 
-slider.addEventListener('input', update);
-sliderPct.addEventListener('input', update);
-update();
+function update(){
+  const {totalLocal, totalGran, totalSpend} = getCategories();
+  const anyLocal = totalLocal * 12;
+  const anyGran = totalGran * 12;
+  const difExtra = (anyLocal - anyGran);
+
+  // Actualitzar valors
+  const el = (id) => document.getElementById(id);
+  el('res-actual').textContent = fmt(anyLocal);
+  el('res-gran').textContent = fmt(anyGran);
+  el('res-dif-extra').textContent = fmt(difExtra);
+  el('res-dif-num').textContent = fmt(difExtra);
+  el('res-missatge').textContent = getMissatge(totalLocal, totalGran, totalSpend);
+
+  // Animació
+  const bloc = document.getElementById('resultat');
+  bloc.classList.remove('updated');
+  void bloc.offsetWidth;
+  bloc.classList.add('updated');
+}
+
+// Inicialitzar sliders categories
+document.querySelectorAll('.cat-row').forEach(row => {
+  const slider = row.querySelector('.cat-slider');
+  const pctSlider = row.querySelector('.cat-pct-slider');
+  const valDisplay = row.querySelector('.cat-val');
+  const pctDisplay = row.querySelector('.cat-pct-val');
+
+  slider.addEventListener('input', () => {
+    valDisplay.textContent = slider.value;
+    update();
+  });
+  pctSlider.addEventListener('input', () => {
+    pctDisplay.textContent = pctSlider.value + '%';
+    update();
+  });
+});
+
+// Compartir
+function getTextCompartir(){
+  const {totalLocal} = getCategories();
+  const anyLocal = Math.round(totalLocal * 12);
+  return `Cada any genero ${anyLocal.toLocaleString('ca-ES')}€ d'impacte a l'economia local del meu barri comprant al comerç de proximitat. Però consumir local no n'hi ha prou per salvar-los. Descobreix per què → abansquetanqui.github.io/AQT/calculadora.html`;
+}
+
+document.getElementById('btn-twitter').addEventListener('click', () => {
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(getTextCompartir()));
+});
+document.getElementById('btn-whatsapp').addEventListener('click', () => {
+  window.open('https://wa.me/?text=' + encodeURIComponent(getTextCompartir()));
+});
+document.getElementById('btn-copy').addEventListener('click', () => {
+  navigator.clipboard.writeText(getTextCompartir()).then(() => {
+    const btn = document.getElementById('btn-copy');
+    btn.textContent = '✓ Copiat!';
+    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+  });
+});
 
 // Nav burger
-const burger = document.getElementById('nav-burger');
-const mobileNav = document.getElementById('nav-mobile');
-burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+document.getElementById('nav-burger').addEventListener('click', function(){
+  document.getElementById('nav-mobile').classList.toggle('open');
+});
+
+// Init
+update();
 </script>
 </body>
 </html>
