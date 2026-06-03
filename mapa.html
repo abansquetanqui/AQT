@@ -73,7 +73,37 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .popup-cat.recuperat{background:rgba(42,122,75,0.12);color:#2A7A4B;}
 .popup-text{color:#6E786A;line-height:1.5;}
 
-/* GRÀFICS */
+/* FITXA LATERAL */
+.fitxa{display:none;position:fixed;top:64px;right:0;width:360px;height:calc(100vh - 64px);background:var(--white);border-left:1px solid var(--border);z-index:500;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.08);}
+.fitxa.open{display:flex;flex-direction:column;}
+.fitxa-header{padding:24px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
+.fitxa-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--muted);padding:4px;line-height:1;}
+.fitxa-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:10px;}
+.fitxa-badge.tancat{background:rgba(196,43,16,0.1);color:var(--red);}
+.fitxa-badge.risc{background:rgba(217,119,6,0.1);color:#B45309;}
+.fitxa-nom{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:4px;letter-spacing:-0.01em;}
+.fitxa-adreca{font-size:12px;color:var(--muted);}
+.fitxa-body{padding:20px 24px;flex:1;}
+.fitxa-desc{font-size:13.5px;color:var(--ink-mid);line-height:1.75;margin-bottom:20px;}
+.fitxa-meta{display:flex;flex-direction:column;gap:8px;}
+.fitxa-meta-item{display:flex;gap:10px;font-size:12.5px;}
+.fitxa-meta-label{font-weight:600;color:var(--ink);min-width:80px;}
+.fitxa-meta-val{color:var(--muted);}
+
+/* CERCA */
+.cerca-wrap{position:relative;}
+.cerca-input{width:100%;border:1.5px solid var(--border);border-radius:20px;padding:7px 14px 7px 34px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;color:var(--ink);}
+.cerca-input:focus{border-color:var(--ink);}
+.cerca-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;}
+
+/* FILTRES PILLS */
+.filtres-anys{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.any-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.any-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+@media(max-width:960px){
+  .fitxa{width:100%;top:auto;bottom:0;height:70vh;border-left:none;border-top:1px solid var(--border);box-shadow:0 -4px 20px rgba(0,0,0,0.1);}
+}
 .grafics-bloc{padding:56px 52px;background:var(--white);border-top:1px solid var(--border);}
 .grafics-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--border);}
 .grafics-kicker{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
@@ -150,6 +180,21 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
   <div class="mapa-stat"><span class="mapa-stat-num">—</span><div class="mapa-stat-label">Total documentats</div></div>
 </div>
 
+<div class="fitxa" id="fitxa">
+  <div class="fitxa-header">
+    <div>
+      <div class="fitxa-badge" id="fitxa-badge">Tancat</div>
+      <div class="fitxa-nom" id="fitxa-nom">Nom del comerç</div>
+      <div class="fitxa-adreca" id="fitxa-adreca">Adreça</div>
+    </div>
+    <button class="fitxa-close" onclick="tancarFitxa()">✕</button>
+  </div>
+  <div class="fitxa-body">
+    <div class="fitxa-desc" id="fitxa-desc"></div>
+    <div class="fitxa-meta" id="fitxa-meta"></div>
+  </div>
+</div>
+
 <div class="mapa-full-wrap">
   <div id="mapa-full"></div>
   <div class="mapa-panel">
@@ -160,6 +205,14 @@ footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
         <button class="filtre-btn" data-filtre="risc" onclick="filtrar(this,'risc')">En risc</button>
         <button class="filtre-btn" data-filtre="tancat" onclick="filtrar(this,'tancat')">Tancats</button>
         <button class="filtre-btn" data-filtre="recuperat" onclick="filtrar(this,'recuperat')">Recuperats</button>
+      </div>
+      <div class="filtres-anys" id="filtres-anys">
+        <span style="font-size:11px;font-weight:600;color:var(--muted);align-self:center;">Any:</span>
+        <button class="any-btn active" data-any="tot" onclick="filtrarAny(this,'tot')">Tots</button>
+      </div>
+      <div class="cerca-wrap" style="margin-top:10px;">
+        <svg class="cerca-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C8C7C0" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="cerca-input" id="cerca-input" placeholder="Cerca un comerç..." oninput="cercar(this.value)">
       </div>
     </div>
     <div class="casos-list" id="casos-list"></div>
@@ -236,6 +289,20 @@ const labels  = { risc:'En risc', tancat:'Tancat',  recuperat:'Recuperat' };
 let punts   = [];
 let markers = [];
 let filtrActual = 'tot';
+let filtrAny = 'tot';
+let cercaActual = '';
+
+function extreurAny(desc) {
+  const m = desc.match(/\b(202[0-9])\b/);
+  return m ? m[1] : null;
+}
+
+function puntVisible(p) {
+  const okEstat = filtrActual === 'tot' || p.cat === filtrActual;
+  const okAny = filtrAny === 'tot' || p.any === filtrAny;
+  const okCerca = !cercaActual || p.nom.toLowerCase().includes(cercaActual.toLowerCase()) || p.addr.toLowerCase().includes(cercaActual.toLowerCase());
+  return okEstat && okAny && okCerca;
+}
 
 // Mapa
 const map = L.map('mapa-full', { center:[41.4035,2.1544], zoom:15, scrollWheelZoom:false });
@@ -286,12 +353,14 @@ async function carregarDades() {
         lng:  parseFloat(r.fields['Lng'])  || null,
         cat:  (r.fields['Categoria'] || 'risc').toLowerCase(),
         desc: r.fields['Descripció'] || '',
+        any:  extreurAny(r.fields['Descripció'] || ''),
       }))
       .filter(p => p.lat && p.lng && p.nom); // descartem els que falten coordenades
 
     pintarMarcadors();
     actualitzarStats();
-    renderLlista(filtrActual);
+    renderAnys();
+    renderLlista();
     renderGrafic();
 
   } catch (err) {
@@ -337,48 +406,88 @@ function actualitzarStats() {
   if (nums[3]) nums[3].textContent = total;
 }
 
-function renderLlista(filtre) {
+function renderAnys() {
+  const anys = [...new Set(punts.map(p => p.any).filter(Boolean))].sort();
+  const wrap = document.getElementById('filtres-anys');
+  // Mantenir el botó "Tots"
+  const totsBtn = wrap.querySelector('[data-any="tot"]');
+  wrap.innerHTML = '';
+  wrap.appendChild(totsBtn);
+  anys.forEach(any => {
+    const btn = document.createElement('button');
+    btn.className = 'any-btn';
+    btn.dataset.any = any;
+    btn.textContent = any;
+    btn.onclick = () => filtrarAny(btn, any);
+    wrap.appendChild(btn);
+  });
+}
+
+function renderLlista() {
   const list = document.getElementById('casos-list');
   list.innerHTML = '';
-
-  const filtrats = filtre === 'tot' ? punts : punts.filter(p => p.cat === filtre);
-
+  const filtrats = punts.filter(puntVisible);
   if (filtrats.length === 0) {
-    list.innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Cap comerç en aquesta categoria.</div>';
+    list.innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Cap comerç amb aquests filtres.</div>';
     return;
   }
-
   filtrats.forEach(p => {
     const div = document.createElement('div');
     div.className = 'cas-item';
     div.innerHTML =
-      `<div class="cas-badge ${p.cat}">${labels[p.cat] || p.cat}</div>` +
+      `<div class="cas-badge ${p.cat}">${labels[p.cat] || p.cat}${p.any ? ' · ' + p.any : ''}</div>` +
       `<div class="cas-nom">${p.nom}</div>` +
-      (p.addr ? `<div class="cas-desc" style="margin-bottom:2px">${p.addr}</div>` : '') +
-      (p.desc ? `<div class="cas-desc">${p.desc}</div>` : '');
+      (p.addr ? `<div class="cas-desc" style="margin-bottom:2px">${p.addr}</div>` : '');
     div.addEventListener('click', () => {
       map.setView([p.lat, p.lng], 17);
       markers.find(m => m.data.nom === p.nom)?.marker.openPopup();
+      obrirFitxa(p);
     });
     list.appendChild(div);
   });
+}
+
+function aplicarFiltres() {
+  markers.forEach(({ marker, data }) => {
+    if (puntVisible(data)) marker.addTo(map);
+    else map.removeLayer(marker);
+  });
+  renderLlista();
 }
 
 function filtrar(btn, filtre) {
   filtrActual = filtre;
   document.querySelectorAll('.filtre-btn').forEach(b => b.className = 'filtre-btn');
   btn.classList.add(filtre === 'tot' ? 'active-all' : 'active-' + filtre);
+  aplicarFiltres();
+}
 
-  // Mostra/amaga marcadors segons filtre
-  markers.forEach(({ marker, data }) => {
-    if (filtre === 'tot' || data.cat === filtre) {
-      marker.addTo(map);
-    } else {
-      map.removeLayer(marker);
-    }
-  });
+function filtrarAny(btn, any) {
+  filtrAny = any;
+  document.querySelectorAll('.any-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  aplicarFiltres();
+}
 
-  renderLlista(filtre);
+function cercar(val) {
+  cercaActual = val;
+  aplicarFiltres();
+}
+
+function obrirFitxa(p) {
+  document.getElementById('fitxa-badge').textContent = labels[p.cat] || p.cat;
+  document.getElementById('fitxa-badge').className = 'fitxa-badge ' + p.cat;
+  document.getElementById('fitxa-nom').textContent = p.nom;
+  document.getElementById('fitxa-adreca').textContent = p.addr || '';
+  document.getElementById('fitxa-desc').textContent = p.desc || '';
+  const meta = document.getElementById('fitxa-meta');
+  meta.innerHTML = '';
+  if (p.any) meta.innerHTML += `<div class="fitxa-meta-item"><span class="fitxa-meta-label">Any</span><span class="fitxa-meta-val">${p.any}</span></div>`;
+  document.getElementById('fitxa').classList.add('open');
+}
+
+function tancarFitxa() {
+  document.getElementById('fitxa').classList.remove('open');
 }
 
 // Arrenca
