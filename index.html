@@ -63,10 +63,12 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
 .que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;}
 
-/* Desktop: grid 3+2 */
-.passos-wrap{display:contents;}
-.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.passos-row2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:66.6%;margin:14px auto 0;}
+/* Desktop: grid 5 columnes */
+.passos-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.passos-wrap .pas:nth-child(4),.passos-wrap .pas:nth-child(5){margin-top:0;}
+@media(min-width:961px){
+  .passos-wrap{grid-template-columns:repeat(5,1fr);}
+}
 .carousel-dots{display:none;}
 
 /* Targetes */
@@ -156,9 +158,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
   .missio-bloc{padding:48px 20px;}.missio-inner{grid-template-columns:1fr;gap:32px;}
   .que-fem{padding:48px 0 40px;}.que-fem-header{padding:0 20px;}
-  .passos-wrap{display:block;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;display:flex;gap:12px;padding:0 20px 16px;scrollbar-width:none;}
+  .passos-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding:0 20px 16px;scrollbar-width:none;}
   .passos-wrap::-webkit-scrollbar{display:none;}
-  .passos,.passos-row2{display:contents;}
   .pas{min-width:80vw;scroll-snap-align:start;flex-shrink:0;}
   .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:4px;}
   .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dk);transition:background 0.2s;}
@@ -229,7 +230,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   </div>
 
   <div class="passos-wrap" id="passos-wrap">
-    <div class="passos">
+
     <div class="pas">
       <div class="pas-header">
         <div>
@@ -275,10 +276,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
       </ul>
       <a class="pas-link" href="recursos.html">Veure recursos →</a>
     </div>
-  </div>
 
-    </div>
-    <div class="passos-row2">
     <div class="pas destacat">
       <div class="pas-header">
         <div>
@@ -307,6 +305,7 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
         <li>Això és el que volem construir.</li>
       </ul>
     </div>
+
   </div>
   <div class="carousel-dots" id="carousel-dots">
     <div class="carousel-dot active"></div>
