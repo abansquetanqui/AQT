@@ -63,13 +63,13 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
 .que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;}
 
-/* Desktop: grid 5 columnes */
-.passos-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.passos-wrap .pas:nth-child(4),.passos-wrap .pas:nth-child(5){margin-top:0;}
-@media(min-width:961px){
-  .passos-wrap{grid-template-columns:repeat(5,1fr);}
-}
-.carousel-dots{display:none;}
+/* Desktop: carousel horitzontal sempre */
+.passos-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:0 52px 20px;scrollbar-width:none;}
+.passos-wrap::-webkit-scrollbar{display:none;}
+.pas{min-width:280px;scroll-snap-align:start;flex-shrink:0;}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:8px;}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dk);transition:background 0.2s;cursor:pointer;}
+.carousel-dot.active{background:var(--red);}
 
 /* Targetes */
 .pas{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:24px 22px;display:flex;flex-direction:column;transition:box-shadow 0.2s;}
@@ -158,12 +158,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
   .missio-bloc{padding:48px 20px;}.missio-inner{grid-template-columns:1fr;gap:32px;}
   .que-fem{padding:48px 0 40px;}.que-fem-header{padding:0 20px;}
-  .passos-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding:0 20px 16px;scrollbar-width:none;}
-  .passos-wrap::-webkit-scrollbar{display:none;}
-  .pas{min-width:80vw;scroll-snap-align:start;flex-shrink:0;}
-  .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:4px;}
-  .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dk);transition:background 0.2s;}
-  .carousel-dot.active{background:var(--red);}
+  .passos-wrap{padding:0 20px 16px;}
+  .pas{min-width:80vw;}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
   .actualitat-bloc{padding:48px 20px;}
