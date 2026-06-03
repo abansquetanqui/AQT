@@ -62,8 +62,14 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .que-fem-header{text-align:center;margin-bottom:36px;}
 .que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
 .que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;}
+
+/* Desktop: grid 3+2 */
+.passos-wrap{display:contents;}
 .passos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .passos-row2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:66.6%;margin:14px auto 0;}
+.carousel-dots{display:none;}
+
+/* Targetes */
 .pas{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:24px 22px;display:flex;flex-direction:column;transition:box-shadow 0.2s;}
 .pas:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);}
 .pas.destacat{border-color:var(--red);}
@@ -149,7 +155,14 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
   .missio-bloc{padding:48px 20px;}.missio-inner{grid-template-columns:1fr;gap:32px;}
-  .que-fem{padding:48px 20px;}.passos{grid-template-columns:1fr;}.passos-row2{grid-template-columns:1fr;max-width:100%;}
+  .que-fem{padding:48px 0 40px;}.que-fem-header{padding:0 20px;}
+  .passos-wrap{display:block;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;display:flex;gap:12px;padding:0 20px 16px;scrollbar-width:none;}
+  .passos-wrap::-webkit-scrollbar{display:none;}
+  .passos,.passos-row2{display:contents;}
+  .pas{min-width:80vw;scroll-snap-align:start;flex-shrink:0;}
+  .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:4px;}
+  .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dk);transition:background 0.2s;}
+  .carousel-dot.active{background:var(--red);}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
   .actualitat-bloc{padding:48px 20px;}
@@ -215,7 +228,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
     <div class="que-fem-title">AQT en cinc passos</div>
   </div>
 
-  <div class="passos">
+  <div class="passos-wrap" id="passos-wrap">
+    <div class="passos">
     <div class="pas">
       <div class="pas-header">
         <div>
@@ -263,7 +277,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
     </div>
   </div>
 
-  <div class="passos-row2">
+    </div>
+    <div class="passos-row2">
     <div class="pas destacat">
       <div class="pas-header">
         <div>
@@ -293,7 +308,30 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
       </ul>
     </div>
   </div>
+  <div class="carousel-dots" id="carousel-dots">
+    <div class="carousel-dot active"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+    <div class="carousel-dot"></div>
+  </div>
 </section>
+<script>
+(function(){
+  const wrap = document.getElementById('passos-wrap');
+  const dots = document.querySelectorAll('.carousel-dot');
+  if(!wrap || !dots.length) return;
+  wrap.addEventListener('scroll', function(){
+    const cards = wrap.querySelectorAll('.pas');
+    let closest = 0, minDist = Infinity;
+    cards.forEach(function(card, i){
+      const dist = Math.abs(card.getBoundingClientRect().left - wrap.getBoundingClientRect().left);
+      if(dist < minDist){ minDist = dist; closest = i; }
+    });
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === closest); });
+  }, {passive:true});
+})();
+</script>
 
 <!-- MAPA -->
 <section class="mapa-bloc" id="mapa">
