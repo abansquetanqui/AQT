@@ -58,16 +58,16 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .missio-img{width:48%;height:auto;}
 
 /* CINC PASSOS */
-.que-fem{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--bg-warm);}
-.que-fem-header{text-align:center;margin-bottom:36px;}
+.que-fem{padding:72px 0;border-bottom:1px solid var(--border);background:var(--bg-warm);}
+.que-fem-header{text-align:center;margin-bottom:36px;padding:0 52px;}
 .que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
 .que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;}
 
-/* Desktop: carousel horitzontal sempre */
-.passos-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:0 52px 20px;scrollbar-width:none;}
+/* Carousel horitzontal */
+.passos-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:4px 52px 24px;scrollbar-width:none;}
 .passos-wrap::-webkit-scrollbar{display:none;}
-.pas{min-width:280px;scroll-snap-align:start;flex-shrink:0;}
-.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:8px;}
+.pas{min-width:260px;max-width:260px;scroll-snap-align:start;flex-shrink:0;}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:4px;}
 .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dk);transition:background 0.2s;cursor:pointer;}
 .carousel-dot.active{background:var(--red);}
 
@@ -157,9 +157,9 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
   .missio-bloc{padding:48px 20px;}.missio-inner{grid-template-columns:1fr;gap:32px;}
-  .que-fem{padding:48px 0 40px;}.que-fem-header{padding:0 20px;}
-  .passos-wrap{padding:0 20px 16px;}
-  .pas{min-width:80vw;}
+  .que-fem{padding:48px 0 36px;}.que-fem-header{padding:0 20px;}
+  .passos-wrap{padding:4px 20px 16px;}
+  .pas{min-width:80vw;max-width:80vw;}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
   .actualitat-bloc{padding:48px 20px;}
