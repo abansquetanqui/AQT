@@ -176,20 +176,19 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 
       <div class="calc-label">Percentatge al comerç local</div>
       <div class="calc-val"><span id="disp-pct">50</span><small>%</small></div>
-      <input type="range" class="calc-slider" id="sl-pct" min="0" max="100" step="5" value="50">
-      <div class="calc-range-labels"><span>0%</span><span>100%</span></div>
+      <input type="range" class="calc-slider" id="sl-pct" min="0" max="100" step="5" value="50">      <div class="calc-range-labels"><span>0%</span><span>100%</span></div>
 
       <hr class="calc-divider">
 
       <div class="res-simple local">
-        <div class="res-kicker">Impacte local anual · comprant al barri</div>
+        <div class="res-kicker">Amb el teu consum actual</div>
         <div class="res-num" id="res-local-any">763 €</div>
-        <div class="res-desc">queden a l'economia del barri amb les teves decisions actuals.</div>
+        <div class="res-desc">queden a l'economia del barri amb el mix actual de compres.</div>
       </div>
       <div class="res-simple gran">
-        <div class="res-kicker">Impacte local anual · si tot fos a grans superfícies</div>
+        <div class="res-kicker">Si tot fos a grans superfícies</div>
         <div class="res-num" id="res-gran-any">113 €</div>
-        <div class="res-desc">quedarien al barri si compressis tot a cadenes.</div>
+        <div class="res-desc">quedarien al barri si compressis tot a cadenes i Amazon.</div>
       </div>
       <div class="res-dif">
         <div class="res-dif-text">
@@ -281,14 +280,16 @@ function updateConsumidor(){
   document.getElementById('disp-total').textContent = total;
   document.getElementById('disp-pct').textContent = document.getElementById('sl-pct').value;
 
-  const local = total * pct * MULT_LOCAL + total * (1-pct) * MULT_GRAN;
-  const gran = total * MULT_GRAN;
-  const anyLocal = local * 12;
-  const anyGran = gran * 12;
+  const impActual = (total * pct * MULT_LOCAL) + (total * (1-pct) * MULT_GRAN);
+  const impSiTotLocal = total * MULT_LOCAL;
+  const impSiTotGran = total * MULT_GRAN;
+  const anyActual = impActual * 12;
+  const anyTotLocal = impSiTotLocal * 12;
+  const anyTotGran = impSiTotGran * 12;
 
-  document.getElementById('res-local-any').textContent = fmt(anyLocal);
-  document.getElementById('res-gran-any').textContent = fmt(anyGran);
-  document.getElementById('res-dif').textContent = '+' + fmt(anyLocal - anyGran);
+  document.getElementById('res-local-any').textContent = fmt(anyActual);
+  document.getElementById('res-gran-any').textContent = fmt(anyTotGran);
+  document.getElementById('res-dif').textContent = '+' + fmt(anyActual - anyTotGran);
 }
 
 function updateInversa(){
