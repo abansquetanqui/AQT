@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descobreix el teu barri · Abans Que Tanqui</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--border:#E2E1DC;--amber:#C47A00;--cta:#2A7A4B;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
+.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:var(--ink)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;padding:12px 24px;}
+
+/* HERO */
+.hero{background:var(--white);border-bottom:1px solid var(--border);padding:56px 52px 48px;}
+.hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.hero h1{font-family:'Lora',serif;font-size:clamp(30px,4vw,48px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px;}
+.hero h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:15px;color:var(--muted);max-width:560px;line-height:1.7;}
+
+/* EINES */
+.eines{padding:48px 52px;display:flex;flex-direction:column;gap:20px;max-width:900px;margin:0 auto;}
+
+/* EINA BLOC */
+.eina{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.eina-header{padding:24px 28px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;user-select:none;}
+.eina-header:hover{background:var(--bg-warm);}
+.eina-num{font-family:'Lora',serif;font-size:13px;font-weight:700;color:var(--amber);letter-spacing:0.06em;margin-bottom:4px;}
+.eina-title{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;margin-bottom:4px;}
+.eina-sub{font-size:13px;color:var(--muted);}
+.eina-toggle{font-size:20px;color:var(--muted);flex-shrink:0;margin-left:16px;transition:transform 0.2s;}
+.eina.open .eina-toggle{transform:rotate(180deg);}
+.eina-body{display:none;padding:28px;}
+.eina.open .eina-body{display:block;}
+
+/* TEST */
+.test-pregunta{margin-bottom:28px;}
+.test-pregunta-text{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px;line-height:1.4;}
+.test-opcions{display:flex;flex-direction:column;gap:8px;}
+.test-opcio{padding:12px 16px;border:1.5px solid var(--border);border-radius:5px;cursor:pointer;font-size:13px;color:var(--ink-mid);transition:all 0.15s;background:var(--white);}
+.test-opcio:hover{border-color:var(--ink);color:var(--ink);}
+.test-opcio.correcta{border-color:var(--cta);background:#EAF3EE;color:var(--cta);font-weight:600;}
+.test-opcio.incorrecta{border-color:var(--red);background:#FDF0EE;color:var(--red);}
+.test-opcio.disabled{pointer-events:none;opacity:0.5;}
+.test-feedback{margin-top:10px;font-size:13px;line-height:1.55;padding:10px 14px;border-radius:4px;}
+.test-feedback.ok{background:#EAF3EE;color:var(--cta);}
+.test-feedback.ko{background:#FDF0EE;color:var(--red);}
+.test-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;}
+.test-progres{font-size:12px;color:var(--muted);}
+.btn-test{background:var(--ink);color:#fff;padding:9px 18px;border-radius:3px;font-size:13px;font-weight:600;border:none;cursor:pointer;}
+.test-resultat{text-align:center;padding:20px 0;}
+.test-resultat-num{font-family:'Lora',serif;font-size:56px;font-weight:700;color:var(--ink);letter-spacing:-0.03em;line-height:1;}
+.test-resultat-label{font-size:14px;color:var(--muted);margin-top:6px;margin-bottom:20px;}
+.test-resultat-msg{font-size:15px;color:var(--ink-mid);line-height:1.65;max-width:420px;margin:0 auto 20px;}
+
+/* BUSCA CARRER */
+.cerca-carrer{display:flex;gap:10px;margin-bottom:20px;}
+.cerca-carrer input{flex:1;border:1.5px solid var(--border);border-radius:4px;padding:10px 14px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;color:var(--ink);}
+.cerca-carrer input:focus{border-color:var(--ink);}
+.cerca-carrer button{background:var(--ink);color:#fff;border:none;border-radius:4px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.cerca-resultat{display:none;}
+.cerca-resultat.visible{display:block;}
+.cerca-res-title{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:14px;}
+.cerca-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;}
+.cerca-item:last-child{border-bottom:none;}
+.cerca-badge{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;flex-shrink:0;margin-top:2px;}
+.cerca-badge.tancat{background:rgba(200,57,43,0.1);color:var(--red);}
+.cerca-badge.risc{background:rgba(196,122,0,0.1);color:var(--amber);}
+.cerca-nom{font-size:14px;font-weight:600;color:var(--ink);}
+.cerca-adreca{font-size:12px;color:var(--muted);}
+
+/* COMPARA BARRIS */
+.barris-grid{display:flex;flex-direction:column;gap:10px;}
+.barri-row{display:grid;grid-template-columns:120px 1fr 40px;gap:12px;align-items:center;}
+.barri-nom{font-size:13px;font-weight:600;color:var(--ink);}
+.barri-barra-wrap{background:var(--bg-warm);border-radius:20px;height:8px;overflow:hidden;}
+.barri-barra{height:100%;border-radius:20px;background:var(--red);transition:width 0.6s ease;}
+.barri-num{font-size:13px;font-weight:700;color:var(--ink);text-align:right;}
+
+/* PETJADA */
+.petjada-sliders{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+.petjada-slider-row{background:var(--bg-warm);border-radius:5px;padding:14px 16px;}
+.petjada-slider-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.petjada-slider-label{font-size:13px;font-weight:600;color:var(--ink);}
+.petjada-slider-val{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);}
+.petjada-slider{width:100%;-webkit-appearance:none;appearance:none;height:3px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;}
+.petjada-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--ink);cursor:pointer;border:2px solid var(--white);}
+.petjada-resultat{background:var(--ink);border-radius:6px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.petjada-res-text{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5;}
+.petjada-res-text strong{color:#fff;display:block;margin-bottom:2px;font-size:15px;}
+.petjada-res-num{font-family:'Lora',serif;font-size:36px;font-weight:700;color:#fff;white-space:nowrap;}
+
+/* REPORTAR */
+.report-form{display:flex;flex-direction:column;gap:14px;}
+.report-field label{display:block;font-size:12px;font-weight:600;color:var(--ink-mid);margin-bottom:6px;letter-spacing:0.02em;}
+.report-field input,.report-field select,.report-field textarea{width:100%;border:1.5px solid var(--border);border-radius:4px;padding:10px 14px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;background:var(--white);}
+.report-field input:focus,.report-field select:focus,.report-field textarea:focus{border-color:var(--ink);}
+.report-field textarea{height:80px;resize:vertical;}
+.report-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.btn-report{background:var(--red);color:#fff;border:none;border-radius:4px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;width:100%;margin-top:4px;}
+.report-ok{display:none;text-align:center;padding:20px;background:#EAF3EE;border-radius:6px;margin-top:10px;}
+.report-ok-icon{font-size:32px;margin-bottom:8px;}
+.report-ok-title{font-size:15px;font-weight:700;color:var(--cta);margin-bottom:4px;}
+.report-ok-text{font-size:13px;color:var(--muted);}
+.report-nota{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.5;}
+
+footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;}
+.footer-brand{font-family:'Lora',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
+.footer-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
+
+@media(max-width:960px){
+  nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
+  .hero{padding:40px 20px 32px;}
+  .eines{padding:24px 16px;}
+  .eina-body{padding:20px 16px;}
+  .barri-row{grid-template-columns:90px 1fr 32px;}
+  .report-row{grid-template-columns:1fr;}
+  .petjada-resultat{flex-direction:column;text-align:center;}
+  footer{padding:24px 20px;flex-direction:column;gap:10px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
+  <div class="nav-links">
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="recursos.html">Recursos</a>
+    <a href="contacte.html">Contacte</a>
+    <a class="nav-cta" href="contacte.html">Suma't</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="recursos.html">Recursos</a>
+  <a href="contacte.html">Contacte</a>
+</div>
+
+<div class="hero">
+  <div class="hero-kicker">Eines interactives</div>
+  <h1>Conèixes el teu barri?<br><em>Descobreix-ho.</em></h1>
+  <p class="hero-sub">Cinc eines per entendre, explorar i actuar sobre la pèrdua del comerç local a Barcelona.</p>
+</div>
+
+<div class="eines">
+
+  <!-- 1. TEST -->
+  <div class="eina open" id="eina-test">
+    <div class="eina-header" onclick="toggleEina('eina-test')">
+      <div>
+        <div class="eina-num">01</div>
+        <div class="eina-title">Quant coneixes els tancaments?</div>
+        <div class="eina-sub">5 preguntes sobre casos reals documentats a Barcelona</div>
+      </div>
+      <div class="eina-toggle">▾</div>
+    </div>
+    <div class="eina-body">
+      <div id="test-container"></div>
+    </div>
+  </div>
+
+  <!-- 2. BUSCA CARRER -->
+  <div class="eina" id="eina-carrer">
+    <div class="eina-header" onclick="toggleEina('eina-carrer')">
+      <div>
+        <div class="eina-num">02</div>
+        <div class="eina-title">Busca el teu carrer</div>
+        <div class="eina-sub">Hi ha hagut tancaments documentats prop teu?</div>
+      </div>
+      <div class="eina-toggle">▾</div>
+    </div>
+    <div class="eina-body">
+      <div class="cerca-carrer">
+        <input type="text" id="input-carrer" placeholder="Ex: Gran de Gràcia, Sants, Clot..." oninput="cercarCarrer()">
+        <button onclick="cercarCarrer()">Buscar</button>
+      </div>
+      <div class="cerca-resultat" id="cerca-resultat"></div>
+    </div>
+  </div>
+
+  <!-- 3. COMPARA BARRIS -->
+  <div class="eina" id="eina-barris">
+    <div class="eina-header" onclick="toggleEina('eina-barris')">
+      <div>
+        <div class="eina-num">03</div>
+        <div class="eina-title">Compara barris</div>
+        <div class="eina-sub">Quins districtes han perdut més comerços documentats?</div>
+      </div>
+      <div class="eina-toggle">▾</div>
+    </div>
+    <div class="eina-body">
+      <div class="barris-grid" id="barris-grid">
+        <div style="font-size:13px;color:var(--muted);">Carregant dades...</div>
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:16px;">Dades parcials en construcció. El mapa creix contínuament.</div>
+    </div>
+  </div>
+
+  <!-- 4. PETJADA DE BARRI -->
+  <div class="eina" id="eina-petjada">
+    <div class="eina-header" onclick="toggleEina('eina-petjada')">
+      <div>
+        <div class="eina-num">04</div>
+        <div class="eina-title">La teva petjada de barri</div>
+        <div class="eina-sub">Quant del teu consum quotidià queda al barri?</div>
+      </div>
+      <div class="eina-toggle">▾</div>
+    </div>
+    <div class="eina-body">
+      <div class="petjada-sliders">
+        <div class="petjada-slider-row">
+          <div class="petjada-slider-top">
+            <div class="petjada-slider-label">Despesa mensual total</div>
+            <div class="petjada-slider-val"><span id="p-total">200</span> €</div>
+          </div>
+          <input type="range" class="petjada-slider" id="sl-p-total" min="50" max="1000" step="10" value="200" oninput="updatePetjada()">
+        </div>
+        <div class="petjada-slider-row">
+          <div class="petjada-slider-top">
+            <div class="petjada-slider-label">% al comerç local de barri</div>
+            <div class="petjada-slider-val"><span id="p-pct">50</span>%</div>
+          </div>
+          <input type="range" class="petjada-slider" id="sl-p-pct" min="0" max="100" step="5" value="50" oninput="updatePetjada()">
+        </div>
+      </div>
+      <div class="petjada-resultat">
+        <div class="petjada-res-text">
+          <strong id="p-impacte-label">763 € queden al barri cada any</strong>
+          vs <span id="p-gran-label">113 €</span> si tot fos a grans superfícies
+        </div>
+        <div class="petjada-res-num" id="p-dif">+650 €</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:12px;">Consumir local és necessari, però no suficient perquè no ens facin fora. <a href="calculadora.html" style="color:var(--red);font-weight:600;">Aprofundeix →</a></div>
+    </div>
+  </div>
+
+  <!-- 5. REPORTAR -->
+  <div class="eina" id="eina-report">
+    <div class="eina-header" onclick="toggleEina('eina-report')">
+      <div>
+        <div class="eina-num">05</div>
+        <div class="eina-title">Reporta un tancament</div>
+        <div class="eina-sub">Has vist tancar un comerç que no tenim documentat?</div>
+      </div>
+      <div class="eina-toggle">▾</div>
+    </div>
+    <div class="eina-body">
+      <div class="report-form" id="report-form">
+        <div class="report-row">
+          <div class="report-field">
+            <label>Nom del comerç *</label>
+            <input type="text" id="r-nom" placeholder="Ex: Ferreteria Molina">
+          </div>
+          <div class="report-field">
+            <label>Adreça *</label>
+            <input type="text" id="r-adreca" placeholder="Ex: Carrer de Sants, 45">
+          </div>
+        </div>
+        <div class="report-row">
+          <div class="report-field">
+            <label>Estat</label>
+            <select id="r-estat">
+              <option value="tancat">Ha tancat</option>
+              <option value="risc">Està en risc</option>
+            </select>
+          </div>
+          <div class="report-field">
+            <label>Any aproximat</label>
+            <select id="r-any">
+              <option value="">No ho sé</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="abans">Abans de 2023</option>
+            </select>
+          </div>
+        </div>
+        <div class="report-field">
+          <label>Què ha passat? (opcional)</label>
+          <textarea id="r-desc" placeholder="Puja de lloguer, jubilació, franquícia al seu lloc..."></textarea>
+        </div>
+        <div class="report-field">
+          <label>El teu correu (opcional, per si necessitem confirmar)</label>
+          <input type="email" id="r-email" placeholder="tu@exemple.com">
+        </div>
+        <button class="btn-report" onclick="enviarReport()">Enviar el cas →</button>
+        <div class="report-nota">Les dades que enviïs serviran per verificar i afegir el cas al mapa. Revisem cada cas abans de publicar-lo.</div>
+      </div>
+      <div class="report-ok" id="report-ok">
+        <div class="report-ok-icon">✓</div>
+        <div class="report-ok-title">Gràcies per reportar-ho!</div>
+        <div class="report-ok-text">Revisarem el cas i, si es pot verificar, l'afegirem al mapa. Fem el mapa entre totes.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand"><div class="footer-dot"></div>Abans Que Tanqui</div>
+  <div class="footer-copy">© 2026 Abans Que Tanqui · En construcció · Barcelona</div>
+</footer>
+
+<script>
+const AIRTABLE_TOKEN = 'patnuSBb3PFtjOg6B.45b031e3b5da717b082606371329a107f2dbe5ef5cbe670027da112a4d8653a1';
+const AIRTABLE_BASE = 'appGuT1DQskra3f9p';
+const AIRTABLE_TABLE = 'tblImxsEi3bEj3clb';
+const MULT_LOCAL = 0.636;
+const MULT_GRAN = 0.047;
+
+let puntsData = [];
+
+// Carregar dades Airtable
+async function carregarPunts() {
+  try {
+    const r = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}?filterByFormula={Actiu}=1`, {
+      headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+    });
+    const d = await r.json();
+    puntsData = d.records.map(r => ({
+      nom: r.fields['Nom'] || '',
+      adreca: r.fields['Adreça'] || '',
+      cat: (r.fields['Categoria'] || 'tancat').toLowerCase(),
+      desc: r.fields['Descripció'] || '',
+      any: (r.fields['Descripció'] || '').match(/\b(202[0-9])\b/)?.[1] || null,
+    }));
+    renderBarris();
+  } catch(e) { console.log('Error Airtable', e); }
+}
+
+// Toggle eines
+function toggleEina(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ===== TEST =====
+const preguntes = [
+  {
+    p: 'Quants anys tenia la Ferreteria Camps quan va tancar el febrer de 2026?',
+    opcions: ['45 anys', '90 anys', '120 anys', '60 anys'],
+    correcta: 1,
+    feedback: 'La Ferreteria Camps va obrir el 1934 i va tancar el 2026 amb 92 anys d\'història. Un lloguer de 15.000€/mes va ser el cop de gràcia.'
+  },
+  {
+    p: 'Quin percentatge de cada 100€ gastats al comerç local queda a l\'economia del barri?',
+    opcions: ['Uns 10€', 'Uns 30€', 'Uns 64€', 'Uns 80€'],
+    correcta: 2,
+    feedback: '63,6€ de cada 100€ gastats al comerç local queden a l\'economia del barri. Si és a grans superfícies, només 4,7€.'
+  },
+  {
+    p: 'El Bar Versalles de Sant Andreu va tancar el 2024. Quant pagava de lloguer al mes?',
+    opcions: ['2.000€', '5.500€', '10.000€', '15.000€'],
+    correcta: 2,
+    feedback: 'El Bar Versalles, fundat el 1915, va tancar el juny de 2024 amb un lloguer de 10.000€/mes. 75 anys en mans de la mateixa família.'
+  },
+  {
+    p: 'Quin és el preu mitjà del lloguer comercial a Barcelona el 2025?',
+    opcions: ['6€/m²', '11€/m²', '16,85€/m²', '25€/m²'],
+    correcta: 2,
+    feedback: '16,85€/m² de mitjana. Per a un local de 80m², això representa més de 1.300€/mes només de lloguer.'
+  },
+  {
+    p: 'Quina entitat britànica va salvar una fleca centenària adquirint el local col·lectivament?',
+    opcions: ['Kensington Corridor Trust', 'Homebaked CLT', 'Oakland CLT', 'Cooper Square CLT'],
+    correcta: 1,
+    feedback: 'Homebaked Community Land Trust a Liverpool va salvar una fleca centenària el 2012. Ara gestiona el local, habitatge i espai comunitari al mateix edifici.'
+  }
+];
+
+let preguntaActual = 0;
+let puntuacio = 0;
+let respost = false;
+
+function renderTest() {
+  const c = document.getElementById('test-container');
+  if (preguntaActual >= preguntes.length) {
+    const pct = Math.round((puntuacio / preguntes.length) * 100);
+    let msg = '';
+    if (pct >= 80) msg = 'Coneixes molt bé el que passa als barris. Ara ajuda\'ns a canviar-ho.';
+    else if (pct >= 50) msg = 'Tens una idea del problema. Però la realitat és pitjor del que sembles saber.';
+    else msg = 'El problema és més gran del que creus. Explora el mapa per veure la magnitud real.';
+    c.innerHTML = `<div class="test-resultat">
+      <div class="test-resultat-num">${puntuacio}/${preguntes.length}</div>
+      <div class="test-resultat-label">respostes correctes</div>
+      <div class="test-resultat-msg">${msg}</div>
+      <a href="mapa.html" style="display:inline-block;background:var(--ink);color:#fff;padding:10px 20px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;margin-right:8px;">Veure el mapa →</a>
+      <button class="btn-test" style="background:var(--bg-warm);color:var(--ink);" onclick="reiniciarTest()">Tornar a intentar</button>
+    </div>`;
+    return;
+  }
+  const q = preguntes[preguntaActual];
+  respost = false;
+  c.innerHTML = `
+    <div class="test-pregunta">
+      <div class="test-pregunta-text">${q.p}</div>
+      <div class="test-opcions">
+        ${q.opcions.map((o,i) => `<div class="test-opcio" onclick="resposta(${i})">${o}</div>`).join('')}
+      </div>
+      <div class="test-feedback" id="test-feedback" style="display:none"></div>
+    </div>
+    <div class="test-nav">
+      <div class="test-progres">Pregunta ${preguntaActual + 1} de ${preguntes.length}</div>
+      <button class="btn-test" id="btn-seguent" onclick="seguent()" style="display:none">Següent →</button>
+    </div>`;
+}
+
+function resposta(idx) {
+  if (respost) return;
+  respost = true;
+  const q = preguntes[preguntaActual];
+  const opcions = document.querySelectorAll('.test-opcio');
+  opcions.forEach((o, i) => {
+    o.classList.add('disabled');
+    if (i === q.correcta) o.classList.add('correcta');
+    else if (i === idx && idx !== q.correcta) o.classList.add('incorrecta');
+  });
+  if (idx === q.correcta) puntuacio++;
+  const fb = document.getElementById('test-feedback');
+  fb.style.display = 'block';
+  fb.className = 'test-feedback ' + (idx === q.correcta ? 'ok' : 'ko');
+  fb.textContent = q.feedback;
+  document.getElementById('btn-seguent').style.display = 'block';
+}
+
+function seguent() { preguntaActual++; renderTest(); }
+function reiniciarTest() { preguntaActual = 0; puntuacio = 0; renderTest(); }
+
+// ===== BUSCA CARRER =====
+function cercarCarrer() {
+  const query = document.getElementById('input-carrer').value.toLowerCase().trim();
+  const res = document.getElementById('cerca-resultat');
+  if (query.length < 2) { res.classList.remove('visible'); return; }
+
+  const trobats = puntsData.filter(p =>
+    p.adreca.toLowerCase().includes(query) ||
+    p.nom.toLowerCase().includes(query) ||
+    p.desc.toLowerCase().includes(query)
+  );
+
+  if (trobats.length === 0) {
+    res.innerHTML = `<div style="font-size:14px;color:var(--muted);padding:12px 0;">No hem documentat cap tancament a "${query}" encara. Si en coneixes un, repòrta'l a l'eina 05.</div>`;
+  } else {
+    res.innerHTML = `<div class="cerca-res-title">${trobats.length} cas${trobats.length !== 1 ? 'os' : ''} documentat${trobats.length !== 1 ? 's' : ''}</div>` +
+      trobats.map(p => `<div class="cerca-item">
+        <span class="cerca-badge ${p.cat}">${p.cat === 'tancat' ? 'Tancat' : 'En risc'}</span>
+        <div><div class="cerca-nom">${p.nom}</div><div class="cerca-adreca">${p.adreca}</div></div>
+      </div>`).join('');
+  }
+  res.classList.add('visible');
+}
+
+// ===== COMPARA BARRIS =====
+function getDistricte(p) {
+  const a = (p.adreca + ' ' + p.desc).toLowerCase();
+  if (a.includes('gràcia') || a.includes('gran de gràcia') || a.includes('travessera de gràcia') || a.includes('llibertat') || a.includes('verdi')) return 'Gràcia';
+  if (a.includes('gòtic') || a.includes('petritxol') || a.includes('call') || a.includes('palla') || a.includes('raval') || a.includes('cera') || a.includes('sant pere')) return 'Ciutat Vella';
+  if (a.includes('eixample') || a.includes('roger de llúria') || a.includes('passeig de gràcia') || a.includes('diagonal') || a.includes('tamarit') || a.includes('parlament')) return 'Eixample';
+  if (a.includes('sants') || a.includes('esplugues')) return 'Sants';
+  if (a.includes('sant andreu') || a.includes('versalles')) return 'Sant Andreu';
+  if (a.includes('clot') || a.includes('muntanya')) return 'Sant Martí';
+  if (a.includes('horta') || a.includes('maragall')) return 'Horta-Guinardó';
+  return 'Altres';
+}
+
+function renderBarris() {
+  const districtes = {};
+  puntsData.forEach(p => {
+    const d = getDistricte(p);
+    districtes[d] = (districtes[d] || 0) + 1;
+  });
+  const sorted = Object.entries(districtes).sort((a,b) => b[1]-a[1]);
+  const max = sorted[0]?.[1] || 1;
+  const grid = document.getElementById('barris-grid');
+  grid.innerHTML = sorted.map(([nom, n]) => `
+    <div class="barri-row">
+      <div class="barri-nom">${nom}</div>
+      <div class="barri-barra-wrap"><div class="barri-barra" style="width:${Math.round(n/max*100)}%"></div></div>
+      <div class="barri-num">${n}</div>
+    </div>`).join('');
+}
+
+// ===== PETJADA =====
+function updatePetjada() {
+  const total = parseInt(document.getElementById('sl-p-total').value);
+  const pct = parseInt(document.getElementById('sl-p-pct').value) / 100;
+  document.getElementById('p-total').textContent = total;
+  document.getElementById('p-pct').textContent = Math.round(pct * 100);
+  const impacte = (total * pct * MULT_LOCAL + total * (1-pct) * MULT_GRAN) * 12;
+  const gran = total * MULT_GRAN * 12;
+  const dif = impacte - gran;
+  document.getElementById('p-impacte-label').textContent = `${Math.round(impacte).toLocaleString('ca-ES')}€ queden al barri cada any`;
+  document.getElementById('p-gran-label').textContent = `${Math.round(gran).toLocaleString('ca-ES')}€`;
+  document.getElementById('p-dif').textContent = `+${Math.round(dif).toLocaleString('ca-ES')} €`;
+}
+
+// ===== REPORTAR =====
+function enviarReport() {
+  const nom = document.getElementById('r-nom').value.trim();
+  const adreca = document.getElementById('r-adreca').value.trim();
+  if (!nom || !adreca) { alert('Cal omplir el nom del comerç i l\'adreça.'); return; }
+
+  const estat = document.getElementById('r-estat').value;
+  const any = document.getElementById('r-any').value;
+  const desc = document.getElementById('r-desc').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+
+  // Enviar per email via mailto com a fallback simple
+  const subject = encodeURIComponent(`Reporta tancament: ${nom}`);
+  const body = encodeURIComponent(`Nom: ${nom}\nAdreça: ${adreca}\nEstat: ${estat}\nAny: ${any || 'desconegut'}\nDescripció: ${desc}\nContacte: ${email || 'no indicat'}`);
+  window.location.href = `mailto:abansquetanqui@gmail.com?subject=${subject}&body=${body}`;
+
+  document.getElementById('report-form').style.display = 'none';
+  document.getElementById('report-ok').style.display = 'block';
+}
+
+// Nav burger
+document.getElementById('nav-burger').addEventListener('click', function(){
+  document.getElementById('nav-mobile').classList.toggle('open');
+});
+
+// Init
+renderTest();
+carregarPunts();
+updatePetjada();
+</script>
+</body>
+</html>
