@@ -17,7 +17,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);}
-.nav-cta{background:var(--cta)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;}
+.nav-cta{background:var(--ink)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;}
 .nav-cta:hover{background:var(--red-lt) !important;}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
@@ -27,7 +27,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
 .nav-mobile.open{display:flex;}
 .nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;transition:color 0.15s;}
-.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--red);color:#fff !important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
+.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--ink);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
 
 .page-header{background:var(--white);padding:72px 52px 64px;border-bottom:2px solid var(--ink);}
 .page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
@@ -68,7 +68,10 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .section-kicker{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.5vw,32px);font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px;}
 .section-title{font-size:13px;font-weight:500;color:var(--ink-muted);}
 
-footer{background:#111110;padding:48px 52px 0;color:rgba(255,255,255,0.6);}
+footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-brand{font-family:'Lora',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
+.footer-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
 .footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
 .footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px;}
 .footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
@@ -266,38 +269,8 @@ mostrarPagina(1);
 </script>
 
 <footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
-      <div class="footer-desc">Iniciativa per a la preservació del comerç local de proximitat. En construcció a Catalunya.</div>
-      <div class="footer-social">
-        <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
-        <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Projecte</div>
-      <a href="projecte.html">El projecte</a>
-      <a href="index.html#que-fem">Com funciona</a>
-      
-      <a href="mapa.html">Mapa de casos</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Participa</div>
-      <a href="contacte.html">Tens un comerç?</a>
-      <a href="contacte.html">Vull ajudar</a>
-      <a href="contacte.html">Contacte</a>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Més</div>
-      <a href="actualitat.html">Actualitat</a>
-      
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
-    <span class="footer-entity">Projecte en fase de constitució · 2026</span>
-  </div>
+  <div class="footer-brand"><div class="footer-dot"></div>Abans Que Tanqui</div>
+  <div class="footer-copy">© 2026 Abans Que Tanqui · En construcció · Barcelona</div>
 </footer>
 
 <script>
