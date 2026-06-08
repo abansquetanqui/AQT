@@ -321,12 +321,12 @@ async function carregarDades() {
     punts = tots
       .map(r => ({
         nom:  r.fields['Nom']       || '',
-        addr: r.fields['Adreca']    || '',
+        addr: r.fields['Adreça']    || r.fields['Adreca'] || '',
         lat:  parseFloat(r.fields['Lat'])  || null,
         lng:  parseFloat(r.fields['Lng'])  || null,
         cat:  (r.fields['Categoria'] || 'risc').toLowerCase(),
         desc: r.fields['Descripció'] || '',
-        any:  extreurAny(r.fields['Descripció'] || ''),
+        any:  r.fields['Any'] ? String(r.fields['Any']) : extreurAny(r.fields['Descripció'] || ''),
       }))
       .filter(p => p.lat && p.lng && p.nom); // descartem els que falten coordenades
 
@@ -476,15 +476,44 @@ mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 <script>
 function getDistricte(p) {
   const a = (p.addr + ' ' + p.desc).toLowerCase();
-  if(a.includes('gràcia') || a.includes('gracia') || a.includes('gran de gràcia') || a.includes('travessera de gràcia') || a.includes('llibertat')) return 'Gràcia';
-  if(a.includes('gòtic') || a.includes('gothic') || a.includes('petritxol') || a.includes('call') || a.includes('escudellers') || a.includes('palla') || a.includes('portaferrissa')) return 'Ciutat Vella';
-  if(a.includes('raval') || a.includes('cera')) return 'Ciutat Vella';
-  if(a.includes('sant pere') || a.includes('ribera')) return 'Ciutat Vella';
-  if(a.includes('eixample') || a.includes('roger de llúria') || a.includes('passeig de gràcia') || a.includes('diagonal')) return 'Eixample';
-  if(a.includes('sant antoni') || a.includes('tamarit') || a.includes('parlament')) return 'Eixample';
-  if(a.includes('sants') || a.includes('esplugues')) return 'Sants-Montjuïc';
-  if(a.includes('sant andreu') || a.includes('versalles')) return 'Sant Andreu';
-  if(a.includes('clot') || a.includes('muntanya')) return 'Sant Martí';
+  // Gràcia
+  if(a.includes('gràcia') || a.includes('gracia') || a.includes('gran de gràcia') ||
+     a.includes('travessera de gràcia') || a.includes('llibertat') ||
+     a.includes('santa eugènia') || a.includes('mercat de la llibertat') ||
+     a.includes('vila de gràcia')) return 'Gràcia';
+  // Ciutat Vella (Gòtic, Raval, Ribera, Barceloneta)
+  if(a.includes('gòtic') || a.includes('gothic') || a.includes('petritxol') ||
+     a.includes('call') || a.includes('escudellers') || a.includes('palla') ||
+     a.includes('portaferrissa') || a.includes('canuda') || a.includes('comtal') ||
+     a.includes('ferran') || a.includes('barri gòtic') ||
+     a.includes('raval') || a.includes('tallers') || a.includes('vicenç martorell') ||
+     a.includes('sant pere') || a.includes('ribera') ||
+     a.includes('barceloneta') || a.includes('la barceloneta') ||
+     a.includes('cera')) return 'Ciutat Vella';
+  // Eixample (inclou Sant Antoni)
+  if(a.includes('eixample') || a.includes('roger de llúria') ||
+     a.includes('passeig de gràcia') || a.includes('rambla de catalunya') ||
+     a.includes('sant joan') || a.includes('passeig sant joan') ||
+     a.includes('sant antoni') || a.includes('tamarit') || a.includes('parlament') ||
+     a.includes('comte borrell') || a.includes('muntaner') || a.includes('aribau') ||
+     a.includes('consell de cent') || a.includes('provença') || a.includes('aragó') ||
+     a.includes('diagonal') || a.includes('francesc macià')) return 'Eixample';
+  // Sants-Montjuïc / Les Corts
+  if(a.includes('sants') || a.includes('esplugues') || a.includes('carrer de sants') ||
+     a.includes('les corts') || a.includes('corts')) return 'Sants-Montjuïc';
+  // Sarrià-Sant Gervasi
+  if(a.includes('sarrià') || a.includes('sarria') || a.includes('sant gervasi') ||
+     a.includes('lesseps') || a.includes('farró')) return 'Sarrià-Sant Gervasi';
+  // Sant Andreu
+  if(a.includes('sant andreu') || a.includes('versalles') ||
+     a.includes('gran de sant andreu')) return 'Sant Andreu';
+  // Horta-Guinardó
+  if(a.includes('horta') || a.includes('guinardó')) return 'Horta-Guinardó';
+  // Sant Martí / Poblenou
+  if(a.includes('clot') || a.includes('muntanya') || a.includes('poblenou') ||
+     a.includes('sant martí') || a.includes('rambla del poblenou')) return 'Sant Martí';
+  // Nou Barris
+  if(a.includes('nou barris') || a.includes('roquetes') || a.includes('verdun')) return 'Nou Barris';
   return 'Altres';
 }
 
