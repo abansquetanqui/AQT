@@ -7,11 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--card:#F0F0F0;--sage:#C8D5B9;--sage-dk:#3A5530;--amber:#C47A00;--cta:#2A7A4B;--cta-lt:#348A58;}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--card:#F0F0F0;--amber:#C47A00;--green-ok:#2A7A4B;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
 nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
 .nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
@@ -19,9 +20,8 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;letter-spacing:0.01em;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);}
-.nav-cta{background:var(--ink)!important;color:#fff !important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s !important;}
-.nav-cta:hover{background:var(--red-lt) !important;}
-
+.nav-cta{background:var(--ink)!important;color:#fff!important;padding:8px 18px;border-radius:3px;font-size:13px;font-weight:600;transition:background 0.15s!important;}
+.nav-cta:hover{background:var(--red-lt)!important;}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -33,120 +33,93 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile a:hover{color:var(--ink);background:var(--bg);}
 .nav-mobile .nav-cta{margin:8px 24px 0;background:var(--ink);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;font-weight:600;}
 
-.page-header{background:var(--ink);padding:52px 52px 48px;}
-.page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(157,207,180,0.7);margin-bottom:10px;}
-.page-header h1{font-family:'Lora',Georgia,serif;font-size:clamp(32px,3.5vw,48px);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px;}
-.page-header p{font-size:15px;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.7;}
+/* GLOBE INTRO */
+#globe-intro{position:relative;width:100%;height:520px;background:#0D0D0B;overflow:hidden;cursor:pointer;}
+#globe-canvas{width:100%;height:100%;display:block;}
+.globe-ui{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;}
+.globe-label{font-family:'Lora',serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:#fff;letter-spacing:-0.02em;opacity:0;transition:opacity 1s;}
+.globe-sub{font-size:12px;font-weight:600;color:rgba(255,255,255,0.35);letter-spacing:0.12em;text-transform:uppercase;opacity:0;transition:opacity 1s 0.3s;}
+.globe-skip{position:absolute;bottom:24px;right:24px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:7px 14px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);cursor:pointer;letter-spacing:0.04em;font-family:'DM Sans',sans-serif;}
+.globe-skip:hover{background:rgba(255,255,255,0.18);color:#fff;}
 
-.mapa-full-wrap{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 64px - 160px);}
+/* MAP SECTION */
+.page-header{background:var(--ink);padding:48px 52px 44px;}
+.page-header-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(157,207,180,0.7);margin-bottom:10px;}
+.page-header h1{font-family:'Lora',Georgia,serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:10px;}
+.page-header p{font-size:14px;color:rgba(255,255,255,0.5);max-width:520px;line-height:1.7;}
+.mapa-stats-bar{background:var(--ink);padding:18px 52px 20px;display:flex;gap:40px;border-top:1px solid rgba(255,255,255,0.07);}
+.mapa-stat{display:flex;flex-direction:column;}
+.mapa-stat-num{font-family:'Lora',Georgia,serif;font-size:26px;font-weight:700;color:#fff;line-height:1;}
+.mapa-stat-label{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;}
+.mapa-full-wrap{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 64px - 200px);}
 #mapa-full{z-index:1;}
 .mapa-panel{background:var(--white);border-left:1px solid var(--border);overflow-y:auto;max-height:calc(100vh - 64px);}
-.mapa-panel-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:10;}
-.mapa-panel-title{font-family:'Lora',Georgia,serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:12px;}
+.mapa-panel-header{padding:24px 24px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:10;}
+.mapa-panel-title{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:12px;}
 .filtres{display:flex;gap:8px;flex-wrap:wrap;}
 .filtre-btn{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:none;cursor:pointer;color:var(--muted);transition:all 0.15s;}
-.filtre-btn.active-risc{background:rgba(217,119,6,0.1);border-color:var(--amber);color:#B45309;}
+.filtre-btn.active-risc{background:rgba(196,122,0,0.1);border-color:var(--amber);color:#B45309;}
 .filtre-btn.active-tancat{background:rgba(196,43,16,0.1);border-color:var(--red);color:var(--red);}
-.filtre-btn.active-recuperat{background:rgba(42,122,75,0.1);border-color:var(--green-ok);color:var(--green-ok);}
 .filtre-btn.active-all{background:var(--ink);border-color:var(--ink);color:#fff;}
-
+.filtres-anys{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.any-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.any-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.cerca-wrap{position:relative;margin-top:10px;}
+.cerca-input{width:100%;border:1.5px solid var(--border);border-radius:20px;padding:7px 14px 7px 34px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;color:var(--ink);}
+.cerca-input:focus{border-color:var(--ink);}
+.cerca-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;}
 .casos-list{padding:0 0 20px;}
-.cas-item{padding:20px 28px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
+.cas-item{padding:18px 24px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
 .cas-item:hover{background:var(--bg);}
-.cas-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:8px;}
+.cas-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:7px;}
 .cas-badge.risc{background:rgba(217,119,6,0.1);color:#B45309;}
 .cas-badge.tancat{background:rgba(196,43,16,0.1);color:var(--red);}
-.cas-badge.recuperat{background:rgba(42,122,75,0.1);color:var(--green-ok);}
-.cas-nom{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;}
-.cas-desc{font-size:12.5px;color:var(--muted);line-height:1.5;}
-
-.mapa-stats-bar{background:var(--ink);padding:20px 52px;display:flex;gap:40px;}
-.mapa-stat{display:flex;flex-direction:column;}
-.mapa-stat-num{font-family:'Lora',Georgia,serif;font-size:28px;font-weight:700;color:#fff;line-height:1;}
-.mapa-stat-label{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
-
+.cas-nom{font-family:'Lora',Georgia,serif;font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.cas-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.fitxa{display:none;position:fixed;top:64px;right:0;width:360px;height:calc(100vh - 64px);background:var(--white);border-left:1px solid var(--border);z-index:500;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.08);}
+.fitxa.open{display:flex;flex-direction:column;}
+.fitxa-header{padding:22px 22px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
+.fitxa-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--muted);padding:4px;line-height:1;}
+.fitxa-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:8px;}
+.fitxa-badge.tancat{background:rgba(196,43,16,0.1);color:var(--red);}
+.fitxa-badge.risc{background:rgba(217,119,6,0.1);color:#B45309;}
+.fitxa-nom{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:3px;letter-spacing:-0.01em;}
+.fitxa-adreca{font-size:12px;color:var(--muted);}
+.fitxa-body{padding:18px 22px;flex:1;}
+.fitxa-desc{font-size:13.5px;color:var(--ink-mid);line-height:1.75;margin-bottom:18px;}
 .leaflet-popup-content-wrapper{border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
 .popup-title{font-weight:700;color:#1A1A17;margin-bottom:4px;}
 .popup-cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:6px;}
 .popup-cat.risc{background:rgba(217,119,6,0.12);color:#B45309;}
 .popup-cat.tancat{background:rgba(196,43,16,0.1);color:#C42B10;}
-.popup-cat.recuperat{background:rgba(42,122,75,0.12);color:#2A7A4B;}
-.popup-text{color:#6E786A;line-height:1.5;}
-
-/* FITXA LATERAL */
-.fitxa{display:none;position:fixed;top:64px;right:0;width:360px;height:calc(100vh - 64px);background:var(--white);border-left:1px solid var(--border);z-index:500;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.08);}
-.fitxa.open{display:flex;flex-direction:column;}
-.fitxa-header{padding:24px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
-.fitxa-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--muted);padding:4px;line-height:1;}
-.fitxa-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-bottom:10px;}
-.fitxa-badge.tancat{background:rgba(196,43,16,0.1);color:var(--red);}
-.fitxa-badge.risc{background:rgba(217,119,6,0.1);color:#B45309;}
-.fitxa-nom{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:4px;letter-spacing:-0.01em;}
-.fitxa-adreca{font-size:12px;color:var(--muted);}
-.fitxa-body{padding:20px 24px;flex:1;}
-.fitxa-desc{font-size:13.5px;color:var(--ink-mid);line-height:1.75;margin-bottom:20px;}
-.fitxa-meta{display:flex;flex-direction:column;gap:8px;}
-.fitxa-meta-item{display:flex;gap:10px;font-size:12.5px;}
-.fitxa-meta-label{font-weight:600;color:var(--ink);min-width:80px;}
-.fitxa-meta-val{color:var(--muted);}
-
-/* CERCA */
-.cerca-wrap{position:relative;}
-.cerca-input{width:100%;border:1.5px solid var(--border);border-radius:20px;padding:7px 14px 7px 34px;font-size:12px;font-family:'DM Sans',sans-serif;outline:none;color:var(--ink);}
-.cerca-input:focus{border-color:var(--ink);}
-.cerca-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;}
-
-/* FILTRES PILLS */
-.filtres-anys{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-.any-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all 0.15s;}
-.any-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
-
-@media(max-width:960px){
-  .fitxa{width:100%;top:auto;bottom:0;height:70vh;border-left:none;border-top:1px solid var(--border);box-shadow:0 -4px 20px rgba(0,0,0,0.1);}
-}
-.grafics-bloc{padding:56px 52px;background:var(--white);border-top:1px solid var(--border);}
+.grafics-bloc{padding:52px 52px;background:var(--white);border-top:1px solid var(--border);}
 .grafics-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--border);}
 .grafics-kicker{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
 .grafics-title{font-family:'Lora',Georgia,serif;font-size:clamp(20px,2vw,26px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
 .grafics-nota{font-size:12px;color:var(--muted);max-width:280px;text-align:right;line-height:1.5;}
-.grafics-inner{width:100%;}
 .grafics-row{display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:center;}
 .grafic-subtitol{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
 .grafic-pie{display:flex;flex-direction:column;align-items:center;}
-.grafic-pie canvas{max-width:240px;max-height:240px;}
-
 footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .footer-brand{font-family:'Lora',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
 .footer-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
 .footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
-.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
-.footer-brand{font-family:'Lora',Georgia,serif;font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:14px;}
-.footer-brand-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
-.footer-desc{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.4);max-width:260px;margin-bottom:20px;}
-.footer-social{display:flex;gap:10px;}
-.footer-social a{width:34px;height:34px;background:rgba(255,255,255,0.07);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;}
-.footer-social a:hover{background:rgba(255,255,255,0.14);}
-.footer-col-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;}
-.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:9px;transition:color 0.15s;}
-.footer-col a:hover{color:rgba(255,255,255,0.9);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:18px 0;display:flex;justify-content:space-between;align-items:center;}
-.footer-copy{font-size:11.5px;color:rgba(255,255,255,0.25);}
-.footer-entity{font-size:11.5px;color:rgba(157,207,180,0.5);font-weight:500;}
-
 @media(max-width:960px){
   nav{padding:0 20px;}
   .nav-links{display:none;}
   .nav-burger{display:flex;}
-  .page-header{padding:36px 20px 32px;}
+  .page-header{padding:32px 20px 28px;}
+  .mapa-stats-bar{padding:14px 20px;gap:18px;flex-wrap:wrap;}
   .mapa-full-wrap{grid-template-columns:1fr;grid-template-rows:360px 1fr;}
   #mapa-full{height:360px;}
   .mapa-panel{max-height:none;border-left:none;border-top:1px solid var(--border);}
-  .mapa-stats-bar{padding:16px 20px;gap:20px;flex-wrap:wrap;}
-  .grafics-bloc{padding:40px 20px;}
-  .grafics-header{flex-direction:column;align-items:flex-start;gap:8px;}.grafics-nota{text-align:left;max-width:100%;}
-  .grafics-row{grid-template-columns:1fr;gap:32px;}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:28px;}
-  .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+  .fitxa{width:100%;top:auto;bottom:0;height:70vh;border-left:none;border-top:1px solid var(--border);}
+  .grafics-bloc{padding:36px 20px;}
+  .grafics-header{flex-direction:column;align-items:flex-start;gap:8px;}
+  .grafics-nota{text-align:left;max-width:100%;}
+  .grafics-row{grid-template-columns:1fr;gap:28px;}
+  footer{padding:20px;}
+  #globe-intro{height:400px;}
 }
 </style>
 </head>
@@ -155,440 +128,440 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 <nav>
   <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
   <div class="nav-links">
-    <a href="projecte.html">Projecte</a><a href="mapa.html">Mapa</a><a href="descobreix.html">Descobreix</a>
-    <a href="actualitat.html">Actualitat</a><a href="recursos.html">Recursos</a>
+    <a href="projecte.html">Projecte</a>
+    <a href="mapa.html" class="active">Mapa</a>
+    <a href="descobreix.html">Descobreix</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="recursos.html">Recursos</a>
     <a href="contacte.html">Contacte</a>
     <a class="nav-cta" href="contacte.html?tipus=comerc">Tens un comerç?</a>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile" id="nav-mobile">
-  <a href="projecte.html">Projecte</a><a href="mapa.html">Mapa</a><a href="descobreix.html">Descobreix</a>
-  <a href="actualitat.html">Actualitat</a><a href="recursos.html">Recursos</a>
+  <a href="projecte.html">Projecte</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="descobreix.html">Descobreix</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="recursos.html">Recursos</a>
   <a href="contacte.html">Contacte</a>
   <a class="nav-cta" href="contacte.html?tipus=comerc">Tens un comerç?</a>
 </div>
 
-
-<div class="page-header">
-  <div class="page-header-kicker">Mapa de casos</div>
-  <h1>Comerços en risc a Barcelona.</h1>
-  <p>Cada punt representa un comerç documentat. El mapa s'actualitza a mesura que treballem sobre el terreny.</p>
+<!-- GLOBE INTRO -->
+<div id="globe-intro">
+  <canvas id="globe-canvas"></canvas>
+  <div class="globe-ui">
+    <div class="globe-label" id="globe-label">Comerços en risc a Barcelona.</div>
+    <div class="globe-sub" id="globe-sub">Cada punt, un local documentat</div>
+  </div>
+  <button class="globe-skip" onclick="skipGlobe()">Saltar intro →</button>
 </div>
 
-<div class="mapa-stats-bar">
-  <div class="mapa-stat"><span class="mapa-stat-num">—</span><div class="mapa-stat-label">En risc</div></div>
-  <div class="mapa-stat"><span class="mapa-stat-num">—</span><div class="mapa-stat-label">Tancats</div></div>
-  <div class="mapa-stat"><span class="mapa-stat-num">—</span><div class="mapa-stat-label">Recuperats</div></div>
-  <div class="mapa-stat"><span class="mapa-stat-num">—</span><div class="mapa-stat-label">Total documentats</div></div>
+<!-- MAP -->
+<div id="map-section" style="display:none;">
+  <div class="page-header">
+    <div class="page-header-kicker">Mapa de casos</div>
+    <h1>Comerços en risc a Barcelona.</h1>
+    <p>Cada punt representa un comerç documentat. El mapa s'actualitza a mesura que treballem sobre el terreny.</p>
+  </div>
+  <div class="mapa-stats-bar">
+    <div class="mapa-stat"><span class="mapa-stat-num" id="stat-risc">—</span><div class="mapa-stat-label">En risc</div></div>
+    <div class="mapa-stat"><span class="mapa-stat-num" id="stat-tancat">—</span><div class="mapa-stat-label">Tancats</div></div>
+    <div class="mapa-stat"><span class="mapa-stat-num" id="stat-total">—</span><div class="mapa-stat-label">Total documentats</div></div>
+  </div>
+  <div class="mapa-full-wrap">
+    <div id="mapa-full"></div>
+    <div class="mapa-panel">
+      <div class="mapa-panel-header">
+        <div class="mapa-panel-title">Casos documentats</div>
+        <div class="filtres">
+          <button class="filtre-btn active-all" data-filtre="tot" onclick="filtrar(this,'tot')">Tots</button>
+          <button class="filtre-btn" data-filtre="risc" onclick="filtrar(this,'risc')">En risc</button>
+          <button class="filtre-btn" data-filtre="tancat" onclick="filtrar(this,'tancat')">Tancats</button>
+        </div>
+        <div class="cerca-wrap">
+          <svg class="cerca-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C8C7C0" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="cerca-input" id="cerca-input" placeholder="Cerca un comerç..." oninput="cercar(this.value)">
+        </div>
+      </div>
+      <div class="casos-list" id="casos-list"></div>
+    </div>
+  </div>
+  <div class="grafics-bloc">
+    <div class="grafics-header">
+      <div>
+        <div class="grafics-kicker">Dades en construcció</div>
+        <div class="grafics-title">Tancaments documentats</div>
+      </div>
+      <div class="grafics-nota">Casos verificats fins ara. La base de dades creix contínuament.</div>
+    </div>
+    <div class="grafics-row">
+      <div>
+        <div class="grafic-subtitol">Per districte</div>
+        <canvas id="chart-districtes" height="80"></canvas>
+      </div>
+      <div class="grafic-pie">
+        <div class="grafic-subtitol">Per estat</div>
+        <canvas id="chart-estat" height="200" width="200"></canvas>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-brand"><div class="footer-dot"></div>Abans Que Tanqui</div>
+    <div class="footer-copy">© 2026 Abans Que Tanqui · En construcció · Barcelona</div>
+  </footer>
 </div>
 
 <div class="fitxa" id="fitxa">
   <div class="fitxa-header">
     <div>
       <div class="fitxa-badge" id="fitxa-badge">Tancat</div>
-      <div class="fitxa-nom" id="fitxa-nom">Nom del comerç</div>
-      <div class="fitxa-adreca" id="fitxa-adreca">Adreça</div>
+      <div class="fitxa-nom" id="fitxa-nom"></div>
+      <div class="fitxa-adreca" id="fitxa-adreca"></div>
     </div>
     <button class="fitxa-close" onclick="tancarFitxa()">✕</button>
   </div>
   <div class="fitxa-body">
     <div class="fitxa-desc" id="fitxa-desc"></div>
-    <div class="fitxa-meta" id="fitxa-meta"></div>
   </div>
 </div>
-
-<div class="mapa-full-wrap">
-  <div id="mapa-full"></div>
-  <div class="mapa-panel">
-    <div class="mapa-panel-header">
-      <div class="mapa-panel-title">Casos documentats</div>
-      <div class="filtres">
-        <button class="filtre-btn active-all" data-filtre="tot" onclick="filtrar(this,'tot')">Tots</button>
-        <button class="filtre-btn" data-filtre="risc" onclick="filtrar(this,'risc')">En risc</button>
-        <button class="filtre-btn" data-filtre="tancat" onclick="filtrar(this,'tancat')">Tancats</button>
-        <button class="filtre-btn" data-filtre="recuperat" onclick="filtrar(this,'recuperat')">Recuperats</button>
-      </div>
-      <div class="filtres-anys" id="filtres-anys">
-        <span style="font-size:11px;font-weight:600;color:var(--muted);align-self:center;">Any:</span>
-        <button class="any-btn active" data-any="tot" onclick="filtrarAny(this,'tot')">Tots</button>
-      </div>
-      <div class="cerca-wrap" style="margin-top:10px;">
-        <svg class="cerca-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C8C7C0" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="cerca-input" id="cerca-input" placeholder="Cerca un comerç..." oninput="cercar(this.value)">
-      </div>
-    </div>
-    <div class="casos-list" id="casos-list"></div>
-  </div>
-</div>
-
-<section class="grafics-bloc">
-  <div class="grafics-header">
-    <div>
-      <div class="grafics-kicker">Dades en construcció</div>
-      <div class="grafics-title">Tancaments documentats</div>
-    </div>
-    <div class="grafics-nota">Mostra els casos verificats que tenim fins ara. La base de dades creix contínuament.</div>
-  </div>
-  <div class="grafics-inner">
-    <div class="grafics-row">
-      <div class="grafic-timeline">
-        <div class="grafic-subtitol">Per any</div>
-        <canvas id="chart-anys" height="100"></canvas>
-      </div>
-      <div class="grafic-pie">
-        <div class="grafic-subtitol">Per districte</div>
-        <canvas id="chart-districtes" height="240" width="240"></canvas>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-brand"><div class="footer-dot"></div>Abans Que Tanqui</div>
-  <div class="footer-copy">© 2026 Abans Que Tanqui · En construcció · Barcelona</div>
-</footer>
 
 <script>
-// ── CONFIGURACIÓ AIRTABLE ─────────────────────────────────────────────────────
-const AIRTABLE_TOKEN  = 'patnuSBb3PFtjOg6B.45b031e3b5da717b082606371329a107f2dbe5ef5cbe670027da112a4d8653a1';   // <-- enganxa aquí el teu token
-const AIRTABLE_BASE   = 'appGuT1DQskra3f9p';
-const AIRTABLE_TABLE  = 'tblImxsEi3bEj3clb';
-// ─────────────────────────────────────────────────────────────────────────────
+// ── AIRTABLE ──────────────────────────────────────────────────────────────────
+const AIRTABLE_TOKEN = 'patnuSBb3PFtjOg6B.45b031e3b5da717b082606371329a107f2dbe5ef5cbe670027da112a4d8653a1';
+const AIRTABLE_BASE  = 'appGuT1DQskra3f9p';
+const AIRTABLE_TABLE = 'tblImxsEi3bEj3clb';
 
-const colors = { risc:'#C47A00', tancat:'#C8392B', recuperat:'#2A7A4B' };
-const labels  = { risc:'En risc', tancat:'Tancat',  recuperat:'Recuperat' };
+const colors = { risc:'#C47A00', tancat:'#C8392B' };
 
-let punts   = [];
+let punts = [];
 let markers = [];
 let filtrActual = 'tot';
-let filtrAny = 'tot';
 let cercaActual = '';
+let map = null;
 
-function extreurAny(desc) {
-  const m = desc.match(/\b(202[0-9])\b/);
-  return m ? m[1] : null;
+// ── GLOBE ─────────────────────────────────────────────────────────────────────
+const gCanvas = document.getElementById('globe-canvas');
+const gCtx = gCanvas.getContext('2d');
+let gAngle = 0;
+let gPhase = 'spin'; // spin → zoom → done
+let gZoomT = 0;
+let gFrame = null;
+let gLastTs = null;
+const BCN = { lat: 41.3851, lng: 2.1734 };
+const DEG = Math.PI / 180;
+
+function resizeGlobe() {
+  gCanvas.width = gCanvas.offsetWidth;
+  gCanvas.height = gCanvas.offsetHeight;
+}
+resizeGlobe();
+window.addEventListener('resize', resizeGlobe);
+
+function sph2cart(lat, lng) {
+  const la = lat * DEG, lo = lng * DEG;
+  return { x: Math.cos(la) * Math.cos(lo), y: Math.sin(la), z: Math.cos(la) * Math.sin(lo) };
+}
+
+function rotPt(p, rLat, rLng) {
+  const rl = rLat * DEG, rlo = rLng * DEG;
+  let { x, y, z } = p;
+  let x2 = x * Math.cos(-rlo) - z * Math.sin(-rlo);
+  let z2 = x * Math.sin(-rlo) + z * Math.cos(-rlo);
+  let y2 = y * Math.cos(-rl) - z2 * Math.sin(-rl);
+  let z3 = y * Math.sin(-rl) + z2 * Math.cos(-rl);
+  return { x: x2, y: y2, z: z3 };
+}
+
+// Simplified but decent continent outlines
+const CONTINENTS = [
+  // Europe + Asia (simplified)
+  [[71,28],[68,30],[60,28],[55,35],[50,40],[46,46],[42,46],[40,28],[35,26],[28,30],[20,35],[10,41],[0,41],[-5,34],[-9,37],[-9,42],[-1,42],[3,41],[8,40],[14,36],[18,39],[24,38],[28,39],[30,35],[32,33],[36,34],[40,38],[42,43],[40,46],[36,48],[32,50],[28,50],[24,53],[22,57],[20,58],[24,63],[28,66],[26,68],[30,70],[34,68],[38,63],[40,58],[44,56],[48,54],[52,53],[58,50],[62,46],[65,42],[68,38],[70,33],[71,28]],
+  // Africa
+  [[36,-5],[32,-6],[28,-12],[18,-16],[12,-16],[6,-14],[4,-2],[3,2],[4,5],[5,9],[5,13],[8,16],[10,21],[12,24],[14,27],[18,28],[22,30],[26,31],[30,30],[33,26],[35,22],[36,18],[38,14],[40,10],[42,8],[44,10],[44,13],[42,16],[40,18],[38,20],[37,24],[36,20],[34,16],[32,13],[30,16],[28,18],[26,16],[22,12],[18,14],[14,16],[10,14],[8,10],[6,6],[4,2],[2,-2],[0,-4],[-4,-8],[-10,-14],[-14,-18],[-20,-20],[-24,-22],[-28,-24],[-30,-18],[-28,-14],[-26,-10],[-22,-6],[-18,-2],[-14,2],[-10,6],[-8,10],[-6,14],[-4,18],[-2,22],[2,28],[6,32],[10,34],[15,36],[20,36],[24,33],[28,31],[32,30],[36,26],[38,22],[40,16],[38,12],[36,8],[34,2],[32,-4],[30,-8],[28,-12],[26,-16],[22,-18],[16,-18],[12,-14],[8,-10],[4,-6],[0,-3],[-4,0],[-8,4],[-12,8],[-16,10],[-20,10],[-24,8],[-28,4],[-32,0],[-36,-4],[-36,-5]],
+  // Americas
+  [[-170,58],[-155,70],[-140,70],[-130,65],[-120,60],[-112,58],[-106,54],[-96,48],[-84,42],[-75,36],[-68,32],[-65,28],[-62,24],[-60,20],[-58,16],[-56,12],[-52,8],[-50,4],[-48,0],[-46,-4],[-44,-8],[-42,-12],[-40,-16],[-38,-20],[-38,-24],[-40,-28],[-42,-32],[-44,-36],[-46,-40],[-48,-44],[-52,-48],[-56,-52],[-60,-56],[-65,-60],[-68,-56],[-66,-52],[-64,-48],[-62,-44],[-60,-40],[-58,-36],[-56,-32],[-54,-28],[-52,-24],[-50,-20],[-48,-16],[-46,-12],[-44,-8],[-42,-4],[-40,0],[-38,4],[-36,8],[-34,12],[-32,16],[-30,18],[-28,16],[-26,12],[-24,8],[-22,4],[-20,0],[-18,-4],[-16,-8],[-14,-12],[-12,-16],[-10,-20],[-8,-22],[-6,-20],[-4,-16],[-2,-12],[0,-8],[2,-4],[4,0],[6,4],[8,8],[10,12],[12,8],[14,4],[16,0],[18,-4],[20,-8],[22,-12],[24,-16],[28,-20],[32,-24],[36,-28],[40,-32],[44,-36],[48,-40],[52,-44],[56,-48],[60,-52],[65,-56],[70,-58],[75,-55],[78,-50],[80,-44],[82,-38],[84,-32],[86,-26],[88,-20],[90,-14],[92,-8],[94,-2],[96,4],[98,10],[100,16],[102,22],[104,28],[106,34],[108,40],[110,46],[112,52],[114,56],[118,60],[124,64],[130,66],[136,68],[142,70],[148,68],[154,65],[160,62],[166,60],[170,58],[-170,58]],
+];
+
+function drawGlobe(rotLat, rotLng, radius, alpha) {
+  const cx = gCanvas.width / 2, cy = gCanvas.height / 2;
+  gCtx.save();
+  gCtx.globalAlpha = alpha;
+
+  // Ocean
+  gCtx.beginPath();
+  gCtx.arc(cx, cy, radius, 0, Math.PI * 2);
+  gCtx.fillStyle = '#0a1628';
+  gCtx.fill();
+
+  // Atmosphere glow
+  gCtx.beginPath();
+  gCtx.arc(cx, cy, radius + 6, 0, Math.PI * 2);
+  gCtx.strokeStyle = 'rgba(100,160,255,0.15)';
+  gCtx.lineWidth = 8;
+  gCtx.stroke();
+
+  // Grid
+  for (let lat = -60; lat <= 60; lat += 30) {
+    gCtx.beginPath(); let first = true;
+    for (let lng = -180; lng <= 180; lng += 4) {
+      const r = rotPt(sph2cart(lat, lng), rotLat, rotLng);
+      if (r.x < 0) { first = true; continue; }
+      const sx = cx + r.z * radius, sy = cy - r.y * radius;
+      first ? (gCtx.moveTo(sx, sy), first = false) : gCtx.lineTo(sx, sy);
+    }
+    gCtx.strokeStyle = 'rgba(100,150,220,0.1)'; gCtx.lineWidth = 0.5; gCtx.stroke();
+  }
+  for (let lng = -180; lng <= 180; lng += 30) {
+    gCtx.beginPath(); let first = true;
+    for (let lat = -80; lat <= 80; lat += 4) {
+      const r = rotPt(sph2cart(lat, lng), rotLat, rotLng);
+      if (r.x < 0) { first = true; continue; }
+      const sx = cx + r.z * radius, sy = cy - r.y * radius;
+      first ? (gCtx.moveTo(sx, sy), first = false) : gCtx.lineTo(sx, sy);
+    }
+    gCtx.strokeStyle = 'rgba(100,150,220,0.1)'; gCtx.lineWidth = 0.5; gCtx.stroke();
+  }
+
+  // Continents
+  CONTINENTS.forEach(poly => {
+    gCtx.beginPath(); let first = true;
+    poly.forEach(([lat, lng]) => {
+      const r = rotPt(sph2cart(lat, lng), rotLat, rotLng);
+      if (r.x < 0) { first = true; return; }
+      const sx = cx + r.z * radius, sy = cy - r.y * radius;
+      first ? (gCtx.moveTo(sx, sy), first = false) : gCtx.lineTo(sx, sy);
+    });
+    gCtx.fillStyle = 'rgba(40,80,140,0.55)';
+    gCtx.fill();
+    gCtx.strokeStyle = 'rgba(160,200,255,0.6)';
+    gCtx.lineWidth = 0.8;
+    gCtx.stroke();
+  });
+
+  // BCN dot
+  const bcnR = rotPt(sph2cart(BCN.lat, BCN.lng), rotLat, rotLng);
+  if (bcnR.x > 0) {
+    const bx = cx + bcnR.z * radius, by = cy - bcnR.y * radius;
+    const pulse = Math.sin(Date.now() / 280) * 0.5 + 0.5;
+    gCtx.beginPath(); gCtx.arc(bx, by, 5 + pulse * 3, 0, Math.PI * 2);
+    gCtx.strokeStyle = `rgba(200,57,43,${0.5 - pulse * 0.35})`; gCtx.lineWidth = 1.5; gCtx.stroke();
+    gCtx.beginPath(); gCtx.arc(bx, by, 4, 0, Math.PI * 2);
+    gCtx.fillStyle = '#C8392B'; gCtx.fill();
+  }
+
+  gCtx.restore();
+}
+
+function easeInOut(t) { return t < 0.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1; }
+function lerpAngle(a, b, t) { let d = ((b - a) % 360 + 540) % 360 - 180; return a + d * t; }
+
+function globeTick(ts) {
+  if (!gLastTs) gLastTs = ts;
+  const dt = Math.min((ts - gLastTs) / 1000, 0.05);
+  gLastTs = ts;
+
+  const W = gCanvas.width, H = gCanvas.height;
+  const baseR = Math.min(W, H) * 0.36;
+
+  gCtx.clearRect(0, 0, W, H);
+  gCtx.fillStyle = '#0D0D0B';
+  gCtx.fillRect(0, 0, W, H);
+
+  if (gPhase === 'spin') {
+    gAngle += dt * 20;
+    drawGlobe(20, gAngle, baseR, 1);
+
+  } else if (gPhase === 'zoom') {
+    gZoomT = Math.min(gZoomT + dt * 0.5, 1);
+    const ez = easeInOut(gZoomT);
+    const curLng = lerpAngle(gAngle % 360, BCN.lng, ez);
+    const curLat = 20 + (BCN.lat - 20) * ez;
+    const curR = baseR + (baseR * 9) * ez;
+    const alphaGlobe = ez < 0.65 ? 1 : 1 - (ez - 0.65) / 0.35;
+
+    drawGlobe(curLat, curLng, curR, Math.max(alphaGlobe, 0));
+
+    if (gZoomT >= 1) {
+      gPhase = 'done';
+      showMapSection();
+      return;
+    }
+  }
+  gFrame = requestAnimationFrame(globeTick);
+}
+
+function startZoom() {
+  if (gPhase !== 'spin') return;
+  document.getElementById('globe-label').style.opacity = '1';
+  document.getElementById('globe-sub').style.opacity = '1';
+  gPhase = 'zoom';
+}
+
+function skipGlobe() {
+  if (gFrame) cancelAnimationFrame(gFrame);
+  showMapSection();
+}
+
+function showMapSection() {
+  document.getElementById('globe-intro').style.display = 'none';
+  document.getElementById('map-section').style.display = 'block';
+  if (!map) initMap();
+}
+
+// Auto-start zoom after 2.5s spin
+setTimeout(startZoom, 2500);
+gFrame = requestAnimationFrame(globeTick);
+
+// ── MAP ───────────────────────────────────────────────────────────────────────
+function initMap() {
+  map = L.map('mapa-full', { center: [41.4035, 2.1544], zoom: 14, scrollWheelZoom: false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a>', subdomains: 'abcd', maxZoom: 19
+  }).addTo(map);
+  carregarDades();
+}
+
+function makeIcon(color) {
+  return L.divIcon({
+    className: '',
+    html: `<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25)"></div>`,
+    iconSize: [14, 14], iconAnchor: [7, 7], popupAnchor: [0, -10]
+  });
+}
+
+async function carregarDades() {
+  document.getElementById('casos-list').innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Carregant comerços...</div>';
+  try {
+    let tots = [], offset = '';
+    do {
+      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}?filterByFormula={Actiu}=1${offset ? '&offset=' + offset : ''}`;
+      const res = await fetch(url, { headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` } });
+      const data = await res.json();
+      if (data.records) tots = tots.concat(data.records);
+      offset = data.offset || '';
+    } while (offset);
+
+    punts = tots.map(r => ({
+      id: r.id,
+      nom: r.fields['Nom'] || '—',
+      addr: r.fields['Adreça'] || '',
+      desc: r.fields['Descripció'] || '',
+      cat: (r.fields['Categoria'] || 'tancat').toLowerCase().trim(),
+      lat: parseFloat(r.fields['Lat']) || null,
+      lng: parseFloat(r.fields['Lng']) || null,
+    })).filter(p => p.lat && p.lng);
+
+    renderStats();
+    renderMarkers();
+    renderLlista();
+    renderGrafics();
+  } catch(e) {
+    document.getElementById('casos-list').innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Error carregant les dades.</div>';
+  }
+}
+
+function renderStats() {
+  const risc = punts.filter(p => p.cat === 'risc').length;
+  const tancat = punts.filter(p => p.cat === 'tancat').length;
+  document.getElementById('stat-risc').textContent = risc;
+  document.getElementById('stat-tancat').textContent = tancat;
+  document.getElementById('stat-total').textContent = punts.length;
 }
 
 function puntVisible(p) {
   const okEstat = filtrActual === 'tot' || p.cat === filtrActual;
-  const okAny = filtrAny === 'tot' || p.any === filtrAny;
   const okCerca = !cercaActual || p.nom.toLowerCase().includes(cercaActual.toLowerCase()) || p.addr.toLowerCase().includes(cercaActual.toLowerCase());
-  return okEstat && okAny && okCerca;
+  return okEstat && okCerca;
 }
 
-// Mapa
-const map = L.map('mapa-full', { center:[41.4035,2.1544], zoom:15, scrollWheelZoom:false });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-  attribution:'&copy; <a href="https://carto.com/">CARTO</a>', subdomains:'abcd', maxZoom:19
-}).addTo(map);
-
-function makeIcon(color){
-  return L.divIcon({
-    className:'',
-    html:`<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25)"></div>`,
-    iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-10]
-  });
-}
-
-// Carrega dades d'Airtable
-async function carregarDades() {
-  document.getElementById('casos-list').innerHTML =
-    '<div style="padding:28px;color:var(--muted);font-size:13px;">Carregant comerços...</div>';
-
-  try {
-    let tots = [];
-    let offset = '';
-
-    // Airtable pagina de 100 en 100 — fem totes les pàgines
-    do {
-      const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`
-        + `?filterByFormula={Actiu}=1`
-        + (offset ? `&offset=${offset}` : '');
-
-      const res = await fetch(url, {
-        headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
-      });
-
-      if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
-      const data = await res.json();
-
-      tots = tots.concat(data.records);
-      offset = data.offset || '';
-    } while (offset);
-
-    // Convertim els registres al format intern
-    punts = tots
-      .map(r => ({
-        nom:  r.fields['Nom']       || '',
-        addr: r.fields['Adreça']    || r.fields['Adreca'] || '',
-        lat:  parseFloat(r.fields['Lat'])  || null,
-        lng:  parseFloat(r.fields['Lng'])  || null,
-        cat:  (r.fields['Categoria'] || 'risc').toLowerCase(),
-        desc: r.fields['Descripció'] || '',
-        any:  r.fields['Any'] ? String(r.fields['Any']) : extreurAny(r.fields['Descripció'] || ''),
-      }))
-      .filter(p => p.lat && p.lng && p.nom); // descartem els que falten coordenades
-
-    pintarMarcadors();
-    actualitzarStats();
-    renderAnys();
-    renderLlista();
-    renderGrafic();
-
-  } catch (err) {
-    console.error('Error Airtable:', err);
-    document.getElementById('casos-list').innerHTML =
-      `<div style="padding:28px;color:var(--red);font-size:13px;">
-        Error carregant les dades.<br>
-        <span style="color:var(--muted);font-size:12px;">${err.message}</span>
-      </div>`;
-  }
-}
-
-function pintarMarcadors() {
-  // Neteja marcadors anteriors
-  markers.forEach(m => map.removeLayer(m.marker));
+function renderMarkers() {
+  markers.forEach(m => map.removeLayer(m));
   markers = [];
-
-  punts.forEach(p => {
-    const color = colors[p.cat] || colors.risc;
+  punts.filter(puntVisible).forEach(p => {
+    const color = colors[p.cat] || '#C8392B';
     const m = L.marker([p.lat, p.lng], { icon: makeIcon(color) })
       .addTo(map)
-      .bindPopup(
-        `<div class="popup-cat ${p.cat}">${labels[p.cat] || p.cat}</div>` +
-        `<div class="popup-title">${p.nom}</div>` +
-        (p.addr ? `<div class="popup-text" style="margin-bottom:4px">${p.addr}</div>` : '') +
-        (p.desc ? `<div class="popup-text">${p.desc}</div>` : '')
-      );
-    markers.push({ marker: m, data: p });
-  });
-}
-
-function actualitzarStats() {
-  const risc      = punts.filter(p => p.cat === 'risc').length;
-  const tancat    = punts.filter(p => p.cat === 'tancat').length;
-  const recuperat = punts.filter(p => p.cat === 'recuperat').length;
-  const total     = punts.length;
-
-  // Actualitza la barra d'estadístiques
-  const nums = document.querySelectorAll('.mapa-stat-num');
-  if (nums[0]) nums[0].textContent = risc;
-  if (nums[1]) nums[1].textContent = tancat;
-  if (nums[2]) nums[2].textContent = recuperat;
-  if (nums[3]) nums[3].textContent = total;
-}
-
-function renderAnys() {
-  const anys = [...new Set(punts.map(p => p.any).filter(Boolean))].sort();
-  const wrap = document.getElementById('filtres-anys');
-  // Mantenir el botó "Tots"
-  const totsBtn = wrap.querySelector('[data-any="tot"]');
-  wrap.innerHTML = '';
-  wrap.appendChild(totsBtn);
-  anys.forEach(any => {
-    const btn = document.createElement('button');
-    btn.className = 'any-btn';
-    btn.dataset.any = any;
-    btn.textContent = any;
-    btn.onclick = () => filtrarAny(btn, any);
-    wrap.appendChild(btn);
+      .bindPopup(`<div class="popup-cat ${p.cat}">${p.cat === 'risc' ? 'En risc' : 'Tancat'}</div><div class="popup-title">${p.nom}</div><div style="color:#6B6B67;font-size:12px;">${p.addr}</div>`);
+    m.on('click', () => obrirFitxa(p));
+    markers.push(m);
   });
 }
 
 function renderLlista() {
-  const list = document.getElementById('casos-list');
-  list.innerHTML = '';
-  const filtrats = punts.filter(puntVisible);
-  if (filtrats.length === 0) {
-    list.innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Cap comerç amb aquests filtres.</div>';
-    return;
-  }
-  filtrats.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'cas-item';
-    div.innerHTML =
-      `<div class="cas-badge ${p.cat}">${labels[p.cat] || p.cat}${p.any ? ' · ' + p.any : ''}</div>` +
-      `<div class="cas-nom">${p.nom}</div>` +
-      (p.addr ? `<div class="cas-desc" style="margin-bottom:2px">${p.addr}</div>` : '');
-    div.addEventListener('click', () => {
-      map.setView([p.lat, p.lng], 17);
-      markers.find(m => m.data.nom === p.nom)?.marker.openPopup();
-      obrirFitxa(p);
-    });
-    list.appendChild(div);
-  });
+  const visibles = punts.filter(puntVisible);
+  const el = document.getElementById('casos-list');
+  if (!visibles.length) { el.innerHTML = '<div style="padding:28px;color:var(--muted);font-size:13px;">Cap resultat.</div>'; return; }
+  el.innerHTML = visibles.map(p => `
+    <div class="cas-item" onclick="obrirFitxa(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <div class="cas-badge ${p.cat}">${p.cat === 'risc' ? 'En risc' : 'Tancat'}</div>
+      <div class="cas-nom">${p.nom}</div>
+      <div class="cas-desc">${p.addr}</div>
+    </div>`).join('');
 }
 
-function aplicarFiltres() {
-  markers.forEach(({ marker, data }) => {
-    if (puntVisible(data)) marker.addTo(map);
-    else map.removeLayer(marker);
+function renderGrafics() {
+  // Per districte (aproximació per barri/zona)
+  const distMap = {};
+  punts.forEach(p => {
+    const zona = p.addr.includes('Gràcia') ? 'Gràcia' :
+      p.addr.includes('Eixample') ? 'Eixample' :
+      p.addr.includes('Raval') || p.addr.includes('Gòtic') || p.addr.includes('Barceloneta') ? 'Ciutat Vella' :
+      p.addr.includes('Sants') ? 'Sants' :
+      p.addr.includes('Horta') ? 'Horta' : 'Altres';
+    distMap[zona] = (distMap[zona] || 0) + 1;
   });
-  renderLlista();
+  const dLabels = Object.keys(distMap);
+  const dVals = dLabels.map(k => distMap[k]);
+
+  new Chart(document.getElementById('chart-districtes'), {
+    type: 'bar',
+    data: { labels: dLabels, datasets: [{ data: dVals, backgroundColor: '#C8392B', borderRadius: 3 }] },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }, responsive: true }
+  });
+
+  const risc = punts.filter(p => p.cat === 'risc').length;
+  const tancat = punts.filter(p => p.cat === 'tancat').length;
+  new Chart(document.getElementById('chart-estat'), {
+    type: 'doughnut',
+    data: { labels: ['En risc', 'Tancat'], datasets: [{ data: [risc, tancat], backgroundColor: ['#C47A00', '#C8392B'], borderWidth: 0 }] },
+    options: { plugins: { legend: { position: 'bottom' } }, cutout: '65%' }
+  });
 }
 
 function filtrar(btn, filtre) {
   filtrActual = filtre;
   document.querySelectorAll('.filtre-btn').forEach(b => b.className = 'filtre-btn');
-  btn.classList.add(filtre === 'tot' ? 'active-all' : 'active-' + filtre);
-  aplicarFiltres();
-}
-
-function filtrarAny(btn, any) {
-  filtrAny = any;
-  document.querySelectorAll('.any-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  aplicarFiltres();
+  btn.classList.add('active-' + (filtre === 'tot' ? 'all' : filtre));
+  renderMarkers(); renderLlista();
 }
 
 function cercar(val) {
   cercaActual = val;
-  aplicarFiltres();
+  renderMarkers(); renderLlista();
 }
 
 function obrirFitxa(p) {
-  document.getElementById('fitxa-badge').textContent = labels[p.cat] || p.cat;
-  document.getElementById('fitxa-badge').className = 'fitxa-badge ' + p.cat;
+  const f = document.getElementById('fitxa');
+  document.getElementById('fitxa-badge').className = `fitxa-badge ${p.cat}`;
+  document.getElementById('fitxa-badge').textContent = p.cat === 'risc' ? 'En risc' : 'Tancat';
   document.getElementById('fitxa-nom').textContent = p.nom;
-  document.getElementById('fitxa-adreca').textContent = p.addr || '';
-  document.getElementById('fitxa-desc').textContent = p.desc || '';
-  const meta = document.getElementById('fitxa-meta');
-  meta.innerHTML = '';
-  if (p.any) meta.innerHTML += `<div class="fitxa-meta-item"><span class="fitxa-meta-label">Any</span><span class="fitxa-meta-val">${p.any}</span></div>`;
-  document.getElementById('fitxa').classList.add('open');
+  document.getElementById('fitxa-adreca').textContent = p.addr;
+  document.getElementById('fitxa-desc').textContent = p.desc;
+  f.classList.add('open');
+  if (map && p.lat && p.lng) map.setView([p.lat, p.lng], 16);
 }
 
 function tancarFitxa() {
   document.getElementById('fitxa').classList.remove('open');
 }
 
-// Arrenca
-carregarDades();
-
 // Nav burger
 const burger = document.getElementById('nav-burger');
 const mobileNav = document.getElementById('nav-mobile');
 burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { burger.classList.remove('open'); mobileNav.classList.remove('open'); }));
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script>
-function getDistricte(p) {
-  const a = (p.addr + ' ' + p.desc).toLowerCase();
-  // Gràcia
-  if(a.includes('gràcia') || a.includes('gracia') || a.includes('gran de gràcia') ||
-     a.includes('travessera de gràcia') || a.includes('llibertat') ||
-     a.includes('santa eugènia') || a.includes('mercat de la llibertat') ||
-     a.includes('vila de gràcia')) return 'Gràcia';
-  // Ciutat Vella (Gòtic, Raval, Ribera, Barceloneta)
-  if(a.includes('gòtic') || a.includes('gothic') || a.includes('petritxol') ||
-     a.includes('call') || a.includes('escudellers') || a.includes('palla') ||
-     a.includes('portaferrissa') || a.includes('canuda') || a.includes('comtal') ||
-     a.includes('ferran') || a.includes('barri gòtic') ||
-     a.includes('raval') || a.includes('tallers') || a.includes('vicenç martorell') ||
-     a.includes('sant pere') || a.includes('ribera') ||
-     a.includes('barceloneta') || a.includes('la barceloneta') ||
-     a.includes('cera')) return 'Ciutat Vella';
-  // Eixample (inclou Sant Antoni)
-  if(a.includes('eixample') || a.includes('roger de llúria') ||
-     a.includes('passeig de gràcia') || a.includes('rambla de catalunya') ||
-     a.includes('sant joan') || a.includes('passeig sant joan') ||
-     a.includes('sant antoni') || a.includes('tamarit') || a.includes('parlament') ||
-     a.includes('comte borrell') || a.includes('muntaner') || a.includes('aribau') ||
-     a.includes('consell de cent') || a.includes('provença') || a.includes('aragó') ||
-     a.includes('diagonal') || a.includes('francesc macià')) return 'Eixample';
-  // Sants-Montjuïc / Les Corts
-  if(a.includes('sants') || a.includes('esplugues') || a.includes('carrer de sants') ||
-     a.includes('les corts') || a.includes('corts')) return 'Sants-Montjuïc';
-  // Sarrià-Sant Gervasi
-  if(a.includes('sarrià') || a.includes('sarria') || a.includes('sant gervasi') ||
-     a.includes('lesseps') || a.includes('farró')) return 'Sarrià-Sant Gervasi';
-  // Sant Andreu
-  if(a.includes('sant andreu') || a.includes('versalles') ||
-     a.includes('gran de sant andreu')) return 'Sant Andreu';
-  // Horta-Guinardó
-  if(a.includes('horta') || a.includes('guinardó')) return 'Horta-Guinardó';
-  // Sant Martí / Poblenou
-  if(a.includes('clot') || a.includes('muntanya') || a.includes('poblenou') ||
-     a.includes('sant martí') || a.includes('rambla del poblenou')) return 'Sant Martí';
-  // Nou Barris
-  if(a.includes('nou barris') || a.includes('roquetes') || a.includes('verdun')) return 'Nou Barris';
-  return 'Altres';
-}
-
-function renderGrafic() {
-  const anys = {};
-  punts.forEach(p => {
-    const match = p.desc.match(/\b(202[0-9])\b/);
-    const any = match ? match[1] : null;
-    if(!any) return;
-    anys[any] = (anys[any] || 0) + 1;
-  });
-
-  const labelsAnys = Object.keys(anys).sort();
-  const valorsAnys = labelsAnys.map(a => anys[a]);
-
-  const ctxAnys = document.getElementById('chart-anys');
-  if(ctxAnys) {
-    new Chart(ctxAnys, {
-      type: 'bar',
-      data: {
-        labels: labelsAnys,
-        datasets: [{
-          label: 'Tancaments',
-          data: valorsAnys,
-          backgroundColor: '#C8392B',
-          borderRadius: 4,
-          borderSkipped: false,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + ' cas' + (c.parsed.y !== 1 ? 'os' : '') } } },
-        scales: {
-          y: { beginAtZero: true, ticks: { stepSize: 1, font: { family: 'DM Sans', size: 12 }, color: '#6B6B67' }, grid: { color: '#E2E1DC' }, border: { display: false } },
-          x: { ticks: { font: { family: 'DM Sans', size: 13, weight: '600' }, color: '#1A1A18' }, grid: { display: false }, border: { display: false } }
-        }
-      }
-    });
-  }
-
-  const districtes = {};
-  punts.forEach(p => {
-    const d = getDistricte(p);
-    districtes[d] = (districtes[d] || 0) + 1;
-  });
-
-  const labelsD = Object.keys(districtes).sort((a,b) => districtes[b] - districtes[a]);
-  const valorsD = labelsD.map(d => districtes[d]);
-  const colors = ['#C8392B','#C47A00','#2A7A4B','#1A5A8A','#6B3A7A','#5A6B3A','#3A5A6B'];
-
-  const ctxD = document.getElementById('chart-districtes');
-  if(ctxD) {
-    new Chart(ctxD, {
-      type: 'doughnut',
-      data: {
-        labels: labelsD,
-        datasets: [{
-          data: valorsD,
-          backgroundColor: colors.slice(0, labelsD.length),
-          borderWidth: 2,
-          borderColor: '#fff',
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        cutout: '60%',
-        plugins: {
-          legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 11 }, color: '#6B6B67', padding: 10, boxWidth: 12 } },
-          tooltip: { callbacks: { label: c => c.label + ': ' + c.parsed + ' casos' } }
-        }
-      }
-    });
-  }
-}
 </script>
 </body>
 </html>
