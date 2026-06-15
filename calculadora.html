@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora d'impacte · Abans Que Tanqui</title>
+<title>Calculadora de viabilitat · Abans Que Tanqui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1A1A18;--ink-mid:#3A3A37;--muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--border:#E2E1DC;--border-dk:#C8C7C0;--amber:#C47A00;--cta:#2A7A4B;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--green:#1B3327;--border:#E2E1DC;--border-dk:#C8C7C0;--amber:#C47A00;--cta:#2A7A4B;}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
-
-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;}
 .nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
 .nav-links{display:flex;gap:22px;align-items:center;}
@@ -23,97 +22,66 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;}
 .nav-mobile.open{display:flex;}
 .nav-mobile a{font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;padding:12px 24px;}
-
-.page-header{background:var(--white);border-bottom:1px solid var(--border);padding:56px 52px 48px;}
-.page-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
-.page-title{font-family:'Lora',serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:14px;}
-.page-title em{font-style:italic;color:var(--red);}
-.page-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:560px;}
-
-.context-bloc{background:var(--ink);padding:28px 52px;}
-.context-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
-.context-item{border-left:3px solid rgba(255,255,255,0.12);padding-left:16px;}
-.context-num{font-family:'Lora',serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:-0.02em;line-height:1;}
-.context-label{font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px;line-height:1.4;}
-
-.calc-wrap{padding:48px 52px;max-width:900px;margin:0 auto;}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
-
-/* CALC BLOC COMPARTIT */
-.calc-bloc{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:28px;}
-.calc-bloc-title{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-0.01em;line-height:1.2;}
-.calc-bloc-sub{font-size:12.5px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
-.calc-label{font-size:12px;font-weight:600;color:var(--ink-mid);margin-bottom:6px;}
-.calc-val{font-family:'Lora',serif;font-size:40px;font-weight:700;color:var(--ink);letter-spacing:-0.03em;line-height:1;margin-bottom:4px;}
-.calc-val small{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:400;color:var(--muted);}
-.calc-slider{width:100%;margin:12px 0 6px;-webkit-appearance:none;appearance:none;height:3px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;}
-.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ink);cursor:pointer;border:2.5px solid var(--white);box-shadow:0 0 0 1px var(--border-dk);}
-.calc-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);cursor:pointer;border:2.5px solid var(--white);}
-.calc-range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:20px;}
-.calc-divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
-
-/* RESULTAT SIMPLE */
-.res-simple{border-radius:5px;padding:18px;margin-bottom:12px;}
-.res-simple.local{background:#EAF3EE;border:1px solid #B8D9C4;}
-.res-simple.gran{background:#FDF0EE;border:1px solid #F0C4BC;}
-.res-kicker{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px;}
-.res-simple.local .res-kicker{color:var(--cta);}
-.res-simple.gran .res-kicker{color:var(--red);}
-.res-num{font-family:'Lora',serif;font-size:28px;font-weight:700;letter-spacing:-0.02em;line-height:1;margin-bottom:3px;}
-.res-simple.local .res-num{color:var(--cta);}
-.res-simple.gran .res-num{color:var(--red);}
-.res-desc{font-size:11.5px;color:var(--muted);line-height:1.5;}
-
-.res-dif{background:var(--ink);border-radius:5px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;}
-.res-dif-text{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;}
-.res-dif-text strong{color:#fff;display:block;margin-bottom:1px;font-size:13px;}
-.res-dif-num{font-family:'Lora',serif;font-size:28px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:-0.02em;flex-shrink:0;}
-
-/* CALC INVERSA */
-.inv-slider::-webkit-slider-thumb{background:var(--red)!important;}
-.inv-slider::-moz-range-thumb{background:var(--red)!important;}
-.inv-result{background:var(--bg-warm);border-radius:5px;padding:18px;margin-bottom:12px;}
-.inv-result-title{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
-.inv-stat{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--border);}
-.inv-stat:last-child{border-bottom:none;}
-.inv-stat-label{font-size:12.5px;color:var(--muted);}
-.inv-stat-val{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;}
-.inv-stat-val.red{color:var(--red);}
-.inv-missatge{border-left:3px solid var(--red);background:#FDF6F5;padding:12px 16px;border-radius:0 4px 4px 0;font-size:12.5px;color:var(--ink-mid);line-height:1.6;}
-
-/* MISSATGE COMPARTIT */
-.context-msg{background:var(--bg-warm);border-left:3px solid var(--amber);padding:16px 20px;border-radius:0 4px 4px 0;margin-top:20px;font-size:13px;color:var(--ink-mid);line-height:1.65;}
-.context-msg strong{color:var(--ink);}
-
-.compartir{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:20px;}
-.compartir-label{font-size:12px;font-weight:600;color:var(--muted);}
-.btn-compartir{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:3px;font-size:11.5px;font-weight:600;cursor:pointer;border:none;}
-.btn-twitter{background:#000;color:#fff;}
-.btn-whatsapp{background:#25D366;color:#fff;}
-.btn-copy{background:var(--bg-warm);color:var(--ink);border:1px solid var(--border);}
-
-.calc-nota{background:var(--bg-warm);border-radius:6px;padding:16px 20px;margin-top:20px;font-size:11.5px;color:var(--muted);line-height:1.65;}
-
-.calc-cta{text-align:center;padding:48px 52px;border-top:1px solid var(--border);}
-.calc-cta-title{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-0.02em;}
-.calc-cta-sub{font-size:13px;color:var(--muted);margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto;}
-.btn-primary{background:var(--ink);color:#fff;padding:11px 22px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;display:inline-block;}
-
-footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;}
-.footer-brand{font-family:'Lora',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
+.wrap{max-width:980px;margin:0 auto;padding:48px 24px 64px;}
+.page-kicker{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.page-title{font-family:'Lora',serif;font-size:clamp(28px,4vw,46px);font-weight:700;color:var(--ink);line-height:1.06;letter-spacing:-0.03em;margin-bottom:14px;}
+.page-sub{font-size:16px;color:var(--muted);max-width:620px;margin-bottom:40px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+@media(max-width:820px){.grid{grid-template-columns:1fr;}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:26px;}
+.card-title{font-family:'Lora',serif;font-size:18px;font-weight:700;margin-bottom:20px;letter-spacing:-0.01em;}
+.field{margin-bottom:22px;}
+.field-label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;font-weight:600;color:var(--ink-mid);margin-bottom:9px;}
+.field-val{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--red);}
+input[type=range]{width:100%;height:5px;border-radius:3px;background:var(--border-dk);outline:none;-webkit-appearance:none;appearance:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;border-radius:50%;background:var(--red);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25);}
+input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:var(--red);cursor:pointer;border:3px solid #fff;}
+.presets{display:flex;gap:8px;margin-bottom:14px;}
+.preset{flex:1;padding:10px 6px;border:1px solid var(--border-dk);border-radius:5px;background:var(--white);cursor:pointer;text-align:center;transition:.15s;}
+.preset:hover{border-color:var(--red);}
+.preset.on{background:var(--green);border-color:var(--green);}
+.preset.on .preset-n,.preset.on .preset-p{color:#fff;}
+.preset-n{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+.preset-p{display:block;font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--ink);margin-top:2px;}
+.adv-toggle{font-size:13px;font-weight:600;color:var(--cta);cursor:pointer;user-select:none;padding:6px 0;display:inline-block;}
+.adv{display:none;margin-top:10px;padding-top:18px;border-top:1px solid var(--border);}
+.adv.open{display:block;}
+.src{font-size:11px;color:var(--muted);margin-top:3px;font-style:italic;}
+/* RESULTATS */
+.res-card{background:var(--green);color:#fff;border-radius:8px;padding:26px;}
+.res-card .card-title{color:#fff;}
+.res-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.res-row:last-of-type{border-bottom:none;}
+.res-lbl{font-size:13px;color:rgba(255,255,255,.72);max-width:60%;}
+.res-num{font-family:'Lora',serif;font-size:26px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;}
+.res-num small{font-size:14px;font-weight:400;color:rgba(255,255,255,.6);}
+.dif{background:var(--red);border-radius:6px;padding:16px 18px;margin-top:18px;text-align:center;}
+.dif-num{font-family:'Lora',serif;font-size:30px;font-weight:700;color:#fff;line-height:1;}
+.dif-txt{font-size:13px;color:#fff;margin-top:5px;font-weight:500;}
+.socies{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-top:24px;display:flex;align-items:center;gap:18px;}
+.socies-num{font-family:'Lora',serif;font-size:42px;font-weight:700;color:var(--red);line-height:1;flex-shrink:0;}
+.socies-txt{font-size:14px;color:var(--ink-mid);}
+.warn{background:#FBF3E0;border:1px solid var(--amber);color:#7a5400;border-radius:6px;padding:13px 16px;margin-top:16px;font-size:13px;display:none;}
+.warn.show{display:block;}
+/* I DESPRÉS */
+.despres{margin-top:48px;}
+.despres-title{font-family:'Lora',serif;font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;}
+.despres-sub{font-size:14px;color:var(--muted);margin-bottom:24px;}
+.despres-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:820px){.despres-grid{grid-template-columns:1fr;}}
+.dcard{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:22px;}
+.dcard-h{font-size:14px;font-weight:700;color:var(--red);margin-bottom:8px;}
+.dcard-t{font-size:13.5px;color:var(--ink-mid);line-height:1.55;}
+.fineprint{font-size:11.5px;color:var(--muted);font-style:italic;line-height:1.5;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);}
+.cta-final{text-align:center;margin-top:44px;}
+.cta-final a{display:inline-block;margin:0 6px;padding:12px 24px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;}
+.btn-p{background:var(--red);color:#fff;}
+.btn-s{background:var(--white);color:var(--ink);border:1px solid var(--border-dk);}
+footer{background:var(--green);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:24px 32px;}
+.footer-brand{font-family:'Lora',serif;font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px;}
 .footer-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
-.footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
-
-@media(max-width:960px){
-  nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
-  .page-header{padding:40px 20px 32px;}
-  .context-bloc{padding:24px 20px;}.context-inner{grid-template-columns:1fr;}
-  .calc-wrap{padding:32px 20px;}
-  .calc-grid{grid-template-columns:1fr;}
-  .res-dif{flex-direction:column;text-align:center;}
-  .calc-cta{padding:36px 20px;}
-  footer{padding:24px 20px;flex-direction:column;gap:10px;text-align:center;}
-}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.3);}
+@media(max-width:720px){.nav-links{display:none;}.nav-burger{display:flex;}footer{flex-direction:column;gap:10px;text-align:center;}}
 </style>
 </head>
 <body>
@@ -138,127 +106,129 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
   <a href="contacte.html">Contacte</a>
 </div>
 
-<div class="page-header">
-  <div class="page-kicker">Cada euro és una decisió</div>
-  <h1 class="page-title">Consumir local és necessari.<br><em>Però no suficient.</em></h1>
-  <p class="page-sub">Calcula quant impacte generes comprant al barri — i entén per què, tot i això, els comerços segueixen tancant.</p>
-</div>
+<div class="wrap">
+  <div class="page-kicker">Eina interactiva</div>
+  <h1 class="page-title">Quant costaria treure<br><em>un local del mercat?</em></h1>
+  <p class="page-sub">Una estimació per entendre el model: comprar un local, treure'l de l'especulació per sempre i cedir-lo a un comerç a preu de cost. Mou els valors i mira els números. Orientatiu, no és una oferta.</p>
 
-<div class="context-bloc">
-  <div class="context-inner">
-    <div class="context-item">
-      <div class="context-num">63,6€</div>
-      <div class="context-label">de cada 100€ gastats al comerç local queden a l'economia del barri</div>
-    </div>
-    <div class="context-item">
-      <div class="context-num">4,7€</div>
-      <div class="context-label">de cada 100€ gastats a grans superfícies queden al barri</div>
-    </div>
-    <div class="context-item">
-      <div class="context-num">16,85€/m²</div>
-      <div class="context-label">preu mitjà del lloguer comercial a Barcelona el 2025. Inassequible per al petit comerç.</div>
-    </div>
-  </div>
-</div>
+  <div class="grid">
+    <!-- ENTRADES -->
+    <div class="card">
+      <div class="card-title">El local</div>
 
-<div class="calc-wrap">
-  <div class="calc-grid">
-
-    <!-- ESQUERRA: impacte consumidor -->
-    <div class="calc-bloc">
-      <div class="calc-bloc-title">El teu impacte com a consumidor</div>
-      <p class="calc-bloc-sub">Quant gastes al mes i quin percentatge fa al comerç local?</p>
-
-      <div class="calc-label">Despesa mensual total</div>
-      <div class="calc-val"><span id="disp-total">200</span> <small>€/mes</small></div>
-      <input type="range" class="calc-slider" id="sl-total" min="50" max="1000" step="10" value="200">
-      <div class="calc-range-labels"><span>50€</span><span>1.000€</span></div>
-
-      <div class="calc-label">Percentatge al comerç local</div>
-      <div class="calc-val"><span id="disp-pct">50</span><small>%</small></div>
-      <input type="range" class="calc-slider" id="sl-pct" min="0" max="100" step="5" value="50">      <div class="calc-range-labels"><span>0%</span><span>100%</span></div>
-
-      <hr class="calc-divider">
-
-      <div class="res-simple local">
-        <div class="res-kicker">Amb el teu consum actual</div>
-        <div class="res-num" id="res-local-any">763 €</div>
-        <div class="res-desc">queden a l'economia del barri amb el mix actual de compres.</div>
-      </div>
-      <div class="res-simple gran">
-        <div class="res-kicker">Si tot fos a grans superfícies</div>
-        <div class="res-num" id="res-gran-any">113 €</div>
-        <div class="res-desc">quedarien al barri si compressis tot a cadenes i Amazon.</div>
-      </div>
-      <div class="res-dif">
-        <div class="res-dif-text">
-          <strong>La diferència que fas</strong>
-          cada any gràcies a comprar local
+      <div class="field">
+        <div class="field-label"><span>Preu del local</span><span class="field-val" id="v-preu">180.000 €</span></div>
+        <div class="presets" id="presets">
+          <div class="preset" data-preu="90000" data-m="60"><span class="preset-n">Petit</span><span class="preset-p">90.000 €</span></div>
+          <div class="preset on" data-preu="180000" data-m="120"><span class="preset-n">Mitjà</span><span class="preset-p">180.000 €</span></div>
+          <div class="preset" data-preu="290000" data-m="180"><span class="preset-n">Gran</span><span class="preset-p">290.000 €</span></div>
         </div>
-        <div class="res-dif-num" id="res-dif">+650 €</div>
+        <input type="range" id="sl-preu" min="45000" max="400000" step="5000" value="180000">
+        <div class="src">Preus reals de locals a Gràcia: idealista i habitaclia (juny 2026).</div>
       </div>
 
-      <div class="compartir">
-        <span class="compartir-label">Comparteix:</span>
-        <button class="btn-compartir btn-twitter" id="btn-twitter">𝕏</button>
-        <button class="btn-compartir btn-whatsapp" id="btn-whatsapp">WhatsApp</button>
-        <button class="btn-compartir btn-copy" id="btn-copy">📋 Copiar</button>
+      <div class="field">
+        <div class="field-label"><span>Superfície</span><span class="field-val" id="v-m">120 m²</span></div>
+        <input type="range" id="sl-m" min="30" max="300" step="5" value="120">
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>Cost de reforma i adequació</span><span class="field-val" id="v-reforma">20.000 €</span></div>
+        <input type="range" id="sl-reforma" min="0" max="60000" step="2500" value="20000">
+      </div>
+
+      <div class="card-title" style="margin-top:8px;">Qui posa l'entrada</div>
+      <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;margin-top:-12px;">El finançament ètic cobreix fins al 80%. El 20% restant és el capital propi, que surt de tres fonts:</p>
+
+      <div class="field">
+        <div class="field-label"><span>Aportació del veïnat (sòcies)</span><span class="field-val" id="v-veinat">25.000 €</span></div>
+        <input type="range" id="sl-veinat" min="0" max="120000" step="1000" value="25000">
+      </div>
+      <div class="field">
+        <div class="field-label"><span>Aportació d'entitats aliades</span><span class="field-val" id="v-entitats">5.000 €</span></div>
+        <input type="range" id="sl-entitats" min="0" max="120000" step="1000" value="5000">
+      </div>
+      <div class="field">
+        <div class="field-label"><span>Aportació retornable del comerç</span><span class="field-val" id="v-comerc">10.000 €</span></div>
+        <input type="range" id="sl-comerc" min="0" max="60000" step="1000" value="10000">
+        <div class="src">El comerç la recupera íntegra quan deixa el local. No és una compra: és pell al projecte.</div>
+      </div>
+
+      <span class="adv-toggle" id="adv-toggle">⚙ Ajusta el finançament ▾</span>
+      <div class="adv" id="adv">
+        <div class="field">
+          <div class="field-label"><span>Interès del préstec ètic</span><span class="field-val" id="v-int">3,35 %</span></div>
+          <input type="range" id="sl-int" min="0" max="6" step="0.05" value="3.35">
+          <div class="src">Per defecte: condicions de finançament ètic per a cessió d'ús (adaptades de l'habitatge).</div>
+        </div>
+        <div class="field">
+          <div class="field-label"><span>Anys per amortitzar</span><span class="field-val" id="v-anys">25 anys</span></div>
+          <input type="range" id="sl-anys" min="10" max="25" step="1" value="25">
+        </div>
+        <div class="field">
+          <div class="field-label"><span>Aportació mitjana per sòcia</span><span class="field-val" id="v-mitjana">500 €</span></div>
+          <input type="range" id="sl-mitjana" min="100" max="3000" step="50" value="500">
+        </div>
       </div>
     </div>
 
-    <!-- DRETA: calculadora inversa -->
-    <div class="calc-bloc">
-      <div class="calc-bloc-title">El que necessita un comerç per sobreviure</div>
-      <p class="calc-bloc-sub">Amb un lloguer comercial real, quants clients com tu necessita un comerç cada dia?</p>
-
-      <div class="calc-label">Lloguer mensual del local</div>
-      <div class="calc-val"><span id="disp-lloguer">2.000</span> <small>€/mes</small></div>
-      <input type="range" class="calc-slider inv-slider" id="sl-lloguer" min="500" max="15000" step="100" value="2000">
-      <div class="calc-range-labels"><span>500€</span><span>15.000€</span></div>
-
-      <div class="calc-label">Marge mitjà del comerç</div>
-      <div class="calc-val"><span id="disp-marge">30</span><small>%</small></div>
-      <input type="range" class="calc-slider inv-slider" id="sl-marge" min="10" max="60" step="5" value="30">
-      <div class="calc-range-labels"><span>10%</span><span>60%</span></div>
-
-      <hr class="calc-divider">
-
-      <div class="inv-result">
-        <div class="inv-result-title">Per poder pagar el lloguer, necessita...</div>
-        <div class="inv-stat">
-          <span class="inv-stat-label">Facturar al mes</span>
-          <span class="inv-stat-val" id="inv-facturacio">6.667 €</span>
+    <!-- RESULTATS -->
+    <div>
+      <div class="res-card">
+        <div class="card-title">Què sortiria</div>
+        <div class="res-row">
+          <span class="res-lbl">Capital a finançar amb préstec ètic</span>
+          <span class="res-num" id="r-prestec">160.000<small> €</small></span>
         </div>
-        <div class="inv-stat">
-          <span class="inv-stat-label">Clients com tu al dia</span>
-          <span class="inv-stat-val red" id="inv-clients">11</span>
+        <div class="res-row">
+          <span class="res-lbl">Quota de cessió d'ús del comerç</span>
+          <span class="res-num" id="r-quota">1.035<small> €/mes</small></span>
         </div>
-        <div class="inv-stat">
-          <span class="inv-stat-label">Anys de consum teu per pagar un mes de lloguer</span>
-          <span class="inv-stat-val red" id="inv-anys">8,7 anys</span>
+        <div class="res-row">
+          <span class="res-lbl">Lloguer de mercat del mateix local</span>
+          <span class="res-num" id="r-mercat">2.022<small> €/mes</small></span>
+        </div>
+        <div class="dif">
+          <div class="dif-num" id="r-estalvi">49% més barat</div>
+          <div class="dif-txt">I no puja mai més.</div>
         </div>
       </div>
 
-      <div class="inv-missatge" id="inv-missatge">
-        Un comerç de barri no pot sobreviure només amb clients fidels. Per molt que compris, el lloguer del local pot fer impossible el negoci.
+      <div class="socies">
+        <div class="socies-num" id="r-socies">50</div>
+        <div class="socies-txt">veïnes aportant <span id="r-mitjana-txt">500</span> € cada una per cobrir la part del veïnat. <strong>Aquí es decideix si el model és viable: no és un problema de banca, és de barri.</strong></div>
+      </div>
+
+      <div class="warn" id="warn">⚠ L'entrada no arriba al 20% mínim que demana el finançament ètic. Cal més capital propi (veïnat, entitats o comerç).</div>
+    </div>
+  </div>
+
+  <!-- I DESPRÉS -->
+  <div class="despres">
+    <div class="despres-title">I després, què?</div>
+    <div class="despres-sub">El que fa diferent aquest model d'una hipoteca: el comerç no compra el local, n'obté l'ús.</div>
+    <div class="despres-grid">
+      <div class="dcard">
+        <div class="dcard-h">Quan s'acaba de pagar</div>
+        <div class="dcard-t">La quota baixa molt: ja no hi ha préstec, només els costos de custòdia. I aquell local comença a generar excedent que finança la compra del següent. El patrimoni creix sol.</div>
+      </div>
+      <div class="dcard">
+        <div class="dcard-h">Si el comerç marxa</div>
+        <div class="dcard-t">Recupera la seva aportació íntegra i el local torna a AQT, que el cedeix a un altre projecte. No es ven mai, a ningú. Així ningú no pot tornar a especular-hi.</div>
+      </div>
+      <div class="dcard">
+        <div class="dcard-h">El comerç paga ús, no compra</div>
+        <div class="dcard-t">El que guanya no és patrimoni: és estabilitat. Quota a preu de cost, contracte llarg i la certesa que no l'expulsaran per especulació. La riquesa es queda al comú.</div>
       </div>
     </div>
-
   </div>
 
-  <div class="context-msg">
-    <strong>Consumir local és necessari, però no suficient perquè no ens facin fora.</strong> Si el propietari del local puja el lloguer demà, el teu consum no pot evitar el tancament. Per això existeix AQT — per canviar qui té el poder sobre els locals.
-  </div>
+  <p class="fineprint">Estimació orientativa per entendre el model, no una oferta ni una previsió financera tancada. Es basa en condicions de finançament ètic per a cessió d'ús adaptades del model d'habitatge (finançament fins al 80%, fons propis mínims del 20%, fins a 25 anys) i en el preu mitjà del lloguer comercial a Barcelona (16,85 €/m²/mes, Observatori AMB, 2025). Preus de locals: idealista i habitaclia (Gràcia, juny 2026). El model financer definitiu d'AQT es validarà amb entitats de finances ètiques.</p>
 
-  <div class="calc-nota">
-    <strong>Sobre les dades:</strong> Multiplicadors d'economia local (63,6% i 4,7%) provenen d'estudis del Regne Unit i els EUA. Preu del lloguer comercial (16,85€/m²) de l'Observatori de l'AMB (2025). El càlcul de clients assumeix una despesa mitjana de 15€ per visita. Totes les xifres són orientatives.
+  <div class="cta-final">
+    <a class="btn-p" href="contacte.html">Suma't al projecte</a>
+    <a class="btn-s" href="projecte.html">Com funciona el model →</a>
   </div>
-</div>
-
-<div class="calc-cta">
-  <div class="calc-cta-title">Consumir local és necessari. Però no suficient.</div>
-  <div class="calc-cta-sub">Perquè no ens facin fora cal canviar qui té el poder sobre els locals. Per això construïm AQT.</div>
-  <a class="btn-primary" href="contacte.html">Suma't al projecte →</a>
 </div>
 
 <footer>
@@ -267,87 +237,82 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 </footer>
 
 <script>
-const MULT_LOCAL = 0.636;
-const MULT_GRAN = 0.047;
-const SPEND_PER_VISIT = 15;
+const $ = id => document.getElementById(id);
+const eur = n => Math.round(n).toLocaleString('ca-ES');
 
-function fmt(n){return Math.round(n).toLocaleString('ca-ES') + ' €';}
-function fmtN(n){return Math.round(n).toLocaleString('ca-ES');}
+function update(){
+  const preu = +$('sl-preu').value;
+  const m = +$('sl-m').value;
+  const reforma = +$('sl-reforma').value;
+  const veinat = +$('sl-veinat').value;
+  const entitats = +$('sl-entitats').value;
+  const comerc = +$('sl-comerc').value;
+  const interes = +$('sl-int').value;
+  const anys = +$('sl-anys').value;
+  const mitjana = +$('sl-mitjana').value;
 
-function updateConsumidor(){
-  const total = parseInt(document.getElementById('sl-total').value);
-  const pct = parseInt(document.getElementById('sl-pct').value) / 100;
-  document.getElementById('disp-total').textContent = total;
-  document.getElementById('disp-pct').textContent = document.getElementById('sl-pct').value;
+  // etiquetes
+  $('v-preu').textContent = eur(preu)+' €';
+  $('v-m').textContent = m+' m²';
+  $('v-reforma').textContent = eur(reforma)+' €';
+  $('v-veinat').textContent = eur(veinat)+' €';
+  $('v-entitats').textContent = eur(entitats)+' €';
+  $('v-comerc').textContent = eur(comerc)+' €';
+  $('v-int').textContent = interes.toFixed(2).replace('.',',')+' %';
+  $('v-anys').textContent = anys+' anys';
+  $('v-mitjana').textContent = eur(mitjana)+' €';
 
-  const impActual = (total * pct * MULT_LOCAL) + (total * (1-pct) * MULT_GRAN);
-  const impSiTotLocal = total * MULT_LOCAL;
-  const impSiTotGran = total * MULT_GRAN;
-  const anyActual = impActual * 12;
-  const anyTotLocal = impSiTotLocal * 12;
-  const anyTotGran = impSiTotGran * 12;
+  const costTotal = preu + reforma;
+  const aportacions = veinat + entitats + comerc;
+  const prestec = Math.max(0, costTotal - aportacions);
 
-  document.getElementById('res-local-any').textContent = fmt(anyActual);
-  document.getElementById('res-gran-any').textContent = fmt(anyTotGran);
-  document.getElementById('res-dif').textContent = '+' + fmt(anyActual - anyTotGran);
+  // quota préstec (amortització francesa)
+  const i = interes/100/12;
+  const n = anys*12;
+  let quotaPrestec = i>0 ? prestec * i / (1 - Math.pow(1+i,-n)) : prestec/n;
+  // custòdia: estimació orientativa ~1,5% del valor /any
+  const custodia = costTotal * 0.015 / 12;
+  const quota = quotaPrestec + custodia;
+
+  const mercat = m * 16.85;
+  const estalvi = mercat>0 ? Math.round((1 - quota/mercat)*100) : 0;
+
+  $('r-prestec').innerHTML = eur(prestec)+'<small> €</small>';
+  $('r-quota').innerHTML = eur(quota)+'<small> €/mes</small>';
+  $('r-mercat').innerHTML = eur(mercat)+'<small> €/mes</small>';
+
+  if(estalvi>0){ $('r-estalvi').textContent = estalvi+'% més barat'; $('.dif'); }
+  else { $('r-estalvi').textContent = Math.abs(estalvi)+'% més car'; }
+
+  // sòcies per cobrir la part del veïnat
+  const socies = mitjana>0 ? Math.ceil(veinat/mitjana) : 0;
+  $('r-socies').textContent = socies;
+  $('r-mitjana-txt').textContent = eur(mitjana);
+
+  // avís 20%
+  const minim = costTotal*0.20;
+  $('warn').classList.toggle('show', aportacions < minim);
 }
 
-function updateInversa(){
-  const lloguer = parseInt(document.getElementById('sl-lloguer').value);
-  const marge = parseInt(document.getElementById('sl-marge').value) / 100;
-  document.getElementById('disp-lloguer').textContent = lloguer.toLocaleString('ca-ES');
-  document.getElementById('disp-marge').textContent = document.getElementById('sl-marge').value;
-
-  const facturacioNecessaria = lloguer / marge;
-  const clientsDia = facturacioNecessaria / 30 / SPEND_PER_VISIT;
-
-  const total = parseInt(document.getElementById('sl-total').value);
-  const pct = parseInt(document.getElementById('sl-pct').value) / 100;
-  const despesaLocalMes = total * pct;
-  const anysPerLloguer = despesaLocalMes > 0 ? lloguer / despesaLocalMes : 999;
-
-  document.getElementById('inv-facturacio').textContent = fmt(facturacioNecessaria);
-  document.getElementById('inv-clients').textContent = fmtN(clientsDia);
-  document.getElementById('inv-anys').textContent = anysPerLloguer > 99 ? '∞' : anysPerLloguer.toFixed(1) + ' anys';
-
-  // Missatge dinàmic
-  let msg = '';
-  if(lloguer >= 10000){
-    msg = 'Un lloguer de ' + lloguer.toLocaleString('ca-ES') + '€/mes és impossible per a qualsevol comerç de barri. Amb aquests preus, el local és un actiu especulatiu, no un espai per treballar.';
-  } else if(lloguer >= 4000){
-    msg = 'Amb ' + lloguer.toLocaleString('ca-ES') + '€/mes de lloguer, el comerç necessita ' + fmtN(clientsDia) + ' clients al dia només per cobrir el local. Una pressió enorme per a qualsevol petit negoci.';
-  } else {
-    msg = 'Fins i tot amb un lloguer relativament baix, un comerç necessita ' + fmtN(clientsDia) + ' clients al dia per poder-lo pagar. I els lloguers no paren de pujar.';
-  }
-  document.getElementById('inv-missatge').textContent = msg;
-}
-
-function update(){updateConsumidor();updateInversa();}
-
-['sl-total','sl-pct'].forEach(id => document.getElementById(id).addEventListener('input', update));
-['sl-lloguer','sl-marge'].forEach(id => document.getElementById(id).addEventListener('input', update));
-
-// Compartir
-function getTextCompartir(){
-  const total = parseInt(document.getElementById('sl-total').value);
-  const pct = parseInt(document.getElementById('sl-pct').value) / 100;
-  const local = total * pct * MULT_LOCAL + total * (1-pct) * MULT_GRAN;
-  const anyLocal = Math.round(local * 12);
-  return `Cada any genero ${anyLocal.toLocaleString('ca-ES')}€ d'impacte a l'economia local del meu barri. Consumir local és necessari, però no suficient perquè no ens facin fora. → abansquetanqui.github.io/AQT/calculadora.html @abansquetanqui`;
-}
-document.getElementById('btn-twitter').addEventListener('click', () => window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(getTextCompartir())));
-document.getElementById('btn-whatsapp').addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent(getTextCompartir())));
-document.getElementById('btn-copy').addEventListener('click', () => {
-  navigator.clipboard.writeText(getTextCompartir()).then(() => {
-    const btn = document.getElementById('btn-copy');
-    btn.textContent = '✓ Copiat!';
-    setTimeout(() => btn.textContent = '📋 Copiar', 2000);
+// presets
+document.querySelectorAll('.preset').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.preset').forEach(x=>x.classList.remove('on'));
+    p.classList.add('on');
+    $('sl-preu').value = p.dataset.preu;
+    $('sl-m').value = p.dataset.m;
+    update();
   });
 });
+// quan es mou el preu manualment, treu el preset actiu
+$('sl-preu').addEventListener('input',()=>{document.querySelectorAll('.preset').forEach(x=>x.classList.remove('on'));});
 
-document.getElementById('nav-burger').addEventListener('click', function(){
-  document.getElementById('nav-mobile').classList.toggle('open');
-});
+['sl-preu','sl-m','sl-reforma','sl-veinat','sl-entitats','sl-comerc','sl-int','sl-anys','sl-mitjana']
+  .forEach(id=>$(id).addEventListener('input',update));
+
+$('adv-toggle').addEventListener('click',()=>{ $('adv').classList.toggle('open'); });
+
+$('nav-burger').addEventListener('click',function(){ $('nav-mobile').classList.toggle('open'); });
 
 update();
 </script>
