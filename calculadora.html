@@ -122,7 +122,9 @@ footer{background:var(--green);color:#fff;display:flex;justify-content:space-bet
           <div class="preset" data-preu="90000" data-m="60"><span class="preset-n">Petit</span><span class="preset-p">90.000 €</span></div>
           <div class="preset on" data-preu="180000" data-m="120"><span class="preset-n">Mitjà</span><span class="preset-p">180.000 €</span></div>
           <div class="preset" data-preu="290000" data-m="180"><span class="preset-n">Gran</span><span class="preset-p">290.000 €</span></div>
+          <div class="preset" data-preu="185000" data-m="120"><span class="preset-n">Cas real ★</span><span class="preset-p">185.000 €</span></div>
         </div>
+        <div class="src" id="cas-real-nota" style="display:none;">★ Cas real: local de 120 m² en venda al carrer Salinas (Vila de Gràcia), 185.000 €. Abans hi havia un comerç de barri. Anunci verificat a idealista (juny 2026).</div>
         <input type="range" id="sl-preu" min="45000" max="400000" step="5000" value="180000">
         <div class="src">Preus reals de locals a Gràcia: idealista i habitaclia (juny 2026).</div>
       </div>
@@ -141,12 +143,12 @@ footer{background:var(--green);color:#fff;display:flex;justify-content:space-bet
       <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;margin-top:-12px;">El finançament ètic cobreix fins al 80%. El 20% restant és el capital propi, que surt de tres fonts:</p>
 
       <div class="field">
-        <div class="field-label"><span>Aportació del veïnat (sòcies)</span><span class="field-val" id="v-veinat">25.000 €</span></div>
-        <input type="range" id="sl-veinat" min="0" max="120000" step="1000" value="25000">
+        <div class="field-label"><span>Aportació del veïnat (sòcies)</span><span class="field-val" id="v-veinat">30.000 €</span></div>
+        <input type="range" id="sl-veinat" min="0" max="120000" step="1000" value="30000">
       </div>
       <div class="field">
-        <div class="field-label"><span>Aportació d'entitats aliades</span><span class="field-val" id="v-entitats">5.000 €</span></div>
-        <input type="range" id="sl-entitats" min="0" max="120000" step="1000" value="5000">
+        <div class="field-label"><span>Aportació d'entitats aliades</span><span class="field-val" id="v-entitats">0 €</span></div>
+        <input type="range" id="sl-entitats" min="0" max="120000" step="1000" value="0">
       </div>
       <div class="field">
         <div class="field-label"><span>Aportació retornable del comerç</span><span class="field-val" id="v-comerc">10.000 €</span></div>
@@ -191,8 +193,9 @@ footer{background:var(--green);color:#fff;display:flex;justify-content:space-bet
         </div>
         <div class="dif">
           <div class="dif-num" id="r-estalvi">49% més barat</div>
-          <div class="dif-txt">I no puja mai més.</div>
+          <div class="dif-txt">que llogar el mateix local. I no puja mai més.</div>
         </div>
+        <p style="font-size:12px;color:rgba(255,255,255,.6);margin-top:14px;line-height:1.5;">La comparació és amb <strong style="color:#fff;">llogar</strong>, que és el que faria la majoria del comerç de barri — no amb comprar. I a diferència de comprar, el local queda fora del mercat per sempre: protegit per al següent comerç i el següent.</p>
       </div>
 
       <div class="socies">
@@ -215,7 +218,7 @@ footer{background:var(--green);color:#fff;display:flex;justify-content:space-bet
       </div>
       <div class="dcard">
         <div class="dcard-h">Si el comerç marxa</div>
-        <div class="dcard-t">Recupera la seva aportació íntegra i el local torna a AQT, que el cedeix a un altre projecte. No es ven mai, a ningú. Així ningú no pot tornar a especular-hi.</div>
+        <div class="dcard-t">Recupera la seva aportació inicial i el local torna a AQT, que el cedeix a un altre projecte. No es ven mai, a ningú. Així ningú no pot tornar a especular-hi.</div>
       </div>
       <div class="dcard">
         <div class="dcard-h">El comerç paga ús, no compra</div>
@@ -302,6 +305,8 @@ document.querySelectorAll('.preset').forEach(p=>{
     p.classList.add('on');
     $('sl-preu').value = p.dataset.preu;
     $('sl-m').value = p.dataset.m;
+    var nota=$('cas-real-nota');
+    if(nota) nota.style.display = (p.dataset.preu==='185000') ? 'block' : 'none';
     update();
   });
 });
