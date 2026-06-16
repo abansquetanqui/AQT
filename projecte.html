@@ -33,7 +33,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* SECCIONS GENERALS */
 .seccio{padding:48px 52px;border-bottom:1px solid var(--border);}
-.seccio-inner{display:grid;grid-template-columns:280px 1fr;gap:52px;align-items:start;}
+.seccio-inner{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
 .seccio-left{}
 .kicker{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
 .titol{font-family:'Lora',serif;font-size:clamp(18px,2.2vw,26px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-0.02em;}
@@ -66,7 +66,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nivell-nota{margin-top:10px;font-size:12px;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:8px;}
 
 /* CICLE */
-.cicle{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);margin-top:4px;}
+.cicle{display:flex;flex-direction:column;border-top:1px solid var(--border);margin-top:4px;}
 .cicle-pas{padding:11px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:baseline;padding-right:16px;}
 .cicle-n{font-size:11px;font-weight:700;color:var(--red);flex-shrink:0;min-width:22px;}
 .cicle-text{font-size:13px;color:var(--ink-mid);}
@@ -108,7 +108,7 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
   .seccio{padding:36px 20px;}
   .seccio-inner{grid-template-columns:1fr;gap:24px;}
   .cicle{grid-template-columns:1fr;}
-  .criteris-grid{grid-template-columns:1fr;}
+  .criteris-grid{grid-template-columns:1fr 1fr;}
   .taula-fila{grid-template-columns:1fr;gap:4px;}
   .nota-estat{padding:24px 20px;}
   .cta-final{padding:48px 20px;}
@@ -221,7 +221,7 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
         <div class="cicle-pas"><div class="cicle-n">06</div><div class="cicle-text">Cessió d'ús estable</div></div>
         <div class="cicle-pas"><div class="cicle-n">07</div><div class="cicle-text">Operació del negoci</div></div>
         <div class="cicle-pas"><div class="cicle-n">08</div><div class="cicle-text">Revisió anual</div></div>
-        <div class="cicle-pas" style="grid-column:1/-1;"><div class="cicle-n">09</div><div class="cicle-text">Possible continuïtat o reassignació</div></div>
+        <div class="cicle-pas"><div class="cicle-n">09</div><div class="cicle-text">Possible continuïtat o reassignació</div></div>
       </div>
     </div>
     <div class="seccio-right">
