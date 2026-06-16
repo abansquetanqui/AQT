@@ -6,15 +6,15 @@
 <title>El Model · Abans Que Tanqui</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1A1A18;--ink-mid:#3A3A37;--muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--border:#E2E1DC;--amber:#C47A00;--cta:#2A7A4B;}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--red-lt:#E04030;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--sage:#C8D5B9;--sage-dk:#3A5530;--amber:#C47A00;--cta:#2A7A4B;--cta-lt:#348A58;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
 
 nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:1000;}
-.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
-.nav-links{display:flex;gap:22px;align-items:center;}
+.nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);}
 .nav-cta{background:var(--ink)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
@@ -27,26 +27,26 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 /* HERO */
 .hero{background:var(--ink);padding:56px 52px;}
 .hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;}
-.hero h1{font-family:'Lora',serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px;}
+.hero h1{font-family:'Lora',Georgia,serif;font-size:clamp(32px,4.5vw,52px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px;}
 .hero h1 em{font-style:italic;color:#C8D5B9;}
-.hero-sub{font-size:14px;line-height:1.75;color:rgba(255,255,255,0.45);max-width:540px;}
+.hero-sub{font-size:15px;line-height:1.75;color:rgba(255,255,255,0.5);max-width:560px;}
 
 /* SECCIONS GENERALS */
 .seccio{padding:48px 52px;border-bottom:1px solid var(--border);}
 .seccio-inner{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
 .seccio-left{}
 .kicker{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
-.titol{font-family:'Lora',serif;font-size:clamp(18px,2.2vw,26px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-0.02em;}
+.titol{font-family:'Lora',Georgia,serif;font-size:clamp(18px,2.2vw,26px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-0.02em;}
 .titol em{font-style:italic;color:var(--red);}
 .seccio-right{}
-.text{font-size:14px;line-height:1.85;color:var(--ink-mid);}
+.text{font-size:15px;line-height:1.85;color:var(--ink-mid);}
 .text+.text{margin-top:10px;}
 
 /* IDEA CENTRAL */
 .idea-central{padding:40px 52px;border-bottom:1px solid var(--border);background:var(--white);}
 .idea-inner{border-left:4px solid var(--red);padding-left:28px;max-width:760px;}
 .idea-label{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
-.idea-text{font-family:'Lora',serif;font-size:clamp(16px,2vw,22px);font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-0.01em;}
+.idea-text{font-family:'Lora',Georgia,serif;font-size:clamp(16px,2vw,22px);font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-0.01em;}
 
 /* LLISTA TAULA */
 .taula{margin-top:20px;display:flex;flex-direction:column;border-top:1px solid var(--border);}
@@ -90,14 +90,14 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* CTA */
 .cta-final{background:var(--ink);padding:56px 52px;text-align:center;}
-.cta-final h2{font-family:'Lora',serif;font-size:clamp(20px,3vw,32px);font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:10px;}
+.cta-final h2{font-family:'Lora',Georgia,serif;font-size:clamp(20px,3vw,32px);font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:10px;}
 .cta-final p{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:24px;max-width:380px;margin-left:auto;margin-right:auto;}
 .cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 .btn-p{background:var(--red);color:#fff;padding:11px 22px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;}
 .btn-s{background:transparent;color:rgba(255,255,255,0.55);padding:11px 22px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);}
 
-footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;}
-.footer-brand{font-family:'Lora',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
+footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,0.6);}
+.footer-brand{font-family:'Lora',Georgia,serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
 .footer-dot{width:7px;height:7px;background:var(--red);border-radius:50%;}
 .footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
 
