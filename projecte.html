@@ -32,10 +32,10 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .hero-sub{font-size:15px;line-height:1.8;color:rgba(255,255,255,0.5);max-width:560px;}
 
 /* IDEA CENTRAL */
-.idea-central{background:var(--red);padding:56px 52px;}
-.idea-central-inner{max-width:720px;}
-.idea-label{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:14px;}
-.idea-text{font-family:'Lora',serif;font-size:clamp(20px,2.5vw,28px);font-weight:600;color:#fff;line-height:1.45;letter-spacing:-0.01em;}
+.idea-central{background:var(--white);padding:56px 52px;border-bottom:1px solid var(--border);}
+.idea-central-inner{max-width:680px;border-left:4px solid var(--red);padding-left:28px;}
+.idea-label{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.idea-text{font-family:'Lora',serif;font-size:clamp(18px,2.5vw,26px);font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-0.01em;}
 
 /* BLOCS GENERALS */
 .bloc{max-width:720px;margin:0 auto;padding:64px 52px;}
@@ -56,15 +56,15 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 
 /* ESTRUCTURA 3 NIVELLS */
 .nivells{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
-.nivell{border:1px solid var(--border);border-radius:6px;padding:22px 24px;}
-.nivell-cap{display:flex;align-items:baseline;gap:12px;margin-bottom:10px;}
+.nivell{border:1px solid var(--border);border-top:3px solid var(--red);border-radius:0 0 4px 4px;padding:22px 24px;background:var(--white);}
+.nivell-cap{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border);}
 .nivell-num{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);}
 .nivell-nom{font-size:15px;font-weight:700;color:var(--ink);}
 .nivell-sub{font-size:12px;color:var(--muted);margin-left:auto;}
-.nivell-items{display:flex;flex-direction:column;gap:5px;}
-.nivell-item{font-size:13.5px;color:var(--ink-mid);padding-left:14px;position:relative;}
-.nivell-item::before{content:'—';position:absolute;left:0;color:var(--border);}
-.nivell-nota{margin-top:10px;font-size:12px;color:var(--muted);font-style:italic;}
+.nivell-items{display:flex;flex-direction:column;gap:6px;}
+.nivell-item{font-size:14px;color:var(--ink-mid);padding-left:16px;position:relative;}
+.nivell-item::before{content:'—';position:absolute;left:0;color:var(--red);opacity:0.4;}
+.nivell-nota{margin-top:12px;font-size:12px;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:10px;}
 
 /* CICLE */
 .cicle{margin-top:28px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
@@ -150,7 +150,6 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
     <div class="idea-label">Idea central</div>
     <div class="idea-text">El model explora si és possible substituir parcialment la lògica especulativa del sòl comercial per una lògica de propietat col·lectiva i assignació d'ús basada en impacte urbà.</div>
   </div>
-</div>
 
 <hr class="divider">
 
@@ -165,8 +164,7 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 <hr class="divider">
 
 <!-- 2. ESTRUCTURA -->
-<div class="bloc bg-warm" style="max-width:100%;padding:0;">
-<div class="bloc" style="background:transparent;">
+<div class="bloc">
   <div class="bloc-kicker">Estructura</div>
   <div class="bloc-title">Tres nivells,<br><em>una decisió col·lectiva.</em></div>
   <div class="nivells">
@@ -208,7 +206,6 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
     </div>
   </div>
 </div>
-</div>
 
 <hr class="divider">
 
@@ -227,13 +224,11 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
     <div class="cicle-pas"><div class="cicle-n">08</div><div class="cicle-text">Revisió anual</div></div>
     <div class="cicle-pas"><div class="cicle-n">09</div><div class="cicle-text">Possible continuïtat o reassignació</div></div>
   </div>
-</div>
 
 <hr class="divider">
 
 <!-- 4. CRITERIS -->
-<div class="bloc bg-warm" style="max-width:100%;padding:0;">
-<div class="bloc" style="background:transparent;">
+<div class="bloc">
   <div class="bloc-kicker">Criteris d'avaluació</div>
   <div class="bloc-title">No guanya qui paga més.<br><em>Guanya qui aporta més.</em></div>
   <p class="bloc-text">La decisió combina una matriu de puntuació i deliberació cooperativa.</p>
@@ -264,7 +259,6 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
     </div>
   </div>
 </div>
-</div>
 
 <hr class="divider">
 
@@ -279,13 +273,11 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
     <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Fons cooperatiu per reinversió en nous locals</div></div>
     <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Excedents destinats a suport a projectes o ampliació del patrimoni</div></div>
   </div>
-</div>
 
 <hr class="divider">
 
 <!-- 6. PRINCIPI D'INTERVENCIÓ -->
-<div class="bloc bg-warm" style="max-width:100%;padding:0;">
-<div class="bloc" style="background:transparent;">
+<div class="bloc">
   <div class="bloc-kicker">Principi d'intervenció urbana</div>
   <div class="bloc-title">No respon al mercat.<br><em>Respon al barri.</em></div>
   <p class="bloc-text">El model no actua seguint la lògica de la rendibilitat immobiliària. Els criteris d'intervenció són:</p>
@@ -304,7 +296,7 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
     </div>
   </div>
 </div>
-</div>
+
 
 <!-- NOTA ESTAT -->
 <div class="nota-estat">
