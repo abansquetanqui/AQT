@@ -40,17 +40,19 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .hero-sub{font-size:16px;color:rgba(255,255,255,0.75);margin-top:24px;letter-spacing:0.02em;}
 
 /* QUÈ ÉS AQT */
-.que-es{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--white);}
-.que-es-inner{max-width:760px;}
+.que-es{padding:64px 52px;border-bottom:1px solid var(--border);background:var(--white);}
+.que-es-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
 .que-es-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
-.que-es-title{font-family:'Lora',Georgia,serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px;}
+.que-es-title{font-family:'Lora',Georgia,serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px;}
 .que-es-title em{font-style:italic;color:var(--red);}
-.que-es-text{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:28px;max-width:640px;}
-.que-es-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);max-width:640px;}
-.que-es-item{padding:16px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:baseline;}
+.que-es-text{font-size:15px;line-height:1.8;color:var(--ink-mid);margin-bottom:16px;}
+.que-es-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.que-es-item{padding:14px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:baseline;}
 .que-es-dash{color:var(--red);font-weight:700;font-size:15px;flex-shrink:0;}
-.que-es-item-text{font-size:15px;color:var(--ink-mid);line-height:1.65;}
-.que-es-nota{margin-top:28px;font-size:13px;color:var(--muted);font-style:italic;max-width:560px;}
+.que-es-item-text{font-size:14px;color:var(--ink-mid);line-height:1.6;}
+.que-es-nota{margin-top:20px;font-size:12px;color:var(--muted);font-style:italic;}
+.que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.5vw,30px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.02em;margin-bottom:16px;}
 
 /* MAPA */
 .mapa-bloc{border-bottom:1px solid var(--border);}
@@ -122,7 +124,8 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
-  .que-es{padding:48px 20px;}
+  .que-es{padding:40px 20px;}
+  .que-es-grid{grid-template-columns:1fr;gap:32px;}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
   .eixos{padding:48px 20px;}
@@ -170,19 +173,26 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 
 <!-- QUÈ ÉS AQT -->
 <section class="que-es" id="que-es">
-  <div class="que-es-inner">
-    <div class="que-es-kicker">Qui som</div>
-    <h2 class="que-es-title">No és nostàlgia.<br><em>És comunitat.</em></h2>
-    <p class="que-es-text">Els comerços de barri tanquen. No perquè la gent hagi deixat d'anar-hi, sinó perquè l'especulació immobiliària encareix els lloguers, les administracions no hi posen límits efectius i el petit comerç acaba ofegat.</p>
-    <p class="que-es-text">Abans Que Tanqui és un espai per documentar i denunciar la substitució comercial que afecta el comerç de proximitat, i una eina col·lectiva per donar suport a qui preserva la vida de barri i construir, a poc a poc, una alternativa al model que ens expulsa.</p>
-    <p class="que-es-text" style="margin-bottom:24px;">AQT és un projecte de recerca i exploració sobre la transformació del comerç de proximitat. Combina:</p>
-    <div class="que-es-list">
-      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Documentació de casos de tancament i substitució comercial</div></div>
-      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Anàlisi de les dinàmiques econòmiques, urbanes i immobiliàries que les provoquen</div></div>
-      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Recollida de dades, exemples i experiències locals</div></div>
-      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Exploració de possibles models col·lectius de gestió de locals comercials</div></div>
+  <div class="que-es-grid">
+    <!-- ESQUERRA: Qui som -->
+    <div>
+      <div class="que-es-kicker">Qui som</div>
+      <h2 class="que-es-title">No és nostàlgia.<br><em>És comunitat.</em></h2>
+      <p class="que-es-text">Els comerços de barri tanquen. No perquè la gent hagi deixat d'anar-hi, sinó perquè l'especulació immobiliària encareix els lloguers, les administracions no hi posen límits efectius i el petit comerç acaba ofegat.</p>
+      <p class="que-es-text">Abans Que Tanqui és un espai per documentar i denunciar la substitució comercial que afecta el comerç de proximitat, i una eina col·lectiva per donar suport a qui preserva la vida de barri i construir, a poc a poc, una alternativa al model que ens expulsa.</p>
     </div>
-    <p class="que-es-nota">AQT no és una iniciativa implementada, sinó un espai de treball en construcció.</p>
+    <!-- DRETA: Què fem -->
+    <div>
+      <div class="que-fem-kicker">Què fem</div>
+      <h3 class="que-fem-title">Un projecte de recerca i exploració sobre la transformació del comerç de proximitat.</h3>
+      <div class="que-es-list">
+        <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Documentació de casos de tancament i substitució comercial</div></div>
+        <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Anàlisi de les dinàmiques econòmiques, urbanes i immobiliàries que les provoquen</div></div>
+        <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Recollida de dades, exemples i experiències locals</div></div>
+        <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Exploració de possibles models col·lectius de gestió de locals comercials</div></div>
+      </div>
+      <p class="que-es-nota">AQT no és una iniciativa implementada, sinó un espai de treball en construcció.</p>
+    </div>
   </div>
 </section>
 
