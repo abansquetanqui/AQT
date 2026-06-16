@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Projecte · Abans Que Tanqui</title>
+<title>Què és AQT · Abans Que Tanqui</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1A1A18;--ink-mid:#3A3A37;--muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#C8392B;--border:#E2E1DC;--amber:#C47A00;--cta:#2A7A4B;}
@@ -29,7 +29,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;}
 .hero h1{font-family:'Lora',serif;font-size:clamp(34px,5vw,58px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:16px;}
 .hero h1 em{font-style:italic;color:#C8D5B9;}
-.hero-sub{font-size:16px;line-height:1.8;color:rgba(255,255,255,0.45);max-width:520px;margin:0 auto;}
+.hero-sub{font-size:16px;line-height:1.8;color:rgba(255,255,255,0.55);max-width:560px;margin:0 auto;}
 
 /* BLOC */
 .bloc{max-width:680px;margin:0 auto;padding:72px 52px;}
@@ -42,34 +42,18 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .divider{border:none;border-top:1px solid var(--border);}
 .bg{background:var(--bg-warm);}
 
+/* LLISTA COMBINADA */
+.combines-list{margin-top:24px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.combines-item{padding:18px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:baseline;}
+.combines-dash{font-size:14px;color:var(--red);font-weight:700;flex-shrink:0;}
+.combines-text{font-size:15px;color:var(--ink-mid);line-height:1.65;}
+
 /* ESTAT */
 .estat-wrap{max-width:680px;margin:0 auto;padding:0 52px 72px;}
 .estat{border-left:3px solid var(--amber);padding:20px 24px;border-radius:0 4px 4px 0;background:#FEFBF5;}
 .estat-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
 .estat-text{font-size:14px;line-height:1.75;color:var(--ink-mid);}
 .estat-text strong{color:var(--ink);}
-
-/* QUÈ FEM */
-.que-fem-bloc{max-width:680px;margin:0 auto;padding:72px 52px;}
-.que-fem-list{margin-top:24px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
-.que-fem-item{padding:18px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:baseline;}
-.que-fem-item-label{font-size:14px;font-weight:600;color:var(--ink);}
-.que-fem-item-text{font-size:14px;color:var(--muted);line-height:1.65;}
-
-/* NO FEM */
-.no-fem{margin-top:28px;background:var(--bg-warm);border-radius:4px;padding:18px 22px;}
-.no-fem-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
-.no-fem-list{display:flex;flex-direction:column;gap:5px;}
-.no-fem-list li{font-size:13.5px;color:var(--muted);list-style:none;padding-left:14px;position:relative;}
-.no-fem-list li::before{content:'—';position:absolute;left:0;color:var(--border);}
-
-/* REFERENTS */
-.refs-bloc{max-width:680px;margin:0 auto;padding:0 52px 72px;}
-.refs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
-.ref-card{border:1px solid var(--border);border-radius:4px;padding:18px 20px;}
-.ref-nom{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;}
-.ref-lloc{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.ref-text{font-size:12.5px;color:var(--muted);line-height:1.55;}
 
 /* CTA */
 .cta-final{background:var(--ink);padding:72px 52px;text-align:center;}
@@ -89,10 +73,6 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
   .hero{padding:56px 24px;}
   .bloc{padding:48px 24px;}
   .estat-wrap{padding:0 24px 48px;}
-  .que-fem-bloc{padding:48px 24px;}
-  .refs-bloc{padding:0 24px 48px;}
-  .que-fem-item{grid-template-columns:1fr;gap:4px;}
-  .refs-grid{grid-template-columns:1fr;}
   .cta-final{padding:56px 24px;}
   footer{padding:24px 20px;flex-direction:column;gap:10px;text-align:center;}
 }
@@ -103,7 +83,7 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 <nav>
   <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
   <div class="nav-links">
-    <a href="projecte.html">Projecte</a>
+    <a href="projecte.html">Què és AQT</a>
     <a href="mapa.html">Mapa</a><a href="descobreix.html">Descobreix</a>
     <a href="actualitat.html">Actualitat</a>
     <a href="recursos.html">Recursos</a>
@@ -113,7 +93,7 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
   <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile" id="nav-mobile">
-  <a href="projecte.html">Projecte</a>
+  <a href="projecte.html">Què és AQT</a>
   <a href="mapa.html">Mapa</a><a href="descobreix.html">Descobreix</a>
   <a href="actualitat.html">Actualitat</a>
   <a href="recursos.html">Recursos</a>
@@ -121,144 +101,51 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 </div>
 
 <div class="hero">
-  <div class="hero-kicker">El projecte</div>
-  <h1>Defensem el comerç<br>de barri. <em>Abans que tanqui.</em></h1>
-  <p class="hero-sub">AQT és una iniciativa per documentar, denunciar i ajudar els comerços de barri amenaçats pel mercat especulatiu. I per construir, a poc a poc, les eines col·lectives per canviar-ho.</p>
+  <div class="hero-kicker">Qui som</div>
+  <h1>Què és AQT?</h1>
+  <p class="hero-sub">Un projecte de recerca i exploració sobre la transformació del comerç de proximitat i les alternatives col·lectives per frenar-la.</p>
 </div>
 
 <hr class="divider">
 
-<!-- PER QUÈ -->
+<!-- QUÈ ÉS AQT -->
 <div class="bloc">
-  <div class="bloc-kicker">Per què existim</div>
-  <div class="bloc-title">Els comerços de barri tanquen.<br><em>No perquè ningú hi vagi.</em></div>
-  <p class="bloc-text">Tanquen perquè els lloguers pugen i ningú ho regula. Perquè els propietaris especulen amb els locals com si fossin actius financers. Perquè quan un local canvia de mans, sovint arriba una franquícia, un pis turístic o un local buit que espera el millor postor.</p>
-  <p class="bloc-text">El resultat és un barri que perd la seva identitat, la seva vida quotidiana, les persones que el fan ser el que és. I ningú ho atura.</p>
-</div>
-
-<hr class="divider">
-
-<!-- COM FUNCIONA EL MODEL -->
-<div class="bloc">
-  <div class="bloc-kicker">Com funcionaria el model</div>
-  <div class="bloc-title">Treure els locals del mercat.<br><em>Per sempre.</em></div>
-  <p class="bloc-text">La idea és senzilla, i ja funciona en habitatge: en lloc de deixar els locals en mans de l'especulació, posar-los sota propietat col·lectiva permanent al servei del barri.</p>
-  <div class="que-fem-list">
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Custòdia col·lectiva</div>
-      <div class="que-fem-item-text">AQT adquireix locals i els treu del mercat especulatiu. No es revenen mai, a ningú: queden com a patrimoni comú de manera permanent.</div>
+  <div class="bloc-kicker">El projecte</div>
+  <div class="bloc-title">Recerca, documentació<br><em>i exploració col·lectiva.</em></div>
+  <p class="bloc-text">AQT és un projecte de recerca i exploració sobre la transformació del comerç de proximitat.</p>
+  <p class="bloc-text">El projecte combina:</p>
+  <div class="combines-list">
+    <div class="combines-item">
+      <div class="combines-dash">—</div>
+      <div class="combines-text">Documentació de casos de tancament i substitució comercial</div>
     </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Cessió d'ús a preu de cost</div>
-      <div class="que-fem-item-text">El local es cedeix a qui hi treballa pagant el cost real, no el preu especulatiu. El comerç manté plena autonomia sobre el seu negoci.</div>
+    <div class="combines-item">
+      <div class="combines-dash">—</div>
+      <div class="combines-text">Anàlisi de les dinàmiques econòmiques, urbanes i immobiliàries que les provoquen</div>
     </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Reinversió</div>
-      <div class="que-fem-item-text">Els excedents serveixen per adquirir nous locals. Ningú no reparteix beneficis: tot torna al barri en forma de més comerç protegit.</div>
+    <div class="combines-item">
+      <div class="combines-dash">—</div>
+      <div class="combines-text">Recollida de dades, exemples i experiències locals</div>
     </div>
-  </div>
-  <p class="bloc-text" style="margin-top:20px;">Vols veure els números? <a href="calculadora.html" style="color:var(--red);font-weight:600;">Calcula si és possible →</a></p>
-</div>
-
-<hr class="divider">
-
-<!-- QUI HI PARTICIPA -->
-<div class="bloc">
-  <div class="bloc-kicker">Qui hi participa</div>
-  <div class="bloc-title">Una sòcia, un vot.</div>
-  <p class="bloc-text">El model es sosté sobre tres rols, amb governança democràtica: cap grup no decideix sol.</p>
-  <div class="que-fem-list">
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Els comerços</div>
-      <div class="que-fem-item-text">Qui ocupa i fa viu el local, amb plena autonomia del seu negoci i la seguretat d'un cost just.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Les sòcies col·laboradores</div>
-      <div class="que-fem-item-text">Veïnat i persones que hi aporten per convicció, no per benefici: perquè volen viure en un barri viu i no en un decorat.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">La comunitat</div>
-      <div class="que-fem-item-text">Qui decideix col·lectivament les prioritats, els criteris d'accés i la reinversió. El control és sempre del barri.</div>
+    <div class="combines-item">
+      <div class="combines-dash">—</div>
+      <div class="combines-text">Exploració de possibles models col·lectius de gestió de locals comercials</div>
     </div>
   </div>
 </div>
 
 <hr class="divider">
 
-<!-- QUÈ FEM -->
-<div class="que-fem-bloc bg" style="max-width:100%;padding:0;">
-<div class="que-fem-bloc">
-  <div class="bloc-kicker">Què fem ara</div>
-  <div class="bloc-title">El que podem oferir avui.</div>
-  <p class="bloc-text">AQT no és una organització gran ni constituïda. Som un projecte en construcció. Però hi ha coses que podem fer ara mateix.</p>
-
-  <div class="que-fem-list">
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Documentem</div>
-      <div class="que-fem-item-text">Registrem tancaments i casos en risc a Barcelona. El mapa creix contínuament amb fonts verificades.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Visibilitzem</div>
-      <div class="que-fem-item-text">Posem nom i cara als comerços que tanquen. Perquè no siguin només una estadística.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Orientem</div>
-      <div class="que-fem-item-text">Si tens un comerç en risc, t'ajudem a trobar recursos, entitats i alternatives. Sense prometre el que no podem complir.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">Construïm</div>
-      <div class="que-fem-item-text">Dissenyem el model —associació ara, cooperativa a mesura que creixem— per adquirir locals i treure'ls del mercat. Encara no és operatiu, però és la direcció.</div>
-    </div>
-  </div>
-
-  <div class="no-fem">
-    <div class="no-fem-title">Ara per ara, no podem</div>
-    <ul class="no-fem-list">
-      <li>Comprar ni gestionar cap local</li>
-      <li>Oferir assessorament jurídic professional</li>
-      <li>Garantir la continuïtat de cap comerç</li>
-    </ul>
-  </div>
-</div>
-</div>
-
-<hr class="divider">
-
-<!-- ON SOM ARA -->
-<div class="bloc">
-  <div class="bloc-kicker">On som ara</div>
-  <div class="bloc-title">En construcció,<br><em>amb honestedat.</em></div>
+<!-- ESTAT -->
+<div class="bloc" style="padding-bottom:0;">
+  <div class="bloc-kicker">Estat actual</div>
+  <div class="bloc-title">Un espai de treball<br><em>en construcció.</em></div>
 </div>
 <div class="estat-wrap">
   <div class="estat">
     <div class="estat-label">Juny 2026</div>
-    <div class="estat-text"><strong>AQT no és encara una entitat constituïda.</strong> Estem en fase de disseny del model i construcció del grup impulsor. Documentem casos reals, orientem comerços en risc i busquem aliats institucionals. Si vols formar-ne part ara, és el moment.</div>
+    <div class="estat-text"><strong>AQT no és una iniciativa implementada, sinó un espai de treball en construcció.</strong> Documentem casos reals, orientem comerços en risc i busquem aliats institucionals per desenvolupar un model cooperatiu de locals en cessió d'ús.</div>
   </div>
-</div>
-
-<hr class="divider">
-
-<!-- CAP A ON ANEM -->
-<div class="refs-bloc bg" style="max-width:100%;padding:0;">
-<div class="refs-bloc">
-  <div class="bloc-kicker">Cap a on anem</div>
-  <div class="bloc-title">No ho farem sols ni de pressa.<br><em>Però sabem cap on anem.</em></div>
-  <div class="que-fem-list">
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">1 · Escoltar el barri</div>
-      <div class="que-fem-item-text">Un procés participatiu per definir junts el model: qui és la comunitat, com es governa i quins comerços es prioritzen.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">2 · Constituir l'associació</div>
-      <div class="que-fem-item-text">Una forma senzilla per començar, amb la missió blindada als estatuts i evolució cap a la cooperativa, el camí que va seguir Sostre Cívic.</div>
-    </div>
-    <div class="que-fem-item">
-      <div class="que-fem-item-label">3 · El primer local</div>
-      <div class="que-fem-item-text">Quan el capital ho permeti, treure el primer local del mercat. Un local que importi, com a punt de partida d'un patrimoni que creix.</div>
-    </div>
-  </div>
-  <p class="bloc-text" style="margin-top:28px;">No inventem res: adaptem models que ja funcionen, com el Kensington Corridor Trust (Filadèlfia) o Sostre Cívic (Catalunya), al comerç de proximitat de Gràcia.</p>
-</div>
 </div>
 
 <div class="cta-final">
