@@ -25,77 +25,76 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile a{font-size:15px;font-weight:500;color:var(--muted);text-decoration:none;padding:12px 24px;}
 
 /* HERO */
-.hero{background:var(--ink);padding:80px 52px;}
-.hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;}
-.hero h1{font-family:'Lora',serif;font-size:clamp(32px,5vw,54px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:16px;}
+.hero{background:var(--ink);padding:56px 52px;}
+.hero-kicker{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;}
+.hero h1{font-family:'Lora',serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px;}
 .hero h1 em{font-style:italic;color:#C8D5B9;}
-.hero-sub{font-size:15px;line-height:1.8;color:rgba(255,255,255,0.5);max-width:560px;}
+.hero-sub{font-size:14px;line-height:1.75;color:rgba(255,255,255,0.45);max-width:540px;}
+
+/* SECCIONS GENERALS */
+.seccio{padding:48px 52px;border-bottom:1px solid var(--border);}
+.seccio-inner{display:grid;grid-template-columns:280px 1fr;gap:52px;align-items:start;}
+.seccio-left{}
+.kicker{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.titol{font-family:'Lora',serif;font-size:clamp(18px,2.2vw,26px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-0.02em;}
+.titol em{font-style:italic;color:var(--red);}
+.seccio-right{}
+.text{font-size:14px;line-height:1.85;color:var(--ink-mid);}
+.text+.text{margin-top:10px;}
 
 /* IDEA CENTRAL */
-.idea-central{background:var(--white);padding:56px 52px;border-bottom:1px solid var(--border);}
-.idea-central-inner{max-width:680px;border-left:4px solid var(--red);padding-left:28px;}
-.idea-label{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
-.idea-text{font-family:'Lora',serif;font-size:clamp(18px,2.5vw,26px);font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-0.01em;}
-
-/* BLOCS GENERALS */
-.bloc{max-width:720px;margin:0 auto;padding:64px 52px;}
-.bloc-kicker{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
-.bloc-title{font-family:'Lora',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.025em;margin-bottom:18px;}
-.bloc-title em{font-style:italic;color:var(--red);}
-.bloc-text{font-size:15px;line-height:1.85;color:var(--ink-mid);}
-.bloc-text+.bloc-text{margin-top:12px;}
-
-.divider{border:none;border-top:1px solid var(--border);}
-.bg-warm{background:var(--bg-warm);}
+.idea-central{padding:40px 52px;border-bottom:1px solid var(--border);background:var(--white);}
+.idea-inner{border-left:4px solid var(--red);padding-left:28px;max-width:760px;}
+.idea-label{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.idea-text{font-family:'Lora',serif;font-size:clamp(16px,2vw,22px);font-weight:600;color:var(--ink);line-height:1.5;letter-spacing:-0.01em;}
 
 /* LLISTA TAULA */
-.taula{margin-top:24px;display:flex;flex-direction:column;border-top:1px solid var(--border);}
-.taula-fila{padding:16px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:baseline;}
+.taula{margin-top:20px;display:flex;flex-direction:column;border-top:1px solid var(--border);}
+.taula-fila{padding:12px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:160px 1fr;gap:16px;}
 .taula-label{font-size:13px;font-weight:700;color:var(--ink);}
-.taula-val{font-size:14px;color:var(--ink-mid);line-height:1.65;}
+.taula-val{font-size:13px;color:var(--ink-mid);line-height:1.6;}
 
-/* ESTRUCTURA 3 NIVELLS */
-.nivells{margin-top:28px;display:flex;flex-direction:column;gap:12px;}
-.nivell{border:1px solid var(--border);border-top:3px solid var(--red);border-radius:0 0 4px 4px;padding:22px 24px;background:var(--white);}
-.nivell-cap{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+/* NIVELLS */
+.nivells{display:flex;flex-direction:column;gap:10px;}
+.nivell{border:1px solid var(--border);border-top:3px solid var(--red);border-radius:0 0 4px 4px;padding:18px 20px;background:var(--white);}
+.nivell-cap{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 .nivell-num{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);}
-.nivell-nom{font-size:15px;font-weight:700;color:var(--ink);}
-.nivell-sub{font-size:12px;color:var(--muted);margin-left:auto;}
-.nivell-items{display:flex;flex-direction:column;gap:6px;}
-.nivell-item{font-size:14px;color:var(--ink-mid);padding-left:16px;position:relative;}
+.nivell-nom{font-size:14px;font-weight:700;color:var(--ink);}
+.nivell-items{display:flex;flex-direction:column;gap:5px;}
+.nivell-item{font-size:13px;color:var(--ink-mid);padding-left:14px;position:relative;}
 .nivell-item::before{content:'—';position:absolute;left:0;color:var(--red);opacity:0.4;}
-.nivell-nota{margin-top:12px;font-size:12px;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:10px;}
+.nivell-nota{margin-top:10px;font-size:12px;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:8px;}
 
 /* CICLE */
-.cicle{margin-top:28px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
-.cicle-pas{padding:14px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:baseline;}
-.cicle-n{font-size:11px;font-weight:700;color:var(--red);flex-shrink:0;min-width:24px;}
-.cicle-text{font-size:14px;color:var(--ink-mid);}
+.cicle{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);margin-top:4px;}
+.cicle-pas{padding:11px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:baseline;padding-right:16px;}
+.cicle-n{font-size:11px;font-weight:700;color:var(--red);flex-shrink:0;min-width:22px;}
+.cicle-text{font-size:13px;color:var(--ink-mid);}
 
-/* CRITERIS GRID */
-.criteris-grid{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.criteri{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:16px 18px;}
-.criteri-nom{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;}
-.criteri-desc{font-size:12.5px;color:var(--muted);line-height:1.5;}
+/* CRITERIS */
+.criteris-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}
+.criteri{border:1px solid var(--border);border-radius:4px;padding:14px 16px;}
+.criteri-nom{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.criteri-desc{font-size:12px;color:var(--muted);line-height:1.5;}
 
-/* SISTEMA ECONÒMIC */
-.eco-items{margin-top:20px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
-.eco-item{padding:14px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;}
+/* ECO */
+.eco-items{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);margin-top:16px;}
+.eco-item{padding:11px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;}
 .eco-dash{color:var(--red);font-weight:700;flex-shrink:0;}
-.eco-text{font-size:14px;color:var(--ink-mid);line-height:1.6;}
+.eco-text{font-size:13px;color:var(--ink-mid);line-height:1.6;}
 
 /* NOTA ESTAT */
-.nota-estat{max-width:720px;margin:0 auto;padding:0 52px 64px;}
-.nota-estat-inner{border-left:3px solid var(--amber);padding:16px 20px;background:#FEFBF5;border-radius:0 4px 4px 0;}
+.nota-estat{padding:32px 52px;border-bottom:1px solid var(--border);}
+.nota-estat-inner{border-left:3px solid var(--amber);padding:14px 18px;background:#FEFBF5;border-radius:0 4px 4px 0;max-width:680px;}
 .nota-estat-text{font-size:13px;color:var(--ink-mid);line-height:1.7;}
 
 /* CTA */
-.cta-final{background:var(--ink);padding:72px 52px;text-align:center;}
-.cta-final h2{font-family:'Lora',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:12px;}
-.cta-final p{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:28px;max-width:380px;margin-left:auto;margin-right:auto;}
+.cta-final{background:var(--ink);padding:56px 52px;text-align:center;}
+.cta-final h2{font-family:'Lora',serif;font-size:clamp(20px,3vw,32px);font-weight:700;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:10px;}
+.cta-final p{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:24px;max-width:380px;margin-left:auto;margin-right:auto;}
 .cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.btn-p{background:var(--red);color:#fff;padding:12px 24px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;}
-.btn-s{background:transparent;color:rgba(255,255,255,0.55);padding:12px 24px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);}
+.btn-p{background:var(--red);color:#fff;padding:11px 22px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;}
+.btn-s{background:transparent;color:rgba(255,255,255,0.55);padding:11px 22px;border-radius:3px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.15);}
 
 footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-between;align-items:center;}
 .footer-brand{font-family:'Lora',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:8px;}
@@ -104,13 +103,15 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
-  .hero{padding:56px 24px;}
-  .idea-central{padding:40px 24px;}
-  .bloc{padding:48px 24px;}
-  .nota-estat{padding:0 24px 48px;}
-  .taula-fila{grid-template-columns:1fr;gap:4px;}
+  .hero{padding:40px 20px;}
+  .idea-central{padding:32px 20px;}
+  .seccio{padding:36px 20px;}
+  .seccio-inner{grid-template-columns:1fr;gap:24px;}
+  .cicle{grid-template-columns:1fr;}
   .criteris-grid{grid-template-columns:1fr;}
-  .cta-final{padding:56px 24px;}
+  .taula-fila{grid-template-columns:1fr;gap:4px;}
+  .nota-estat{padding:24px 20px;}
+  .cta-final{padding:48px 20px;}
   footer{padding:24px 20px;flex-direction:column;gap:10px;text-align:center;}
 }
 </style>
@@ -146,157 +147,134 @@ footer{background:#111110;padding:28px 52px;display:flex;justify-content:space-b
 
 <!-- IDEA CENTRAL -->
 <div class="idea-central">
-  <div class="idea-central-inner">
+  <div class="idea-inner">
     <div class="idea-label">Idea central</div>
     <div class="idea-text">El model explora si és possible substituir parcialment la lògica especulativa del sòl comercial per una lògica de propietat col·lectiva i assignació d'ús basada en impacte urbà.</div>
   </div>
-
-<hr class="divider">
-
-<!-- 1. NATURALESA -->
-<div class="bloc">
-  <div class="bloc-kicker">Naturalesa del sistema</div>
-  <div class="bloc-title">Locals que no es venen.<br><em>Mai.</em></div>
-  <p class="bloc-text">Els locals no s'exploten individualment ni es revenen: es destinen a projectes econòmics seleccionats per criteris d'impacte urbà i viabilitat. El patrimoni és col·lectiu i permanent.</p>
-  <p class="bloc-text">L'objectiu és reduir la pressió especulativa i estabilitzar el comerç de proximitat mitjançant propietat col·lectiva del sòl comercial.</p>
 </div>
 
-<hr class="divider">
-
-<!-- 2. ESTRUCTURA -->
-<div class="bloc">
-  <div class="bloc-kicker">Estructura</div>
-  <div class="bloc-title">Tres nivells,<br><em>una decisió col·lectiva.</em></div>
-  <div class="nivells">
-    <div class="nivell">
-      <div class="nivell-cap">
-        <div class="nivell-num">Estratègic</div>
-        <div class="nivell-nom">Cooperativa</div>
+<!-- 1. NATURALESA + ESTRUCTURA -->
+<div class="seccio">
+  <div class="seccio-inner">
+    <div class="seccio-left">
+      <div class="kicker">Naturalesa</div>
+      <div class="titol">Locals que no es venen.<br><em>Mai.</em></div>
+      <div class="text" style="margin-top:16px;">Els locals no s'exploten individualment ni es revenen: es destinen a projectes econòmics seleccionats per criteris d'impacte urbà i viabilitat.</div>
+      <div class="text">L'objectiu és reduir la pressió especulativa i estabilitzar el comerç de proximitat mitjançant propietat col·lectiva del sòl comercial.</div>
+    </div>
+    <div class="seccio-right">
+      <div class="kicker">Estructura · Tres nivells</div>
+      <div class="nivells">
+        <div class="nivell">
+          <div class="nivell-cap">
+            <div class="nivell-num">Estratègic</div>
+            <div class="nivell-nom">Cooperativa</div>
+          </div>
+          <div class="nivell-items">
+            <div class="nivell-item">Propietat dels locals</div>
+            <div class="nivell-item">Definició de criteris</div>
+            <div class="nivell-item">Decisió final sobre projectes</div>
+            <div class="nivell-item">Governança: 1 persona = 1 vot</div>
+          </div>
+        </div>
+        <div class="nivell">
+          <div class="nivell-cap">
+            <div class="nivell-num">Assessorament</div>
+            <div class="nivell-nom">Comissió tècnica</div>
+          </div>
+          <div class="nivell-items">
+            <div class="nivell-item">Diagnosi urbana i comercial</div>
+            <div class="nivell-item">Anàlisi de projectes</div>
+            <div class="nivell-item">Informes previs a la decisió</div>
+          </div>
+          <div class="nivell-nota">No decideix. Orienta.</div>
+        </div>
+        <div class="nivell">
+          <div class="nivell-cap">
+            <div class="nivell-num">Operatiu</div>
+            <div class="nivell-nom">Grups llavor</div>
+          </div>
+          <div class="nivell-items">
+            <div class="nivell-item">Desenvolupen l'activitat econòmica</div>
+            <div class="nivell-item">Gestionen el local</div>
+            <div class="nivell-item">Assumeixen el risc del projecte</div>
+          </div>
+          <div class="nivell-nota">Requisits: mínim 3 persones · pla de viabilitat · aportació inicial.</div>
+        </div>
       </div>
-      <div class="nivell-items">
-        <div class="nivell-item">Propietat dels locals</div>
-        <div class="nivell-item">Definició de criteris</div>
-        <div class="nivell-item">Decisió final sobre projectes</div>
-        <div class="nivell-item">Governança: 1 persona = 1 vot</div>
-      </div>
-    </div>
-    <div class="nivell">
-      <div class="nivell-cap">
-        <div class="nivell-num">Assessorament</div>
-        <div class="nivell-nom">Comissió tècnica</div>
-      </div>
-      <div class="nivell-items">
-        <div class="nivell-item">Diagnosi urbana i comercial</div>
-        <div class="nivell-item">Anàlisi de projectes</div>
-        <div class="nivell-item">Informes previs a la decisió</div>
-      </div>
-      <div class="nivell-nota">No decideix. Orienta.</div>
-    </div>
-    <div class="nivell">
-      <div class="nivell-cap">
-        <div class="nivell-num">Operatiu</div>
-        <div class="nivell-nom">Grups llavor</div>
-      </div>
-      <div class="nivell-items">
-        <div class="nivell-item">Desenvolupen l'activitat econòmica</div>
-        <div class="nivell-item">Gestionen el local</div>
-        <div class="nivell-item">Assumeixen el risc del projecte</div>
-      </div>
-      <div class="nivell-nota">Requisits: mínim 3 persones · pla de viabilitat · aportació inicial.</div>
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- 3. CICLE -->
-<div class="bloc">
-  <div class="bloc-kicker">Cicle d'un local</div>
-  <div class="bloc-title">De l'adquisició<br><em>a l'operació.</em></div>
-  <div class="cicle">
-    <div class="cicle-pas"><div class="cicle-n">01</div><div class="cicle-text">Adquisició del local</div></div>
-    <div class="cicle-pas"><div class="cicle-n">02</div><div class="cicle-text">Diagnosi del context urbà</div></div>
-    <div class="cicle-pas"><div class="cicle-n">03</div><div class="cicle-text">Convocatòria oberta</div></div>
-    <div class="cicle-pas"><div class="cicle-n">04</div><div class="cicle-text">Presentació de projectes</div></div>
-    <div class="cicle-pas"><div class="cicle-n">05</div><div class="cicle-text">Avaluació segons criteris</div></div>
-    <div class="cicle-pas"><div class="cicle-n">06</div><div class="cicle-text">Cessió d'ús estable</div></div>
-    <div class="cicle-pas"><div class="cicle-n">07</div><div class="cicle-text">Operació del negoci</div></div>
-    <div class="cicle-pas"><div class="cicle-n">08</div><div class="cicle-text">Revisió anual</div></div>
-    <div class="cicle-pas"><div class="cicle-n">09</div><div class="cicle-text">Possible continuïtat o reassignació</div></div>
-  </div>
-
-<hr class="divider">
-
-<!-- 4. CRITERIS -->
-<div class="bloc">
-  <div class="bloc-kicker">Criteris d'avaluació</div>
-  <div class="bloc-title">No guanya qui paga més.<br><em>Guanya qui aporta més.</em></div>
-  <p class="bloc-text">La decisió combina una matriu de puntuació i deliberació cooperativa.</p>
-  <div class="criteris-grid">
-    <div class="criteri">
-      <div class="criteri-nom">Viabilitat econòmica</div>
-      <div class="criteri-desc">El projecte pot sostenir-se i cobrir el cost del local</div>
-    </div>
-    <div class="criteri">
-      <div class="criteri-nom">Arrelament al territori</div>
-      <div class="criteri-desc">Vinculació real amb el barri i les seves necessitats</div>
-    </div>
-    <div class="criteri">
-      <div class="criteri-nom">Impacte social i urbà</div>
-      <div class="criteri-desc">Contribució a la vida quotidiana del barri</div>
-    </div>
-    <div class="criteri">
-      <div class="criteri-nom">Sostenibilitat</div>
-      <div class="criteri-desc">Capacitat de perdurar i créixer sense dependència externa</div>
-    </div>
-    <div class="criteri">
-      <div class="criteri-nom">Economia social</div>
-      <div class="criteri-desc">Coherència amb els valors cooperatius i comunitaris</div>
-    </div>
-    <div class="criteri">
-      <div class="criteri-nom">Compatibilitat</div>
-      <div class="criteri-desc">Encaix amb el teixit comercial existent al barri</div>
     </div>
   </div>
 </div>
 
-<hr class="divider">
-
-<!-- 5. SISTEMA ECONÒMIC -->
-<div class="bloc">
-  <div class="bloc-kicker">Sistema econòmic</div>
-  <div class="bloc-title">Cost real.<br><em>Sense especulació.</em></div>
-  <p class="bloc-text">El sistema es finança a través de les quotes d'ús dels locals, que cobreixen únicament els costos reals: hipoteca, manteniment i gestió. Els excedents es reinverteixen en nous locals o suport a projectes. Ningú no distribueix beneficis.</p>
-  <div class="eco-items">
-    <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Quotes d'ús dels locals (preu de cost, no de mercat)</div></div>
-    <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Cobertura de costos: hipoteca, manteniment, gestió</div></div>
-    <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Fons cooperatiu per reinversió en nous locals</div></div>
-    <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Excedents destinats a suport a projectes o ampliació del patrimoni</div></div>
-  </div>
-
-<hr class="divider">
-
-<!-- 6. PRINCIPI D'INTERVENCIÓ -->
-<div class="bloc">
-  <div class="bloc-kicker">Principi d'intervenció urbana</div>
-  <div class="bloc-title">No respon al mercat.<br><em>Respon al barri.</em></div>
-  <p class="bloc-text">El model no actua seguint la lògica de la rendibilitat immobiliària. Els criteris d'intervenció són:</p>
-  <div class="taula">
-    <div class="taula-fila">
-      <div class="taula-label">Estabilització</div>
-      <div class="taula-val">Preservar el comerç de proximitat front la substitució especulativa</div>
+<!-- 2. CICLE + CRITERIS -->
+<div class="seccio" style="background:var(--bg-warm);">
+  <div class="seccio-inner">
+    <div class="seccio-left">
+      <div class="kicker">Cicle d'un local</div>
+      <div class="titol">De l'adquisició<br><em>a l'operació.</em></div>
+      <div class="cicle" style="margin-top:20px;">
+        <div class="cicle-pas"><div class="cicle-n">01</div><div class="cicle-text">Adquisició del local</div></div>
+        <div class="cicle-pas"><div class="cicle-n">02</div><div class="cicle-text">Diagnosi del context urbà</div></div>
+        <div class="cicle-pas"><div class="cicle-n">03</div><div class="cicle-text">Convocatòria oberta</div></div>
+        <div class="cicle-pas"><div class="cicle-n">04</div><div class="cicle-text">Presentació de projectes</div></div>
+        <div class="cicle-pas"><div class="cicle-n">05</div><div class="cicle-text">Avaluació segons criteris</div></div>
+        <div class="cicle-pas"><div class="cicle-n">06</div><div class="cicle-text">Cessió d'ús estable</div></div>
+        <div class="cicle-pas"><div class="cicle-n">07</div><div class="cicle-text">Operació del negoci</div></div>
+        <div class="cicle-pas"><div class="cicle-n">08</div><div class="cicle-text">Revisió anual</div></div>
+        <div class="cicle-pas" style="grid-column:1/-1;"><div class="cicle-n">09</div><div class="cicle-text">Possible continuïtat o reassignació</div></div>
+      </div>
     </div>
-    <div class="taula-fila">
-      <div class="taula-label">Cobertura urbana</div>
-      <div class="taula-val">Atendre necessitats comercials no cobertes pel mercat</div>
-    </div>
-    <div class="taula-fila">
-      <div class="taula-label">Reducció de buits</div>
-      <div class="taula-val">Activar locals buits estructurals amb usos d'interès social</div>
+    <div class="seccio-right">
+      <div class="kicker">Criteris d'avaluació</div>
+      <div class="titol">No guanya qui paga més.<br><em>Guanya qui aporta més.</em></div>
+      <p class="text" style="margin-top:12px;">Decisió per matriu de puntuació + deliberació cooperativa.</p>
+      <div class="criteris-grid" style="margin-top:16px;">
+        <div class="criteri"><div class="criteri-nom">Viabilitat econòmica</div><div class="criteri-desc">El projecte pot sostenir-se i cobrir el cost del local</div></div>
+        <div class="criteri"><div class="criteri-nom">Arrelament al territori</div><div class="criteri-desc">Vinculació real amb el barri i les seves necessitats</div></div>
+        <div class="criteri"><div class="criteri-nom">Impacte social i urbà</div><div class="criteri-desc">Contribució a la vida quotidiana del barri</div></div>
+        <div class="criteri"><div class="criteri-nom">Sostenibilitat</div><div class="criteri-desc">Capacitat de perdurar sense dependència externa</div></div>
+        <div class="criteri"><div class="criteri-nom">Economia social</div><div class="criteri-desc">Coherència amb valors cooperatius i comunitaris</div></div>
+        <div class="criteri"><div class="criteri-nom">Compatibilitat</div><div class="criteri-desc">Encaix amb el teixit comercial existent al barri</div></div>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- 3. ECONÒMIC + INTERVENCIÓ -->
+<div class="seccio">
+  <div class="seccio-inner">
+    <div class="seccio-left">
+      <div class="kicker">Sistema econòmic</div>
+      <div class="titol">Cost real.<br><em>Sense especulació.</em></div>
+      <p class="text" style="margin-top:16px;">Les quotes cobreixen únicament costos reals. Els excedents es reinverteixen. Ningú no distribueix beneficis.</p>
+      <div class="eco-items">
+        <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Quotes d'ús a preu de cost</div></div>
+        <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Cobertura: hipoteca, manteniment, gestió</div></div>
+        <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Fons cooperatiu per reinversió</div></div>
+        <div class="eco-item"><div class="eco-dash">—</div><div class="eco-text">Excedents → nous locals o suport a projectes</div></div>
+      </div>
+    </div>
+    <div class="seccio-right">
+      <div class="kicker">Principi d'intervenció urbana</div>
+      <div class="titol">No respon al mercat.<br><em>Respon al barri.</em></div>
+      <p class="text" style="margin-top:16px;">El model no actua seguint la lògica de la rendibilitat immobiliària.</p>
+      <div class="taula">
+        <div class="taula-fila">
+          <div class="taula-label">Estabilització</div>
+          <div class="taula-val">Preservar el comerç de proximitat front la substitució especulativa</div>
+        </div>
+        <div class="taula-fila">
+          <div class="taula-label">Cobertura urbana</div>
+          <div class="taula-val">Atendre necessitats comercials no cobertes pel mercat</div>
+        </div>
+        <div class="taula-fila">
+          <div class="taula-label">Reducció de buits</div>
+          <div class="taula-val">Activar locals buits estructurals amb usos d'interès social</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- NOTA ESTAT -->
 <div class="nota-estat">
