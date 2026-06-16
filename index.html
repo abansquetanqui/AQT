@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abans Que Tanqui · Preservem el comerç de barri</title>
+<title>Abans Que Tanqui · Comerç de proximitat</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -20,8 +20,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-links{display:flex;gap:22px;align-items:center;}
 .nav-links a{font-size:13px;font-weight:500;color:var(--ink-muted);text-decoration:none;transition:color 0.15s;}
 .nav-links a:hover{color:var(--ink);}
-.nav-cta{background:var(--cta)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
-.nav-cta:hover{background:var(--cta-lt)!important;}
+.nav-cta{background:var(--ink)!important;color:#fff!important;padding:8px 16px;border-radius:3px;font-size:13px;font-weight:600;}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1100;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--ink-mid);border-radius:2px;transition:all 0.25s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -30,7 +29,6 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;flex-direction:column;padding:16px 0 24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);}
 .nav-mobile.open{display:flex;}
 .nav-mobile a{font-size:15px;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:12px 24px;}
-.nav-mobile .nav-cta{margin:8px 24px 0;background:var(--cta);color:#fff!important;padding:12px 20px;border-radius:4px;text-align:center;}
 
 /* HERO */
 .hero{position:relative;min-height:620px;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
@@ -39,51 +37,20 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .hero-content{position:relative;z-index:2;text-align:center;padding:60px 40px;}
 .hero-h1{font-family:'Lora',Georgia,serif;font-size:clamp(80px,16vw,180px);font-weight:700;line-height:0.9;letter-spacing:-0.04em;text-transform:uppercase;}
 .h1-blanc{color:#fff;}
-.h1-negre{color:#1A1A18;}
 .hero-sub{font-size:16px;color:rgba(255,255,255,0.75);margin-top:24px;letter-spacing:0.02em;}
-.btn-primary{background:var(--cta);color:#fff;padding:13px 22px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s;}
-.btn-primary:hover{background:var(--cta-lt);}
-.btn-ghost{color:#fff;font-size:14px;font-weight:600;text-decoration:none;padding:11px 20px;border:2px solid rgba(255,255,255,0.5);border-radius:4px;transition:border-color 0.15s;}
-.btn-ghost:hover{border-color:#fff;}
 
-/* MISSIÓ */
-.missio-bloc{padding:64px 52px;border-bottom:1px solid var(--border);background:var(--white);}
-.missio-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-.missio-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
-.missio-title{font-family:'Lora',Georgia,serif;font-size:clamp(32px,4.5vw,56px);font-weight:700;color:var(--ink);line-height:1.0;letter-spacing:-0.03em;margin-bottom:20px;}
-.missio-title em{font-style:italic;color:var(--red);}
-.missio-bloc p{font-size:15px;line-height:1.8;color:var(--ink-mid);margin-bottom:16px;}
-.missio-link{display:inline-block;background:var(--red);color:#fff;padding:11px 20px;border-radius:3px;font-size:13px;font-weight:700;text-decoration:none;margin-top:4px;}
-.missio-imgs{display:flex;gap:16px;align-items:flex-end;justify-content:center;}
-.missio-img{width:48%;height:auto;}
-
-/* CINC PASSOS */
-.que-fem{padding:72px 0;border-bottom:1px solid var(--border);background:var(--bg-warm);}
-.que-fem-header{text-align:center;margin-bottom:36px;padding:0 52px;}
-.que-fem-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
-.que-fem-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.15;}
-
-/* Carousel horitzontal */
-.passos-wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding:4px 52px 24px;scrollbar-width:none;}
-.passos-wrap::-webkit-scrollbar{display:none;}
-.pas{min-width:260px;max-width:260px;scroll-snap-align:start;flex-shrink:0;}
-.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:4px;}
-.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border-dk);transition:background 0.2s;cursor:pointer;}
-.carousel-dot.active{background:var(--red);}
-
-/* Targetes */
-.pas{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:24px 22px;display:flex;flex-direction:column;transition:box-shadow 0.2s;}
-.pas:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);}
-.pas.destacat{border-color:var(--red);}
-.pas-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.pas-num{font-family:'Lora',Georgia,serif;font-size:13px;font-weight:700;color:var(--amber);letter-spacing:0.06em;}
-.pas-icon{width:32px;height:32px;background:var(--bg-warm);border-radius:6px;display:flex;align-items:center;justify-content:center;}
-.pas-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.3;}
-.pas-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;flex:1;}
-.pas-bullets li{font-size:12.5px;line-height:1.55;color:var(--muted);padding-left:14px;position:relative;}
-.pas-bullets li::before{content:'·';position:absolute;left:0;color:var(--amber);}
-.pas-link{font-size:12px;font-weight:600;color:var(--red);text-decoration:none;margin-top:14px;display:inline-block;}
-.pas-link:hover{text-decoration:underline;}
+/* QUÈ ÉS AQT */
+.que-es{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--white);}
+.que-es-inner{max-width:760px;}
+.que-es-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.que-es-title{font-family:'Lora',Georgia,serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px;}
+.que-es-title em{font-style:italic;color:var(--red);}
+.que-es-text{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:28px;max-width:640px;}
+.que-es-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);max-width:640px;}
+.que-es-item{padding:16px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:baseline;}
+.que-es-dash{color:var(--red);font-weight:700;font-size:15px;flex-shrink:0;}
+.que-es-item-text{font-size:15px;color:var(--ink-mid);line-height:1.65;}
+.que-es-nota{margin-top:28px;font-size:13px;color:var(--muted);font-style:italic;max-width:560px;}
 
 /* MAPA */
 .mapa-bloc{border-bottom:1px solid var(--border);}
@@ -107,9 +74,19 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .popup-title{font-weight:700;color:#1A1A18;margin-bottom:4px;}
 .popup-text{color:#6B6B67;line-height:1.5;}
 
-/* ACTUALITAT */
-.actualitat-bloc{padding:72px 52px;border-bottom:1px solid var(--border);background:var(--bg-warm);}
+/* EIXOS */
+.eixos{padding:64px 52px;border-bottom:1px solid var(--border);background:var(--bg-warm);}
+.eixos-kicker{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.eixos-title{font-family:'Lora',Georgia,serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;margin-bottom:36px;}
+.eixos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.eix{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:24px 20px;text-decoration:none;color:inherit;transition:box-shadow 0.2s,transform 0.2s;}
+.eix:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);transform:translateY(-2px);}
+.eix-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.eix-title{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.eix-desc{font-size:13px;color:var(--muted);line-height:1.55;}
 
+/* ACTUALITAT */
+.actualitat-bloc{padding:72px 52px;border-bottom:1px solid var(--border);}
 .actualitat-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;}
 .actualitat-header h2{font-family:'Lora',Georgia,serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
 .actualitat-link{font-size:13px;font-weight:600;color:var(--cta);text-decoration:none;border-bottom:1.5px solid var(--cta);padding-bottom:1px;white-space:nowrap;}
@@ -125,17 +102,6 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .article-title{font-family:'Lora',Georgia,serif;font-size:17px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:8px;letter-spacing:-0.01em;}
 .article-excerpt{font-size:13px;line-height:1.6;color:var(--muted);flex:1;margin-bottom:16px;}
 .article-llegir{font-size:13px;font-weight:600;color:var(--cta);border-bottom:1.5px solid var(--cta);padding-bottom:1px;width:fit-content;}
-
-/* CTA FINAL */
-.cta-final{background:linear-gradient(135deg,#E8F0EB 0%,#F7F7F7 60%,#fff 100%);padding:80px 52px;text-align:center;}
-.cta-final-inner{max-width:800px;margin:0 auto;}
-.cta-headline{font-family:'Lora',Georgia,serif;font-size:40px;font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.03em;margin:0 auto 16px;}
-.cta-final-sub{font-size:15px;color:var(--ink-muted);max-width:480px;margin:0 auto 32px;line-height:1.6;}
-.cta-final-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.cta-btn-primary{background:var(--cta);color:#fff;padding:14px 28px;border-radius:6px;font-size:15px;font-weight:700;text-decoration:none;transition:background 0.15s;}
-.cta-btn-primary:hover{background:var(--cta-lt);}
-.cta-btn-secondary{background:var(--red);color:#fff;padding:14px 28px;border-radius:6px;font-size:15px;font-weight:700;text-decoration:none;transition:background 0.15s;}
-.cta-btn-secondary:hover{background:var(--red-lt);}
 
 /* FOOTER */
 footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
@@ -156,19 +122,17 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 @media(max-width:960px){
   nav{padding:0 20px;}.nav-links{display:none;}.nav-burger{display:flex;}
   .hero{min-height:520px;}.hero-content{padding:32px 20px;}
-  .missio-bloc{padding:48px 20px;}.missio-inner{grid-template-columns:1fr;gap:32px;}
-  .que-fem{padding:48px 0 36px;}.que-fem-header{padding:0 20px;}
-  .passos-wrap{padding:4px 20px 16px;}
-  .pas{min-width:80vw;max-width:80vw;}
+  .que-es{padding:48px 20px;}
   .mapa-header{padding:32px 20px 20px;}.mapa-footer{padding:14px 20px;}
   #mapa-leaflet{height:320px;}
+  .eixos{padding:48px 20px;}
+  .eixos-grid{grid-template-columns:1fr 1fr;gap:12px;}
   .actualitat-bloc{padding:48px 20px;}
   .articles-grid{grid-template-columns:1fr;}
-  .cta-final{padding:56px 20px;}
   footer{padding:44px 20px 0;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px;}
 }
-@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}.hero-actions{flex-direction:column;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}.eixos-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -176,20 +140,23 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
 <nav>
   <a class="nav-logo" href="index.html"><div class="nav-logo-dot"></div>Abans Que Tanqui</a>
   <div class="nav-links">
-    <a href="projecte.html">Projecte</a><a href="mapa.html">Mapa</a>
+    <a href="projecte.html">Què és AQT</a>
+    <a href="mapa.html">Mapa</a>
     <a href="descobreix.html">Descobreix</a>
-    <a href="actualitat.html">Actualitat</a><a href="recursos.html">Recursos</a>
+    <a href="actualitat.html">Actualitat</a>
+    <a href="recursos.html">Recursos</a>
     <a href="contacte.html">Contacte</a>
-    <a class="nav-cta" href="contacte.html?tipus=comerc">Tens un comerç?</a>
+    <a class="nav-cta" href="contacte.html">Suma't</a>
   </div>
   <button class="nav-burger" id="nav-burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile" id="nav-mobile">
-  <a href="projecte.html">Projecte</a><a href="mapa.html">Mapa</a>
+  <a href="projecte.html">Què és AQT</a>
+  <a href="mapa.html">Mapa</a>
   <a href="descobreix.html">Descobreix</a>
-  <a href="actualitat.html">Actualitat</a><a href="recursos.html">Recursos</a>
+  <a href="actualitat.html">Actualitat</a>
+  <a href="recursos.html">Recursos</a>
   <a href="contacte.html">Contacte</a>
-  <a class="nav-cta" href="contacte.html?tipus=comerc">Tens un comerç?</a>
 </div>
 
 <!-- HERO -->
@@ -203,142 +170,23 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   </div>
 </section>
 
-<!-- MISSIÓ -->
-<section class="missio-bloc">
-  <div class="missio-inner">
-    <div class="missio-text">
-      <div class="missio-kicker">Qui som</div>
-      <h2 class="missio-title">No és nostàlgia.<br><em>És comunitat.</em></h2>
-      <p>Els comerços de barri tanquen. No perquè la gent hagi deixat d'anar-hi, sinó perquè l'especulació immobiliària encareix els lloguers, les administracions no hi posen límits efectius i el petit comerç acaba ofegat.</p>
-      <p>Abans Que Tanqui és un espai per documentar i denunciar aquesta substitució comercial, i una eina col·lectiva per donar suport a qui preserva la vida de barri i construir, a poc a poc, una alternativa al model que ens expulsa.</p>
-      <a class="missio-link" href="contacte.html">Suma't al projecte →</a>
+<!-- QUÈ ÉS AQT -->
+<section class="que-es" id="que-es">
+  <div class="que-es-inner">
+    <div class="que-es-kicker">Qui som</div>
+    <h2 class="que-es-title">No és nostàlgia.<br><em>És comunitat.</em></h2>
+    <p class="que-es-text">Els comerços de barri tanquen. No perquè la gent hagi deixat d'anar-hi, sinó perquè l'especulació immobiliària encareix els lloguers, les administracions no hi posen límits efectius i el petit comerç acaba ofegat.</p>
+    <p class="que-es-text">Abans Que Tanqui és un espai per documentar i denunciar la substitució comercial que afecta el comerç de proximitat, i una eina col·lectiva per donar suport a qui preserva la vida de barri i construir, a poc a poc, una alternativa al model que ens expulsa.</p>
+    <p class="que-es-text" style="margin-bottom:24px;">AQT és un projecte de recerca i exploració sobre la transformació del comerç de proximitat. Combina:</p>
+    <div class="que-es-list">
+      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Documentació de casos de tancament i substitució comercial</div></div>
+      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Anàlisi de les dinàmiques econòmiques, urbanes i immobiliàries que les provoquen</div></div>
+      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Recollida de dades, exemples i experiències locals</div></div>
+      <div class="que-es-item"><div class="que-es-dash">—</div><div class="que-es-item-text">Exploració de possibles models col·lectius de gestió de locals comercials</div></div>
     </div>
-    <div class="missio-imgs">
-      <img src="img/mapa-ilustracio.png" alt="Mapa de barri amb pins de comerços" class="missio-img">
-      <img src="img/comunitat-ilustracio-hq.jpg" alt="Persones del barri intercanviant" class="missio-img">
-    </div>
+    <p class="que-es-nota">AQT no és una iniciativa implementada, sinó un espai de treball en construcció.</p>
   </div>
 </section>
-
-<!-- QUÈ FEM -->
-<!-- CTA COMERÇ -->
-<section style="background:var(--ink);padding:28px 52px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;">
-  <div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;">Per a comerciants</div>
-    <div style="font-family:'Lora',serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.01em;">Tens un comerç en risc?</div>
-    <div style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;">T'escoltem. Sense compromisos.</div>
-  </div>
-  <a href="contacte.html?tipus=comerc" style="background:var(--red);color:#fff;padding:11px 22px;border-radius:3px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;">Explica'ns el teu cas →</a>
-</section>
-
-<section class="que-fem" id="que-fem">
-  <div class="que-fem-header">
-    <div class="que-fem-kicker">Com participar</div>
-    <div class="que-fem-title">AQT en cinc passos</div>
-  </div>
-
-  <div class="passos-wrap" id="passos-wrap">
-
-    <div class="pas">
-      <div class="pas-header">
-        <div>
-          <div class="pas-num">01</div>
-          <div class="pas-title">Descobreix</div>
-        </div>
-        <div class="pas-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-      </div>
-      <ul class="pas-bullets">
-        <li>Mira quins comerços han tancat o estan en risc a Barcelona.</li>
-        <li>Calcula quant impacte genera el teu consum al barri.</li>
-      </ul>
-      <a class="pas-link" href="mapa.html">Veure el mapa →</a>
-      <a class="pas-link" href="calculadora.html">Calcular l'impacte →</a>
-    </div>
-
-    <div class="pas">
-      <div class="pas-header">
-        <div>
-          <div class="pas-num">02</div>
-          <div class="pas-title">Entén</div>
-        </div>
-        <div class="pas-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-      </div>
-      <ul class="pas-bullets">
-        <li>Per què tanquen els comerços de barri, més enllà del "la gent no compra".</li>
-        <li>Què proposem fer-hi i com funciona el model.</li>
-      </ul>
-      <a class="pas-link" href="projecte.html">Conèixer el projecte →</a>
-    </div>
-
-    <div class="pas">
-      <div class="pas-header">
-        <div>
-          <div class="pas-num">03</div>
-          <div class="pas-title">Ajuda</div>
-        </div>
-        <div class="pas-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      </div>
-      <ul class="pas-bullets">
-        <li>Si tens un comerç en risc, aquí trobaràs guies i orientació.</li>
-        <li>On demanar ajuda i quines alternatives hi ha.</li>
-      </ul>
-      <a class="pas-link" href="recursos.html">Veure recursos →</a>
-    </div>
-
-    <div class="pas destacat">
-      <div class="pas-header">
-        <div>
-          <div class="pas-num">04</div>
-          <div class="pas-title">Suma't</div>
-        </div>
-        <div class="pas-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-      </div>
-      <ul class="pas-bullets">
-        <li>Apunta't com a persona interessada en el projecte.</li>
-        <li>Quan ens constituïm, les primeres seran les sòcies fundadores.</li>
-      </ul>
-      <a class="pas-link" href="contacte.html">Vull ser sòcia →</a>
-    </div>
-
-    <div class="pas">
-      <div class="pas-header">
-        <div>
-          <div class="pas-num">05</div>
-          <div class="pas-title">El barri creix</div>
-        </div>
-        <div class="pas-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C47A00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div>
-      </div>
-      <ul class="pas-bullets">
-        <li>Cada local adquirit ja no pot tornar al mercat especulatiu.</li>
-        <li>Això és el que volem construir.</li>
-      </ul>
-    </div>
-
-  </div>
-  <div class="carousel-dots" id="carousel-dots">
-    <div class="carousel-dot active"></div>
-    <div class="carousel-dot"></div>
-    <div class="carousel-dot"></div>
-    <div class="carousel-dot"></div>
-    <div class="carousel-dot"></div>
-  </div>
-</section>
-<script>
-(function(){
-  const wrap = document.getElementById('passos-wrap');
-  const dots = document.querySelectorAll('.carousel-dot');
-  if(!wrap || !dots.length) return;
-  wrap.addEventListener('scroll', function(){
-    const cards = wrap.querySelectorAll('.pas');
-    let closest = 0, minDist = Infinity;
-    cards.forEach(function(card, i){
-      const dist = Math.abs(card.getBoundingClientRect().left - wrap.getBoundingClientRect().left);
-      if(dist < minDist){ minDist = dist; closest = i; }
-    });
-    dots.forEach(function(d,i){ d.classList.toggle('active', i === closest); });
-  }, {passive:true});
-})();
-</script>
 
 <!-- MAPA -->
 <section class="mapa-bloc" id="mapa">
@@ -355,9 +203,36 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   <div class="mapa-footer"><a class="mapa-link" href="mapa.html">Veure el mapa complet →</a></div>
 </section>
 
+<!-- EIXOS -->
+<section class="eixos" id="eixos">
+  <div class="eixos-kicker">El projecte s'organitza en</div>
+  <div class="eixos-title">Quatre espais de treball</div>
+  <div class="eixos-grid">
+    <a class="eix" href="projecte.html">
+      <div class="eix-label">Model</div>
+      <div class="eix-title">Com funciona</div>
+      <div class="eix-desc">Exploració del sistema cooperatiu de locals en cessió d'ús</div>
+    </a>
+    <a class="eix" href="actualitat.html">
+      <div class="eix-label">Actualitat</div>
+      <div class="eix-title">Articles i reflexions</div>
+      <div class="eix-desc">Anàlisi i casos sobre la transformació del comerç de proximitat</div>
+    </a>
+    <a class="eix" href="recursos.html">
+      <div class="eix-label">Recursos</div>
+      <div class="eix-title">Guies i informació</div>
+      <div class="eix-desc">Eines i orientació per a comerços en risc i persones interessades</div>
+    </a>
+    <a class="eix" href="descobreix.html">
+      <div class="eix-label">Descobreix</div>
+      <div class="eix-title">Casos i mapes</div>
+      <div class="eix-desc">Explora els establiments documentats i analitza el teu barri</div>
+    </a>
+  </div>
+</section>
+
 <!-- ACTUALITAT -->
 <section class="actualitat-bloc" id="actualitat">
-  
   <div class="actualitat-header">
     <h2>Actualitat</h2>
     <a class="actualitat-link" href="actualitat.html">Veure tots els articles →</a>
@@ -386,7 +261,6 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
         <div class="article-llegir">Llegir l'article →</div>
       </div>
     </a>
-    
     <a class="article-card" href="articles/ferreteria-camps.html">
       <div class="article-photo">
         <img src="img/ferreteria-camps.jpg" alt="Ferreteria Camps">
@@ -403,22 +277,12 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-final">
-  <div class="cta-headline">Si no actuem ara,<br>ja és massa tard.</div>
-  <div class="cta-final-sub">El comerç de barri és patrimoni comunitari. Defensar-lo és una tasca col·lectiva.</div>
-  <div class="cta-final-actions">
-    <a class="cta-btn-primary" href="contacte.html">Participa ara</a>
-  </div>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
       <div class="footer-brand"><div class="footer-brand-dot"></div>Abans Que Tanqui</div>
-      <div class="footer-desc">Iniciativa per a la preservació del comerç local de proximitat. En construcció a Catalunya.</div>
+      <div class="footer-desc">Projecte de recerca i exploració sobre la transformació del comerç de proximitat. En construcció a Catalunya.</div>
       <div class="footer-social">
         <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
         <a href="contacte.html" title="Correu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
@@ -426,14 +290,12 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Projecte</div>
-      <a href="projecte.html">El projecte</a>
-      <a href="projecte.html#qui-som">Qui som</a>
-      <a href="projecte.html#valors">Valors</a>
-      <a href="projecte.html#model">Com funciona</a>
+      <a href="projecte.html">Què és AQT</a>
+      <a href="projecte.html">Com funciona</a>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Participa</div>
-      <a href="contacte.html">Vull participar</a>
+      <a href="contacte.html">Suma't</a>
       <a href="contacte.html">Tens un comerç?</a>
       <a href="contacte.html">Contacte</a>
     </div>
@@ -442,11 +304,12 @@ footer{background:#111110;padding:56px 52px 0;color:rgba(255,255,255,0.6);}
       <a href="mapa.html">Mapa de casos</a>
       <a href="actualitat.html">Actualitat</a>
       <a href="recursos.html">Recursos</a>
+      <a href="descobreix.html">Descobreix</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Abans Que Tanqui · Iniciativa social per al comerç local de Catalunya</span>
-    <span class="footer-entity">Projecte en fase de constitució · 2026</span>
+    <span class="footer-copy">© 2026 Abans Que Tanqui · Projecte en construcció · Barcelona</span>
+    <span class="footer-entity">En fase de constitució · 2026</span>
   </div>
 </footer>
 
