@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#1800b0;--red-lt:#2E00E0;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--sage:#C8D5B9;--sage-dk:#3A5530;--amber:#C47A00;--cta:#2A7A4B;--cta-lt:#348A58;}
+:root{--ink:#1A1A18;--ink-mid:#3A3A37;--ink-muted:#6B6B67;--bg:#F7F7F7;--bg-warm:#EFEFEF;--white:#FFFFFF;--red:#598bf1;--red-lt:#7aaaf5;--text:#1A1A18;--muted:#6B6B67;--border:#E2E1DC;--border-dk:#C8C7C0;--sage:#C8D5B9;--sage-dk:#3A5530;--amber:#C47A00;--cta:#2A7A4B;--cta-lt:#348A58;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',system-ui,sans-serif;background:var(--white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
@@ -71,7 +71,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 52px
 .leaflet-popup-content-wrapper{border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;}
 .popup-cat{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:6px;}
 .popup-cat.risc{background:rgba(196,122,0,0.1);color:var(--amber);}
-.popup-cat.tancat{background:rgba(24,0,176,0.1);color:var(--red);}
+.popup-cat.tancat{background:rgba(89,139,241,0.1);color:var(--red);}
 .popup-cat.recuperat{background:rgba(42,122,75,0.12);color:var(--cta);}
 .popup-title{font-weight:700;color:#1A1A18;margin-bottom:4px;}
 .popup-text{color:#6B6B67;line-height:1.5;}
@@ -329,7 +329,7 @@ mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burge
 const map=L.map('mapa-leaflet',{center:[41.4035,2.1544],zoom:14,zoomControl:true,scrollWheelZoom:false});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; <a href="https://carto.com/">CARTO</a>',subdomains:'abcd',maxZoom:19}).addTo(map);
 function makeIcon(color){return L.divIcon({className:'',html:`<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.2)"></div>`,iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10]});}
-const colors={risc:'#C47A00',tancat:'#1800b0',recuperat:'#2A7A4B'};
+const colors={risc:'#C47A00',tancat:'#598bf1',recuperat:'#2A7A4B'};
 const labels={risc:'En risc',tancat:'Tancat',recuperat:'Recuperat'};
 
 fetch('https://api.airtable.com/v0/appGuT1DQskra3f9p/tblImxsEi3bEj3clb?filterByFormula={Actiu}=1',{
